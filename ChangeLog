@@ -3,8 +3,9 @@
 	* configure.in: Changed version to 0.10.2.
 
 2002-03-15  Behdad Esfahbod <behdad@bamdad.org>
-	* packtab.c: Updated the output generating routine, to generate much fewer
-	symbols, to reduce the relocation time (suggested by Owen Taylor).
+	* packtab.c: Updated the output generating routine, to generate much
+	fewer symbols, to reduce the relocation time (suggested by Owen
+	Taylor).
 
 2002-03-15  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c, fribidi.h: Applied the patch from
