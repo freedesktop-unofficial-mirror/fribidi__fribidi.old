@@ -16,8 +16,12 @@
 	* AUTHORS: Abel Cheung <maddog@linux.org.hk> added, has implemented
 	pkgconfig support.
 	* fribidi_char_sets.h, fribidi_char_sets.c: Check for macro
-	FRIBIDI_0_9_INTERFACE to define fribidi_*_to_unicode functions with
-	0.9.x interface.
+	FRIBIDI_INTERFACE_1 to define fribidi_*_to_unicode functions with
+	interface version 1.
+	* Makefile.am: A small dependency problem fixed.
+	* unidata/README: Added, Unicode disclaimer.
+	* Makefile.am: unidata/README, unidata/UnicodeData.txt,
+	BidiMirroring.txt: Added to distribution files.
 
 2001-12-31  Behdad Esfahbod <behdad@bamdad.org>
 	* configure.in: Check for sed added.

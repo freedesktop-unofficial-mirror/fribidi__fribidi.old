@@ -175,28 +175,27 @@ fribidi_char_set_leave (FriBidiCharSet char_set)
 }
 
 
-/* 0.9.x interface, deprecated, just for compatibility. */
+/* Interface version 1, deprecated, just for compatibility. */
 int
-fribidi_charset_to_unicode_0_9 (FriBidiCharSet char_set, char *s,
-				/* output */
-				FriBidiChar *us)
+fribidi_charset_to_unicode_1 (FriBidiCharSet char_set, char *s,
+			      /* output */
+			      FriBidiChar *us)
 {
   return fribidi_charset_to_unicode (char_set, s, strlen (s), us);
 }
 
 /* Also old character sets. */
 
-#define FRIBIDI_0_9_TO_UNICODE_DEFINE(cs)	\
-	int fribidi_##cs##_to_unicode_0_9 (char *s, FriBidiChar *us)	\
+#define FRIBIDI_TO_UNICODE_DEFINE_1(cs)	\
+	int fribidi_##cs##_to_unicode_1 (char *s, FriBidiChar *us)	\
 	{	\
 	  return fribidi_##cs##_to_unicode (s, strlen(s), us);	\
 	}
-FRIBIDI_0_9_TO_UNICODE_DEFINE (utf8)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (cap_rtl)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (iso8859_6)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (iso8859_8)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (cp1255)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (cp1256)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (isiri_3342)
-#undef FRIBIDI_0_9_TO_UNICODE_DEFINE
+FRIBIDI_TO_UNICODE_DEFINE_1 (utf8)
+FRIBIDI_TO_UNICODE_DEFINE_1 (cap_rtl)
+FRIBIDI_TO_UNICODE_DEFINE_1 (iso8859_6)
+FRIBIDI_TO_UNICODE_DEFINE_1 (iso8859_8)
+FRIBIDI_TO_UNICODE_DEFINE_1 (cp1255)
+FRIBIDI_TO_UNICODE_DEFINE_1 (cp1256) FRIBIDI_TO_UNICODE_DEFINE_1 (isiri_3342)
+#undef FRIBIDI_TO_UNICODE_DEFINE_1
 #endif

@@ -1,5 +1,7 @@
 Implementation issues:
 
+* Update CapRTL with new Unicode reference version.
+
 * configure.in, Makefile.am: better check for downloader.
 
 * Revise Reorder api, in fribidi_main.c reorder after link break.

@@ -75,6 +75,11 @@ TABLE_FILES =	\
 	fribidi_tab_char_type_2.i	\
 	fribidi_tab_char_type_9.i
 
+UNIDATA_FILES =	\
+	unidata/README	\
+	unidata/UnicodeData.txt	\
+	unidata/BidiMirroring.txt
+
 EXTRA_HEADERS =	\
 	packtab.h	\
 	$(GETOPT_HDR)
@@ -87,6 +92,7 @@ EXTRA_DIST =	\
 	fribidi.pc.in	\
 	$(TEST_FILES)	\
 	$(TABLE_FILES)	\
+	$(UNIDATA_FILES)	\
 	$(EXTRA_HEADERS)
 
 fribidi_benchmark_SOURCES = fribidi_benchmark.c $(GETOPT_SRC)
@@ -106,8 +112,9 @@ unidata/%:
 	$(DOWNLOAD) "http://www.unicode.org/Public/UNIDATA/$$file" ||	\
 	($(RM) -f "$$file"; false)
 
-build_fribidi_tab_mirroring.i: fribidi_create_mirroring	\
+build_fribidi_tab_mirroring.i: $(fribidi_create_mirroring_SOURCES)	\
 		unidata/BidiMirroring.txt
+	$(MAKE) fribidi_create_mirroring
 	if test -d unidata; then UNIDATA=unidata;	\
 	else UNIDATA="$(srcdir)/unidata"; fi &&	\
 	./fribidi_create_mirroring "$$UNIDATA"
@@ -124,8 +131,9 @@ fribidi_tab_char_type_small:
 fribidi_tab_char_type_large:
 	$(MAKE) fribidi_tab_char_type_2.i
 
-fribidi_tab_char_type_%.i: fribidi_create_char_types	\
+fribidi_tab_char_type_%.i: $(fribidi_create_char_types_SOURCES)	\
 		unidata/UnicodeData.txt
+	$(MAKE) fribidi_create_char_types
 	if test -d unidata; then UNIDATA=unidata;	\
 	else UNIDATA="$(srcdir)/unidata"; fi &&	\
 	./fribidi_create_char_types "`echo "$@"	\
@@ -145,7 +153,7 @@ config.h: fribidi_tab_char_type_stamp
 
 $(srcdir)/fribidi_char_type.c: config.h
 
-tests/test_%.reference: tests/test_%.input fribidi
+tests/test_%.reference: tests/test_%.input $(libfribidi_la_SOURCES)
 	(test -d tests || mkdir tests) &&	\
 	testcase="$@" && 	\
 	charset="`echo "$@" | $(SED) 's/_[^_]*$$//;s/.*_//'`" &&	\

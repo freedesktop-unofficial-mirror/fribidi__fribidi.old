@@ -1,6 +1,6 @@
 AC_INIT(fribidi.c)
 
-PACKAGE=FriBidi
+PACKAGE=fribidi
 VERSION=0.10.0pre
 INTERFACE_VERSION=2
 AM_CONFIG_HEADER(config.h)
