@@ -1,9 +1,24 @@
+2001-03-29  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi.c, fribidi_char_sets.h, fribidi_char_sets_cap_rtl.c,
+	fribidi_main.c, tests/test-CapRTL, tests/test-CapRTL.reference,
+	tests/test-hebrew, tests/test-hebrew.reference: Fixed a bug in
+	--clean that didn't remove RLM and LRM, and updated tests to reflect
+	this change.
+
+	* fribidi_main.c: Options --wltr and --wrtl added.
+
+	* TODO: A recently done task removed.
+
 2001-03-28  Roozbeh Pournader <roozbeh@sharif.edu>
 	* bootstrap: swapped 'aclocal' and 'autoheader'. do not warn for
 	missing COPYING.
+
 	* COPYING: removed.
+
 	* COPYING.LIB: added.
+
 	* README, *.h, *.c, unidata/CreateGetType.pl: changes to reflect LGPL.
+
 	* Makefile.am: added 'bootstrap' to distribution.
 
 2001-03-28  Behdad Esfahbod <behdad@bamdad.org>

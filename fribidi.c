@@ -20,7 +20,7 @@
  * For licensing issues, contact <dov@imagic.weizmann.ac.il> and
  * <fwpg@sharif.edu>.
  */
- 
+
 #include "fribidi.h"
 #include "config.h"
 #ifdef DEBUG
@@ -1092,13 +1092,15 @@ fribidi_set_mirroring (gboolean mirror)
 //  fribidi_remove_explicits() removes explicit marks, and returns the
 //  new length.
 //----------------------------------------------------------------------*/
-gint fribidi_remove_explicits (FriBidiChar * str, gint length)
+gint
+fribidi_remove_explicits (FriBidiChar * str, gint length)
 {
   gint i, j;
 
   j = 0;
   for (i = 0; i < length; i++)
-    if (!FRIBIDI_IS_EXPLICIT (fribidi_get_type (str[i])))
+    if (!FRIBIDI_IS_EXPLICIT (fribidi_get_type (str[i]))
+	&& str[i] != UNI_LRM && str[i] != UNI_RLM)
       str[j++] = str[i];
 
   return j;

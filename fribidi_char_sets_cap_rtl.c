@@ -1,45 +1,39 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001 Behdad Esfahbod.
  * 
- * This library is free software; you can redistribute it and/or 
- * modify it under the terms of the GNU Lesser General Public 
- * License as published by the Free Software Foundation; either 
- * version 2.1 of the License, or (at your option) any later version. 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public  
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  * 
- * This library is distributed in the hope that it will be useful, 
- * but WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
- * Lesser General Public License for more details. 
+ * This library is distributed in the hope that it will be useful,  
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of   
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  * 
- * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA  
+ * You should have received a copy of the GNU Lesser General Public License  
+ * along with this library, in a file named COPYING.LIB; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+ * Boston, MA 02111-1307, USA
  * 
- * For licensing issues, contact <dov@imagic.weizmann.ac.il> and 
- * <fwpg@sharif.edu>. 
-  */
+ * For licensing issues, contact <dov@imagic.weizmann.ac.il> and
+ * <fwpg@sharif.edu>.
+ */
 
 #include "fribidi.h"
 
 extern FriBidiCharType FriBidiPropertyBlock0000[256];
 extern FriBidiCharType *FriBidiPropertyBlocks[256];
 
-#define UNI_LRM 0x200E
-#define UNI_RLM 0x200F
-#define UNI_LRE 0x202a
-#define UNI_RLE 0x202b
-#define UNI_PDF 0x202c
-#define UNI_LRO 0x202d
-#define UNI_RLO 0x202e
-
-FriBidiChar fribidi_cap_rtl_to_unicode_c (guchar ch)
+FriBidiChar
+fribidi_cap_rtl_to_unicode_c (guchar ch)
 {
   return ch;
 }
 
-guchar fribidi_unicode_to_cap_rtl_c (FriBidiChar uch)
+guchar
+fribidi_unicode_to_cap_rtl_c (FriBidiChar uch)
 {
   if (uch <= 0x7f)
     return uch;
@@ -47,8 +41,7 @@ guchar fribidi_unicode_to_cap_rtl_c (FriBidiChar uch)
     return (guchar) "¿";
 }
 
-gint
-fribidi_cap_rtl_to_unicode (guchar * s, FriBidiChar * us)
+gint fribidi_cap_rtl_to_unicode (guchar * s, FriBidiChar * us)
 {
   gint i, j, length, len;
 
@@ -100,8 +93,7 @@ fribidi_cap_rtl_to_unicode (guchar * s, FriBidiChar * us)
   return j;
 }
 
-gint
-fribidi_unicode_to_cap_rtl (FriBidiChar * us, gint length, guchar * s)
+gint fribidi_unicode_to_cap_rtl (FriBidiChar * us, gint length, guchar * s)
 {
   gint i, j;
 
@@ -109,7 +101,8 @@ fribidi_unicode_to_cap_rtl (FriBidiChar * us, gint length, guchar * s)
   for (i = 0; i < length; i++)
     {
       FriBidiChar ch = us[i];
-      if (!FRIBIDI_IS_EXPLICIT (fribidi_get_type (ch)) && ch != '_')
+      if (!FRIBIDI_IS_EXPLICIT (fribidi_get_type (ch)) && ch != '_'
+	  && ch != UNI_LRM && ch != UNI_RLM)
 	{
 	  if (ch < 256)
 	    s[j++] = ch;
@@ -282,14 +275,12 @@ FriBidiPropCharType FriBidiPropertyBlockCapRTL[256] = {
 #undef PDF
 #undef EN
 
-gboolean
-fribidi_char_set_enter_cap_rtl (void)
+gboolean fribidi_char_set_enter_cap_rtl (void)
 {
   FriBidiPropertyBlocks[0] = FriBidiPropertyBlockCapRTL;
 }
 
-gboolean
-fribidi_char_set_leave_cap_rtl (void)
+gboolean fribidi_char_set_leave_cap_rtl (void)
 {
   FriBidiPropertyBlocks[0] = FriBidiPropertyBlock0000;
 }

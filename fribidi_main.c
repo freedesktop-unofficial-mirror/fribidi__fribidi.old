@@ -1,24 +1,24 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001 Behdad Esfahbod.
  * 
- * This library is free software; you can redistribute it and/or 
- * modify it under the terms of the GNU Lesser General Public 
- * License as published by the Free Software Foundation; either 
- * version 2.1 of the License, or (at your option) any later version. 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public  
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  * 
- * This library is distributed in the hope that it will be useful, 
- * but WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
- * Lesser General Public License for more details. 
+ * This library is distributed in the hope that it will be useful,  
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of   
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  * 
- * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA  
+ * You should have received a copy of the GNU Lesser General Public License  
+ * along with this library, in a file named COPYING.LIB; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+ * Boston, MA 02111-1307, USA
  * 
- * For licensing issues, contact <dov@imagic.weizmann.ac.il> and 
- * <fwpg@sharif.edu>. 
+ * For licensing issues, contact <dov@imagic.weizmann.ac.il> and
+ * <fwpg@sharif.edu>.
  */
 
 /*======================================================================
@@ -76,7 +76,7 @@ main (int argc, char *argv[])
   char_set = FRIBIDI_CHARSET_DEFAULT;
   bol_text = NULL;
   eol_text = NULL;
-  input_base_direction = FRIBIDI_TYPE_ON;
+  input_base_direction = FRIBIDI_TYPE_WL;
   file_found = FALSE;
 
 #define CASE(s) if (strcmp (S_, (s)) == 0)
@@ -121,14 +121,17 @@ main (int argc, char *argv[])
 	       "  -E, --eol EOL         Output string EOL after the visual string\n"
 	       "  -R, --rtl             Force base direction to RTL\n"
 	       "  -L, --ltr             Force base direction to LTR\n"
+	       "  -r, --wrtl            Set base direction to RTL if no strong character found\n"
+	       "  -l, --wltr            Set base direction to LTR if no strong character found \\\n"
+	       "                        (default)\n"
 	       "  -c, --clean           Remove explicit format codes in visual string \\\n"
 	       "                        output, currently does not affect other outputs\n"
 	       "      --basedir         Output Base Direction\n"
 	       "      --ltov            Output Logical to Visual position map\n"
 	       "      --vtol            Output Visual to Logical position map\n"
 	       "      --levels          Output Embedding Levels\n"
-	       "      --changes         Output information about changes between\n"
-	       "                        logical and visual string (start, length) \\\n"
+	       "      --changes         Output information about changes between \\\n"
+	       "                        logical and visual string (start, length)\n"
 	       "      --novisual        Do not output the visual string, to be used with \\\n"
 	       "                        --basedir, --ltov, --vtol, --levels, --changes\n"
 	       "  Options affect only subsequent arguments\n"
@@ -136,8 +139,8 @@ main (int argc, char *argv[])
 	       "\n"
 	       "Output:\n"
 	       "  For each line of input, output something like this:\n"
-	       "    [BOL][input-str` => '][[padding space]visual-str][\\n base-dir]\n"
-	       "    [\\n ltov-map][\\n vtol-map][\\n levels][\\n changes][EOL]\n"
+	       "    [input-str` => '][BOL][[padding space]visual-str][EOL]\n"
+	       "    [\\n base-dir][\\n ltov-map][\\n vtol-map][\\n levels][\\n changes]\n"
 	       "\n"
 	       "Available character sets:\n", appname, appname, appname,
 	       fribidi_char_set_name (char_set), text_width);
@@ -175,24 +178,34 @@ main (int argc, char *argv[])
 	    text_width = atoi (NEXTARG);
 	    continue;
 	  }
-	  CASE2 ("-E", "--eol")
-	  {
-	    eol_text = NEXTARG;
-	    continue;
-	  }
 	  CASE2 ("-B", "--bol")
 	  {
 	    bol_text = NEXTARG;
 	    continue;
 	  }
+	  CASE2 ("-E", "--eol")
+	  {
+	    eol_text = NEXTARG;
+	    continue;
+	  }
 	  CASE2 ("-R", "--rtl")
 	  {
-	    input_base_direction = FRIBIDI_TYPE_RTL;
+	    input_base_direction = FRIBIDI_TYPE_R;
 	    continue;
 	  }
 	  CASE2 ("-L", "--ltr")
 	  {
-	    input_base_direction = FRIBIDI_TYPE_LTR;
+	    input_base_direction = FRIBIDI_TYPE_L;
+	    continue;
+	  }
+	  CASE2 ("-r", "--wrtl")
+	  {
+	    input_base_direction = FRIBIDI_TYPE_WR;
+	    continue;
+	  }
+	  CASE2 ("-l", "--wltr")
+	  {
+	    input_base_direction = FRIBIDI_TYPE_WL;
 	    continue;
 	  }
 	  CASE2 ("-f", "--fill")

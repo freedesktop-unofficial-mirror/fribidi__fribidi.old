@@ -1,9 +1,5 @@
 Implementation issues:
 
-* Currently one need to run "bootstrap" two times, to generate "config.h"
-  containing "PACKAGE" and "VERSION" defined, (to roozbeh: would you please
-  have a look).
-
 * Set autoconf to use fribidi_mini_glib, to compile with DEBUG, and other
   define symbols, and it can set FriBidiStrIndex to be guint32 instead of
   guint16, define FRIBIDI_MAX_STRING_LENGTH based on sizeof(FriBidiStrIndex).
@@ -13,7 +9,7 @@ Implementation issues:
 
 * Design some tests for each character set.
 
-* Charset convertors and fribidi_analyse change API to allocate mem if
+* Charset converters and fribidi_analyse change API to allocate mem if
   NULL is passed to them.
 
 BiDi algorithms issues:
