@@ -67,13 +67,22 @@ Install lib%{name}-devel if you want to develop programs which will use
 if [ ! -x ./configure ];then 
 ./bootstrap
 fi
-./configure %{_target_platform}
+
+./configure %{_target_platform}                                         \
+	--prefix=%{_prefix}             --exec-prefix=%{_exec_prefix}   \
+	--bindir=%{_bindir}             --sbindir=%{_sbindir}           \
+	--sysconfdir=%{_sysconfdir}     --datadir=%{_datadir}           \
+	--includedir=%{_includedir}                                     \
+	--libdir=%{_libdir}             --libexecdir=%{_libexecdir}     \
+	--mandir=%{_mandir}             --infodir=%{_infodir}           \
+	--localstatedir=%{_localstatedir} --sharedstatedir=%{_sharedstatedir}
+ 
 make CFLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{prefix}
-make install
+make DESTDIR="$RPM_BUILD_ROOT" install
 
 
 %clean

@@ -1,6 +1,9 @@
 See ChangeLog.
 
-Fribidi tested on sourceforge.net's compile farm`.
+fribidi.spec has bee added to CVS, please use this file if you are
+going to create an RPM package from fribidi.
+
+Fribidi tested on sourceforge.net's compile farm.
 
 Currently tested and has no problem with:
 
