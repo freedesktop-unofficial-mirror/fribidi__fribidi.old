@@ -27,7 +27,13 @@
 /*======================================================================
  *  fribidi_get_type() returns the bidi type of a character.
  *----------------------------------------------------------------------*/
-FRIBIDI_API FriBidiCharType fribidi_get_type (FriBidiChar uch);
+FRIBIDI_API FriBidiCharType fribidi_get_type_internal (FriBidiChar uch);
+
+FRIBIDI_API FriBidiCharType
+fribidi_get_type (FriBidiChar uch)
+{
+  return fribidi_get_type_internal (uch);
+}
 
 FRIBIDI_API void
 fribidi_get_types (		/* input */

@@ -182,8 +182,9 @@ test.reference:
 test: fribidi
 	"$(srcdir)/run.tests"
 
-.PHONY: test test.reference	\
-		fribidi_tab_char_type_small fribidi_tab_char_type_large
+.PHONY:		test test.reference	\
+		fribidi_tab_char_type_small fribidi_tab_char_type_large	\
+		fribidi_tab_mirroring fribidi_tab tab
 
 TESTS = run.tests
 

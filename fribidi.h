@@ -82,8 +82,15 @@ extern "C"
 /*======================================================================
  *  fribidi_get_type() returns bidi type of a character.
  *----------------------------------------------------------------------*/
-#define fribidi_get_type fribidi_get_type_internal
   FRIBIDI_API FriBidiCharType fribidi_get_type (FriBidiChar uch);
+
+/*======================================================================
+ *  fribidi_get_types() returns bidi type of a string.
+ *----------------------------------------------------------------------*/
+  FRIBIDI_API void fribidi_get_types (	/* input */
+				       FriBidiChar *str, FriBidiStrIndex len,
+				       /* output */
+				       FriBidiCharType *type);
 
 /*======================================================================
  *  fribidi_get_mirror_char() returns the mirrored character, if any.
@@ -94,14 +101,6 @@ extern "C"
 							/* Output */
 							FriBidiChar
 							*mirrored_ch);
-
-/*======================================================================
- *  fribidi_get_types() returns bidi type of a string.
- *----------------------------------------------------------------------*/
-  FRIBIDI_API void fribidi_get_types (	/* input */
-				       FriBidiChar *str, FriBidiStrIndex len,
-				       /* output */
-				       FriBidiCharType *type);
 
 /*======================================================================
  *  fribidi_get_mirror_char() returns the mirrored character, if input
