@@ -40,7 +40,8 @@ err (char *msg)
 }
 
 static void
-err2 (char *fmt, char *p)
+err2 (char *fmt,
+      char *p)
 {
   fprintf (stderr, "fribidi_create_char_types: ");
   fprintf (stderr, fmt, p);
@@ -112,8 +113,9 @@ static void
 init_table ()
 {
   int i;
-  int deftype = get_type (default_type), RTL = get_type ("RTL"), AL =
-    get_type ("AL");
+  int deftype = get_type (default_type),
+    RTL = get_type ("RTL"),
+    AL = get_type ("AL");
 
   for (i = 0; i < type_names_count; i++)
     names[i] = 0;
@@ -170,7 +172,8 @@ headermacro (char *file)
 }
 
 static void
-write_char_type (char *file, int max_depth)
+write_char_type (char *file,
+		 int max_depth)
 {
   int i;
   FILE *f;
@@ -227,7 +230,8 @@ write_char_type (char *file, int max_depth)
 }
 
 int
-main (int argc, char **argv)
+main (int argc,
+      char **argv)
 {
   int max_depth;
   char file[50], *p;

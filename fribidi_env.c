@@ -55,7 +55,8 @@
  *----------------------------------------------------------------------*/
 
 void
-init_fribidienv (FriBidiEnv *fribidienv, FriBidiFlags aFlags)
+init_fribidienv (FriBidiEnv *fribidienv,
+		 FriBidiFlags aFlags)
 {
   VALIDATE_FRIBIDIENV (fribidienv);
   fribidienv->iAllocatedMemoryChunks = NULL;
@@ -94,7 +95,8 @@ destroy_fribidienv (FriBidiEnv *fribidienv)
  * environments, which support exceptions.
  *----------------------------------------------------------------------*/
 void *
-fribidi_malloc (FriBidiEnv *fribidienv, int size)
+fribidi_malloc (FriBidiEnv *fribidienv,
+		int size)
 {
   FriBidiMemChunkPrefix *lChunk_ptr;
   FriBidiMemChunkPrefix *lNextChunk_ptr;
@@ -141,7 +143,8 @@ fribidi_malloc (FriBidiEnv *fribidienv, int size)
  * If the memory chunk is not properly linked, then panic.
  *----------------------------------------------------------------------*/
 void
-fribidi_free (FriBidiEnv *fribidienv, void *ptr)
+fribidi_free (FriBidiEnv *fribidienv,
+	      void *ptr)
 {
   FriBidiMemChunkPrefix *lChunk_ptr;
   FriBidiMemChunkPrefix *lNextChunk_ptr;
@@ -196,7 +199,8 @@ fribidi_mirroring_status (FriBidiEnv *fbenv)
  *  fribidi_set_mirroring() sets mirroring on or off.
  *----------------------------------------------------------------------*/
 void
-fribidi_set_mirroring (FriBidiEnv *fbenv, fribidi_boolean mirror)
+fribidi_set_mirroring (FriBidiEnv *fbenv,
+		       fribidi_boolean mirror)
 {
   VALIDATE_FRIBIDIENV (fbenv);
 
@@ -229,7 +233,8 @@ fribidi_reorder_nsm_status (FriBidiEnv *fbenv)
  *  fribidi_set_reorder_nsm() sets reordering of nsm sequences on or off.
  *----------------------------------------------------------------------*/
 void
-fribidi_set_reorder_nsm (FriBidiEnv *fbenv, fribidi_boolean reorder)
+fribidi_set_reorder_nsm (FriBidiEnv *fbenv,
+			 fribidi_boolean reorder)
 {
   VALIDATE_FRIBIDIENV (fbenv);
 
@@ -267,7 +272,8 @@ fribidi_debug_status (FriBidiEnv *fbenv)
  *  returns FRIBIDI_FALSE.
  *----------------------------------------------------------------------*/
 fribidi_boolean
-fribidi_set_debug (FriBidiEnv *fbenv, fribidi_boolean debug)
+fribidi_set_debug (FriBidiEnv *fbenv,
+		   fribidi_boolean debug)
 {
 #ifdef DEBUG
   VALIDATE_FRIBIDIENV (fbenv);

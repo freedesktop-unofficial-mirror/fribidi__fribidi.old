@@ -82,7 +82,8 @@ LevelInfo;
 
 
 static void
-bidi_string_reverse (FriBidiChar *str, FriBidiStrIndex len)
+bidi_string_reverse (FriBidiChar *str,
+		     FriBidiStrIndex len)
 {
   FriBidiStrIndex i;
   for (i = 0; i < len / 2; i++)
@@ -94,7 +95,8 @@ bidi_string_reverse (FriBidiChar *str, FriBidiStrIndex len)
 }
 
 static void
-index_array_reverse (FriBidiStrIndex *arr, FriBidiStrIndex len)
+index_array_reverse (FriBidiStrIndex *arr,
+		     FriBidiStrIndex len)
 {
   FriBidiStrIndex i;
   for (i = 0; i < len / 2; i++)
@@ -127,12 +129,12 @@ new_type_link (FriBidiEnv *fribidienv)
       static FriBidiMemChunk *mem_chunk = NULL;
 
       if (!mem_chunk)
-	mem_chunk =
-	  fribidi_mem_chunk_create (fribidienv,
-				    TypeLink, FRIBIDI_CHUNK_SIZE,
-				    FRIBIDI_ALLOC_ONLY);
+	mem_chunk = fribidi_mem_chunk_create (fribidienv, TypeLink,
+					      FRIBIDI_CHUNK_SIZE,
+					      FRIBIDI_ALLOC_ONLY);
 
-      link = fribidi_chunk_new (fribidienv, TypeLink, mem_chunk);
+      link = fribidi_chunk_new (fribidienv, TypeLink,
+				mem_chunk);
     }
 #endif /* !USE_SIMPLE_MALLOC */
 
@@ -145,7 +147,8 @@ new_type_link (FriBidiEnv *fribidienv)
 }
 
 static void
-free_type_link (FriBidiEnv *fribidienv, TypeLink *link)
+free_type_link (FriBidiEnv *fribidienv,
+		TypeLink *link)
 {
 #ifdef USE_SIMPLE_MALLOC
   fribidi_free (fribidienv, link);
@@ -165,7 +168,8 @@ free_type_link (FriBidiEnv *fribidienv, TypeLink *link)
 
 static TypeLink *
 run_length_encode_types (FriBidiEnv *fribidienv,
-			 FriBidiCharType *char_type, FriBidiStrIndex type_len)
+			 FriBidiCharType *char_type,
+			 FriBidiStrIndex type_len)
 {
   TypeLink *list, *last, *link;
 
@@ -202,7 +206,9 @@ run_length_encode_types (FriBidiEnv *fribidienv,
    the override_list.
 */
 static void
-init_list (FriBidiEnv *fribidienv, TypeLink **start, TypeLink **end)
+init_list (FriBidiEnv *fribidienv,
+	   TypeLink **start,
+	   TypeLink **end)
 {
   TypeLink *list;
   TypeLink *link;
@@ -233,7 +239,8 @@ init_list (FriBidiEnv *fribidienv, TypeLink **start, TypeLink **end)
    the list that p is currently in, if any.
 */
 static void
-move_element_before (TypeLink *p, TypeLink *list)
+move_element_before (TypeLink *p,
+		     TypeLink *list)
 {
   if (p->prev)
     {
@@ -261,7 +268,9 @@ move_element_before (TypeLink *p, TypeLink *list)
    TBD: use some explanatory names instead of p, q, ...
 */
 static void
-override_list (FriBidiEnv *fribidienv, TypeLink *base, TypeLink *over)
+override_list (FriBidiEnv *fribidienv,
+	       TypeLink *base,
+	       TypeLink *over)
 {
   TypeLink *p = base, *q, *r, *s, *t;
   FriBidiStrIndex pos = 0, pos2;
@@ -360,7 +369,8 @@ override_list (FriBidiEnv *fribidienv, TypeLink *base, TypeLink *over)
 #define RL_LEVEL(list) ((list)->level)
 
 static TypeLink *
-merge_with_prev (FriBidiEnv *fribidienv, TypeLink *second)
+merge_with_prev (FriBidiEnv *fribidienv,
+		 TypeLink *second)
 {
   TypeLink *first = second->prev;
   first->next = second->next;
@@ -371,7 +381,8 @@ merge_with_prev (FriBidiEnv *fribidienv, TypeLink *second)
 }
 
 static void
-compact_list (FriBidiEnv *fribidienv, TypeLink *list)
+compact_list (FriBidiEnv *fribidienv,
+	      TypeLink *list)
 {
   if (list->next)
     for (list = list->next; list; list = list->next)
@@ -381,7 +392,8 @@ compact_list (FriBidiEnv *fribidienv, TypeLink *list)
 }
 
 static void
-compact_neutrals (FriBidiEnv *fribidienv, TypeLink *list)
+compact_neutrals (FriBidiEnv *fribidienv,
+		  TypeLink *list)
 {
   if (list->next)
     {
@@ -572,10 +584,12 @@ print_bidi_string (FriBidiChar *str)
 static void
 fribidi_analyse_string (FriBidiEnv *fribidienv,
 			/* input */
-			const FriBidiChar *str, FriBidiStrIndex len,
+			const FriBidiChar *str,
+			FriBidiStrIndex len,
 			FriBidiCharType *pbase_dir,
 			/* output */
-			TypeLink **ptype_rl_list, FriBidiLevel *pmax_level)
+			TypeLink **ptype_rl_list,
+			FriBidiLevel *pmax_level)
 {
   FriBidiLevel base_level, max_level;
   FriBidiCharType base_dir;
@@ -1027,7 +1041,8 @@ fribidi_analyse_string (FriBidiEnv *fribidienv,
  *  fribidi_analyse_string(), after the list is not needed anymore.
  *----------------------------------------------------------------------*/
 static void
-free_rl_list (FriBidiEnv *fribidienv, TypeLink *type_rl_list)
+free_rl_list (FriBidiEnv *fribidienv,
+	      TypeLink *type_rl_list)
 {
 
   TypeLink *pp;
@@ -1073,7 +1088,8 @@ free_rl_list (FriBidiEnv *fribidienv, TypeLink *type_rl_list)
  *----------------------------------------------------------------------*/
 FRIBIDI_API FriBidiStrIndex
 fribidi_remove_bidi_marks (FriBidiEnv *fribidienv,
-			   FriBidiChar *str, FriBidiStrIndex length,
+			   FriBidiChar *str,
+			   FriBidiStrIndex length,
 			   FriBidiStrIndex *position_to_this_list,
 			   FriBidiStrIndex *position_from_this_list,
 			   FriBidiLevel *embedding_level_list)
@@ -1133,7 +1149,8 @@ fribidi_remove_bidi_marks (FriBidiEnv *fribidienv,
 FRIBIDI_API fribidi_boolean
 fribidi_log2vis (FriBidiEnv *fribidienv,
 		 /* input */
-		 const FriBidiChar *str, FriBidiStrIndex len,
+		 const FriBidiChar *str,
+		 FriBidiStrIndex len,
 		 FriBidiCharType *pbase_dir,
 		 /* output */
 		 FriBidiChar *visual_str,
@@ -1299,7 +1316,8 @@ fribidi_log2vis (FriBidiEnv *fribidienv,
 		if (RL_LEVEL (pp) >= level_idx)
 		  {
 		    /* Find all stretches that are >= level_idx */
-		    FriBidiStrIndex len = RL_LEN (pp), pos = RL_POS (pp);
+		    FriBidiStrIndex len = RL_LEN (pp),
+		      pos = RL_POS (pp);
 		    TypeLink *pp1 = pp->next;
 		    while (pp1->next && RL_LEVEL (pp1) >= level_idx)
 		      {
@@ -1368,7 +1386,8 @@ fribidi_log2vis_get_embedding_levels (FriBidiEnv *fribidienv,
 
   for (pp = type_rl_list->next; pp->next; pp = pp->next)
     {
-      FriBidiStrIndex i, pos = RL_POS (pp), len = RL_LEN (pp);
+      FriBidiStrIndex i, pos = RL_POS (pp),
+        len = RL_LEN (pp);
       FriBidiLevel level = RL_LEVEL (pp);
       for (i = 0; i < len; i++)
 	embedding_level_list[pos + i] = level;

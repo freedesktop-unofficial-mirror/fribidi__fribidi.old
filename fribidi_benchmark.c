@@ -40,7 +40,8 @@ extern char *fribidi_version_info;
 #define MAX_STR_LEN 1000
 
 static void
-die (char *fmt, ...)
+die (char *fmt,
+     ...)
 {
   va_list ap;
   va_start (ap, fmt);
@@ -98,7 +99,8 @@ utime (void)
 }
 
 static void
-benchmark (char *S_, int niter)
+benchmark (char *S_,
+	   int niter)
 {
   int len, i;
   FriBidiChar us[MAX_STR_LEN], out_us[MAX_STR_LEN];
@@ -182,7 +184,8 @@ benchmark (char *S_, int niter)
 }
 
 int
-main (int argc, char *argv[])
+main (int argc,
+      char *argv[])
 {
   niter = 2000;
 

@@ -214,7 +214,8 @@ extern char *getenv ();
 #endif
 
 static char *
-my_index (str, chr)
+my_index (str,
+	  chr)
      const char *str;
      int chr;
 {
@@ -266,8 +267,8 @@ static char *const *original_argv;
 /* Make sure the environment variable bash 2.0 puts in the environment
    is valid for the getopt call we must make sure that the ARGV passed
    to getopt is that one passed to the process.  */
-static void
-  __attribute__ ((unused)) store_args_and_env (int argc, char *const *argv)
+static void __attribute__ ((unused)) store_args_and_env (int argc,
+							 char *const *argv)
 {
   /* XXX This is no good solution.  We should rather copy the args so
      that we can compare them later.  But we must not use malloc(3).  */
@@ -386,10 +387,14 @@ exchange (argv)
 /* Initialize the internal data when the first call is made.  */
 
 #if defined __STDC__ && __STDC__
-static const char *_getopt_initialize (int, char *const *, const char *);
+static const char *_getopt_initialize (int,
+				       char *const *,
+				       const char *);
 #endif
 static const char *
-_getopt_initialize (argc, argv, optstring)
+_getopt_initialize (argc,
+		    argv,
+		    optstring)
      int argc;
      char *const *argv;
      const char *optstring;
@@ -511,7 +516,12 @@ _getopt_initialize (argc, argv, optstring)
    long-named options.  */
 
 int
-_getopt_internal (argc, argv, optstring, longopts, longind, long_only)
+_getopt_internal (argc,
+		  argv,
+		  optstring,
+		  longopts,
+		  longind,
+		  long_only)
      int argc;
      char *const *argv;
      const char *optstring;
@@ -978,7 +988,9 @@ _getopt_internal (argc, argv, optstring, longopts, longind, long_only)
 }
 
 int
-getopt (argc, argv, optstring)
+getopt (argc,
+	argv,
+	optstring)
      int argc;
      char *const *argv;
      const char *optstring;
@@ -995,7 +1007,8 @@ getopt (argc, argv, optstring)
    the above definition of `getopt'.  */
 
 int
-main (argc, argv)
+main (argc,
+      argv)
      int argc;
      char **argv;
 {

@@ -253,7 +253,8 @@ extern "C"
  *----------------------------------------------------------------------*/
   FRIBIDI_API void fribidi_xpos_resolve (FriBidiEnv *fribidienv,
 					 /* input */
-					 int x_pos, int x_offset,
+					 int x_pos,
+					 int x_offset,
 					 FriBidiStrIndex len,
 					 const FriBidiLevel
 					 *embedding_level_list,
@@ -276,6 +277,7 @@ extern "C"
   FRIBIDI_API void fribidi_runs_log2vis (FriBidiEnv *fribidienv,
 					 /* input */
 					 const FriBidiList *logical_runs,	/* List of FriBidiRunType */
+
 					 FriBidiStrIndex len,
 					 const FriBidiStrIndex *log2vis,
 					 FriBidiCharType base_dir,

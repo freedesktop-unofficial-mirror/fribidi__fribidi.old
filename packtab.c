@@ -54,7 +54,8 @@ init (int *base)
 }
 
 static int
-compare (const void *r, const void *s)
+compare (const void *r,
+	 const void *s)
 {
   int i;
   for (i = 0; i < cmpcluster; i++)
@@ -313,9 +314,15 @@ write_out ()
 }
 
 int
-pack_table (int *base, int key_num, int key_size,
-	    int p_max_depth, int p_tab_width, char **p_name,
-	    char *p_key_type_name, char *p_table_name, char *p_macro_name,
+pack_table (int *base,
+	    int key_num,
+	    int key_size,
+	    int p_max_depth,
+	    int p_tab_width,
+	    char **p_name,
+	    char *p_key_type_name,
+	    char *p_table_name,
+	    char *p_macro_name,
 	    FILE * out)
 {
   N = key_num;

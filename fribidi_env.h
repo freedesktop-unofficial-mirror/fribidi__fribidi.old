@@ -146,7 +146,8 @@ extern "C"
  *
  *  It initializes the doubly-linked list of memory chunks and the flags.
  *----------------------------------------------------------------------*/
-  void init_fribidienv (FriBidiEnv *fribidienv, FriBidiFlags aFlags);
+  void init_fribidienv (FriBidiEnv *fribidienv,
+			FriBidiFlags aFlags);
 
 
 /*======================================================================
@@ -163,7 +164,8 @@ extern "C"
  * This function may throw an Out-Of-Memory exception in
  * environments, which support exceptions.
  *----------------------------------------------------------------------*/
-  void *fribidi_malloc (FriBidiEnv *fribidienv, int size);
+  void *fribidi_malloc (FriBidiEnv *fribidienv,
+			int size);
 
 
 /*======================================================================
@@ -171,7 +173,8 @@ extern "C"
  * FriBidiEnv instance and free it.
  * If the memory chunk is not properly linked, then panic.
  *----------------------------------------------------------------------*/
-  void fribidi_free (FriBidiEnv *fribidienv, void *ptr);
+  void fribidi_free (FriBidiEnv *fribidienv,
+		     void *ptr);
 
 
 /*====================================================================*/
@@ -204,7 +207,8 @@ extern "C"
 /*======================================================================
  *  fribidi_set_mirroring() sets mirroring on or off.
  *----------------------------------------------------------------------*/
-  void fribidi_set_mirroring (FriBidiEnv *fbenv, fribidi_boolean mirror);
+  void fribidi_set_mirroring (FriBidiEnv *fbenv,
+			      fribidi_boolean mirror);
 
 /*======================================================================
  *  fribidi_reorder_nsm_status() returns whether reordering of nsm
@@ -215,7 +219,8 @@ extern "C"
 /*======================================================================
  *  fribidi_set_reorder_nsm() sets reordering of nsm sequences on or off.
  *----------------------------------------------------------------------*/
-  void fribidi_set_reorder_nsm (FriBidiEnv *fbenv, fribidi_boolean reorder);
+  void fribidi_set_reorder_nsm (FriBidiEnv *fbenv,
+				fribidi_boolean reorder);
 
 /*======================================================================
  *  fribidi_debug_status() returns whether debugging is on or off,

@@ -69,7 +69,9 @@ struct interval
 
 /* auxiliary function for binary search in interval table */
 static int
-bisearch (wchar_t ucs, const struct interval *table, int max)
+bisearch (wchar_t ucs,
+	  const struct interval *table,
+	  int max)
 {
   int min = 0;
   int mid;
@@ -192,7 +194,8 @@ mk_wcwidth (wchar_t ucs)
 
 
 int
-mk_wcswidth (const wchar_t * pwcs, size_t n)
+mk_wcswidth (const wchar_t * pwcs,
+	     size_t n)
 {
   int w, width = 0;
 
@@ -284,7 +287,8 @@ mk_wcwidth_cjk (wchar_t ucs)
 
 
 int
-mk_wcswidth_cjk (const wchar_t * pwcs, size_t n)
+mk_wcswidth_cjk (const wchar_t * pwcs,
+		 size_t n)
 {
   int w, width = 0;
 

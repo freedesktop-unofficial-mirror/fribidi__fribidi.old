@@ -30,7 +30,8 @@
 FRIBIDI_API FriBidiCharType fribidi_get_type_internal (FriBidiChar uch);
 
 FRIBIDI_API FriBidiCharType
-fribidi_get_type (FriBidiEnv *env, FriBidiChar uch)
+fribidi_get_type (FriBidiEnv *env,
+		  FriBidiChar uch)
 {
   return fribidi_get_type_internal (uch);
 }
@@ -38,7 +39,8 @@ fribidi_get_type (FriBidiEnv *env, FriBidiChar uch)
 FRIBIDI_API void
 fribidi_get_types (FriBidiEnv *env,
 		   /* input */
-		   const FriBidiChar *str, FriBidiStrIndex len,
+		   const FriBidiChar *str,
+		   FriBidiStrIndex len,
 		   /* output */
 		   FriBidiCharType *type)
 {

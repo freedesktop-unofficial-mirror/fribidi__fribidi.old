@@ -64,14 +64,16 @@ extern "C"
 
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
-  int fribidi_charset_to_unicode (FriBidiCharSet char_set, char *s,
+  int fribidi_charset_to_unicode (FriBidiCharSet char_set,
+				  char *s,
 				  int length,
 				  /* output */
 				  FriBidiChar *us);
 
 /* Convert the unicode string "us" with length "length" to character
    string "s" in charset "char_set" and return it's length. */
-  int fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
+  int fribidi_unicode_to_charset (FriBidiCharSet char_set,
+				  FriBidiChar *us,
 				  int length,
 				  /* output */
 				  char *s);
@@ -102,7 +104,8 @@ extern "C"
 #ifdef FRIBIDI_INTERFACE_1
 /* Interface version 1, deprecated, just for compatibility. */
 
-  int fribidi_charset_to_unicode_1 (FriBidiCharSet char_set, char *s,
+  int fribidi_charset_to_unicode_1 (FriBidiCharSet char_set,
+				    char *s,
 				    /* output */
 				    FriBidiChar *us);
 #define fribidi_charset_to_unicode	fribidi_charset_to_unicode_1

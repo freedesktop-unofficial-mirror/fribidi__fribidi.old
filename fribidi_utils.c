@@ -64,11 +64,15 @@ FRIBIDI_API void
 fribidi_map_range (FriBidiEnv *fribidienv,
 		   /* input */
 		   FriBidiStrIndex in_span[2],	/* Start and end span */
-		   FriBidiStrIndex len, fribidi_boolean is_v2l_map,	/* Needed for embedding_level */
+
+		   FriBidiStrIndex len,
+		   fribidi_boolean is_v2l_map,	/* Needed for embedding_level */
+
 		   const FriBidiStrIndex *position_map,
 		   const FriBidiLevel *embedding_level_list,
 		   /* output */
-		   int *num_mapped_spans, FriBidiStrIndex mapped_spans[63][2])
+		   int *num_mapped_spans,
+		   FriBidiStrIndex mapped_spans[63][2])
 {
   FriBidiStrIndex ch_idx;
   fribidi_boolean in_range = FRIBIDI_FALSE;
@@ -195,10 +199,13 @@ fribidi_find_string_changes (FriBidiEnv *fribidienv,
 FRIBIDI_API void
 fribidi_xpos_resolve (FriBidiEnv *fribidienv,
 		      /* input */
-		      int x_pos, int x_offset, FriBidiStrIndex len,
+		      int x_pos,
+		      int x_offset,
+		      FriBidiStrIndex len,
 		      const FriBidiLevel *embedding_level_list,
 		      FriBidiCharType base_dir,
-		      const FriBidiStrIndex *vis2log, const int *char_widths,
+		      const FriBidiStrIndex *vis2log,
+		      const int *char_widths,
 		      /* output */
 		      FriBidiStrIndex *res_log_pos,
 		      FriBidiStrIndex *res_vis_pos,
@@ -304,7 +311,8 @@ fribidi_xpos_resolve (FriBidiEnv *fribidienv,
 FRIBIDI_API fribidi_boolean
 fribidi_is_char_rtl (FriBidiEnv *fribidienv,
 		     const FriBidiLevel *embedding_level_list,
-		     FriBidiCharType base_dir, FriBidiStrIndex idx)
+		     FriBidiCharType base_dir,
+		     FriBidiStrIndex idx)
 {
   if (!embedding_level_list || idx < 0)
     return FRIBIDI_IS_RTL (base_dir);
@@ -322,8 +330,12 @@ FRIBIDI_API void
 fribidi_runs_log2vis (FriBidiEnv *fribidienv,
 		      /* input */
 		      const FriBidiList *logical_runs,	/* List of FriBidiRunType */
-		      FriBidiStrIndex len, const FriBidiStrIndex *log2vis, FriBidiCharType base_dir,	/* TBD: remove it, not needed */
+
+		      FriBidiStrIndex len,
+		      const FriBidiStrIndex *log2vis,
+		      FriBidiCharType base_dir,	/* TBD: remove it, not needed */
 		      /* output */
+
 		      FriBidiList **visual_runs)
 {
   void **visual_attribs =

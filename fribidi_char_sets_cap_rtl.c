@@ -103,7 +103,9 @@ fribidi_unicode_to_cap_rtl_c (FriBidiChar uch)
 }
 
 int
-fribidi_cap_rtl_to_unicode (char *s, int len, FriBidiChar *us)
+fribidi_cap_rtl_to_unicode (char *s,
+			    int len,
+			    FriBidiChar *us)
 {
   int i, j;
 
@@ -155,7 +157,9 @@ fribidi_cap_rtl_to_unicode (char *s, int len, FriBidiChar *us)
 }
 
 int
-fribidi_unicode_to_cap_rtl (FriBidiChar *us, int length, char *s)
+fribidi_unicode_to_cap_rtl (FriBidiChar *us,
+			    int length,
+			    char *s)
 {
   int i, j;
 

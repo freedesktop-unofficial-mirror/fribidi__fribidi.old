@@ -1,3 +1,5 @@
+-gnu
+-bfda
 -T TypeLink
 -T LevelInfo
 -T FriBidiChar
