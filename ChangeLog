@@ -1,3 +1,7 @@
+2002-01-04  Roozbeh Pournader <roozbeh@sharif.edu>
+	* FriBidi 0.10.1 released.
+	* configure.in: Changed the version to 0.10.1.
+
 2002-01-18  Behdad Esfahbod <behdad@bamdad.org>
 	* configure.in, fribidi.spec.in: Clean up, different version components
 	defined, rpm names changed from fribidi to fribidi{majorversion}.
