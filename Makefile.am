@@ -34,6 +34,7 @@ libfribidi_la_SOURCES =	\
 	fribidi.c	\
 	fribidi_types.c		\
 	fribidi_mem.c	\
+	fribidi_env.c	\
 	fribidi_mirroring.c	\
 	fribidi_char_type.c	\
 	fribidi_wcwidth.c	\
@@ -49,6 +50,7 @@ libfribidiinc_HEADERS =	\
 	fribidi.h	\
 	fribidi_types.h	\
 	fribidi_mem.h	\
+	fribidi_env.h	\
 	fribidi_unicode.h	\
 	$(libfribidi_charsets_h)	\
 	$(libfribidi_charsets_extra_h)	\
@@ -144,6 +146,9 @@ fribidi_tab_char_type_stamp:
 	touch "$(srcdir)/fribidi_char_type.c" || $(MAKE) clean
 	touch "$@"
 
+fribidi_tabs: fribidi_tab_mirroring.i	\
+		fribidi_tab_char_type_2.i fribidi_tab_char_type_9.i
+
 config.h: fribidi_tab_char_type_stamp
 	./config.status --recheck
 	./config.status
@@ -171,7 +176,8 @@ test: fribidi
 	"$(srcdir)/run.tests"
 
 .PHONY: test test.reference	\
-		fribidi_tab_char_type_small fribidi_tab_char_type_large
+		fribidi_tab_char_type_small fribidi_tab_char_type_large	\
+		fribidi_tabs
 
 TESTS = run.tests
 

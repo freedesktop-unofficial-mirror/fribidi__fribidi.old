@@ -336,3 +336,5 @@ pack_table (int *base, int key_num, int key_size, int ptr_size,
   free (tab);
   return 1;
 }
+
+/* End of packtab.c */

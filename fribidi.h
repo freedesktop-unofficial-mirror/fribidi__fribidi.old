@@ -28,6 +28,8 @@
 #include "fribidi_unicode.h"
 #include "fribidi_mem.h"
 #include "fribidi_types.h"
+#include "fribidi_env.h"
+
 #ifndef FRIBIDI_NO_CHARSETS
 #include "fribidi_char_sets.h"
 #endif
@@ -37,8 +39,10 @@ extern "C"
 {
 #endif
 
-  boolean fribidi_log2vis (	/* input */
-			    FriBidiChar *str, FriBidiStrIndex len,
+  boolean fribidi_log2vis ( FriBidiEnv* fribidienv,
+			    /* input */
+			    const FriBidiChar *str,
+			    FriBidiStrIndex len,
 			    FriBidiCharType *pbase_dirs,
 			    /* output */
 			    FriBidiChar *visual_str,
@@ -46,8 +50,9 @@ extern "C"
 			    FriBidiStrIndex *position_V_to_L_list,
 			    FriBidiLevel *embedding_level_list);
 
-  boolean fribidi_log2vis_get_embedding_levels (	/* input */
-						 FriBidiChar *str,
+  boolean fribidi_log2vis_get_embedding_levels ( FriBidiEnv* fribidienv,
+						 /* input */
+						 const FriBidiChar *str,
 						 FriBidiStrIndex len,
 						 FriBidiCharType *pbase_dir,
 						 /* output */
@@ -58,7 +63,8 @@ extern "C"
  *  fribidi_remove_bidi_marks() removes bidirectional marks, and returns
  *  the new length, also updates each of other inputs if not NULL.
  *----------------------------------------------------------------------*/
-  FriBidiStrIndex fribidi_remove_bidi_marks (FriBidiChar *str,
+  FriBidiStrIndex fribidi_remove_bidi_marks (FriBidiEnv* fribidienv,
+					     FriBidiChar *str,
 					     FriBidiStrIndex length,
 					     FriBidiStrIndex
 					     *position_to_this_list,
@@ -70,13 +76,20 @@ extern "C"
 /*======================================================================
  *  fribidi_get_type() returns bidi type of a character.
  *----------------------------------------------------------------------*/
-  FriBidiCharType fribidi_get_type (FriBidiChar uch);
+  FriBidiCharType fribidi_get_type_internal (FriBidiChar uch);
+
+  /* At present, the fribidienv parameter is not actually used
+   * by this procedure.
+   */
+#define fribidi_get_type(fribidienv,uch) fribidi_get_type_internal(uch)
 
 /*======================================================================
  *  fribidi_get_types() returns bidi type of a string.
  *----------------------------------------------------------------------*/
-  void fribidi_get_types (	/* input */
-			   FriBidiChar *str, FriBidiStrIndex len,
+  void fribidi_get_types ( FriBidiEnv* fribidienv,
+			   /* input */
+			   const FriBidiChar *str,
+			   FriBidiStrIndex len,
 			   /* output */
 			   FriBidiCharType *type);
 
@@ -85,38 +98,19 @@ extern "C"
  *  character has a mirror, or the input itself.
  *  if mirrored_ch is NULL, just returns if character has a mirror or not.
  *----------------------------------------------------------------------*/
-  boolean fribidi_get_mirror_char (	/* Input */
+  boolean fribidi_get_mirror_char ( FriBidiEnv* fribidienv,
+				    /* Input */
 				    FriBidiChar ch,
 				    /* Output */
 				    FriBidiChar *mirrored_ch);
-
 /*======================================================================
- *  fribidi_mirroring_status() returns whether mirroring is on or off,
- *  default is on.
+ *  The following functions were moved to fribidi_env:
+ *  - fribidi_mirroring_status()
+ *  - fribidi_set_mirroring()
+ *  - fribidi_reorder_nsm_status()
+ *  - fribidi_set_reorder_nsm()
+ *  - fribidi_set_debug()
  *----------------------------------------------------------------------*/
-  boolean fribidi_mirroring_status (void);
-
-/*======================================================================
- *  fribidi_set_mirroring() sets mirroring on or off.
- *----------------------------------------------------------------------*/
-  void fribidi_set_mirroring (boolean mirror);
-
-/*======================================================================
- *  fribidi_reorder_nsm_status() returns whether reordering of NSM
- *  sequences is on or off, default is off.
- *----------------------------------------------------------------------*/
-  boolean fribidi_reorder_nsm_status (void);
-
-/*======================================================================
- *  fribidi_set_reorder_nsm() sets reordering of NSM characters on or off.
- *----------------------------------------------------------------------*/
-  void fribidi_set_reorder_nsm (boolean);
-
-/*======================================================================
- *  fribidi_set_debug() turn on or off debugging, default is off, return
- *  false is fribidi is not compiled with debug enabled.
- *----------------------------------------------------------------------*/
-  boolean fribidi_set_debug (boolean debug);
 
 /* fribidi_utils.c */
 
@@ -125,10 +119,11 @@ extern "C"
  *  of characters that need redrawing. It returns the start and the
  *  length of the section in the new string that needs redrawing.
  *----------------------------------------------------------------------*/
-  void fribidi_find_string_changes (	/* input */
-				     FriBidiChar *old_str,
+  void fribidi_find_string_changes ( FriBidiEnv* fribidienv,
+				     /* input */
+				     const FriBidiChar *old_str,
 				     FriBidiStrIndex old_len,
-				     FriBidiChar *new_str,
+				     const FriBidiChar *new_str,
 				     FriBidiStrIndex new_len,
 				     /* output */
 				     FriBidiStrIndex *change_start,
@@ -164,10 +159,13 @@ extern "C"
  *                       // output
  *                       &num_vis_ranges, *vis_ranges);
  **----------------------------------------------------------------------*/
-  void fribidi_map_range (FriBidiStrIndex span[2], FriBidiStrIndex len,
+  void fribidi_map_range (FriBidiEnv* fribidienv,
+			  /* input */
+			  FriBidiStrIndex span[2],
+			  FriBidiStrIndex len,
 			  boolean is_v2l_map,
-			  FriBidiStrIndex *position_map,
-			  FriBidiLevel *embedding_level_list,
+			  const FriBidiStrIndex *position_map,
+			  const FriBidiLevel *embedding_level_list,
 			  /* output */
 			  int *num_mapped_spans, FriBidiStrIndex spans[3][2]);
 
@@ -176,7 +174,8 @@ extern "C"
  *  was resolved in the rtl direction. This simply involves asking
  *  if the embedding level for the character is odd.
  *----------------------------------------------------------------------*/
-  boolean fribidi_is_char_rtl (FriBidiLevel *embedding_level_list,
+  boolean fribidi_is_char_rtl (FriBidiEnv* fribidienv,
+			       const FriBidiLevel *embedding_level_list,
 			       FriBidiCharType base_dir, FriBidiStrIndex idx);
 
 /*======================================================================
@@ -227,11 +226,14 @@ extern "C"
  *                  beyond the end of the line, res_attach_before is true.
  *
  *----------------------------------------------------------------------*/
-  void fribidi_xpos_resolve (int x_pos, int x_offset,
+  void fribidi_xpos_resolve (FriBidiEnv* fribidienv,
+			     /* input */
+			     int x_pos, int x_offset,
 			     FriBidiStrIndex len,
-			     FriBidiLevel *embedding_level_list,
+			     const FriBidiLevel *embedding_level_list,
 			     FriBidiCharType base_dir,
-			     FriBidiStrIndex *vis2log, int *char_widths,
+			     const FriBidiStrIndex *vis2log,
+			     const int *char_widths,
 			     /* output */
 			     FriBidiStrIndex *res_log_pos,
 			     FriBidiStrIndex *res_vis_pos,
@@ -244,9 +246,11 @@ extern "C"
  *  a list of visual runs. A run is defined as a sequence that has
  *  the same attributes.
  *----------------------------------------------------------------------*/
-  void fribidi_runs_log2vis (	/* input */
-			      FriBidiList *logical_runs,	/* List of FriBidiRunType */
-			      FriBidiStrIndex len, FriBidiStrIndex *log2vis,
+  void fribidi_runs_log2vis ( FriBidiEnv* fribidienv,
+			      /* input */
+			      const FriBidiList *logical_runs,	/* List of FriBidiRunType */
+			      FriBidiStrIndex len,
+			      const FriBidiStrIndex *log2vis,
 			      FriBidiCharType base_dir,
 			      /* output */
 			      FriBidiList **visual_runs);

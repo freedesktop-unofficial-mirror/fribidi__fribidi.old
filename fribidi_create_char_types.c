@@ -103,7 +103,7 @@ get_type (char *s)
 #define table_name "FriBidiPropertyBlock"
 #define key_type_name "FriBidiPropCharType"
 #define macro_name "FRIBIDI_GET_TYPE"
-#define function_name "fribidi_get_type"
+#define function_name "fribidi_get_type_internal"
 #define char_type_name "FriBidiCharType"
 #define char_name "FriBidiChar"
 #define prop_to_type_name "fribidi_prop_to_type"

@@ -1,3 +1,14 @@
+2002-03-16  Behdad Esfahbod <behdad@bamdad.org>
+	* Applied the FriBidiEnv patch from Omer Zak dated 2002-02-24,
+	updated it with to reflect the new changes.
+	* NOTE: These changes alter the interface, so are not recommended for
+	any use before they are released.
+
+2002-03-16  Omer Zak <omerz@actcom.co.il>
+	* This is the big FriBidiEnv patch.
+	* Several files:  Added FriBidiEnv* parameter to several procedures.
+	* fribidi_env.c, fribidi_env.h: Added.
+
 2002-03-15  Behdad Esfahbod <behdad@bamdad.org>
 	* 0.10.2 released.
 	* configure.in: Changed version to 0.10.2.

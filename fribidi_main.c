@@ -46,7 +46,7 @@ extern char *fribidi_version_info;
 #define MAX_STR_LEN 65000
 
 
-#define ALLOCATE(tp,ln) ((tp *) malloc (sizeof (tp) * (ln)))
+#define ALLOCATE(frenv, tp,ln) ((tp *) fribidi_malloc (frenv, sizeof (tp) * (ln)))
 static void
 die (char *fmt, ...)
 {
@@ -271,7 +271,7 @@ main (int argc, char *argv[])
 	  eol_text = optarg;
 	  break;
 	case 'd':
-	  if (!fribidi_set_debug (TRUE))
+	  if (!fribidi_set_debug (NULL, TRUE))
 	    die
 	      ("%s lib must be compiled with DEBUG option to enable\nturn debug info on.\n",
 	       FRIBIDI_PACKAGE);
@@ -327,8 +327,8 @@ main (int argc, char *argv[])
 #endif
     die ("unrecognized character set `%s'\n", char_set);
 
-  fribidi_set_mirroring (do_mirror);
-  fribidi_set_reorder_nsm (do_reorder_nsm);
+  fribidi_set_mirroring (NULL, do_mirror);
+  fribidi_set_reorder_nsm (NULL, do_reorder_nsm);
   exit_val = 0;
   file_found = FALSE;
   while (optind < argc || !file_found)
@@ -403,14 +403,14 @@ main (int argc, char *argv[])
 	      FriBidiStrIndex new_len;
 	      boolean log2vis;
 
-	      visual = show_visual ? ALLOCATE (FriBidiChar, len + 1) : NULL;
-	      ltov = show_ltov ? ALLOCATE (FriBidiStrIndex, len + 1) : NULL;
-	      vtol = show_vtol ? ALLOCATE (FriBidiStrIndex, len + 1) : NULL;
-	      levels = show_levels ? ALLOCATE (FriBidiLevel, len + 1) : NULL;
+	      visual = show_visual ? ALLOCATE (NULL, FriBidiChar, len + 1) : NULL;
+	      ltov = show_ltov ? ALLOCATE (NULL, FriBidiStrIndex, len + 1) : NULL;
+	      vtol = show_vtol ? ALLOCATE (NULL, FriBidiStrIndex, len + 1) : NULL;
+	      levels = show_levels ? ALLOCATE (NULL, FriBidiLevel, len + 1) : NULL;
 
 	      /* Create a bidi string. */
 	      base = input_base_direction;
-	      log2vis = fribidi_log2vis (logical, len, &base,
+	      log2vis = fribidi_log2vis (NULL, logical, len, &base,
 					 /* output */
 					 visual, ltov, vtol, levels);
 	      if (log2vis)
@@ -424,7 +424,7 @@ main (int argc, char *argv[])
 		  /* Remove explicit marks, if asked for. */
 		  if (do_clean)
 		    len =
-		      fribidi_remove_bidi_marks (visual, len, ltov, vtol,
+		      fribidi_remove_bidi_marks (NULL, visual, len, ltov, vtol,
 						 levels);
 
 		  if (show_visual)
@@ -532,7 +532,7 @@ main (int argc, char *argv[])
 		  if (show_changes)
 		    {
 		      FriBidiStrIndex change_start, change_len;
-		      fribidi_find_string_changes (logical, len,
+		      fribidi_find_string_changes (NULL, logical, len,
 						   visual, new_len,
 						   &change_start,
 						   &change_len);
@@ -547,13 +547,13 @@ main (int argc, char *argv[])
 		}
 
 	      if (show_visual)
-		free (visual);
+		fribidi_free (NULL, visual);
 	      if (show_ltov)
-		free (ltov);
+		fribidi_free (NULL, ltov);
 	      if (show_vtol)
-		free (vtol);
+		fribidi_free (NULL, vtol);
 	      if (show_levels)
-		free (levels);
+		fribidi_free (NULL, levels);
 	    }
 
 	    if (*nl_found)

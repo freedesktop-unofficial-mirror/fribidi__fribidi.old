@@ -25,6 +25,7 @@
 #include <stdlib.h>
 
 #include "fribidi_config.h"
+/* #include "fribidi_env.h" */
 
 #ifdef __cplusplus
 extern "C"
@@ -55,29 +56,38 @@ extern "C"
     FriBidiList *prev;
   };
 
-  FriBidiList *fribidi_list_append (FriBidiList *list, void *data);
+  typedef struct _FriBidiEnv FriBidiEnv;
+
+  FriBidiList *fribidi_list_append (FriBidiEnv* fribidienv,
+				    FriBidiList *list, void *data);
 
   typedef struct _FriBidiMemChunk FriBidiMemChunk;
 
 #define FRIBIDI_ALLOC_ONLY      1
 #define FRIBIDI_ALLOC_AND_FREE  2
 
-  FriBidiMemChunk *fribidi_mem_chunk_new (char *name,
+  FriBidiMemChunk *fribidi_mem_chunk_new (FriBidiEnv* fribidienv,
+					  char *name,
 					  int atom_size,
 					  unsigned long area_size, int type);
-  void fribidi_mem_chunk_destroy (FriBidiMemChunk *mem_chunk);
-  void *fribidi_mem_chunk_alloc (FriBidiMemChunk *mem_chunk);
-  void *fribidi_mem_chunk_alloc0 (FriBidiMemChunk *mem_chunk);
-  void fribidi_mem_chunk_free (FriBidiMemChunk *mem_chunk, void *mem);
+  void fribidi_mem_chunk_destroy (FriBidiEnv* fribidienv,
+				  FriBidiMemChunk *mem_chunk);
+  void *fribidi_mem_chunk_alloc (FriBidiEnv* fribidienv,
+				 FriBidiMemChunk *mem_chunk);
+  void *fribidi_mem_chunk_alloc0 (FriBidiEnv* fribidienv,
+				  FriBidiMemChunk *mem_chunk);
+  void fribidi_mem_chunk_free (FriBidiEnv* fribidienv,
+			       FriBidiMemChunk *mem_chunk, void *mem);
 
-#define fribidi_mem_chunk_create(type, pre_alloc, alloc_type) ( \
-  fribidi_mem_chunk_new (#type " mem chunks (" #pre_alloc ")", \
+#define fribidi_mem_chunk_create(fbenv, type, pre_alloc, alloc_type) ( \
+  fribidi_mem_chunk_new (fbenv, \
+                   #type " mem chunks (" #pre_alloc ")", \
                    sizeof (type), \
                    sizeof (type) * (pre_alloc), \
                    (alloc_type)) \
 )
-#define fribidi_chunk_new(type, chunk)        ( \
-  (type *) fribidi_mem_chunk_alloc (chunk) \
+#define fribidi_chunk_new(fbenv, type, chunk)        ( \
+  (type *) fribidi_mem_chunk_alloc (fbenv, chunk) \
 )
 
   int fribidi_strcasecmp (const char *s1, const char *s2);

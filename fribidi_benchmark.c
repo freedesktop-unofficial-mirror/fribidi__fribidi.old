@@ -163,7 +163,7 @@ benchmark (char *S_, int niter)
     {
       /* Create a bidi string */
       base = FRIBIDI_TYPE_ON;
-      fribidi_log2vis (us, len, &base,
+      fribidi_log2vis (NULL, us, len, &base,
 		       /* output */
 		       out_us, positionVtoL, positionLtoV, embedding_list);
     }

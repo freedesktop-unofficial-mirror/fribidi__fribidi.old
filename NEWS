@@ -1,3 +1,9 @@
+New in CVS:
+
+* fribidi has been restructured, to become reentrant.  The api is completely
+  changed.  So please do not use the new api in any public code, before the
+  next version is released (the api is heavily subject to changes).
+
 New in 0.10.2:
 
 * Rule L3 of UAX#9 implemented.  Now fribidi implements the whole Unicode

@@ -161,7 +161,7 @@ fribidi_unicode_to_cap_rtl (FriBidiChar *us, int length, char *s)
   for (i = 0; i < length; i++)
     {
       FriBidiChar ch = us[i];
-      if (!FRIBIDI_IS_EXPLICIT (fribidi_get_type (ch)) && ch != '_'
+      if (!FRIBIDI_IS_EXPLICIT (fribidi_get_type_internal (ch)) && ch != '_'
 	  && ch != UNI_LRM && ch != UNI_RLM)
 	s[j++] = fribidi_unicode_to_cap_rtl_c (ch);
       else
@@ -218,7 +218,7 @@ fribidi_char_set_desc_cap_rtl (void)
     return s;
 
   l = 4000;
-  s = (char *) malloc (l);
+  s = (char *) fribidi_malloc (NULL, l);
   i = 0;
   i += snprintf (s + i, l - i,
 		 "CapRTL is a character set for testing with the reference\n"
@@ -262,11 +262,11 @@ fribidi_char_set_enter_cap_rtl (void)
       int i, count;
 
       caprtl_to_unicode =
-	(FriBidiChar *) malloc (CAPRTL_CHARS * sizeof caprtl_to_unicode[0]);
+	(FriBidiChar *) fribidi_malloc (NULL, CAPRTL_CHARS * sizeof caprtl_to_unicode[0]);
       for (i = 0; i < FRIBIDI_TYPES_COUNT; i++)
 	request[i] = 0;
       for (i = 0; i < CAPRTL_CHARS; i++)
-	if (fribidi_get_mirror_char (i, NULL))
+	if (fribidi_get_mirror_char (NULL, i, NULL))
 	  caprtl_to_unicode[i] = i;
       for (count = 0, i = 0; i < CAPRTL_CHARS; i++)
 	if (caprtl_to_unicode[i] == 0)
@@ -275,11 +275,11 @@ fribidi_char_set_enter_cap_rtl (void)
 	    count++;
 	  }
       for (i = 1; i < 0x10000 && count; i++)	/* Assign BMP chars to CapRTL entries */
-	if (!fribidi_get_mirror_char (i, NULL))
+	if (!fribidi_get_mirror_char (NULL, i, NULL))
 	  {
 	    int j, k;
 	    for (j = 0; j < FRIBIDI_TYPES_COUNT; j++)
-	      if (fribidi_prop_to_type[j] == fribidi_get_type (i))
+	      if (fribidi_prop_to_type[j] == fribidi_get_type_internal (i))
 		break;
 	    if (!request[j])	/* Do not need this type */
 	      continue;

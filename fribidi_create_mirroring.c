@@ -119,7 +119,7 @@ write_mirror (char *file)
       fprintf (f, "  {0x%04X, 0x%04X},\n", i, table[i]);
   fprintf (f, "} ;\n\n");
   fprintf (f, "/* *INDE" "NT-ON* */\n\n");
-  fprintf (f, "int nFriBidiMirroredChars = %d;\n\n", mirroring_count);
+  fprintf (f, "const int nFriBidiMirroredChars = %d;\n\n", mirroring_count);
   fprintf (f, "\n#endif /* %s */\n", FILENAME);
   fclose (f);
 }

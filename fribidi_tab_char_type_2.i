@@ -3198,10 +3198,10 @@ static const FriBidiPropCharType *FriBidiPropertyBlockLevel0[2176*1] = {
 #undef RTL
 #undef LTR
 /*======================================================================
- *  fribidi_get_type() returns the bidi type of a character.
+ *  fribidi_get_type_internal() returns the bidi type of a character.
  *----------------------------------------------------------------------*/
 FriBidiCharType
-fribidi_get_type (FriBidiChar uch)
+fribidi_get_type_internal (FriBidiChar uch)
 {
   if (uch < 0x110000)
     return fribidi_prop_to_type[(unsigned char)FRIBIDI_GET_TYPE (uch)];

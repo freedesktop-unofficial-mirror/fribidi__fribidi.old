@@ -30,7 +30,8 @@
 #include "fribidi_tab_mirroring.i"
 
 boolean
-fribidi_get_mirror_char (	/* Input */
+fribidi_get_mirror_char ( FriBidiEnv* fribidienv,
+			  /* Input */
 			  FriBidiChar ch,
 			  /* Output */
 			  FriBidiChar *mirrored_ch)
