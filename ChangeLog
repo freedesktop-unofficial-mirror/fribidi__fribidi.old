@@ -1,3 +1,7 @@
+2002-01-25  Behdad Esfahbod <behdad@bamdad.org>
+	* Makefile.am: Added fribidi.spec to distribution, to be able to make
+	RPMs from released distribution with 'rpm -tb'.
+
 2002-01-23  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi_create_char_types.c, fribidi_create_mirroring.c: Changed
 	to use sprintf() instead of snprintf().

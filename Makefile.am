@@ -91,6 +91,7 @@ EXTRA_DIST =	\
 	fribidi_config.h.in	\
 	fribidi.pc.in	\
 	fribidi.spec.in	\
+	fribidi.spec	\
 	$(TEST_FILES)	\
 	$(TABLE_FILES)	\
 	$(UNIDATA_FILES)	\

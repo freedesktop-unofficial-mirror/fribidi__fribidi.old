@@ -16,7 +16,7 @@
 %define minor @FRIBIDI_MINOR_VERSION@
 %define micro @FRIBIDI_MICRO_VERSION@
 %define apiver @FRIBIDI_INTERFACE_VERSION@
-%define rel @FRIBIDI_SPEC_RELEASE@
+%define rel @FRIBIDI_RPM_RELEASE@
 %define prefix %{_prefix}
 
 Name: %{name}
