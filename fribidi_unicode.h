@@ -30,7 +30,7 @@ extern "C"
 #endif
 
 /* Unicode version */
-#define FRIBIDI_UNICODE_CHARS	0x110000
+#define FRIBIDI_UNICODE_CHARS	(sizeof(FriBidiChar) >= 4 ? 0x110000 : 0x10000)
 #define FRIBIDI_UNICODE_VERSION	"3.2.0"
 
 /* UAX#9 Unicode BiDirectional Algorithm */
