@@ -18,6 +18,14 @@ AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 
+dnl Cygwin does not set srcdir to ".".
+if test x$srcdir = x; then
+  xsrcdir=.
+else
+  xsrcdir="$srcdir"
+fi
+
+dnl Cygwin does not expand two cannonical macros
 AM_PATH_GLIB_2_0(1.2.0,
   [GLIB_CFLAGS_OLD="$GLIB_CFLAGS"
    GLIB_LIBS_OLD="$GLIB_LIBS"
@@ -29,6 +37,42 @@ AM_PATH_GLIB_2_0(1.2.0,
   [GLIB_CFLAGS="-DFRIBIDI_USE_MINI_GLIB"
    GLIB_LIBS="-L. -lfribidi_mini_glib"
    NO_GLIB_HEADERS="fribidi_mini_glib.h"])
+
+AC_SUBST(GETOPTLIB)
+AC_CHECK_FUNC(getopt_long, GETOPTLIB="", GETOPTLIB="-L. -lgetopt")
+
+dnl Check for configure options
+
+dnl --enable-debug
+AC_ARG_ENABLE(debug,
+[  --enable-debug           Turn on debugging information],
+[case "${enableval}" in
+  yes) debug=true ;;
+  no)  debug=false ;;
+  *) AC_MSG_ERROR(bad value ${enableval} for --enable-debug) ;;
+esac],[debug=false])
+AM_CONDITIONAL(DEBUG, test x$debug = xtrue)
+
+dnl --enable-memopt
+AC_ARG_ENABLE(memopt,
+[  --enable-memopt          Turn on optimization for memory usage],
+[case "${enableval}" in
+  yes) memopt=true ;;
+  no)  memopt=false ;;
+  *) AC_MSG_ERROR(bad value ${enableval} for --enable-memoptimized) ;;
+esac],[memopt=false])
+AM_CONDITIONAL(MEM_OPTIMIZED, test x$memopt = xtrue)
+
+dnl --enable-malloc
+AC_ARG_ENABLE(malloc,
+[  --enable-malloc          Use simple malloc instead of glib functions],
+[case "${enableval}" in
+  yes) malloc=true ;;
+  no)  malloc=false ;;
+  *) AC_MSG_ERROR(bad value ${enableval} for --enable-malloc) ;;
+esac],[malloc=false])
+AM_CONDITIONAL(MALLOC, test x$malloc = xtrue)
+
 
 AC_OUTPUT([
 Makefile

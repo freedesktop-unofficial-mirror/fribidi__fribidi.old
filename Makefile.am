@@ -1,3 +1,22 @@
+if DEBUG
+DEBUGF = -DDEBUG
+else
+DEBUGF =
+endif
+
+if MEM_OPTIMIZED
+MEM_OPTIMIZEDF = -DMEM_OPTIMIZED
+else
+MEM_OPTIMIZEDF =
+endif
+
+if MALLOC
+MALLOCF = -DUSE_SIMPLE_MALLOC
+else
+MALLOCF =
+endif
+
+CFLAGS = $(DEBUGF) $(MEM_OPTIMIZEDF) $(MALLOCF)
 
 MAINTAINERCLEANFILES = Makefile.in configure aclocal.m4 config.h.in
 
@@ -41,7 +60,12 @@ libfribidiinc_HEADERS =	\
 	@NO_GLIB_HEADERS@
 
 EXTRA_HEADERS =	\
-	fribidi_mini_glib.h
+	fribidi_mini_glib.h	\
+	getopt.h
+
+getopt_files =	\
+	getopt.c	\
+	getopt1.c
 
 EXTRA_DIST =	\
 	bootstrap \
@@ -59,11 +83,11 @@ EXTRA_DIST =	\
 	tests/test-hebrew.reference
 
 fribidi_benchmark_SOURCES = fribidi_benchmark.c
-fribidi_benchmark_LDADD = libfribidi.la $(GLIB_LIBS)
+fribidi_benchmark_LDADD = libfribidi.la $(GLIB_LIBS) $(GETOPTLIB)
 
 bin_PROGRAMS = fribidi
 fribidi_SOURCES = fribidi_main.c
-fribidi_LDADD = libfribidi.la $(GLIB_LIBS)
+fribidi_LDADD = libfribidi.la $(GLIB_LIBS) $(GETOPTLIB)
 
 unidata/BidiMirroring.txt:
 	cd $(top_srcdir)/unidata &&	\
@@ -105,6 +129,8 @@ TESTS = run.tests
 
 bin_SCRIPTS = fribidi-config
 
+noinst_LIBRARIES = libfribidi_mini_glib.a libgetopt.a
 
-noinst_LIBRARIES = libfribidi_mini_glib.a
 libfribidi_mini_glib_a_SOURCES = fribidi_mini_glib.c
+
+libgetopt_a_SOURCES = getopt.c getopt1.c
