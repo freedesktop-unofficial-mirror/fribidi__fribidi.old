@@ -31,7 +31,7 @@ gchar
 fribidi_unicode_to_cap_rtl_c (FriBidiChar uch)
 {
   if (uch <= 0x7f)
-    return (gchar) (guchar) uch;
+    return (gchar) uch;
   else
     return '¿';
 }
@@ -102,7 +102,7 @@ fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, gchar *s)
 	  && ch != UNI_LRM && ch != UNI_RLM)
 	{
 	  if (ch < 256)
-	    s[j++] = (gchar) (guchar) ch;
+	    s[j++] = (gchar) ch;
 	  else
 	    s[j++] = '¿';
 	}
@@ -138,7 +138,7 @@ fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, gchar *s)
 	    default:
 	      j--;
 	      if (ch < 256)
-		s[j++] = (gchar) (guchar) ch;
+		s[j++] = (gchar) ch;
 	      else
 		s[j++] = '¿';
 	      break;

@@ -1,3 +1,7 @@
+2001-04-11  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi_char_sets_*.c: Fixed bugs introduced in guchar to gchar
+	conversion.
+
 2001-04-10  Behdad Esfahbod <behdad@bamdad.org>
 	* *.c/*.h: Changed all "guchar"s to "gchar" and neede casts done.
 

@@ -50,17 +50,17 @@ FriBidiChar fribidi_cp1255_to_unicode_tab[] = {	/* 0x80-0xBF */
 };
 
 FriBidiChar
-fribidi_cp1255_to_unicode_c (gchar ch)
+fribidi_cp1255_to_unicode_c (gchar sch)
 {
-  if ((guchar) ch >= ISO_ALEF && (guchar) ch <= ISO_TAV)
+  guchar ch = (guchar) sch;
+  if (ch >= ISO_ALEF && ch <= ISO_TAV)
     return ch - ISO_ALEF + UNI_ALEF;
-  else if ((guchar) ch >= CP1255_SHEVA && (guchar) ch <= CP1255_SOF_PASUQ)
+  else if (ch >= CP1255_SHEVA && ch <= CP1255_SOF_PASUQ)
     return ch - CP1255_SHEVA + UNI_SHEVA;
-  else if ((guchar) ch >= CP1255_DOUBLE_VAV
-	   && (guchar) ch <= CP1255_GERSHAYIM)
+  else if (ch >= CP1255_DOUBLE_VAV && ch <= CP1255_GERSHAYIM)
     return ch - CP1255_DOUBLE_VAV + UNI_DOUBLE_VAV;
   /* cp1256 specific chars */
-  else if ((guchar) ch >= 0x80 && (guchar) ch <= 0xbf)
+  else if (ch >= 0x80 && ch <= 0xbf)
     return fribidi_cp1255_to_unicode_tab[ch - 0x80];
   else
     return ch;

@@ -25,15 +25,15 @@
  *  A main program for fribidi.
  *----------------------------------------------------------------------*/
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif /* HAVE_CONFIG_H */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <getopt.h>
 #include <string.h>
 #include "fribidi.h"
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif /* HAVE_CONFIG_H */
 
 #define appname "fribidi"
 #define appversion VERSION

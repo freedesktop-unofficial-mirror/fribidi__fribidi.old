@@ -39,29 +39,30 @@
 #define UNI_TAV 0x05EA
 
 FriBidiChar
-fribidi_iso8859_8_to_unicode_c (gchar ch)
+fribidi_iso8859_8_to_unicode_c (gchar sch)
 {
+  guchar ch = (guchar) sch;
   /* optimization */
-  if ((guchar) ch < ISO_8859_8_LRO)
+  if (ch < ISO_8859_8_LRO)
     return ch;
-  else if ((guchar) ch >= ISO_ALEF && (guchar) ch <= ISO_TAV)
+  else if (ch >= ISO_ALEF && ch <= ISO_TAV)
     return ch - ISO_ALEF + UNI_ALEF;
-  switch ((guchar) ch)
+  switch (ch)
     {
     case ISO_8859_8_RLM:
-      return (gchar) UNI_RLM;
+      return UNI_RLM;
     case ISO_8859_8_LRM:
-      return (gchar) UNI_LRM;
+      return UNI_LRM;
     case ISO_8859_8_RLO:
-      return (gchar) UNI_RLO;
+      return UNI_RLO;
     case ISO_8859_8_LRO:
-      return (gchar) UNI_LRO;
+      return UNI_LRO;
     case ISO_8859_8_RLE:
-      return (gchar) UNI_RLE;
+      return UNI_RLE;
     case ISO_8859_8_LRE:
-      return (gchar) UNI_LRE;
+      return UNI_LRE;
     case ISO_8859_8_PDF:
-      return (gchar) UNI_PDF;
+      return UNI_PDF;
     default:
       return '?';		/* This shouldn't happen! */
     }
@@ -83,25 +84,25 @@ gchar
 fribidi_unicode_to_iso8859_8_c (FriBidiChar uch)
 {
   if (uch < 128)
-    return uch;
+    return (gchar) uch;
   if (uch >= UNI_ALEF && uch <= UNI_TAV)
     return (gchar) (uch - UNI_ALEF + ISO_ALEF);
   switch (uch)
     {
     case UNI_RLM:
-      return ISO_8859_8_RLM;
+      return (gchar) ISO_8859_8_RLM;
     case UNI_LRM:
-      return ISO_8859_8_LRM;
+      return (gchar) ISO_8859_8_LRM;
     case UNI_RLO:
-      return ISO_8859_8_RLO;
+      return (gchar) ISO_8859_8_RLO;
     case UNI_LRO:
-      return ISO_8859_8_LRO;
+      return (gchar) ISO_8859_8_LRO;
     case UNI_RLE:
-      return ISO_8859_8_RLE;
+      return (gchar) ISO_8859_8_RLE;
     case UNI_LRE:
-      return ISO_8859_8_LRE;
+      return (gchar) ISO_8859_8_LRE;
     case UNI_PDF:
-      return ISO_8859_8_PDF;
+      return (gchar) ISO_8859_8_PDF;
     }
   return '¿';
 }

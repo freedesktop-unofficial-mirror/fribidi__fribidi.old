@@ -41,15 +41,16 @@ FriBidiChar fribidi_isiri_3342_to_unicode_tab[] = {	/* 0xA0-0xFF */
 };
 
 FriBidiChar
-fribidi_isiri_3342_to_unicode_c (gchar ch)
+fribidi_isiri_3342_to_unicode_c (gchar sch)
 {
-  if (((guchar) ch >= 0x80 && (guchar) ch <= 0xa0) || (guchar) ch == 0xff)
-    return ch - 0x80;		/* FIXME: but they are strong typed RTL ! */
-  else if ((guchar) ch >= 0xa1 && (guchar) ch <= 0xfe)
+  guchar ch = (guchar) sch;
+  if ((ch >= 0x80 && ch <= 0xa0) || ch == 0xff)
+    return (ch - 0x80);		/* FIXME: but they are strong typed RTL ! */
+  else if (ch >= 0xa1 && ch <= 0xfe)
     return fribidi_isiri_3342_to_unicode_tab[ch - 0xa0];
   /* TODO */
   else
-    return ch;
+    return (gchar) ch;
 }
 
 gint
@@ -74,141 +75,141 @@ fribidi_unicode_to_isiri_3342_c (FriBidiChar uch)
     switch (uch)
       {
       case 0x060C:
-	return 0xAC;
+	return (gchar) 0xAC;
       case 0x061B:
-	return 0xBB;
+	return (gchar) 0xBB;
       case 0x061F:
-	return 0xBF;
+	return (gchar) 0xBF;
       case 0x0621:
-	return 0xC2;
+	return (gchar) 0xC2;
       case 0x0622:
-	return 0xC0;
+	return (gchar) 0xC0;
       case 0x0623:
-	return 0xF8;
+	return (gchar) 0xF8;
       case 0x0624:
-	return 0xF9;
+	return (gchar) 0xF9;
       case 0x0625:
-	return 0xFA;
+	return (gchar) 0xFA;
       case 0x0626:
-	return 0xFB;
+	return (gchar) 0xFB;
       case 0x0627:
-	return 0xC1;
+	return (gchar) 0xC1;
       case 0x0628:
-	return 0xC3;
+	return (gchar) 0xC3;
       case 0x0629:
-	return 0xFC;
+	return (gchar) 0xFC;
       case 0x062A:
-	return 0xC5;
+	return (gchar) 0xC5;
       case 0x062B:
-	return 0xC6;
+	return (gchar) 0xC6;
       case 0x062C:
-	return 0xC7;
+	return (gchar) 0xC7;
       case 0x062D:
-	return 0xC9;
+	return (gchar) 0xC9;
       case 0x062E:
-	return 0xCA;
+	return (gchar) 0xCA;
       case 0x062F:
-	return 0xCB;
+	return (gchar) 0xCB;
       case 0x0630:
-	return 0xCC;
+	return (gchar) 0xCC;
       case 0x0631:
-	return 0xCD;
+	return (gchar) 0xCD;
       case 0x0632:
-	return 0xCE;
+	return (gchar) 0xCE;
       case 0x0633:
-	return 0xD0;
+	return (gchar) 0xD0;
       case 0x0634:
-	return 0xD1;
+	return (gchar) 0xD1;
       case 0x0635:
-	return 0xD2;
+	return (gchar) 0xD2;
       case 0x0636:
-	return 0xD3;
+	return (gchar) 0xD3;
       case 0x0637:
-	return 0xD4;
+	return (gchar) 0xD4;
       case 0x0638:
-	return 0xD5;
+	return (gchar) 0xD5;
       case 0x0639:
-	return 0xD6;
+	return (gchar) 0xD6;
       case 0x063A:
-	return 0xD7;
+	return (gchar) 0xD7;
       case 0x0640:
-	return 0xE9;
+	return (gchar) 0xE9;
       case 0x0641:
-	return 0xD8;
+	return (gchar) 0xD8;
       case 0x0642:
-	return 0xD9;
+	return (gchar) 0xD9;
       case 0x0643:
-	return 0xFD;
+	return (gchar) 0xFD;
       case 0x0644:
-	return 0xDC;
+	return (gchar) 0xDC;
       case 0x0645:
-	return 0xDD;
+	return (gchar) 0xDD;
       case 0x0646:
-	return 0xDE;
+	return (gchar) 0xDE;
       case 0x0647:
-	return 0xE0;
+	return (gchar) 0xE0;
       case 0x0648:
-	return 0xDF;
+	return (gchar) 0xDF;
       case 0x064A:
-	return 0xFE;
+	return (gchar) 0xFE;
       case 0x064B:
-	return 0xF3;
+	return (gchar) 0xF3;
       case 0x064C:
-	return 0xF5;
+	return (gchar) 0xF5;
       case 0x064D:
-	return 0xF4;
+	return (gchar) 0xF4;
       case 0x064E:
-	return 0xF0;
+	return (gchar) 0xF0;
       case 0x064F:
-	return 0xF2;
+	return (gchar) 0xF2;
       case 0x0650:
-	return 0xF1;
+	return (gchar) 0xF1;
       case 0x0651:
-	return 0xF6;
+	return (gchar) 0xF6;
       case 0x0652:
-	return 0xF7;
+	return (gchar) 0xF7;
       case 0x066A:
-	return 0xA5;
+	return (gchar) 0xA5;
       case 0x066B:
-	return 0xAE;
+	return (gchar) 0xAE;
       case 0x066C:
-	return 0xA7;
+	return (gchar) 0xA7;
       case 0x067E:
-	return 0xC4;
+	return (gchar) 0xC4;
       case 0x0686:
-	return 0xC8;
+	return (gchar) 0xC8;
       case 0x0698:
-	return 0xCF;
+	return (gchar) 0xCF;
       case 0x06A9:
-	return 0xDA;
+	return (gchar) 0xDA;
       case 0x06AF:
-	return 0xDB;
+	return (gchar) 0xDB;
       case 0x06CC:
-	return 0xE1;
+	return (gchar) 0xE1;
       case 0x06F0:
-	return 0xB0;
+	return (gchar) 0xB0;
       case 0x06F1:
-	return 0xB1;
+	return (gchar) 0xB1;
       case 0x06F2:
-	return 0xB2;
+	return (gchar) 0xB2;
       case 0x06F3:
-	return 0xB3;
+	return (gchar) 0xB3;
       case 0x06F4:
-	return 0xB4;
+	return (gchar) 0xB4;
       case 0x06F5:
-	return 0xB5;
+	return (gchar) 0xB5;
       case 0x06F6:
-	return 0xB6;
+	return (gchar) 0xB6;
       case 0x06F7:
-	return 0xB7;
+	return (gchar) 0xB7;
       case 0x06F8:
-	return 0xB8;
+	return (gchar) 0xB8;
       case 0x06F9:
-	return 0xB9;
+	return (gchar) 0xB9;
       case 0x200C:
-	return 0xA1;
+	return (gchar) 0xA1;
       case 0x200D:
-	return 0xA2;
+	return (gchar) 0xA2;
       default:
 	return '¿';
       }

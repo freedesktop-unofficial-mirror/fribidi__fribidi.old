@@ -52,9 +52,10 @@ FriBidiChar fribidi_cp1256_to_unicode_tab[] = {	/* 0x80-0xFF */
 };
 
 FriBidiChar
-fribidi_cp1256_to_unicode_c (gchar ch)
+fribidi_cp1256_to_unicode_c (gchar sch)
 {
-  if ((guchar) ch >= 0x80 && (guchar) ch <= 0xff)
+  guchar ch = (guchar) sch;
+  if (ch >= 0x80 && ch <= 0xff)
     return fribidi_cp1256_to_unicode_tab[ch - 0x80];
   else
     return ch;
@@ -83,129 +84,129 @@ fribidi_unicode_to_cp1256_c (FriBidiChar uch)
     switch (uch)
       {
       case 0x0152:
-	return 0x8c;
+	return (gchar) 0x8c;
       case 0x0153:
-	return 0x9c;
+	return (gchar) 0x9c;
       case 0x0192:
-	return 0x83;
+	return (gchar) 0x83;
       case 0x02C6:
-	return 0x88;
+	return (gchar) 0x88;
       case 0x060C:
-	return 0xA1;
+	return (gchar) 0xA1;
       case 0x061B:
-	return 0xBA;
+	return (gchar) 0xBA;
       case 0x061F:
-	return 0xBF;
+	return (gchar) 0xBF;
       case 0x0637:
-	return 0xD8;
+	return (gchar) 0xD8;
       case 0x0638:
-	return 0xD9;
+	return (gchar) 0xD9;
       case 0x0639:
-	return 0xDA;
+	return (gchar) 0xDA;
       case 0x063A:
-	return 0xDB;
+	return (gchar) 0xDB;
       case 0x0640:
-	return 0xDC;
+	return (gchar) 0xDC;
       case 0x0641:
-	return 0xDD;
+	return (gchar) 0xDD;
       case 0x0642:
-	return 0xDE;
+	return (gchar) 0xDE;
       case 0x0643:
-	return 0xDF;
+	return (gchar) 0xDF;
       case 0x0644:
-	return 0xE1;
+	return (gchar) 0xE1;
       case 0x0645:
-	return 0xE3;
+	return (gchar) 0xE3;
       case 0x0646:
-	return 0xE4;
+	return (gchar) 0xE4;
       case 0x0647:
-	return 0xE5;
+	return (gchar) 0xE5;
       case 0x0648:
-	return 0xE6;
+	return (gchar) 0xE6;
       case 0x0649:
-	return 0xEC;
+	return (gchar) 0xEC;
       case 0x064A:
-	return 0xED;
+	return (gchar) 0xED;
       case 0x064B:
-	return 0xF0;
+	return (gchar) 0xF0;
       case 0x064C:
-	return 0xF1;
+	return (gchar) 0xF1;
       case 0x064D:
-	return 0xF2;
+	return (gchar) 0xF2;
       case 0x064E:
-	return 0xF3;
+	return (gchar) 0xF3;
       case 0x064F:
-	return 0xF5;
+	return (gchar) 0xF5;
       case 0x0650:
-	return 0xF6;
+	return (gchar) 0xF6;
       case 0x0651:
-	return 0xF8;
+	return (gchar) 0xF8;
       case 0x0652:
-	return 0xFA;
+	return (gchar) 0xFA;
       case 0x0679:
-	return 0x8A;
+	return (gchar) 0x8A;
       case 0x067E:
-	return 0x81;
+	return (gchar) 0x81;
       case 0x0686:
-	return 0x8D;
+	return (gchar) 0x8D;
       case 0x0688:
-	return 0x8F;
+	return (gchar) 0x8F;
       case 0x0691:
-	return 0x9A;
+	return (gchar) 0x9A;
       case 0x0698:
-	return 0x8E;
+	return (gchar) 0x8E;
       case 0x06A9:
-	return 0x98;
+	return (gchar) 0x98;
       case 0x06AF:
-	return 0x90;
+	return (gchar) 0x90;
       case 0x06BA:
-	return 0x9F;
+	return (gchar) 0x9F;
       case 0x06BE:
-	return 0xAA;
+	return (gchar) 0xAA;
       case 0x06C1:
-	return 0xC0;
+	return (gchar) 0xC0;
       case 0x200C:
-	return 0x9D;
+	return (gchar) 0x9D;
       case 0x200D:
-	return 0x9E;
+	return (gchar) 0x9E;
       case 0x200E:
-	return 0xFD;
+	return (gchar) 0xFD;
       case 0x200F:
-	return 0xFE;
+	return (gchar) 0xFE;
       case 0x2013:
-	return 0x96;
+	return (gchar) 0x96;
       case 0x2014:
-	return 0x97;
+	return (gchar) 0x97;
       case 0x2018:
-	return 0x91;
+	return (gchar) 0x91;
       case 0x2019:
-	return 0x92;
+	return (gchar) 0x92;
       case 0x201A:
-	return 0x82;
+	return (gchar) 0x82;
       case 0x201C:
-	return 0x93;
+	return (gchar) 0x93;
       case 0x201D:
-	return 0x94;
+	return (gchar) 0x94;
       case 0x201E:
-	return 0x84;
+	return (gchar) 0x84;
       case 0x2020:
-	return 0x86;
+	return (gchar) 0x86;
       case 0x2021:
-	return 0x87;
+	return (gchar) 0x87;
       case 0x2022:
-	return 0x95;
+	return (gchar) 0x95;
       case 0x2026:
-	return 0x85;
+	return (gchar) 0x85;
       case 0x2030:
-	return 0x89;
+	return (gchar) 0x89;
       case 0x2039:
-	return 0x8B;
+	return (gchar) 0x8B;
       case 0x203A:
-	return 0x9B;
+	return (gchar) 0x9B;
       case 0x20AC:
-	return 0x80;
+	return (gchar) 0x80;
       case 0x2122:
-	return 0x99;
+	return (gchar) 0x99;
 
       default:
 	return '¿';

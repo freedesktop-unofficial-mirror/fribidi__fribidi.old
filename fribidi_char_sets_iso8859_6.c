@@ -31,9 +31,10 @@
 #define UNI_SUKUN 0x0652
 
 FriBidiChar
-fribidi_iso8859_6_to_unicode_c (gchar ch)
+fribidi_iso8859_6_to_unicode_c (gchar sch)
 {
-  if ((guchar) ch >= ISO_HAMZA && (guchar) ch <= ISO_SUKUN)
+  guchar ch = (guchar) sch;
+  if (ch >= ISO_HAMZA && ch <= ISO_SUKUN)
     return ch - ISO_HAMZA + UNI_HAMZA;
   else
     return ch;
