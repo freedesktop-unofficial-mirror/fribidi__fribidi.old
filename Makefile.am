@@ -73,7 +73,7 @@ tests/test-hebrew.reference: fribidi tests/test-hebrew
 	$(top_srcdir)/tests/test-hebrew.reference
 
 test: fribidi
-	./run.tests
+	$(top_srcdir)/run.tests
 
 TESTS = run.tests
 
