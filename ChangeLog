@@ -1,3 +1,6 @@
+2002-01-14  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi.c: Rewrote run_length_encode_types() main loop.
+
 2002-01-12  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.spec.in: Define RPM serial version as interface version.
 	* TODO: New tasks added.

@@ -167,11 +167,18 @@ free_type_link (TypeLink *link)
 #endif
 }
 
+#define FRIBIDI_ADD_TYPE_LINK(p,q) \
+	{	\
+		(p)->len = (q)->pos - (p)->pos;	\
+		(p)->next = (q);	\
+		(q)->prev = (p);	\
+		(p) = (q);	\
+	}
+
 static TypeLink *
 run_length_encode_types (FriBidiCharType *char_type, FriBidiStrIndex type_len)
 {
   TypeLink *list, *last, *link;
-  TypeLink current;
 
   FriBidiStrIndex i;
 
@@ -179,45 +186,24 @@ run_length_encode_types (FriBidiCharType *char_type, FriBidiStrIndex type_len)
   list = new_type_link ();
   list->type = FRIBIDI_TYPE_SOT;
   list->level = FRIBIDI_LEVEL_START;
-  list->len = 0;
-  list->pos = 0;
   last = list;
 
   /* Sweep over the string_type s */
-  current.type = FRIBIDI_LEVEL_START;
-  current.len = 0;
-  current.pos = -1;
-  for (i = 0; i <= type_len; i++)
-    {
-      if (i == type_len || char_type[i] != current.type)
-	{
-	  if (current.pos >= 0)
-	    {
-	      link = new_type_link ();
-	      link->type = current.type;
-	      link->pos = current.pos;
-	      link->len = current.len;
-	      last->next = link;
-	      link->prev = last;
-	      last = last->next;
-	    }
-	  if (i == type_len)
-	    break;
-	  current.len = 0;
-	  current.pos = i;
-	}
-      current.type = char_type[i];
-      current.len++;
-    }
+  for (i = 0; i < type_len; i++)
+    if (char_type[i] != last->type)
+      {
+	link = new_type_link ();
+	link->type = char_type[i];
+	link->pos = i;
+	FRIBIDI_ADD_TYPE_LINK(last,link)
+      }
 
   /* Add the ending link */
   link = new_type_link ();
   link->type = FRIBIDI_TYPE_EOT;
   link->level = FRIBIDI_LEVEL_END;
-  link->len = 0;
   link->pos = type_len;
-  last->next = link;
-  link->prev = last;
+  FRIBIDI_ADD_TYPE_LINK(last,link);
 
   return list;
 }
