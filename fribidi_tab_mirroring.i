@@ -24,7 +24,7 @@
 
 /* *INDENT-OFF* */
 
-struct
+static const struct
 {
   FriBidiChar ch, mirrored_ch;
 }

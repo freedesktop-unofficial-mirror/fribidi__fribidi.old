@@ -116,7 +116,7 @@ write_mirror (char *file)
 	   "  characters that mirror to themself. It will then be the responsibility\n"
 	   "  of the display engine to actually mirror these.\n" "*/\n\n");
   fprintf (f, "/* *INDENT-OFF" "* */\n\n");
-  fprintf (f, "struct\n"
+  fprintf (f, "static const struct\n"
 	   "{\n"
 	   "  FriBidiChar ch, mirrored_ch;\n"
 	   "}\n" "FriBidiMirroredChars[] =\n" "{\n");
