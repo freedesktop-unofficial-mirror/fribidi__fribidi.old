@@ -96,7 +96,7 @@ help (void)
 	  char_set);
 #else
   printf ("  -c, --charset CS      Specify character set, default is %s\n"
-	  "  -C, --charsetdesc CS  Show descriptions for character set CS and exit\n"
+	  "      --charsetdesc CS  Show descriptions for character set CS and exit\n"
 	  "      --caprtl          Old style: set character set to CapRTL\n",
 	  char_set);
 #endif
