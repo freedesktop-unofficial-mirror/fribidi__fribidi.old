@@ -150,6 +150,7 @@ config.h: fribidi_tab_char_type_stamp
 $(srcdir)/fribidi_char_type.c: config.h
 
 tests/test_%.reference: tests/test_%.input $(libfribidi_la_SOURCES)
+	$(MAKE) fribidi
 	(test -d tests || mkdir tests) &&	\
 	testcase="$@" && 	\
 	charset="`echo "$@" | $(SED) 's/_[^_]*$$//;s/.*_//'`" &&	\
