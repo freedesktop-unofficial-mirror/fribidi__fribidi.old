@@ -27,8 +27,6 @@ Summary: Library implementing the Unicode Bidirectional Algorithm
 Group: System/Libraries
 Provides: lib%{name}
 Provides: lib%{name}-devel
-Conflicts: lib%{name}
-Conflicts: lib%{name}-devel
 %description
 A library to handle bidirectional scripts (eg. hebrew, arabic), so that
 the display is done in the proper way; while the text data itself is
