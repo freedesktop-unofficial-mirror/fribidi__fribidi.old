@@ -196,7 +196,7 @@ extern "C"
 
 /* Return the minimum level of the direction, 0 for FRIBIDI_TYPE_LTR and
    1 for FRIBIDI_TYPE_RTL and FRIBIDI_TYPE_AL. */
-#define FRIBIDI_DIR_TO_LEVEL(dir) (dir & 1)
+#define FRIBIDI_DIR_TO_LEVEL(dir) ((FriBidiLevel)(dir & 1))
 
 /* Is right to left? */
 #define FRIBIDI_IS_RTL(p)      ((p) & FRIBIDI_MASK_RTL)
