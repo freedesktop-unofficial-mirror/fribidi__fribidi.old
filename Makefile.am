@@ -37,6 +37,7 @@ libfribidiinc_HEADERS =	\
 	fribidi_char_sets_utf8.h
 
 EXTRA_DIST =	\
+	bootstrap \
 	run.tests	\
 	ANNOUNCE	\
 	acinclude.m4	\

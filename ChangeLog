@@ -1,5 +1,10 @@
 2001-03-28  Roozbeh Pournader <roozbeh@sharif.edu>
-	* bootstrap: swapped 'aclocal' and 'autoheader'.
+	* bootstrap: swapped 'aclocal' and 'autoheader'. do not warn for
+	missing COPYING.
+	* COPYING: removed.
+	* COPYING.LIB: added.
+	* README, *.h, *.c, unidata/CreateGetType.pl: changes to reflect LGPL.
+	* Makefile.am: added 'bootstrap' to distribution.
 
 2001-03-28  Behdad Esfahbod <behdad@bamdad.org>
 	* Makefile.am: New target "fribidi_tables.i" defined to download
