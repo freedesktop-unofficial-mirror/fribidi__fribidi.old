@@ -1,4 +1,4 @@
-/* Generate fully random tests. */
+/* Generate random test datas, best for explicit support test. */
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>

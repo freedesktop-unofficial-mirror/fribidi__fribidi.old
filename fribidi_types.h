@@ -28,6 +28,8 @@
 
 typedef guint32 FriBidiChar;
 
+typedef guint16 FriBidiStrIndex;
+
 /* Define some bit masks, that character types are based on, each one has
    only one bit on. */
 typedef enum
@@ -221,6 +223,46 @@ FriBidiCharType;
 guchar fribidi_char_from_type (FriBidiCharType c);
 
 guchar *fribidi_type_name (FriBidiCharType c);
+
+
+/* Define character types that fribidi_tables.i uses. if MEM_OPTIMIZED
+   defined, then define them to be 0, 1, 2, ... and then in
+   fribidi_get_type.c map them on FriBidiCharType-s, else define them to
+   be equal to FribidiCharType-s */
+#ifdef MEM_OPTIMIZED
+#define _FRIBIDI_PROP(type) FRIBIDI_PROP_TYPE_##type
+typedef guint8 FriBidiPropCharType;
+#else
+#define _FRIBIDI_PROP(type) FRIBIDI_PROP_TYPE_##type = FRIBIDI_TYPE_##type
+typedef FriBidiCharType FriBidiPropCharType;
+#endif
+enum
+{
+  _FRIBIDI_PROP (LTR),		/* Strong left to right */
+  _FRIBIDI_PROP (RTL),		/* Right to left characters */
+  _FRIBIDI_PROP (AL),		/* Arabic characters */
+  _FRIBIDI_PROP (LRE),		/* Left-To-Right embedding */
+  _FRIBIDI_PROP (RLE),		/* Right-To-Left embedding */
+  _FRIBIDI_PROP (LRO),		/* Left-To-Right override */
+  _FRIBIDI_PROP (RLO),		/* Right-To-Left override */
+  _FRIBIDI_PROP (PDF),		/* Pop directional override */
+  _FRIBIDI_PROP (EN),		/* European digit */
+  _FRIBIDI_PROP (AN),		/* Arabic digit */
+  _FRIBIDI_PROP (ES),		/* European number separator */
+  _FRIBIDI_PROP (ET),		/* European number terminator */
+  _FRIBIDI_PROP (CS),		/* Common Separator */
+  _FRIBIDI_PROP (NSM),		/* Non spacing mark */
+  _FRIBIDI_PROP (BN),		/* Boundary neutral */
+  _FRIBIDI_PROP (BS),		/* Block separator */
+  _FRIBIDI_PROP (SS),		/* Segment separator */
+  _FRIBIDI_PROP (WS),		/* Whitespace */
+  _FRIBIDI_PROP (ON),		/* Other Neutral */
+  _FRIBIDI_PROP (WL),		/* Weak left to right */
+  _FRIBIDI_PROP (WR),		/* Weak right to left */
+  _FRIBIDI_PROP (SOT),		/* Start of text */
+  _FRIBIDI_PROP (EOT),		/* End of text */
+};
+#undef _FRIBIDI_PROP
 
 /* The following type is used by fribidi_utils */
 typedef struct

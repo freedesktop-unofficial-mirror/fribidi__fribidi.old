@@ -8,4 +8,4 @@ trap 'echo; rm -f $path/test.{in,out,ref} &> /dev/null ; exit' INT
 
 while ! test "`$path/dotest $1`"; do echo -n .; done
 shift
-cat $path/test.in | $path/test -clean $@
+$path/test $@ $path/test.in

@@ -26,8 +26,12 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include "fribidi.h"
+#include "config.h"
 
 #define appname "fribidi"
+#define appversion VERSION
+
+extern guchar *fribidi_version_info;
 
 #define MAX_STR_LEN 65000
 
@@ -48,8 +52,8 @@ main (int argc, char *argv[])
 {
   int argp;
   FILE *IN;
-  gboolean do_pad, do_fill, do_clean, file_found, show_input;
-  gboolean show_visual, show_ltov, show_vtol, show_levels, show_changes;
+  gboolean do_pad, do_fill, do_clean, file_found, show_input, show_visual;
+  gboolean show_basedir, show_ltov, show_vtol, show_levels, show_changes;
   gint char_set, text_width;
   guchar *bol_text, *eol_text;
   FriBidiCharType input_base_direction;
@@ -61,6 +65,7 @@ main (int argc, char *argv[])
   do_clean = FALSE;
   show_input = FALSE;
   show_visual = TRUE;
+  show_basedir = FALSE;
   show_ltov = FALSE;
   show_vtol = FALSE;
   show_levels = FALSE;
@@ -98,11 +103,14 @@ main (int argc, char *argv[])
 	       "\n"
 	       "  -h, --help            Display this information and exit\n"
 	       "  -V, --version         Display version information and exit\n"
+	       "  -v, --verbose         Verbose mode, same as --basedir --ltov --vtol \\\n"
+	       "                        --levels --changes\n"
 	       "  -d, --debug           Output debug info\n"
-	       "  -t, --test            Set default character set to CapRTL, turn on padding\n"
+	       "  -P, --caprtl          Old style: Set character set to CapRTL\n"
+	       "  -t, --test            Test %s, same as --clean --fill --showinput\n"
 	       "      --showinput       Output the input string too\n"
 	       "  -C, --charset CS      Specify character set, default is %s\n"
-	       "      --charsetdesc CS  Show descreptions for character set CS, if any and exit\n"
+	       "      --charsetdesc CS  Show descreptions for character set CS and exit\n"
 	       "  -p, --nopad           Do not right justify RTL lines\n"
 	       "  -f, --fill            Fill lines up to margin\n"
 	       "  -W, --width W         Screem width for padding, default is %d\n"
@@ -110,47 +118,49 @@ main (int argc, char *argv[])
 	       "  -E, --eol EOL         Output string EOL after the visual string\n"
 	       "  -R, --rtl             Force base direction to RTL\n"
 	       "  -L, --ltr             Force base direction to LTR\n"
-	       "  -c, --clean           Remove explicit format codes in visual string\n"
+	       "  -c, --clean           Remove explicit format codes in visual string \\\n"
 	       "                        output, currently does not affect other outputs\n"
+	       "      --basedir         Output Base Direction\n"
 	       "      --ltov            Output Logical to Visual position map\n"
 	       "      --vtol            Output Visual to Logical position map\n"
 	       "      --levels          Output Embedding Levels\n"
 	       "      --changes         Output information about changes between\n"
-	       "                        logical and visual string (start, length)\n"
-	       "      --novisual        Do not output the visual string, to be used\n"
-	       "                        with --ltov, --vtol, --levels, --changes\n"
+	       "                        logical and visual string (start, length) \\\n"
+	       "      --novisual        Do not output the visual string, to be used with \\\n"
+	       "                        --basedir, --ltov, --vtol, --levels, --changes\n"
 	       "  Options affect only subsequent arguments\n"
+	       "  All string indexes are zero based\n"
 	       "\n"
 	       "Output:\n"
 	       "  For each line of input, output something like this:\n"
-	       "    [BOL][input-str` => '][[padding space]visual-str]\n"
+	       "    [BOL][input-str` => '][[padding space]visual-str][\\n base-dir]\n"
 	       "    [\\n ltov-map][\\n vtol-map][\\n levels][\\n changes][EOL]\n"
 	       "\n"
-	       "Available character sets are:\n", appname, appname,
+	       "Available character sets:\n", appname, appname, appname,
 	       fribidi_char_set_name (char_set), text_width);
 	    for (i = 1; i <= FRIBIDI_CHAR_SETS_NUM; i++)
-	      printf ("  * %-23s%-4s%s", fribidi_char_set_title (i),
-		      (fribidi_char_set_desc (i) ? "X" : ""),
-		      (i & 1 ? "" : "\n"));
-	    if (FRIBIDI_CHAR_SETS_NUM & 1)
-	      printf ("\n");
+	      printf ("  * %-10s: %-25s%1s\n",
+		      fribidi_char_set_name (i), fribidi_char_set_title (i),
+		      (fribidi_char_set_desc (i) ? "X" : ""));
 	    printf
-	      ("  X: Character set has descreptions, use --charsetdesc to see\n");
+	      ("  X: Character set has descriptions, use --charsetdesc to see\n");
 	    printf
 	      ("\nReport bugs online at <http://fribidi.sourceforge.net/bugs.php>.\n");
 	    exit (0);
 	  }
 	  CASE2 ("-V", "--version")
 	  {
-	    printf
-	      ("%s %s\n"
-	       "Copyright (C) 2001 FriBidi Project.\n"
-	       "%s comes with NO WARRANTY, to the extent permitted by law.\n"
-	       "You may redistribute copies of %s under the terms of\n"
-	       "the GNU General Public License.\n"
-	       "For more information about these matters, see the files name COPYING.\n",
-	       appname, VERSION, appname, appname);
+	    printf (appname " " appversion "\n%s", fribidi_version_info);
 	    exit (0);
+	  }
+	  CASE2 ("-v", "--verbose")
+	  {
+	    show_basedir = TRUE;
+	    show_ltov = TRUE;
+	    show_vtol = TRUE;
+	    show_levels = TRUE;
+	    show_changes = TRUE;
+	    continue;
 	  }
 	  CASE2 ("-p", "--nopad")
 	  {
@@ -197,6 +207,11 @@ main (int argc, char *argv[])
 	    show_input = TRUE;
 	    continue;
 	  }
+	  CASE ("--basedir")
+	  {
+	    show_basedir = TRUE;
+	    continue;
+	  }
 	  CASE ("--ltov")
 	  {
 	    show_ltov = TRUE;
@@ -230,10 +245,16 @@ main (int argc, char *argv[])
 		 PACKAGE);
 	    continue;
 	  }
-	  CASE2 ("-t", "--test")
+	  CASE2 ("-P", "--caprtl")
 	  {
 	    char_set = FRIBIDI_CHARSET_CAP_RTL;
-	    do_pad = TRUE;
+	    continue;
+	  }
+	  CASE2 ("-t", "--test")
+	  {
+	    do_fill = TRUE;
+	    show_input = TRUE;
+	    do_clean = TRUE;
 	    continue;
 	  }
 	  CASE2 ("-C", "--charset")
@@ -322,16 +343,16 @@ main (int argc, char *argv[])
 		len = fribidi_charset_to_unicode (char_set, S_, logical);
 
 		{
-		  guint16 *ltov, *vtol;
+		  FriBidiStrIndex *ltov, *vtol;
 		  guint8 *levels;
 		  gint new_len;
 
 		  if (show_ltov)
-		    ltov = g_new (guint16, len + 1);
+		    ltov = g_new (FriBidiStrIndex, len + 1);
 		  else
 		    ltov = NULL;
 		  if (show_vtol)
-		    vtol = g_new (guint16, len + 1);
+		    vtol = g_new (FriBidiStrIndex, len + 1);
 		  else
 		    vtol = NULL;
 		  if (show_levels)
@@ -389,6 +410,13 @@ main (int argc, char *argv[])
 		      if (eol_text)
 			printf ("%s", eol_text);
 
+		      nl_found = "\n";
+		    }
+		  if (show_basedir)
+		    {
+		      printf (nl_found);
+		      printf ("Base direction: %s",
+			      (FRIBIDI_DIR_TO_LEVEL (base) ? "R" : "L"));
 		      nl_found = "\n";
 		    }
 		  if (show_ltov)

@@ -22,15 +22,24 @@
 #include "fribidi.h"
 #include "fribidi_tables.i"
 
+#ifdef MEM_OPTIMIZED
+extern FriBidiCharType prop_to_type[];
+#endif
+
 /*======================================================================
 //  fribidi_get_type() returns the bidi type of a character.
 //----------------------------------------------------------------------*/
-FriBidiCharType fribidi_get_type (FriBidiChar uch)
+FriBidiCharType
+fribidi_get_type (FriBidiChar uch)
 {
   int i = uch % 256, j = uch / 256;
-  FriBidiCharType *block = FriBidiPropertyBlocks[j];
+  FriBidiPropCharType *block = FriBidiPropertyBlocks[j];
   if (block)
+#ifdef MEM_OPTIMIZED
+    return prop_to_type[block[i]];
+#else
     return block[i];
+#endif
   else
     {
       switch (j)
@@ -67,11 +76,10 @@ FriBidiCharType fribidi_get_type (FriBidiChar uch)
     }
 }
 
-gboolean
-fribidi_get_mirror_char (	/* Input */
-			  FriBidiChar ch,
-			  /* Output */
-			  FriBidiChar * mirrored_ch)
+gboolean fribidi_get_mirror_char (	/* Input */
+				   FriBidiChar ch,
+				   /* Output */
+				   FriBidiChar * mirrored_ch)
 {
   int pos, step;
   gboolean found = FALSE;

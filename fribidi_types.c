@@ -17,9 +17,10 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include "fribidi_types.h"
+#include "fribidi.h"
 
-guchar fribidi_char_from_type (FriBidiCharType c)
+guchar
+fribidi_char_from_type (FriBidiCharType c)
 {
   switch (c)
     {
@@ -107,3 +108,35 @@ fribidi_type_name (FriBidiCharType c)
     }
 #undef _FRIBIDI_CASE
 };
+
+#ifdef MEM_OPTIMIZED
+/* If MEM_OPTIMIZED defined, map fribidi_prop_types to fribidi_types,
+   it has the overhead of one more array lookup in fribidi_get_type(),
+   the order of types here should be the same as
+   "typedef enum FriBidiPropCharType in fribidi_types.h */
+FriBidiCharType prop_to_type[] = {
+  FRIBIDI_TYPE_LTR,		/* Strong left to right */
+  FRIBIDI_TYPE_RTL,		/* Right to left characters */
+  FRIBIDI_TYPE_AL,		/* Arabic characters */
+  FRIBIDI_TYPE_LRE,		/* Left-To-Right embedding */
+  FRIBIDI_TYPE_RLE,		/* Right-To-Left embedding */
+  FRIBIDI_TYPE_LRO,		/* Left-To-Right override */
+  FRIBIDI_TYPE_RLO,		/* Right-To-Left override */
+  FRIBIDI_TYPE_PDF,		/* Pop directional override */
+  FRIBIDI_TYPE_EN,		/* European digit */
+  FRIBIDI_TYPE_AN,		/* Arabic digit */
+  FRIBIDI_TYPE_ES,		/* European number separator */
+  FRIBIDI_TYPE_ET,		/* European number terminator */
+  FRIBIDI_TYPE_CS,		/* Common Separator */
+  FRIBIDI_TYPE_NSM,		/* Non spacing mark */
+  FRIBIDI_TYPE_BN,		/* Boundary neutral */
+  FRIBIDI_TYPE_BS,		/* Block separator */
+  FRIBIDI_TYPE_SS,		/* Segment separator */
+  FRIBIDI_TYPE_WS,		/* Whitespace */
+  FRIBIDI_TYPE_ON,		/* Other Neutral */
+  FRIBIDI_TYPE_WL,		/* Weak left to right */
+  FRIBIDI_TYPE_WR,		/* Weak right to left */
+  FRIBIDI_TYPE_SOT,		/* Start of text */
+  FRIBIDI_TYPE_EOT,		/* End of text */
+};
+#endif

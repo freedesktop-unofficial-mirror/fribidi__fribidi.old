@@ -18,6 +18,7 @@
  * Boston, MA 02111-1307, USA.
  */
 #include "fribidi.h"
+#include "config.h"
 #ifdef DEBUG
 #include <stdio.h>
 #endif
@@ -73,8 +74,7 @@ level_info;
 static gboolean fribidi_debug = FALSE;
 #endif
 
-int
-fribidi_set_debug (gboolean debug)
+gboolean fribidi_set_debug (gboolean debug)
 {
 #ifdef DEBUG
   return fribidi_debug = debug;
@@ -107,12 +107,12 @@ bidi_string_reverse (FriBidiChar * str, gint len)
 }
 
 static void
-int16_array_reverse (guint16 * arr, gint len)
+index_array_reverse (FriBidiStrIndex * arr, gint len)
 {
   gint i;
   for (i = 0; i < len / 2; i++)
     {
-      guint16 tmp = arr[i];
+      FriBidiStrIndex tmp = arr[i];
       arr[i] = arr[len - 1 - i];
       arr[len - 1 - i] = tmp;
     }
@@ -988,6 +988,54 @@ fribidi_analyse_string (	/* input */
     }
 #endif
 
+  DBG ("Reset the embedding levels.\n");
+  {
+    gint j, k, state, pos;
+    TypeLink *p, *q, *list, *list_end;
+
+    /* L1. Reset the embedding levels of some chars. */
+    init_list (&list, &list_end);
+    q = list_end;
+    state = 1;
+    pos = len - 1;
+    for (j = len - 1; j >= 0; j--)
+      {
+	k = fribidi_get_type (str[j]);
+	if (!state && FRIBIDI_IS_SEPARATOR (k))
+	  {
+	    state = 1;
+	    pos = j;
+	  }
+	else
+	  if (state
+	      && !(j && FRIBIDI_IS_EXPLICIT_OR_SEPARATOR_OR_BN_OR_WS (k)))
+	  {
+	    /* if state is on at the very first of string, do this too. */
+	    if (!j)
+	      j--;
+	    state = 0;
+	    p = new_type_link ();
+	    p->prev = p->next = 0;
+	    p->pos = j + 1;
+	    p->len = pos - j;
+	    p->type = base_dir;
+	    p->level = base_level;
+	    move_element_before (p, q);
+	    q = p;
+	  }
+      }
+    override_list (type_rl_list, list);
+  }
+
+#ifdef DEBUG
+  if (fribidi_debug)
+    {
+      print_types_re (type_rl_list);
+      print_resolved_levels (type_rl_list);
+      print_resolved_types (type_rl_list);
+    }
+#endif
+
   *ptype_rl_list = type_rl_list;
   *pmax_level = max_level;
   *pbase_dir = base_dir;
@@ -995,7 +1043,7 @@ fribidi_analyse_string (	/* input */
 
 /*======================================================================
 //  Frees up the rl_list, must be called after each call to
-    fribidi_analyse_string(), after the list is not needed anymore.
+//  fribidi_analyse_string(), after the list is not needed anymore.
 //----------------------------------------------------------------------*/
 void
 free_rl_list (TypeLink * type_rl_list)
@@ -1017,6 +1065,19 @@ free_rl_list (TypeLink * type_rl_list)
   free_type_links = type_rl_list;
   type_rl_list = NULL;
 #endif
+}
+
+static gboolean mirroring = TRUE;
+
+gboolean fribidi_mirroring_status (void)
+{
+  return mirroring;
+}
+
+void
+fribidi_set_mirroring (gboolean mirror)
+{
+  mirroring = mirror;
 }
 
 /*======================================================================
@@ -1048,8 +1109,8 @@ fribidi_log2vis (		/* input */
 		  FriBidiChar * str, gint len, FriBidiCharType * pbase_dir,
 		  /* output */
 		  FriBidiChar * visual_str,
-		  guint16 * position_L_to_V_list,
-		  guint16 * position_V_to_L_list,
+		  FriBidiStrIndex * position_L_to_V_list,
+		  FriBidiStrIndex * position_V_to_L_list,
 		  guint8 * embedding_level_list)
 {
   TypeLink *type_rl_list, *pp = NULL;
@@ -1064,13 +1125,13 @@ fribidi_log2vis (		/* input */
   if (position_L_to_V_list && !position_V_to_L_list)
     {
       private_V_to_L = TRUE;
-      position_V_to_L_list = g_new (guint16, len + 1);
+      position_V_to_L_list = g_new (FriBidiStrIndex, len + 1);
     }
 
-  if (len > FRIBIDI_MAX_STRING_LENGTH)
+  if (len > FRIBIDI_MAX_STRING_LENGTH && position_V_to_L_list)
     {
 #ifdef DEBUG
-      fprintf (stderr, "%s cannot handle strings > %d chars\n",
+      fprintf (stderr, "%s: cannot handle strings > %d characters\n",
 	       PACKAGE, FRIBIDI_MAX_STRING_LENGTH);
 #endif
       return;
@@ -1081,54 +1142,9 @@ fribidi_log2vis (		/* input */
 
   /* 7. Reordering resolved levels */
   DBG ("Reordering resolved levels.\n");
-
   {
     gint level_idx;
-    gint i, j, k, state, pos;
-    TypeLink *p, *q, *list, *list_end;
-
-    DBG ("Reset the embedding levels.\n");
-    /* L1. Reset the embedding levels of some chars. */
-    init_list (&list, &list_end);
-    q = list_end;
-    state = 1;
-    pos = len - 1;
-    for (j = len - 1; j >= 0; j--)
-      {
-	k = fribidi_get_type (str[j]);
-	if (!state && FRIBIDI_IS_SEPARATOR (k))
-	  {
-	    state = 1;
-	    pos = j;
-	  }
-	else
-	  if (state
-	      && !(j && FRIBIDI_IS_EXPLICIT_OR_SEPARATOR_OR_BN_OR_WS (k)))
-	  {
-	    /* if state is on at the very first of string, do this too. */
-	    if (!j)
-	      j--;
-	    state = 0;
-	    p = new_type_link ();
-	    p->prev = p->next = 0;
-	    p->pos = j + 1;
-	    p->len = pos - j;
-	    p->type = *pbase_dir;
-	    p->level = FRIBIDI_DIR_TO_LEVEL (p->type);
-	    move_element_before (p, q);
-	    q = p;
-	  }
-      }
-    override_list (type_rl_list, list);
-
-#ifdef DEBUG
-    if (fribidi_debug)
-      {
-	print_types_re (type_rl_list);
-	print_resolved_levels (type_rl_list);
-	print_resolved_types (type_rl_list);
-      }
-#endif
+    gint i, j;
 
     /* TBD: L3 */
 
@@ -1157,7 +1173,7 @@ fribidi_log2vis (		/* input */
     if (visual_str || position_V_to_L_list)
       {
 
-	if (visual_str)
+	if (mirroring && visual_str)
 	  /* L4. Mirror all characters that are in odd levels and have mirrors. */
 	  for (pp = type_rl_list->next; pp->next; pp = pp->next)
 	    {
@@ -1194,7 +1210,7 @@ fribidi_log2vis (		/* input */
 		    if (visual_str)
 		      bidi_string_reverse (visual_str + pos, len);
 		    if (position_V_to_L_list)
-		      int16_array_reverse (position_V_to_L_list + pos, len);
+		      index_array_reverse (position_V_to_L_list + pos, len);
 		  }
 	      }
 	  }
@@ -1247,3 +1263,27 @@ fribidi_log2vis_get_embedding_levels (
 
   free_rl_list (type_rl_list);
 }
+
+guchar *fribidi_version_info =
+  "Copyright (C) 2001 FriBidi Project.\n"
+  PACKAGE " comes with NO WARRANTY, to the extent permitted by law.\n"
+  "You may redistribute copies of " PACKAGE " under the terms of\n"
+  "the GNU General Public License.\n"
+  "For more information about these matters, see the files named COPYING.\n"
+#if (defined(MEM_OPTIMIZED) || defined(DEBUG) || defined(USE_SIMPLE_MALLOC) \
+    || defined(FRIBIDI_USE_MINI_GLIB))
+  "This " PACKAGE " is compiled with following options:\n"
+#if (defined(MEM_OPTIMIZED))
+  "MEM_OPTIMIZED\n"
+#endif
+#if (defined(DEBUG))
+  "DEBUG\n"
+#endif
+#if (defined(USE_SIMPLE_MALLOC))
+  "USE_SIMPLE_MALLOC\n"
+#endif
+#if (defined(FRIBIDI_USE_MINI_GLIB))
+  "FRIBIDI_USE_MINI_GLIB\n"
+#endif
+#endif
+ ;

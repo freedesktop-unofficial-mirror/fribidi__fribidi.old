@@ -5,30 +5,30 @@
 
 #include "fribidi.h"
 
-#define WS FRIBIDI_TYPE_WS
-#define BS FRIBIDI_TYPE_BS
-#define EO FRIBIDI_TYPE_EO
-#define CTL FRIBIDI_TYPE_CTL
-#define LRE FRIBIDI_TYPE_LRE
-#define RLE FRIBIDI_TYPE_RLE
-#define ES FRIBIDI_TYPE_ES
-#define LRO FRIBIDI_TYPE_LRO
-#define RLO FRIBIDI_TYPE_RLO
-#define AL FRIBIDI_TYPE_AL
-#define SS FRIBIDI_TYPE_SS
-#define ET FRIBIDI_TYPE_ET
-#define NSM FRIBIDI_TYPE_NSM
-#define LTR FRIBIDI_TYPE_LTR
-#define ON FRIBIDI_TYPE_ON
-#define AN FRIBIDI_TYPE_AN
-#define BN FRIBIDI_TYPE_BN
-#define RTL FRIBIDI_TYPE_RTL
-#define CS FRIBIDI_TYPE_CS
-#define PDF FRIBIDI_TYPE_PDF
-#define EN FRIBIDI_TYPE_EN
+#define WS FRIBIDI_PROP_TYPE_WS
+#define BS FRIBIDI_PROP_TYPE_BS
+#define EO FRIBIDI_PROP_TYPE_EO
+#define CTL FRIBIDI_PROP_TYPE_CTL
+#define LRE FRIBIDI_PROP_TYPE_LRE
+#define RLE FRIBIDI_PROP_TYPE_RLE
+#define ES FRIBIDI_PROP_TYPE_ES
+#define LRO FRIBIDI_PROP_TYPE_LRO
+#define RLO FRIBIDI_PROP_TYPE_RLO
+#define AL FRIBIDI_PROP_TYPE_AL
+#define SS FRIBIDI_PROP_TYPE_SS
+#define ET FRIBIDI_PROP_TYPE_ET
+#define NSM FRIBIDI_PROP_TYPE_NSM
+#define LTR FRIBIDI_PROP_TYPE_LTR
+#define ON FRIBIDI_PROP_TYPE_ON
+#define AN FRIBIDI_PROP_TYPE_AN
+#define BN FRIBIDI_PROP_TYPE_BN
+#define RTL FRIBIDI_PROP_TYPE_RTL
+#define CS FRIBIDI_PROP_TYPE_CS
+#define PDF FRIBIDI_PROP_TYPE_PDF
+#define EN FRIBIDI_PROP_TYPE_EN
 
 
-FriBidiCharType FriBidiPropertyBlock0000[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0000[256] = {
   BN ,BN ,BN ,BN ,BN ,BN ,BN ,BN ,BN ,SS ,BS ,SS ,WS ,BS ,BN ,BN ,
   BN ,BN ,BN ,BN ,BN ,BN ,BN ,BN ,BN ,BN ,BN ,BN ,BS ,BS ,BS ,SS ,
   WS ,ON ,ON ,ET ,ET ,ET ,ON ,ON ,ON ,ON ,ON ,ET ,CS ,ET ,CS ,ES ,
@@ -47,7 +47,7 @@ FriBidiCharType FriBidiPropertyBlock0000[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,ON ,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock0100[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0100[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -66,7 +66,7 @@ FriBidiCharType FriBidiPropertyBlock0100[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock0200[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0200[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -85,7 +85,7 @@ FriBidiCharType FriBidiPropertyBlock0200[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock0300[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0300[256] = {
   NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,
   NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,
   NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,
@@ -104,7 +104,7 @@ FriBidiCharType FriBidiPropertyBlock0300[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock0400[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0400[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -123,7 +123,7 @@ FriBidiCharType FriBidiPropertyBlock0400[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock0500[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0500[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -142,7 +142,7 @@ FriBidiCharType FriBidiPropertyBlock0500[256] = {
   RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,
 };
 
-FriBidiCharType FriBidiPropertyBlock0600[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0600[256] = {
   CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,
   CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,CS ,AL ,AL ,AL ,AL ,AL ,
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
@@ -161,7 +161,7 @@ FriBidiCharType FriBidiPropertyBlock0600[256] = {
   EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,AL ,AL ,AL ,AL ,AL ,AL ,
 };
 
-FriBidiCharType FriBidiPropertyBlock0700[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0700[256] = {
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,BN ,
   AL ,NSM,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
@@ -180,7 +180,7 @@ FriBidiCharType FriBidiPropertyBlock0700[256] = {
   NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,
 };
 
-FriBidiCharType FriBidiPropertyBlock0900[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0900[256] = {
   NSM,NSM,NSM,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -199,7 +199,7 @@ FriBidiCharType FriBidiPropertyBlock0900[256] = {
   LTR,LTR,ET ,ET ,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock0a00[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0a00[256] = {
   NSM,NSM,NSM,NSM,NSM,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -218,7 +218,7 @@ FriBidiCharType FriBidiPropertyBlock0a00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock0b00[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0b00[256] = {
   NSM,NSM,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -237,7 +237,7 @@ FriBidiCharType FriBidiPropertyBlock0b00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock0c00[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0c00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -256,7 +256,7 @@ FriBidiCharType FriBidiPropertyBlock0c00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock0d00[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0d00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -275,7 +275,7 @@ FriBidiCharType FriBidiPropertyBlock0d00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock0e00[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0e00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -294,7 +294,7 @@ FriBidiCharType FriBidiPropertyBlock0e00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock0f00[256] = {
+FriBidiPropCharType FriBidiPropertyBlock0f00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,NSM,NSM,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -313,7 +313,7 @@ FriBidiCharType FriBidiPropertyBlock0f00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock1000[256] = {
+FriBidiPropCharType FriBidiPropertyBlock1000[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,NSM,NSM,NSM,
@@ -332,7 +332,7 @@ FriBidiCharType FriBidiPropertyBlock1000[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock1600[256] = {
+FriBidiPropCharType FriBidiPropertyBlock1600[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -351,7 +351,7 @@ FriBidiCharType FriBidiPropertyBlock1600[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock1700[256] = {
+FriBidiPropCharType FriBidiPropertyBlock1700[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -370,7 +370,7 @@ FriBidiCharType FriBidiPropertyBlock1700[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlock1800[256] = {
+FriBidiPropCharType FriBidiPropertyBlock1800[256] = {
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,BN ,BN ,BN ,BN ,BN ,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -389,7 +389,7 @@ FriBidiCharType FriBidiPropertyBlock1800[256] = {
   NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,
 };
 
-FriBidiCharType FriBidiPropertyBlock1f00[256] = {
+FriBidiPropCharType FriBidiPropertyBlock1f00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -408,7 +408,7 @@ FriBidiCharType FriBidiPropertyBlock1f00[256] = {
   ON ,ON ,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,ON ,ON ,ON ,
 };
 
-FriBidiCharType FriBidiPropertyBlock2000[256] = {
+FriBidiPropCharType FriBidiPropertyBlock2000[256] = {
   WS ,WS ,WS ,WS ,WS ,WS ,WS ,WS ,WS ,WS ,WS ,BN ,BN ,BN ,LTR,RTL,
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,WS ,BS ,LRE,RLE,PDF,LRO,RLO,WS ,
@@ -427,7 +427,7 @@ FriBidiCharType FriBidiPropertyBlock2000[256] = {
   NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,
 };
 
-FriBidiCharType FriBidiPropertyBlock2100[256] = {
+FriBidiPropCharType FriBidiPropertyBlock2100[256] = {
   ON ,ON ,LTR,ON ,ON ,ON ,ON ,LTR,ON ,ON ,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,ON ,LTR,ON ,ON ,ON ,LTR,LTR,LTR,LTR,LTR,ON ,ON ,
   ON ,ON ,ON ,ON ,LTR,ON ,LTR,ON ,LTR,ON ,LTR,LTR,LTR,LTR,ET ,LTR,
@@ -446,7 +446,7 @@ FriBidiCharType FriBidiPropertyBlock2100[256] = {
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
 };
 
-FriBidiCharType FriBidiPropertyBlock2200[256] = {
+FriBidiPropCharType FriBidiPropertyBlock2200[256] = {
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
   ON ,ON ,ET ,ET ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
@@ -465,7 +465,7 @@ FriBidiCharType FriBidiPropertyBlock2200[256] = {
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
 };
 
-FriBidiCharType FriBidiPropertyBlock2300[256] = {
+FriBidiPropCharType FriBidiPropertyBlock2300[256] = {
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
@@ -484,7 +484,7 @@ FriBidiCharType FriBidiPropertyBlock2300[256] = {
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
 };
 
-FriBidiCharType FriBidiPropertyBlock2400[256] = {
+FriBidiPropCharType FriBidiPropertyBlock2400[256] = {
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
@@ -503,7 +503,7 @@ FriBidiCharType FriBidiPropertyBlock2400[256] = {
   EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,
 };
 
-FriBidiCharType FriBidiPropertyBlock2500[256] = {
+FriBidiPropCharType FriBidiPropertyBlock2500[256] = {
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
@@ -522,7 +522,7 @@ FriBidiCharType FriBidiPropertyBlock2500[256] = {
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
 };
 
-FriBidiCharType FriBidiPropertyBlock3000[256] = {
+FriBidiPropCharType FriBidiPropertyBlock3000[256] = {
   WS ,ON ,ON ,ON ,ON ,LTR,LTR,LTR,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
   ON ,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,NSM,NSM,NSM,NSM,NSM,NSM,
@@ -541,7 +541,7 @@ FriBidiCharType FriBidiPropertyBlock3000[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,ON ,LTR,LTR,LTR,LTR,
 };
 
-FriBidiCharType FriBidiPropertyBlocka400[256] = {
+FriBidiPropCharType FriBidiPropertyBlocka400[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -560,7 +560,7 @@ FriBidiCharType FriBidiPropertyBlocka400[256] = {
   ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,
 };
 
-FriBidiCharType FriBidiPropertyBlockfb00[256] = {
+FriBidiPropCharType FriBidiPropertyBlockfb00[256] = {
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
   LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,RTL,NSM,RTL,
   RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,ET ,RTL,RTL,RTL,RTL,RTL,RTL,
@@ -579,7 +579,7 @@ FriBidiCharType FriBidiPropertyBlockfb00[256] = {
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
 };
 
-FriBidiCharType FriBidiPropertyBlockfc00[256] = {
+FriBidiPropCharType FriBidiPropertyBlockfc00[256] = {
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
@@ -598,7 +598,7 @@ FriBidiCharType FriBidiPropertyBlockfc00[256] = {
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
 };
 
-FriBidiCharType FriBidiPropertyBlockfd00[256] = {
+FriBidiPropCharType FriBidiPropertyBlockfd00[256] = {
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
@@ -617,7 +617,7 @@ FriBidiCharType FriBidiPropertyBlockfd00[256] = {
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,
 };
 
-FriBidiCharType FriBidiPropertyBlockfe00[256] = {
+FriBidiPropCharType FriBidiPropertyBlockfe00[256] = {
   NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,
   NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,
   NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,NSM,
@@ -636,7 +636,7 @@ FriBidiCharType FriBidiPropertyBlockfe00[256] = {
   AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,AL ,BN ,
 };
 
-FriBidiCharType FriBidiPropertyBlockff00[256] = {
+FriBidiPropCharType FriBidiPropertyBlockff00[256] = {
   ON ,ON ,ON ,ET ,ET ,ET ,ON ,ON ,ON ,ON ,ON ,ET ,CS ,ET ,CS ,ES ,
   EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,EN ,CS ,ON ,ON ,ON ,ON ,ON ,
   ON ,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,
@@ -657,7 +657,7 @@ FriBidiCharType FriBidiPropertyBlockff00[256] = {
 
 /* 33 blocks defined */
 
-FriBidiCharType *FriBidiPropertyBlocks[256] = {
+FriBidiPropCharType *FriBidiPropertyBlocks[256] = {
   FriBidiPropertyBlock0000,
   FriBidiPropertyBlock0100,
   FriBidiPropertyBlock0200,

@@ -157,7 +157,7 @@ fribidi_unicode_to_cap_rtl (FriBidiChar * us, gint length, guchar * s)
 }
 
 guchar *
-fribidi_char_set_desc_cap_rtl ()
+fribidi_char_set_desc_cap_rtl (void)
 {
   return
     "CapRTL is a character set for testing with the reference\n" \
@@ -209,29 +209,29 @@ fribidi_char_set_desc_cap_rtl ()
     "    * _L  LRO\n" "    * _R  RLO\n" "    * __  `_' itself\n" "\n";
 }
 
-#define WS FRIBIDI_TYPE_WS
-#define BS FRIBIDI_TYPE_BS
-#define EO FRIBIDI_TYPE_EO
-#define CTL FRIBIDI_TYPE_CTL
-#define LRE FRIBIDI_TYPE_LRE
-#define RLE FRIBIDI_TYPE_RLE
-#define ES FRIBIDI_TYPE_ES
-#define LRO FRIBIDI_TYPE_LRO
-#define RLO FRIBIDI_TYPE_RLO
-#define AL FRIBIDI_TYPE_AL
-#define SS FRIBIDI_TYPE_SS
-#define ET FRIBIDI_TYPE_ET
-#define NSM FRIBIDI_TYPE_NSM
-#define LTR FRIBIDI_TYPE_LTR
-#define ON FRIBIDI_TYPE_ON
-#define AN FRIBIDI_TYPE_AN
-#define BN FRIBIDI_TYPE_BN
-#define RTL FRIBIDI_TYPE_RTL
-#define CS FRIBIDI_TYPE_CS
-#define PDF FRIBIDI_TYPE_PDF
-#define EN FRIBIDI_TYPE_EN
+#define WS FRIBIDI_PROP_TYPE_WS
+#define BS FRIBIDI_PROP_TYPE_BS
+#define EO FRIBIDI_PROP_TYPE_EO
+#define CTL FRIBIDI_PROP_TYPE_CTL
+#define LRE FRIBIDI_PROP_TYPE_LRE
+#define RLE FRIBIDI_PROP_TYPE_RLE
+#define ES FRIBIDI_PROP_TYPE_ES
+#define LRO FRIBIDI_PROP_TYPE_LRO
+#define RLO FRIBIDI_PROP_TYPE_RLO
+#define AL FRIBIDI_PROP_TYPE_AL
+#define SS FRIBIDI_PROP_TYPE_SS
+#define ET FRIBIDI_PROP_TYPE_ET
+#define NSM FRIBIDI_PROP_TYPE_NSM
+#define LTR FRIBIDI_PROP_TYPE_LTR
+#define ON FRIBIDI_PROP_TYPE_ON
+#define AN FRIBIDI_PROP_TYPE_AN
+#define BN FRIBIDI_PROP_TYPE_BN
+#define RTL FRIBIDI_PROP_TYPE_RTL
+#define CS FRIBIDI_PROP_TYPE_CS
+#define PDF FRIBIDI_PROP_TYPE_PDF
+#define EN FRIBIDI_PROP_TYPE_EN
 
-FriBidiCharType FriBidiPropertyBlockCapRTL[256] = {
+FriBidiPropCharType FriBidiPropertyBlockCapRTL[256] = {
   /* CapRTL charset table. */
   ON, ON, ON, ON, LTR, RTL, ON, ON, ON, ON, ON, ON, ON, BS, RLO, RLE,	/*00-0f */
   LRO, LRE, PDF, WS, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON,	/*10-1f */

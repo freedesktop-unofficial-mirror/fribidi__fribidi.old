@@ -60,7 +60,7 @@
 void
 fribidi_map_range (gint in_span[2],	/* Start and end span */
 		   int len, gboolean is_v2l_map,	/* Needed for embedding_level */
-		   guint16 * position_map, guint8 * embedding_level_list,
+		   FriBidiStrIndex * position_map, guint8 * embedding_level_list,
 		   /* output */
 		   int *num_mapped_spans, int mapped_spans[3][2])
 {
@@ -196,7 +196,7 @@ fribidi_xpos_resolve (gint x_pos,
 		      gint len,
 		      guint8 * embedding_level_list,
 		      FriBidiCharType base_dir,
-		      guint16 * vis2log, gint16 * char_widths,
+		      FriBidiStrIndex * vis2log, gint16 * char_widths,
 		      /* output */
 		      gint * res_log_pos,
 		      gint * res_vis_pos,
@@ -320,7 +320,7 @@ fribidi_is_char_rtl (guint8 * embedding_level_list,
 void
 fribidi_runs_log2vis (		/* input */
 		       GList * logical_runs,	/* List of FriBidiRunType */
-		       gint len, guint16 * log2vis, FriBidiCharType base_dir,
+		       gint len, FriBidiStrIndex * log2vis, FriBidiCharType base_dir,
 		       /* output */
 		       GList ** visual_runs)
 {

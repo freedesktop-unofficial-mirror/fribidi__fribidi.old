@@ -21,8 +21,12 @@
 #include <stdlib.h>
 #include <sys/times.h>
 #include "fribidi.h"
+#include "config.h"
 
 #define appname "fribidi_benchmark"
+#define appversion VERSION
+
+extern guchar *fribidi_version_info;
 
 #define MAX_STR_LEN 1000
 
@@ -55,7 +59,7 @@ die (gchar * fmt, ...)
   "here_L is_o_o_o _R ab  one_o _r 123,987_LT_oHE_R t_o oNE:" \
 
 double
-utime ()
+utime (void)
 {
   struct tms tb;
   times (&tb);
@@ -67,7 +71,7 @@ benchmark (guchar * S_, FriBidiCharSet char_set, gint niter)
 {
   gint len, i;
   FriBidiChar us[MAX_STR_LEN], out_us[MAX_STR_LEN];
-  guint16 positionLtoV[MAX_STR_LEN], positionVtoL[MAX_STR_LEN];
+  FriBidiStrIndex positionLtoV[MAX_STR_LEN], positionVtoL[MAX_STR_LEN];
   guint8 embedding_list[MAX_STR_LEN];
   FriBidiCharType base;
   double time0, time1;
@@ -136,14 +140,7 @@ main (int argc, char *argv[])
 	  }
 	  CASE2 ("-V", "--version")
 	  {
-	    printf
-	      ("%s %s\n"
-	       "Copyright (C) 2001 FriBidi Project.\n"
-	       "%s comes with NO WARRANTY, to the extent permitted by law.\n"
-	       "You may redistribute copies of %s under the terms of\n"
-	       "the GNU General Public License.\n"
-	       "For more information about these matters, see the files name COPYING.\n",
-	       appname, VERSION, appname, appname);
+	    printf (appname " " appversion "\n%s", fribidi_version_info);
 	    exit (0);
 	  }
 	  CASE2 ("-n", "--niter")

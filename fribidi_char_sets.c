@@ -36,7 +36,7 @@ typedef struct
   /* Charset's title. */
   guchar *title;
   /* Comments, if any. */
-  guchar *(*desc) ();
+  guchar *(*desc) (void);
   /* Some charsets like CapRTL may need to change some fribidis tables, by
      calling this function, they can do this changes. */
     gboolean (*enter) (void);

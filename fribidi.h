@@ -20,12 +20,8 @@
 #ifndef FRIBIDI_H
 #define FRIBIDI_H
 
-#include "config.h"
-
 #include "fribidi_types.h"
 #include "fribidi_char_sets.h"
-
-int fribidi_set_debug (gboolean debug);
 
 FriBidiCharType fribidi_get_type (FriBidiChar uch);
 
@@ -39,8 +35,8 @@ void fribidi_log2vis (		/* input */
 		       gint len, FriBidiCharType * pbase_dir,
 		       /* output */
 		       FriBidiChar * visual_str,
-		       guint16 * position_L_to_V_list,
-		       guint16 * position_V_to_L_list,
+		       FriBidiStrIndex * position_L_to_V_list,
+		       FriBidiStrIndex * position_V_to_L_list,
 		       guint8 * embedding_level_list);
 
 void fribidi_log2vis_get_embedding_levels (	/* input */
@@ -55,6 +51,19 @@ void fribidi_log2vis_get_embedding_levels (	/* input */
 //  new length.
 //----------------------------------------------------------------------*/
 gint fribidi_remove_explicits (FriBidiChar * str, gint length);
+
+/*======================================================================
+//  fribidi_mirroring_status() returns whether mirroring is on or off,
+//  default is on.
+//----------------------------------------------------------------------*/
+gboolean fribidi_mirroring_status (void);
+
+void fribidi_set_mirroring (gboolean mirror);
+
+/*======================================================================
+//  fribidi_set_denug() turn on or off debugging, default is off.
+//----------------------------------------------------------------------*/
+gboolean fribidi_set_debug (gboolean debug);
 
 /* fribidi_utils.c */
 
@@ -106,7 +115,8 @@ void
 fribidi_map_range (gint span[2],
 		   int len,
 		   gboolean is_v2l_map,
-		   guint16 * position_map, guint8 * embedding_level_list,
+		   FriBidiStrIndex * position_map,
+		   guint8 * embedding_level_list,
 		   /* output */
 		   int *num_mapped_spans, int spans[3][2]);
 
@@ -173,7 +183,7 @@ void fribidi_xpos_resolve (gint x_pos,
 			   gint len,
 			   guint8 * embedding_level_list,
 			   FriBidiCharType base_dir,
-			   guint16 * vis2log, gint16 * char_widths,
+			   FriBidiStrIndex * vis2log, gint16 * char_widths,
 			   /* output */
 			   gint * res_log_pos,
 			   gint * res_vis_pos,

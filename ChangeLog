@@ -1,22 +1,64 @@
-2001-03-27 Roozbeh Pournader <roozbeh@sharif.edu>
+2001-03-28  Behdad Esfahbod <behdad@bamdad.org>
+	* Makefile.am: New target "fribidi_tables.i" defined to download
+	"unidata/BidiMirroring.txt" and "unidata/PropList.txt" if not
+	available, and call "unidata/CreateGetType.pl" if needed to update
+	"fribidi_tables.i".
+
+	* fribidi_types.h, fribidi_types.c, fribidi_get_type.c,
+	unidata/CreateGetType.pl: Define symbol MEM_OPTIMIZED added to
+	make Dov happy :-), if MEM_OPTIMIZED defined, fribidi_tables.i
+	entries will be guint8 instead of gint to free 27KB extra memory
+	that was used to make fribidi use bitmasks, the overhead will be
+	three array lookups instead of two, in fribidi_get_type().	
+
+	* fribidi_main.c: Options --verbose and --basedir added.
+	Options --test and --caprtl updated.
+
+	* conformance/test_gen.c: File name changed to
+	conformance/test_gen_explicit.c
+	
+	* run.tests: Make to work with "make test" and "make check" when
+	making from other directories.
+
+	* fribidi.c: Rule L1 ("Reset the embedding levels") moved from
+	fribidi_log2vis() to fribidi_analyse_string(), to affect
+	fribidi_log2vis_get_embedding_levels() too. New functions
+	fribidi_mirroring_status() and fribidi_set_mirroring() added to
+	turn on or off mirroring (Rule L3).  Changed to warn about too long
+	strings only if at least one of	position_L_to_V_list or
+	position_V_to_L_list is asked.
+	
+	* fribidi.h: Updated to reflect new functions in fribidi.c,
+	#include "config.h" removed, and added to each .c file that use it,
+	because config.h should not be included by other apps/libs.
+	
+	* fribidi.c, fribidi_main.c, fribidi_benchmark.c: #included "config.h",
+	Now, --version options shows the options that library is compiled
+	with (DEBUG, MEM_OPTIMIZED, USE_SIMPLE_MALLOC, FRIBIDI_USE_MINI_GLIB).
+
+	* fribidi_types.h, fribidi.c, fribidi.h, fribidi_utils.c: TypeDefined
+	FriBidiStrIndex as guint16 and used for the type of
+	position_L_to_V_list and postition_V_to_L_list arrays.
+	
+2001-03-27  Roozbeh Pournader <roozbeh@sharif.edu>
 	* fribidi.h: Removed definition of PACKAGE and VERSION. #included
 	"config.h"
 
-	* Makefile.am: make "make dist" work.
+	* Makefile.am: Make "make dist" work.
 
-2001-03-26 Behdad Esfahbod <behdad@bamdad.org>
+2001-03-27  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c, fribidi_types.h: Some bugs introduced in the last
 	changes removed, "Resolving weak types" rewritten, no known
-	conformance bugs. Defined macros for external use, changed their
+	conformance bugs.  Defined macros for external use, changed their
 	name to have a prefix of FRIBIDI_.
 	
 	* fribidi.c, fribidi.h: Function fribidi_remove_explicits() added
 	to remove the explicit marks from a fribidi string.
 
 	* fribidi.c: Fixed a bug that caused position_l_to_v and
-	position_v_to_l not to calculated correctly.
+	position_v_to_l	not to calculated correctly.
 	
-	* fribidi.h: Define symbols PACKAGE and VERSION manually, autoconf
+	* fribidi.h: Defined symbols PACKAGE and VERSION manually, autoconf
 	should set them, but I don't know how to.
 	
 	* fribidi_char_sets.c, fribidi_char_sets.h, fribidi_char_sets_*:
@@ -30,15 +72,17 @@
 
 	* fribidi_main.c: API revised, many new options added,	
 	Default charset changed to UTF-8
-	Option --test simulates the old defaults (--charset CapRTL)
+	Option --caprtl simulates the old style (same as --charset CapRTL)
+	Option --test simulates the old test_fribidi (same as --fill
+	--showinput --clean)
 	Option --clean now works for all charsets.
 	Option --fill implementated.
-	Options --version, --showinput, --ltov, --vtol, --levels,
-	--changes, --novisual, --charsetdesc added.	
+	Options --version, --showinput, --ltov, --vtol, --levels, --changes,
+	--novisual, --charsetdesc added.
 	Now use the charset conventions, lots of code removed.
 	
-	* test_fribidi.c: got removed. `fribidi --showinput --fill --clean'
-	should be used instead.
+	* test_fribidi.c: Got removed!	`fribidi --test' should	be used 
+	instead.
 
 	* fribidi_benchmark: Explicit support added, now benchmarks with
 	two strings, one without explicit marks and one with them.
@@ -47,12 +91,11 @@
 	tests/test-explicit, tests/test-explicit.reference,
 	tests/test-hebrew, tests/test-hebrew.reference: New test datas
 	added, for better testing of weak types and explicit support.  Test
-	outputs updated for the new CapRTL character set.  Test output fot
+	outputs updated for the new CapRTL character set.  Test output for
 	test-hebrew added.
 	
 	* Makefile.in, Makefile.am: Updated to use fribidi instead of
-	test_fribidi for test targets.  New source files added to
-	libfribidi_la_SOURCES.
+	test_fribidi for test targets.  New files added.
 	
 	* TODO: Some done tasks removed, some new tasks added!
 

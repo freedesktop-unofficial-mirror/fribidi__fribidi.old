@@ -1,7 +1,6 @@
 #!/bin/sh
 # Test ../fribidi with reference/bidiref, using stdin, and diff the outputs.
-# use -debug switch to see the debug info into stderr.
-# use -clean to remove explicit marks before doing diff.
+# use --debug switch to see the debug info into stderr.
 
 path=`dirname $(which $0)`
 
@@ -11,7 +10,7 @@ if ! test -f "$path/../fribidi"; then
 fi
 
 if ! test -f "$path/reference/bidiref"; then
-  if test -z "`echo -n | $path/../fribidi -debug 2>&1`"; then
+  if test -z "`echo -n | $path/../fribidi --debug 2>&1`"; then
     debug="-DDEBUGGING"
   else
     debug=""
@@ -23,13 +22,12 @@ convertsub () {
   refline="`echo \"$refline\" | sed s/$1/$2/g`"
 }
 
+p1="--clean"
+p2="-clean"
 while [ -n "$1" ]; do
-  if test "$1" = "-debug"; then
+  if test "$1" = "--debug"; then
     p1=$p1" --debug"
     p2=$p2" -verbose"
-  elif test "$1" = "-clean"; then
-    p1=$p1" --clean"
-    p2=$p2" -clean"
   else
     par=$par" $1"
   fi

@@ -207,7 +207,7 @@ sub split_entity {
 sub create_block {
     my ($block,$name, $ranges) = @_;
     my($title) = <<__;
-FriBidiCharType ${name}\[256\] = {
+FriBidiPropCharType ${name}\[256\] = {
 __
     my $result;
     my $last_type=$ranges->[0]->[2];
@@ -258,13 +258,13 @@ sub create_c_file {
 __
 
     for my $type (keys %type_names) {
-       $c_file .= "#define $type_names{$type}->[0] FRIBIDI_TYPE_$type_names{$type}->[0]\n";
+       $c_file .= "#define $type_names{$type}->[0] FRIBIDI_PROP_TYPE_$type_names{$type}->[0]\n";
     }
     $c_file .= "\n\n";
     
     my $i = 0;
     my $block_array = <<__;
-FriBidiCharType *FriBidiPropertyBlocks[256] = {
+FriBidiPropCharType *FriBidiPropertyBlocks[256] = {
 __
 
     my %seen_blocks;

@@ -13,7 +13,7 @@ fi
 
 path=`dirname $(which $0)`
 
-if ! test -f "$path/fribidi"; then
+if ! test -f "./fribidi"; then
   echo "run.tests: you must make fribidi first"
   exit 1
 fi
@@ -22,7 +22,7 @@ TEST () {
   test="$1"
   charset="$2"
   echo "=== Running test $test"
-  $path/fribidi --showinput --clean --fill --charset "$charset" \
+  ./fribidi --showinput --clean --fill --charset "$charset" \
     "$path/tests/$test" > "$test.output"
 
   if diff "$test.output" "$path/tests/$test.reference"; then
