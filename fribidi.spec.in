@@ -65,7 +65,7 @@ Install lib%{name}-devel if you want to develop programs which will use
 if [ ! -x ./configure ];then 
 ./bootstrap
 fi
-%configure
+./configure %{_target_platform}
 make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 
 %install
