@@ -532,7 +532,7 @@ compact_neutrals (TypeLink *list)
  *  levels.
  *----------------------------------------------------------------------*/
 
-static guchar char_from_level_array[] = {
+static gchar char_from_level_array[] = {
   'e',				/* FRIBIDI_LEVEL_REMOVED, internal error, this level shouldn't be viewed.  */
   '_',				/* FRIBIDI_LEVEL_START or _END, indicating start of string and end of string. */
   /* 0-9,A-F are the only valid levels in debug mode and before resolving
@@ -1321,7 +1321,7 @@ fribidi_log2vis_get_embedding_levels (	/* input */
   return TRUE;
 }
 
-guchar *fribidi_version_info =
+gchar *fribidi_version_info =
   "Copyright (C) 2001 FriBidi Project.\n"
   PACKAGE " comes with NO WARRANTY, to the extent permitted by law.\n"
   "You may redistribute copies of " PACKAGE " under the terms of\n"

@@ -39,36 +39,36 @@
 #define UNI_TAV 0x05EA
 
 FriBidiChar
-fribidi_iso8859_8_to_unicode_c (guchar ch)
+fribidi_iso8859_8_to_unicode_c (gchar ch)
 {
   /* optimization */
-  if (ch < ISO_8859_8_LRO)
+  if ((guchar) ch < ISO_8859_8_LRO)
     return ch;
-  else if (ch >= ISO_ALEF && ch <= ISO_TAV)
+  else if ((guchar) ch >= ISO_ALEF && (guchar) ch <= ISO_TAV)
     return ch - ISO_ALEF + UNI_ALEF;
-  switch (ch)
+  switch ((guchar) ch)
     {
     case ISO_8859_8_RLM:
-      return UNI_RLM;
+      return (gchar) UNI_RLM;
     case ISO_8859_8_LRM:
-      return UNI_LRM;
+      return (gchar) UNI_LRM;
     case ISO_8859_8_RLO:
-      return UNI_RLO;
+      return (gchar) UNI_RLO;
     case ISO_8859_8_LRO:
-      return UNI_LRO;
+      return (gchar) UNI_LRO;
     case ISO_8859_8_RLE:
-      return UNI_RLE;
+      return (gchar) UNI_RLE;
     case ISO_8859_8_LRE:
-      return UNI_LRE;
+      return (gchar) UNI_LRE;
     case ISO_8859_8_PDF:
-      return UNI_PDF;
+      return (gchar) UNI_PDF;
     default:
       return '?';		/* This shouldn't happen! */
     }
 }
 
 gint
-fribidi_iso8859_8_to_unicode (guchar *s, FriBidiChar *us)
+fribidi_iso8859_8_to_unicode (gchar *s, FriBidiChar *us)
 {
   gint i;
   gint len = strlen (s);
@@ -79,13 +79,13 @@ fribidi_iso8859_8_to_unicode (guchar *s, FriBidiChar *us)
   return len;
 }
 
-guchar
+gchar
 fribidi_unicode_to_iso8859_8_c (FriBidiChar uch)
 {
   if (uch < 128)
     return uch;
   if (uch >= UNI_ALEF && uch <= UNI_TAV)
-    return (guchar) (uch - UNI_ALEF + ISO_ALEF);
+    return (gchar) (uch - UNI_ALEF + ISO_ALEF);
   switch (uch)
     {
     case UNI_RLM:
@@ -107,7 +107,7 @@ fribidi_unicode_to_iso8859_8_c (FriBidiChar uch)
 }
 
 gint
-fribidi_unicode_to_iso8859_8 (FriBidiChar *us, int length, guchar *s)
+fribidi_unicode_to_iso8859_8 (FriBidiChar *us, int length, gchar *s)
 {
   gint i;
 

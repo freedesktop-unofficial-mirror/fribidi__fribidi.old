@@ -28,20 +28,20 @@ typedef struct
 {
   /* Convert the character string "s" to unicode string "us" and
      return it's length. */
-  gint (*charset_to_unicode) (guchar *s,
+  gint (*charset_to_unicode) (gchar *s,
 			      /* output */
 			      FriBidiChar *us);
   /* Convert the unicode string "us" with length "length" to character
      string "s" and return it's length. */
   gint (*unicode_to_charset) (FriBidiChar *us, gint length,
 			      /* output */
-			      guchar *s);
+			      gchar *s);
   /* Charset's name. */
-  guchar *name;
+  gchar *name;
   /* Charset's title. */
-  guchar *title;
+  gchar *title;
   /* Comments, if any. */
-  guchar *(*desc) (void);
+  gchar *(*desc) (void);
   /* Some charsets like CapRTL may need to change some fribidis tables, by
      calling this function, they can do this changes. */
   gboolean (*enter) (void);
@@ -81,7 +81,7 @@ FriBidiCharSetHandler fribidi_char_sets[FRIBIDI_CHAR_SETS_NUM + 1] = {
 
 /* Return the charset which name is "s". */
 FriBidiCharSet
-fribidi_parse_charset (guchar *s)
+fribidi_parse_charset (gchar *s)
 {
   gint i;
 
@@ -96,7 +96,7 @@ fribidi_parse_charset (guchar *s)
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
 gint
-fribidi_charset_to_unicode (FriBidiCharSet char_set, guchar *s,
+fribidi_charset_to_unicode (FriBidiCharSet char_set, gchar *s,
 			    /* output */
 			    FriBidiChar *us)
 {
@@ -111,7 +111,7 @@ gint
 fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
 			    gint length,
 			    /* output */
-			    guchar *s)
+			    gchar *s)
 {
   fribidi_char_set_enter (char_set);
   return fribidi_char_sets[char_set].unicode_to_charset == NULL ? 0 :
@@ -119,15 +119,15 @@ fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
 }
 
 /* Return the string containing the name of the charset. */
-guchar *
+gchar *
 fribidi_char_set_name (FriBidiCharSet char_set)
 {
-  return fribidi_char_sets[char_set].name == NULL ? (guchar *) "" :
+  return fribidi_char_sets[char_set].name == NULL ? (gchar *) "" :
     fribidi_char_sets[char_set].name;
 }
 
 /* Return the string containing the title of the charset. */
-guchar *
+gchar *
 fribidi_char_set_title (FriBidiCharSet char_set)
 {
   return fribidi_char_sets[char_set].title == NULL ?
@@ -135,7 +135,7 @@ fribidi_char_set_title (FriBidiCharSet char_set)
 }
 
 /* Return the string containing the comments about the charset, if any. */
-guchar *
+gchar *
 fribidi_char_set_desc (FriBidiCharSet char_set)
 {
   return fribidi_char_sets[char_set].desc == NULL ?

@@ -120,6 +120,6 @@ fribidi_get_mirror_char (	/* Input */
     {
       *mirrored_ch = ch;
       found = FALSE;
-    }    
+    }
   return found;
 }

@@ -31,13 +31,13 @@
 #define fribidi_char_set_enter_cp1255 NULL
 #define fribidi_char_set_leave_cp1255 NULL
 
-FriBidiChar fribidi_cp1255_to_unicode_c (guchar ch);
-gint fribidi_cp1255_to_unicode (guchar *s,
+FriBidiChar fribidi_cp1255_to_unicode_c (gchar ch);
+gint fribidi_cp1255_to_unicode (gchar *s,
 				/* Output */
 				FriBidiChar *us);
-guchar fribidi_unicode_to_cp1255_c (FriBidiChar uch);
+gchar fribidi_unicode_to_cp1255_c (FriBidiChar uch);
 gint fribidi_unicode_to_cp1255 (FriBidiChar *us, gint length,
 				/* Output */
-				guchar *s);
+				gchar *s);
 
 #endif /* FRIBIDI_CHAR_SETS_CP1255_H */

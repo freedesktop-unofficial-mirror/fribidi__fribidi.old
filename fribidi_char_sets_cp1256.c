@@ -52,16 +52,16 @@ FriBidiChar fribidi_cp1256_to_unicode_tab[] = {	/* 0x80-0xFF */
 };
 
 FriBidiChar
-fribidi_cp1256_to_unicode_c (guchar ch)
+fribidi_cp1256_to_unicode_c (gchar ch)
 {
-  if (ch >= 0x80 && ch <= 0xff)
+  if ((guchar) ch >= 0x80 && (guchar) ch <= 0xff)
     return fribidi_cp1256_to_unicode_tab[ch - 0x80];
   else
     return ch;
 }
 
 gint
-fribidi_cp1256_to_unicode (guchar *s, FriBidiChar *us)
+fribidi_cp1256_to_unicode (gchar *s, FriBidiChar *us)
 {
   gint i;
   gint len = strlen (s);
@@ -72,13 +72,13 @@ fribidi_cp1256_to_unicode (guchar *s, FriBidiChar *us)
   return len;
 }
 
-guchar
+gchar
 fribidi_unicode_to_cp1256_c (FriBidiChar uch)
 {
   if (uch < 256)
-    return (guchar) uch;
+    return (gchar) uch;
   if (uch >= UNI_HAMZA && uch <= UNI_DAD)
-    return (guchar) (uch - UNI_HAMZA + ISO_HAMZA);
+    return (gchar) (uch - UNI_HAMZA + ISO_HAMZA);
   else
     switch (uch)
       {
@@ -213,7 +213,7 @@ fribidi_unicode_to_cp1256_c (FriBidiChar uch)
 }
 
 gint
-fribidi_unicode_to_cp1256 (FriBidiChar *us, int length, guchar *s)
+fribidi_unicode_to_cp1256 (FriBidiChar *us, int length, gchar *s)
 {
   gint i;
 

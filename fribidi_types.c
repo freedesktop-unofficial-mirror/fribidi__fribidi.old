@@ -21,7 +21,7 @@
 
 #include "fribidi.h"
 
-guchar
+gchar
 fribidi_char_from_type (FriBidiCharType c)
 {
   switch (c)
@@ -73,7 +73,7 @@ fribidi_char_from_type (FriBidiCharType c)
     }
 };
 
-guchar *
+gchar *
 fribidi_type_name (FriBidiCharType c)
 {
 #define _FRIBIDI_CASE(type) case FRIBIDI_TYPE_##type: return #type

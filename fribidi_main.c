@@ -38,12 +38,12 @@
 #define appname "fribidi"
 #define appversion VERSION
 
-extern guchar *fribidi_version_info;
+extern gchar *fribidi_version_info;
 
 #define MAX_STR_LEN 65000
 
 static void
-die (guchar *fmt, ...)
+die (gchar *fmt, ...)
 {
   va_list ap;
   va_start (ap, fmt);
@@ -60,7 +60,7 @@ die (guchar *fmt, ...)
 gboolean do_pad, do_fill, do_mirror, do_clean, show_input, show_visual;
 gboolean show_basedir, show_ltov, show_vtol, show_levels, show_changes;
 gint char_set, text_width;
-guchar *bol_text, *eol_text;
+gchar *bol_text, *eol_text;
 FriBidiCharType input_base_direction;
 
 static void
@@ -155,7 +155,7 @@ main (int argc, char *argv[])
   eol_text = NULL;
   input_base_direction = FRIBIDI_TYPE_ON;
 
-  if (s = getenv ("COLUMNS"))
+  if ((s = getenv ("COLUMNS")))
     {
       int i;
 
@@ -303,7 +303,7 @@ main (int argc, char *argv[])
 
       /* Read and process input one line at a time */
       {
-	guchar S_[MAX_STR_LEN];
+	gchar S_[MAX_STR_LEN];
 	gint padding_width;
 
 	if (show_input)
@@ -315,7 +315,7 @@ main (int argc, char *argv[])
 	  {
 	    char *new_line, *nl_found;
 	    FriBidiChar logical[FRIBIDI_MAX_STRING_LENGTH];
-	    guchar outstring[MAX_STR_LEN];
+	    gchar outstring[MAX_STR_LEN];
 	    FriBidiCharType base;
 	    int len, i, j, k;
 

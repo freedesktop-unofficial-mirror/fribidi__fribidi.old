@@ -65,7 +65,7 @@ FriBidiCharSet;
 
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
-gint fribidi_charset_to_unicode (FriBidiCharSet char_set, guchar *s,
+gint fribidi_charset_to_unicode (FriBidiCharSet char_set, gchar *s,
 				 /* output */
 				 FriBidiChar *us);
 
@@ -74,17 +74,17 @@ gint fribidi_charset_to_unicode (FriBidiCharSet char_set, guchar *s,
 gint fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
 				 gint length,
 				 /* output */
-				 guchar *s);
+				 gchar *s);
 
 /* Return the string containing the name of the charset. */
-guchar *fribidi_char_set_name (FriBidiCharSet char_set);
+gchar *fribidi_char_set_name (FriBidiCharSet char_set);
 
 /* Return the string containing the title (name with a short description)
    of the charset. */
-guchar *fribidi_char_set_title (FriBidiCharSet char_set);
+gchar *fribidi_char_set_title (FriBidiCharSet char_set);
 
 /* Return the string containing a descreption about the charset, if any. */
-guchar *fribidi_char_set_desc (FriBidiCharSet char_set);
+gchar *fribidi_char_set_desc (FriBidiCharSet char_set);
 
 /* Some charsets like CapRTL may need to change some fribidis tables, by
    calling this function, they can do this changes. */
@@ -96,6 +96,6 @@ gboolean fribidi_char_set_enter (FriBidiCharSet char_set);
 gboolean fribidi_char_set_leave (FriBidiCharSet char_set);
 
 /* Return the charset which name is "s". */
-FriBidiCharSet fribidi_parse_charset (guchar *s);
+FriBidiCharSet fribidi_parse_charset (gchar *s);
 
 #endif /* FRIBIDI_CHAR_SETS_H */

@@ -31,16 +31,16 @@
 #define UNI_SUKUN 0x0652
 
 FriBidiChar
-fribidi_iso8859_6_to_unicode_c (guchar ch)
+fribidi_iso8859_6_to_unicode_c (gchar ch)
 {
-  if (ch >= ISO_HAMZA && ch <= ISO_SUKUN)
+  if ((guchar) ch >= ISO_HAMZA && (guchar) ch <= ISO_SUKUN)
     return ch - ISO_HAMZA + UNI_HAMZA;
   else
     return ch;
 }
 
 gint
-fribidi_iso8859_6_to_unicode (guchar *s, FriBidiChar *us)
+fribidi_iso8859_6_to_unicode (gchar *s, FriBidiChar *us)
 {
   gint i;
   gint len = strlen (s);
@@ -51,26 +51,26 @@ fribidi_iso8859_6_to_unicode (guchar *s, FriBidiChar *us)
   return len;
 }
 
-guchar
+gchar
 fribidi_unicode_to_iso8859_6_c (FriBidiChar uch)
 {
   if (uch >= UNI_HAMZA && uch <= UNI_SUKUN)
-    return (guchar) (uch - UNI_HAMZA + ISO_HAMZA);
+    return (gchar) (uch - UNI_HAMZA + ISO_HAMZA);
   /* TODO: handle pre-composed and presentation chars */
   else if (uch < 256)
-    return (guchar) uch;
+    return (gchar) uch;
   else if (uch == 0x060c)
-    return (guchar) 0xac;
+    return (gchar) 0xac;
   else if (uch == 0x061b)
-    return (guchar) 0xbb;
+    return (gchar) 0xbb;
   else if (uch == 0x061f)
-    return (guchar) 0xbf;
+    return (gchar) 0xbf;
   else
     return '¿';
 }
 
 gint
-fribidi_unicode_to_iso8859_6 (FriBidiChar *us, int length, guchar *s)
+fribidi_unicode_to_iso8859_6 (FriBidiChar *us, int length, gchar *s)
 {
   gint i;
 

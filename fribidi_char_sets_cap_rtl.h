@@ -27,17 +27,15 @@
 
 #define fribidi_char_set_name_cap_rtl "CapRTL"
 #define fribidi_char_set_title_cap_rtl "CapRTL (Test)"
-guchar *fribidi_char_set_desc_cap_rtl (void);
+gchar *fribidi_char_set_desc_cap_rtl (void);
 gboolean fribidi_char_set_enter_cap_rtl (void);
 gboolean fribidi_char_set_leave_cap_rtl (void);
 
-FriBidiChar fribidi_cap_rtl_to_unicode_c (guchar ch);
-gint fribidi_cap_rtl_to_unicode (guchar *s,
+gint fribidi_cap_rtl_to_unicode (gchar *s,
 				 /* Output */
 				 FriBidiChar *us);
-guchar fribidi_unicode_to_cap_rtl_c (FriBidiChar uch);
 gint fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length,
 				 /* Output */
-				 guchar *s);
+				 gchar *s);
 
 #endif /* FRIBIDI_CHAR_SETS_CAP_RTL_H */

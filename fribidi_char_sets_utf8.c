@@ -26,7 +26,7 @@
 /* the following added by Raphael Finkel <raphael@cs.uky.edu> 12/1999 */
 
 gint
-fribidi_utf8_to_unicode (guchar *s, FriBidiChar *us)
+fribidi_utf8_to_unicode (gchar *s, FriBidiChar *us)
 /* warning: the length of input string may exceed the length of the output */
 {
   int length;
@@ -34,19 +34,19 @@ fribidi_utf8_to_unicode (guchar *s, FriBidiChar *us)
   length = 0;
   while (*s)
     {
-      if (*s <= 0177)		/* one byte */
+      if (*(guchar *) s <= 0x7f)	/* one byte */
 	{
 	  *us++ = *s++;		/* expand with 0s */
 	}
-      else if (*s < 0340)	/* 2 chars, such as Hebrew */
+      else if (*(guchar *) s <= 0x7ff)	/* 2 chars, such as Hebrew */
 	{
-	  *us++ = ((*s & 037) << 6) + (*(s + 1) & 077);
+	  *us++ = ((*(guchar *) s & 037) << 6) + (*(guchar *) (s + 1) & 077);
 	  s += 2;
 	}
       else			/* 3 chars */
 	{
 	  *us++ = ((*s & 017) << 12) + ((*(s + 1) & 077) << 6) +
-	    (*(s + 2) & 077);
+	    (*(guchar *) (s + 2) & 077);
 	  s += 3;
 	}
       length += 1;
@@ -56,21 +56,21 @@ fribidi_utf8_to_unicode (guchar *s, FriBidiChar *us)
 }
 
 gint
-fribidi_unicode_to_utf8 (FriBidiChar *us, int length, guchar *s)
+fribidi_unicode_to_utf8 (FriBidiChar *us, int length, gchar *s)
 /* warning: the length of output string may exceed the length of the input */
 {
   gint i;
-  guchar *t;
+  gchar *t;
 
   t = s;
   for (i = 0; i < length; i++)
     {
-      FriBidiChar mychar = us[i];
+      FriBidiChar mychar = (guchar) us[i];
       if (mychar <= 0x7F)
 	{			/* 7 sig bits; plain 7-bit ASCII */
 	  *t++ = mychar;
 	}
-      else if (mychar <= 0x7FF)	/* 11 sig bits; Hebrew is in this range */
+      else if (mychar <= 0x7FF)	/* 11 sig bits */
 	{
 	  *t++ = 0300 | (guint8) ((mychar >> 6) & 037);
 	  *t++ = 0200 | (guint8) (mychar & 077);	/* lower 6 bits */
@@ -96,7 +96,7 @@ fribidi_unicode_to_utf8 (FriBidiChar *us, int length, guchar *s)
 gboolean
 fribidi_utf8_to_unicode_p (	/* Input */
 			    /* UTF8 string */
-			    guchar *in_utf8_str,
+			    gchar *in_utf8_str,
 			    /* Length of UTF8 string in octets */
 			    guint in_utf8_length,
 			    /* Buffer for Unicode translation */
@@ -129,11 +129,11 @@ fribidi_utf8_to_unicode_p (	/* Input */
        (index < in_utf8_length) && (index_uni < unicode_buffer_length);)
     {
       /* NOTE:  there is no protection against UTF8 sequences which overflow the in_utf8_str. */
-      if (in_utf8_str[index] <= 0177)	/* one byte */
+      if ((guchar) in_utf8_str[index] <= 0177)	/* one byte */
 	{
 	  unicode_buffer[index_uni++] = in_utf8_str[index++];	/* expand with 0s */
 	}
-      else if (in_utf8_str[index] < 0340)	/* 2 chars, such as Hebrew */
+      else if ((guchar) in_utf8_str[index] < 0340)	/* 2 chars */
 	{
 	  unicode_buffer[index_uni++] = ((in_utf8_str[index] & 037) << 6)
 	    + (in_utf8_str[index + 1] & 077);
@@ -162,7 +162,7 @@ fribidi_unicode_to_utf8_p (	/* Input */
 			    /* Unicode string length in Unicode characters */
 			    guint in_unicode_length,
 			    /* Buffer for UTF8 translation */
-			    guchar *utf8_buffer,
+			    gchar *utf8_buffer,
 			    /* Length of UTF8 buffer */
 			    guint utf8_buffer_length,
 			    /* Outputs */
@@ -198,7 +198,7 @@ fribidi_unicode_to_utf8_p (	/* Input */
 
       ucs4_char = in_unicode_str[index];
 
-#define PUT_UTF8_BYTE(b) utf8_buffer[index_utf8++] = (b)
+#define PUT_UTF8_BYTE(b) utf8_buffer[index_utf8++] = (gchar)(b)
 
       if (ucs4_char < 0x00000080)
 	{

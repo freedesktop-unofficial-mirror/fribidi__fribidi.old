@@ -33,11 +33,11 @@
 
 gint fribidi_unicode_to_utf8 (FriBidiChar *us, gint length,
 			      /* Output */
-			      guchar *s);
+			      gchar *s);
 
 /* warning: the length of output string may exceed the length of the input */
 /* the length of the string is returned */
-gint fribidi_utf8_to_unicode (guchar *s,
+gint fribidi_utf8_to_unicode (gchar *s,
 			      /* Output */
 			      FriBidiChar *us);
 
@@ -48,7 +48,7 @@ gint fribidi_utf8_to_unicode (guchar *s,
 /* Returns TRUE if the entire UTF8 string was converted without errors. */
 gboolean fribidi_utf8_to_unicode_p (	/* Input */
 				     /* UTF8 string */
-				     guchar *in_utf8_str,
+				     gchar *in_utf8_str,
 				     /* Length of UTF8 string in octets */
 				     guint in_utf8_length,
 				     /* Buffer for Unicode translation */
@@ -70,7 +70,7 @@ gboolean fribidi_unicode_to_utf8_p (	/* Input */
 				     /* Unicode string length in Unicode characters */
 				     guint in_unicode_length,
 				     /* Buffer for UTF8 translation */
-				     guchar *utf8_buffer,
+				     gchar *utf8_buffer,
 				     /* Length of UTF8 buffer */
 				     guint utf8_buffer_length,
 				     /* Outputs */

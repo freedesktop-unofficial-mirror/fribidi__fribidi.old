@@ -50,23 +50,24 @@ FriBidiChar fribidi_cp1255_to_unicode_tab[] = {	/* 0x80-0xBF */
 };
 
 FriBidiChar
-fribidi_cp1255_to_unicode_c (guchar ch)
+fribidi_cp1255_to_unicode_c (gchar ch)
 {
-  if (ch >= ISO_ALEF && ch <= ISO_TAV)
+  if ((guchar) ch >= ISO_ALEF && (guchar) ch <= ISO_TAV)
     return ch - ISO_ALEF + UNI_ALEF;
-  else if (ch >= CP1255_SHEVA && ch <= CP1255_SOF_PASUQ)
+  else if ((guchar) ch >= CP1255_SHEVA && (guchar) ch <= CP1255_SOF_PASUQ)
     return ch - CP1255_SHEVA + UNI_SHEVA;
-  else if (ch >= CP1255_DOUBLE_VAV && ch <= CP1255_GERSHAYIM)
+  else if ((guchar) ch >= CP1255_DOUBLE_VAV
+	   && (guchar) ch <= CP1255_GERSHAYIM)
     return ch - CP1255_DOUBLE_VAV + UNI_DOUBLE_VAV;
   /* cp1256 specific chars */
-  else if (ch >= 0x80 && ch <= 0xbf)
+  else if ((guchar) ch >= 0x80 && (guchar) ch <= 0xbf)
     return fribidi_cp1255_to_unicode_tab[ch - 0x80];
   else
     return ch;
 }
 
 gint
-fribidi_cp1255_to_unicode (guchar *s, FriBidiChar *us)
+fribidi_cp1255_to_unicode (gchar *s, FriBidiChar *us)
 {
   gint i;
   gint len = strlen (s);
@@ -77,24 +78,24 @@ fribidi_cp1255_to_unicode (guchar *s, FriBidiChar *us)
   return len;
 }
 
-guchar
+gchar
 fribidi_unicode_to_cp1255_c (FriBidiChar uch)
 {
   if (uch >= UNI_ALEF && uch <= UNI_TAV)
-    return (guchar) (uch - UNI_ALEF + ISO_ALEF);
+    return (gchar) (uch - UNI_ALEF + ISO_ALEF);
   if (uch >= UNI_SHEVA && uch <= UNI_SOF_PASUQ)
-    return (guchar) (uch - UNI_SHEVA + CP1255_SHEVA);
+    return (gchar) (uch - UNI_SHEVA + CP1255_SHEVA);
   if (uch >= UNI_DOUBLE_VAV && uch <= UNI_GERSHAYIM)
-    return (guchar) (uch - UNI_DOUBLE_VAV + CP1255_DOUBLE_VAV);
+    return (gchar) (uch - UNI_DOUBLE_VAV + CP1255_DOUBLE_VAV);
   /* TODO: handle pre-composed and presentation chars */
   else if (uch < 256)
-    return (guchar) uch;
+    return (gchar) uch;
   else
     return '¿';
 }
 
 gint
-fribidi_unicode_to_cp1255 (FriBidiChar *us, int length, guchar *s)
+fribidi_unicode_to_cp1255 (FriBidiChar *us, int length, gchar *s)
 {
   gint i;
 

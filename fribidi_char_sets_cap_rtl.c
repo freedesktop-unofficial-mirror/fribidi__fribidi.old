@@ -27,23 +27,17 @@
 extern FriBidiCharType FriBidiPropertyBlock0000[256];
 extern FriBidiCharType *FriBidiPropertyBlocks[256];
 
-FriBidiChar
-fribidi_cap_rtl_to_unicode_c (guchar ch)
-{
-  return ch;
-}
-
-guchar
+gchar
 fribidi_unicode_to_cap_rtl_c (FriBidiChar uch)
 {
   if (uch <= 0x7f)
-    return uch;
+    return (gchar) (guchar) uch;
   else
-    return (guchar) "¿";
+    return '¿';
 }
 
 gint
-fribidi_cap_rtl_to_unicode (guchar *s, FriBidiChar *us)
+fribidi_cap_rtl_to_unicode (gchar *s, FriBidiChar *us)
 {
   gint i, j, len;
 
@@ -51,7 +45,7 @@ fribidi_cap_rtl_to_unicode (guchar *s, FriBidiChar *us)
   j = 0;
   for (i = 0; i < len; i++)
     {
-      guchar ch;
+      gchar ch;
 
       ch = s[i];
       if (ch == '_')
@@ -89,14 +83,14 @@ fribidi_cap_rtl_to_unicode (guchar *s, FriBidiChar *us)
 	    }
 	}
       else
-	us[j++] = s[i];
+	us[j++] = (guchar) s[i];
     }
 
   return j;
 }
 
 gint
-fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, guchar *s)
+fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, gchar *s)
 {
   gint i, j;
 
@@ -108,7 +102,7 @@ fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, guchar *s)
 	  && ch != UNI_LRM && ch != UNI_RLM)
 	{
 	  if (ch < 256)
-	    s[j++] = ch;
+	    s[j++] = (gchar) (guchar) ch;
 	  else
 	    s[j++] = '¿';
 	}
@@ -144,7 +138,7 @@ fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, guchar *s)
 	    default:
 	      j--;
 	      if (ch < 256)
-		s[j++] = ch;
+		s[j++] = (gchar) (guchar) ch;
 	      else
 		s[j++] = '¿';
 	      break;
@@ -156,11 +150,11 @@ fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, guchar *s)
   return j;
 }
 
-guchar *
+gchar *
 fribidi_char_set_desc_cap_rtl (void)
 {
   /* *INDENT-OFF* */
-  return
+  return (gchar*)
     "CapRTL is a character set for testing with the reference\n" \
     "implementation, with explicit marks escape strings, and\n" \
     "the property that contains all unicode character types in\n" \

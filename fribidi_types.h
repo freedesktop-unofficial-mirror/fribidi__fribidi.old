@@ -221,9 +221,9 @@ FriBidiCharType;
                               FRIBIDI_TYPE_ON)
 
 
-guchar fribidi_char_from_type (FriBidiCharType c);
+gchar fribidi_char_from_type (FriBidiCharType c);
 
-guchar *fribidi_type_name (FriBidiCharType c);
+gchar *fribidi_type_name (FriBidiCharType c);
 
 
 /* Define character types that fribidi_tables.i uses. if MEM_OPTIMIZED

@@ -41,11 +41,11 @@ FriBidiChar fribidi_isiri_3342_to_unicode_tab[] = {	/* 0xA0-0xFF */
 };
 
 FriBidiChar
-fribidi_isiri_3342_to_unicode_c (guchar ch)
+fribidi_isiri_3342_to_unicode_c (gchar ch)
 {
-  if ((ch >= 0x80 && ch <= 0xa0) || ch == 0xff)
+  if (((guchar) ch >= 0x80 && (guchar) ch <= 0xa0) || (guchar) ch == 0xff)
     return ch - 0x80;		/* FIXME: but they are strong typed RTL ! */
-  else if (ch >= 0xa1 && ch <= 0xfe)
+  else if ((guchar) ch >= 0xa1 && (guchar) ch <= 0xfe)
     return fribidi_isiri_3342_to_unicode_tab[ch - 0xa0];
   /* TODO */
   else
@@ -53,7 +53,7 @@ fribidi_isiri_3342_to_unicode_c (guchar ch)
 }
 
 gint
-fribidi_isiri_3342_to_unicode (guchar *s, FriBidiChar *us)
+fribidi_isiri_3342_to_unicode (gchar *s, FriBidiChar *us)
 {
   int i;
   int len = strlen (s);
@@ -64,12 +64,12 @@ fribidi_isiri_3342_to_unicode (guchar *s, FriBidiChar *us)
   return len;
 }
 
-guchar
+gchar
 fribidi_unicode_to_isiri_3342_c (FriBidiChar uch)
 {
   /* TODO */
   if (uch < 256)
-    return (guchar) uch;
+    return (gchar) uch;
   else
     switch (uch)
       {
@@ -215,7 +215,7 @@ fribidi_unicode_to_isiri_3342_c (FriBidiChar uch)
 }
 
 gint
-fribidi_unicode_to_isiri_3342 (FriBidiChar *us, int length, guchar *s)
+fribidi_unicode_to_isiri_3342 (FriBidiChar *us, int length, gchar *s)
 {
   gint i;
 

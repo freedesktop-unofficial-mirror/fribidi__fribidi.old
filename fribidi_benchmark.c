@@ -34,12 +34,12 @@
 #define appname "fribidi_benchmark"
 #define appversion VERSION
 
-extern guchar *fribidi_version_info;
+extern gchar *fribidi_version_info;
 
 #define MAX_STR_LEN 1000
 
 static void
-die (guchar *fmt, ...)
+die (gchar *fmt, ...)
 {
   va_list ap;
   va_start (ap, fmt);
@@ -99,7 +99,7 @@ utime (void)
 }
 
 static void
-benchmark (guchar *S_, FriBidiCharSet char_set, gint niter)
+benchmark (gchar *S_, FriBidiCharSet char_set, gint niter)
 {
   gint len, i;
   FriBidiChar us[MAX_STR_LEN], out_us[MAX_STR_LEN];
@@ -129,7 +129,7 @@ benchmark (guchar *S_, FriBidiCharSet char_set, gint niter)
   printf ("Length = %d\n", len);
   printf ("Iterations = %d\n", niter);
   printf ("%d len*iterations in %f seconds\n", len * niter, time1 - time0);
-  printf ("= %f kilo.len.iterations/second\n",
+  printf ("= %f kilo.length.iterations/second\n",
 	  1.0 * len * niter / 1000 / (time1 - time0));
 
   return;

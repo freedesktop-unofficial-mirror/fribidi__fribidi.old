@@ -31,13 +31,13 @@
 #define fribidi_char_set_enter_iso8859_8 NULL
 #define fribidi_char_set_leave_iso8859_8 NULL
 
-FriBidiChar fribidi_iso8859_8_to_unicode_c (guchar ch);
-gint fribidi_iso8859_8_to_unicode (guchar *s,
+FriBidiChar fribidi_iso8859_8_to_unicode_c (gchar ch);
+gint fribidi_iso8859_8_to_unicode (gchar *s,
 				   /* Output */
 				   FriBidiChar *us);
-guchar fribidi_unicode_to_iso8859_8_c (FriBidiChar uch);
+gchar fribidi_unicode_to_iso8859_8_c (FriBidiChar uch);
 gint fribidi_unicode_to_iso8859_8 (FriBidiChar *us, gint length,
 				   /* Output */
-				   guchar *s);
+				   gchar *s);
 
 #endif /* FRIBIDI_CHAR_SETS_ISO8859_8_H */
