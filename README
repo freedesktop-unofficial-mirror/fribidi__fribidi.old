@@ -98,16 +98,10 @@ where
 In any of the output pointers == NULL, then that information is not 
 calculated.
 
-A test program test_fribidi has been written to test out the algorithm.
-test_fribidi currently works on iso8859-8 by default, but by adding the flag
--capital_rtl it treats capital letters as RTL, as is done for illustration
-purposes in the Unicode specification.
-
 How it looks like
 =================
 
-Here is the output of 
-    ./test_fribidi -capital_rtl tests/test-capital-rtl
+Here is the output for some tests (assume CAPITAL letters as right to left):
 
 car is THE CAR in arabic            => car is RAC EHT in arabic           
 CAR IS the car IN ENGLISH           =>           HSILGNE NI the car SI RAC
@@ -124,8 +118,9 @@ HE SAID "it is a car!x" AND RAN     =>     NAR DNA "it is a car!x" DIAS EH
 Executable
 ==========
 There is a also a command line utilitity called fribidi that loops over
-the text of a file and performs the BiDi algorithm on each line. Run
-fribidi with the -help option to learn about usage. 
+the text of a file and performs the BiDi algorithm on each line, also
+used for testing the algorithm. Run fribidi with the --help option to
+learn about usage.
 
 Bugs and comments
 =================

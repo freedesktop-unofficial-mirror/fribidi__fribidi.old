@@ -1,5 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999 Dov Grobgeld
+ * Copyright (C) 2001 Behdad Esfahbod
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -21,89 +22,146 @@
 #include <sys/times.h>
 #include "fribidi.h"
 
-#define TEST_STRING "a THE QUICK BROWN 123,456 (FOX JUMPS OVER) THE LAZY DOG the quick brown fox jumps over the lazy dog THE QUICK BROWN FOX JUMPS 123,456 OVER THE LAZY DOG"
+#define appname "fribidi_benchmark"
 
-#define CASE(s) if (strcmp(S_, s) == 0)
+#define MAX_STR_LEN 1000
 
-double utime ()
+void
+die (gchar * fmt, ...)
+{
+  va_list ap;
+  va_start (ap, fmt);
+
+  fprintf (stderr, "%s: ", appname);
+  vfprintf (stderr, fmt, ap);
+  fprintf (stderr, "Try `%s --help' for more information.\n", appname);
+  exit (-1);
+}
+
+#define TEST_STRING \
+  "a THE QUICK -123,456 (FOX JUMPS ) DOG the quick !1@7#4&5^ over the dog " \
+  "123,456 OVER THE 5%+ 4.0 LAZY"
+#define TEST_STRING_EXPLICIT \
+  "this is _LJUST_o a _lsimple _Rte%ST_o th_oat  HAS A _LPDF missing" \
+  "AnD hOw_L AbOuT, 123,987 tHiS_o a GO_oOD - _L_oTE_oST. " \
+  "here_L is_o_o_o _R a good one_o And _r 123,987_LT_oHE_R next_o oNE:" \
+  "_R_r and the last _LONE_o IS THE _rbest _lONE and" \
+  "A REAL BIG_l_o BUG! _L _l_r_R_L_laslaj siw_o_Rlkj sslk" \
+  "a _L_L_L_LL_L_L_L_L_L_L_L_L_Rbug_o_o_o_o_o_o" \
+  "here_L is_o_o_o _R a good one_o And _r 123,987_LT_oHE_R next_o oNE:" \
+  "_R_r and the last _LONE_o IS THE _rbest _lONE and" \
+  "A REAL BIG_l_o BUG! _L _l_r_R_L_laslaj siw_o_Rlkj sslk" \
+  "a _L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_Rbug" \
+  "here_L is_o_o_o _R ab  one_o _r 123,987_LT_oHE_R t_o oNE:" \
+
+double
+utime ()
 {
   struct tms tb;
-  times(&tb);
+  times (&tb);
   return 0.01 * tb.tms_utime;
 }
 
-int main(int argc, char *argv[])
+void
+benchmark (guchar * S_, FriBidiCharSet char_set, gint niter)
 {
-  int argp=1;
-  guchar S_[255];
-  FriBidiChar us[255];
-  int len;
-  FriBidiChar out_us[255];
-  guint16 positionLtoV[255], positionVtoL[255];
-  guint8 embedding_list[255];
+  gint len, i;
+  FriBidiChar us[MAX_STR_LEN], out_us[MAX_STR_LEN];
+  guint16 positionLtoV[MAX_STR_LEN], positionVtoL[MAX_STR_LEN];
+  guint8 embedding_list[MAX_STR_LEN];
   FriBidiCharType base;
-  int i;
-  int niter = 1000;
   double time0, time1;
-  
-  while(argp< argc && argv[argp][0] == '-')
-    {
-      gchar *S_ = argv[argp++];
 
-      CASE("-help") {
-	printf(
-	       "fribidi_benchmark - A program for benchmarking the fribid library\n"
-	       "\n"
-	       "Syntax:\n"
-	       "    fribidi_benchmark -niter niter\n"
-	       "\n"
-	       "Description:\n"
-	       "    A program for benchmarking the speed of the BiDi algorithm.\n"
-	       "\n"
-	       "Options:\n"
-	       "    -niter niter  Number of iterations. Default is 1000.\n"
-	       );
-	exit(0);
-      }
-
-      CASE("-niter")  { niter = atoi(argv[argp++]); continue; };
-      fprintf(stderr, "Unknown option %s!\n", S_);
-      exit(0);
-    }
-  
-
-  strcpy(S_, TEST_STRING);
-  len= strlen(S_);
-
-  /* Map capital to iso Hebrew */
-  for (i=0; i<len; i++)
-    if (S_[i]>='A' && S_[i]<='Z')
-      S_[i]+= 0xE0 - 'A';  /* Map to iso Hebrew */
-
-  fribidi_iso8859_8_to_unicode(S_, us);
+  len = fribidi_charset_to_unicode (char_set, S_, us);
 
   /* Start timer */
-  time0 = utime();
+  time0 = utime ();
 
-  for (i=0; i<niter; i++) {
-    /* Create a bidi string */
-    base = FRIBIDI_TYPE_ON;
-    fribidi_log2vis(us, len, &base, 
-		    /* output */
-		    out_us,
-		    positionVtoL,
-		    positionLtoV,
-		    embedding_list
-		    );
-  }
+  for (i = 0; i < niter; i++)
+    {
+      /* Create a bidi string */
+      base = FRIBIDI_TYPE_ON;
+      fribidi_log2vis (us, len, &base,
+		       /* output */
+		       out_us, positionVtoL, positionLtoV, embedding_list);
+    }
 
   /* stop timer */
-  time1 = utime();
-  
+  time1 = utime ();
+
   /* output result */
-  printf("len = %d\n", len);
-  printf("%d iterations in %f seconds\n", niter, time1-time0);
-  printf("= %f iterations/second\n", 1.0 * niter/(time1-time0));
-  
+  printf ("Length = %d\n", len);
+  printf ("Iterations = %d\n", niter);
+  printf ("%d len*iterations in %f seconds\n", len * niter, time1 - time0);
+  printf ("= %f kilo.len.iterations/second\n",
+	  1.0 * len * niter / 1000 / (time1 - time0));
+
+  return;
+}
+
+int
+main (int argc, char *argv[])
+{
+  int argp;
+  gint niter;
+
+  niter = 1000;
+
+#define CASE(s) if (strcmp (S_, (s)) == 0)
+#define CASE2(s1, s2) if (strcmp (S_, (s1)) == 0 || strcmp (S_, (s2)) == 0)
+
+  /* Parse the command line */
+  argp = 1;
+  while (argp < argc)
+    {
+      gchar *S_;
+
+      S_ = argv[argp++];
+      if (S_[0] == '-' && S_[1])
+	{
+	  CASE2 ("-?", "--help")
+	  {
+	    gint i;
+
+	    printf
+	      ("Usage: %s [OPTION]...\n"
+	       "A program for benchmarking the speed of the %s library.\n"
+	       "\n"
+	       "  -?, --help            Display this information and exit\n"
+	       "  -V, --version         Display version information and exit\n"
+	       "  -n, --niter N         Number of iterations. Default is %d.\n"
+	       "\nReport bugs online at <http://fribidi.sourceforge.net/bugs.php>.\n",
+	       appname, PACKAGE, niter);
+	    exit (0);
+	  }
+	  CASE2 ("-V", "--version")
+	  {
+	    printf
+	      ("%s %s\n"
+	       "Copyright (C) 2001 FriBidi Project.\n"
+	       "%s comes with NO WARRANTY, to the extent permitted by law.\n"
+	       "You may redistribute copies of %s under the terms of\n"
+	       "the GNU General Public License.\n"
+	       "For more information about these matters, see the files name COPYING.\n",
+	       appname, VERSION, appname, appname);
+	    exit (0);
+	  }
+	  CASE2 ("-n", "--niter")
+	  {
+	    niter = atoi (argv[argp++]);
+	    continue;
+	  };
+	  die ("unrecognized option `%s'\n", S_);
+	}
+      else
+	die ("unrecognized parameter `%s'\n", S_);
+    }
+
+  printf ("* Without explicit marks:\n");
+  benchmark (TEST_STRING, FRIBIDI_CHARSET_CAP_RTL, niter);
+  printf ("\n");
+  printf ("* With explicit marks:\n");
+  benchmark (TEST_STRING_EXPLICIT, FRIBIDI_CHARSET_CAP_RTL, niter);
+
   return 0;
 }

@@ -1,17 +1,67 @@
 2001-03-22  Behdad Esfahbod <behdad@bamdad.org>
-	* fribidi.c, fribidi_types.h: Some bugs introduced in last changes
-	removed, "Resolving weak types" rewritten, no known bugs.
+	* fribidi.c, fribidi_types.h: Some bugs introduced in the last
+	changes removed, "Resolving weak types" rewritten and now works!,
+	no known bugs now.
+	Macros defined for external use, changed their name to have
+	a prefix of FRIBIDI_.
+	
+	* fribidi.c, fribidi.h: Function fribidi_remove_explicits() added
+	to remove the explicit marks from a fribidi string.
+
+	* fribidi.c: A bug that caused position_l_to_v and position_v_to_l
+	not to calculated correctly, fixed.
+	
+	* fribidi.h: Define symbols PACKAGE and VERSION manually, autoconf
+	should set them, but I don't know how to.
+	
+	* fribidi_char_sets.c, fribidi_char_sets.h, fribidi_char_sets_*:
+	Each charset moved to a pair of .c/.h file.
+	CapRTL defined as a character set for testing with the reference
+	implementation, with explicit marks escape strings, beware that
+	it differs from the old capital rtl, it is a character set, only
+	for test, with the property that contains all character types in
+	ascii characters.
+	Some functions defined to make charset conversion easy.
+	An interface designed for adding new charsets.
+
+	* fribidi_main.c: API revised, many new options added,	
+	Default charset changed to UTF-8
+	Option --test simulates the old defaults (--charset CapRTL)
+	Option --clean now works for all charsets.
+	Option --fill implementated.
+	Options --version, --showinput, --ltov, --vtol, --levels,
+	--changes, --novisual, --charsetdesc added.	
+	Now use the charset conventions, lots of code removed.
+	
+	* test_fribidi.c: Just removed!
+	`fribidi --showinput --fill --clean' should be used instead.
+
+	* fribidi_benchmark: Explicit support added, now benchmarks with
+	two strings, one without explicit marks and one with them.
+	
+	* run.tests, tests/test-CapRTL, tests/test-CapRTL.reference,
+	tests/test-explicit, tests/test-explicit.reference,
+	tests/test-hebrew, tests/test-hebrew.reference: New test datas
+	added, for better testing of weak types and explitcit support.
+	Test outputs updated for the new CapRTL character set.
+	Test output fot test-hebrew added.
+	
+	* Makefile.in, Makefile.am: Updated to use fribidi instead of
+	test_fribidi for test targets.
+	New source files added to libfribidi_la_SOURCES
+	
+	* TODO: Some done tasks removed, some new tasks added!
 
 2001-03-09  Dov Grobgeld  <dov@orbotech.orbotech.co.il>
 
 	* fribidi_mini_glib.c, fribidi_mini_glib.h: Applied patch
-	received from Dan Kenigsberg <danken@cs.technion.ac.il> that allows
-	compiling fribidi without glib if the flag FRIBIDI_USE_MINI_GLIB is
-	turned on. This option is currently turned on when compiling through
-	Makefile.noglib.
+	received from Dan Kenigsberg <danken@cs.technion.ac.il> that
+	allows compiling fribidi without glib if the flag
+	FRIBIDI_USE_MINI_GLIB is turned on.  This option is currently
+	turned on when compiling through Makefile.noglib .
 
-	* TODO: Added the task of making autoconf automatically turn on
-	FRIBIDI_USE_MINI_GLIB if glib isn't found.
+	* TODO: Added the task of making autoconf automatically turn
+	on FRIBIDI_USE_MINI_GLIB if glib isn't found.
 
 2001-03-07  Behdad Esfahbod <behdad@bamdad.org>
 
@@ -20,7 +70,7 @@
 	
 	* fribidi_types.h: Almost redefined, to use bitfields for char types,
 	and many macros defined for efficient querying about char types.
-	some unused char types removed, also char types L, R, N converted
+	Some unused char types removed, also char types L, R, N converted
 	to LTR, RTL and ON everywhere.
 	
 	* CreateGetType.pl: Changed to define tables as arrays of 
@@ -40,8 +90,8 @@
 	* fribidi.c: Added 'AL' to types that change the paragraph embedding
 	level, it previously only checked for 'R'.
 
-	* fribidi.c: Define symbol NO_STDIO changed to DEBUG, to turn off
-	all debug codes compile time, also a function fribidi_set_debug,
+	* fribidi.c: Define symbol NO_STDIO changed to DEBUG, to turn on or
+	off all debug codes compile time, also a function fribidi_set_debug,
 	turns on and off the debug output generations in run time.
 
 	* fribidi.c: Added some more debug information, all debug informations
@@ -108,7 +158,7 @@
 	* fribidi.c: [OZ] Replaced int to gint to better support embedded
 	libraries.
 
-	* Applied lots of code contributed by Omer Zak <omerz@actcom.co.il>:
+	* Applied lots of code contributed by Omer Zak <omerz@actcom.co.il>
 	detailed above.
 	
 
@@ -140,18 +190,18 @@
 	characters for the iso-8859-8 converts at unused positions 
 	0xFE and 0xFF . 
 
-	* CreateGetType.PL, fribidi.c, fribidi_tables.i, fribidi_types.h:
+	* CreateGetType.pl, fribidi.c, fribidi_tables.i, fribidi_types.h:
  	Updated the algorithms to be consistance with the latest Unicode
  	Technical Report #9 release. Still no explicit overrides, but
  	hopefully the implicit algorithm now works according to the
  	specification.
 
-	* CreateGetType.PL, fribidi_tables.i: Overwrote the character
+	* CreateGetType.pl, fribidi_tables.i: Overwrote the character
  	bidi-assignment of all non-assigned characters within blocks with
  	the property of the previous character in order to create a few
  	more reused secondary lookup character tables.
 
-	* CreateGetType.PL, fribidi.c, fribidi_tables.i: Added Owen
+	* CreateGetType.pl, fribidi.c, fribidi_tables.i: Added Owen
  	Taylor's speed patch that speeds up fribidi by a factor of 4!
   	Owen's patch consists of two parts. The first part is a double
  	table lookup scheme for accessing the character properties,

@@ -1,5 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999 Dov Grobgeld
+ * Copyright (C) 2001 Behdad Esfahbod
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -24,55 +25,75 @@
 /*======================================================================
 //  fribidi_get_type() returns the bidi type of a character.
 //----------------------------------------------------------------------*/
-FriBidiCharType fribidi_get_type(FriBidiChar uch)
+FriBidiCharType fribidi_get_type (FriBidiChar uch)
 {
   int i = uch % 256, j = uch / 256;
   FriBidiCharType *block = FriBidiPropertyBlocks[j];
   if (block)
     return block[i];
-  else {
-    switch (j) {
-      case 0x05: if (i >= 0x90) return FRIBIDI_TYPE_RTL; else break;
+  else
+    {
+      switch (j)
+	{
+	case 0x05:
+	  if (i >= 0x90)
+	    return FRIBIDI_TYPE_RTL;
+	  else
+	    break;
 
-      case 0xFB: if (i >= 0x50) return FRIBIDI_TYPE_AL; else
-                 if (i >= 0x1D) return FRIBIDI_TYPE_RTL; else break;
-      case 0x06: 
-      case 0xFC: 
-      case 0xFD: return FRIBIDI_TYPE_AL;
-      case 0x07: if (i <= 0xBF) return FRIBIDI_TYPE_AL; else break;
-      case 0xFE: if (i >= 0x70) return FRIBIDI_TYPE_AL; else break;
-    }    
-    return FRIBIDI_TYPE_LTR;
-  }
+	case 0xFB:
+	  if (i >= 0x50)
+	    return FRIBIDI_TYPE_AL;
+	  else if (i >= 0x1D)
+	    return FRIBIDI_TYPE_RTL;
+	  else
+	    break;
+	case 0x06:
+	case 0xFC:
+	case 0xFD:
+	  return FRIBIDI_TYPE_AL;
+	case 0x07:
+	  if (i <= 0xBF)
+	    return FRIBIDI_TYPE_AL;
+	  else
+	    break;
+	case 0xFE:
+	  if (i >= 0x70)
+	    return FRIBIDI_TYPE_AL;
+	  else
+	    break;
+	}
+      return FRIBIDI_TYPE_LTR;
+    }
 }
 
 gboolean
-fribidi_get_mirror_char(/* Input */
-		       FriBidiChar ch,
-		       /* Output */
-		       FriBidiChar *mirrored_ch)
+fribidi_get_mirror_char (	/* Input */
+			  FriBidiChar ch,
+			  /* Output */
+			  FriBidiChar * mirrored_ch)
 {
   int pos, step;
   gboolean found = FALSE;
 
-  pos = step = (nFriBidiMirroredChars/2)+1;
+  pos = step = (nFriBidiMirroredChars / 2) + 1;
 
-  while(step > 1)
+  while (step > 1)
     {
       FriBidiChar cmp_ch = FriBidiMirroredChars[pos].ch;
-      step = (step+1)/2;
-      
+      step = (step + 1) / 2;
+
       if (cmp_ch < ch)
 	{
 	  pos += step;
-	  if (pos>nFriBidiMirroredChars-1)
-	    pos = nFriBidiMirroredChars-1;
+	  if (pos > nFriBidiMirroredChars - 1)
+	    pos = nFriBidiMirroredChars - 1;
 	}
       else if (cmp_ch > ch)
 	{
 	  pos -= step;
-	  if (pos<0)
-	    pos=0;
+	  if (pos < 0)
+	    pos = 0;
 	}
       else
 	break;
@@ -84,4 +105,3 @@ fribidi_get_mirror_char(/* Input */
     }
   return found;
 }
-

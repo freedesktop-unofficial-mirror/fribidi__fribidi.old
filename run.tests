@@ -1,5 +1,5 @@
-#! /bin/sh
-# run.test - Check that the algorithm does what it is supposed to
+#!/bin/sh
+# run.tests - Check that the algorithm does what it is supposed to
 
 if test -z "$srcdir"; then
   srcdir=.
@@ -11,13 +11,28 @@ if test -z "$VERBOSE"; then
    exec > /dev/null 2>&1
 fi
 
-echo "=== Running test $0"
+path=`dirname $(which $0)`
 
-# Attempt to execute the program we built.
-./test_fribidi -capital_rtl tests/test-capital-rtl | tee > test.output
-
-if diff test.output test.reference; then
-  exit 0
-else
+if ! test -f "$path/fribidi"; then
+  echo "run.tests: you must make fribidi first"
   exit 1
 fi
+
+TEST () {
+  test="$1"
+  charset="$2"
+  echo "=== Running test $test"
+  $path/fribidi --showinput --clean --fill --charset "$charset" \
+    "$path/tests/$test" > "$test.output"
+
+  if diff "$test.output" "$path/tests/$test.reference"; then
+    rm "$test.output"
+    return 0
+  else
+    return 1
+  fi
+}
+
+TEST test-CapRTL CapRTL &&
+TEST test-hebrew ISO8859-8 &&
+TEST test-explicit CapRTL

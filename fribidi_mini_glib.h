@@ -3,21 +3,21 @@
 
 #include <stdlib.h>
 
-typedef char   gchar;
-typedef short  gshort;
-typedef long   glong;
-typedef int    gint;
-typedef gint   gboolean;
+typedef char gchar;
+typedef short gshort;
+typedef long glong;
+typedef int gint;
+typedef gint gboolean;
 
-typedef unsigned char	guchar;
-typedef unsigned short	gushort;
-typedef unsigned long	gulong;
-typedef unsigned int	guint;
+typedef unsigned char guchar;
+typedef unsigned short gushort;
+typedef unsigned long gulong;
+typedef unsigned int guint;
 
-typedef float	gfloat;
-typedef double	gdouble;
+typedef float gfloat;
+typedef double gdouble;
 
-typedef void* gpointer;
+typedef void *gpointer;
 typedef const void *gconstpointer;
 
 /* from glibconfig.h */
@@ -37,15 +37,14 @@ typedef unsigned int guint32;
 #define g_new(T, n) malloc(n*sizeof(T))
 #define g_free(P) free(P)
 
-typedef struct _GList           GList;
+typedef struct _GList GList;
 struct _GList
 {
   gpointer data;
   GList *next;
   GList *prev;
 };
-      
-GList* g_list_append            (GList          *list,
-                                 gpointer        data);
+
+GList *g_list_append (GList * list, gpointer data);
 
 #endif /* _FRIBIDI_MINI_GLIB_H */

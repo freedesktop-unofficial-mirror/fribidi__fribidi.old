@@ -1,5 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999 Dov Grobgeld
+ * Copyright (C) 2001 Behdad Esfahbod
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,37 +20,42 @@
 #ifndef FRIBIDI_H
 #define FRIBIDI_H
 
+#define PACKAGE "fribidi"
+#define VERSION "0.9.0"
+
 #include "fribidi_types.h"
 #include "fribidi_char_sets.h"
 
-FriBidiCharType fribidi_get_type(FriBidiChar uch);
-gboolean
-fribidi_get_mirror_char(/* Input */
-			FriBidiChar ch,
-			/* Output */
-			FriBidiChar *mirrored_ch);
-int
-fribidi_set_debug(gboolean debug);
+int fribidi_set_debug (gboolean debug);
 
-void fribidi_log2vis(/* input */
-		     FriBidiChar *str,
-		     gint len,
-		     FriBidiCharType *pbase_dir,
-		     /* output */
-		     FriBidiChar *visual_str,
-		     guint16     *position_L_to_V_list,
-		     guint16     *position_V_to_L_list,
-		     guint8      *embedding_level_list
-		     );
+FriBidiCharType fribidi_get_type (FriBidiChar uch);
 
-void fribidi_log2vis_get_embedding_levels(
-                     /* input */
-		     FriBidiChar *str,
-		     int len,
-		     FriBidiCharType *pbase_dir,
-		     /* output */
-		     guint8 *embedding_level_list
-		     );
+gboolean fribidi_get_mirror_char (	/* Input */
+				   FriBidiChar ch,
+				   /* Output */
+				   FriBidiChar * mirrored_ch);
+
+void fribidi_log2vis (		/* input */
+		       FriBidiChar * str,
+		       gint len, FriBidiCharType * pbase_dir,
+		       /* output */
+		       FriBidiChar * visual_str,
+		       guint16 * position_L_to_V_list,
+		       guint16 * position_V_to_L_list,
+		       guint8 * embedding_level_list);
+
+void fribidi_log2vis_get_embedding_levels (	/* input */
+					    FriBidiChar * str,
+					    int len,
+					    FriBidiCharType * pbase_dir,
+					    /* output */
+					    guint8 * embedding_level_list);
+
+/*======================================================================
+//  fribidi_remove_explicits() removes explicit marks, and returns the
+//  new length.
+//----------------------------------------------------------------------*/
+gint fribidi_remove_explicits (FriBidiChar * str, gint length);
 
 /* fribidi_utils.c */
 
@@ -58,16 +64,12 @@ void fribidi_log2vis_get_embedding_levels(
 //  of characters that need redrawing. It returns the start and the
 //  length of the section in the new string that needs redrawing.
 //----------------------------------------------------------------------*/
-void
-fribidi_find_string_changes(/* input */
-			    FriBidiChar *old_str,
-			    int old_len,
-			    FriBidiChar *new_str,
-			    int new_len,
-			    /* output */
-			    int *change_start,
-			    int *change_len
-			    );
+void fribidi_find_string_changes (	/* input */
+				   FriBidiChar * old_str,
+				   int old_len,
+				   FriBidiChar * new_str, int new_len,
+				   /* output */
+				   int *change_start, int *change_len);
 
 
 /*======================================================================
@@ -102,14 +104,12 @@ fribidi_find_string_changes(/* input */
 //
 //----------------------------------------------------------------------*/
 void
-fribidi_map_range (gint span[2],             
+fribidi_map_range (gint span[2],
 		   int len,
-		   gboolean is_v2l_map,      
-		   guint16 *position_map,
-		   guint8 *embedding_level_list,
+		   gboolean is_v2l_map,
+		   guint16 * position_map, guint8 * embedding_level_list,
 		   /* output */
-		   int *num_mapped_spans,
-		   int spans[3][2]);
+		   int *num_mapped_spans, int spans[3][2]);
 
 /*======================================================================
 //  fribidi_is_char_rtl() answers the question whether a character
@@ -117,9 +117,8 @@ fribidi_map_range (gint span[2],
 //  if the embedding level for the character is odd.
 //----------------------------------------------------------------------*/
 gboolean
-fribidi_is_char_rtl(guint8 *embedding_level_list,
-		    FriBidiCharType base_dir,
-		    int idx);
+fribidi_is_char_rtl (guint8 * embedding_level_list,
+		     FriBidiCharType base_dir, int idx);
 
 /*======================================================================
 //  fribidi_xpos_resolve() does the complicated translation of
@@ -170,18 +169,16 @@ fribidi_is_char_rtl(guint8 *embedding_level_list,
 //
 //----------------------------------------------------------------------*/
 
-void fribidi_xpos_resolve(gint x_pos,
-			  gint x_offset,
-			  gint len,
-			  guint8 *embedding_level_list,
-			  FriBidiCharType base_dir,
-			  guint16 *vis2log,
-			  gint16 *char_widths,
-			  /* output */
-			  gint *res_log_pos,
-			  gint *res_vis_pos,
-			  gint *res_cursor_x_pos,
-			  gboolean *res_cursor_dir_is_rtl,
-			  gboolean *res_attach_before
-			  );
+void fribidi_xpos_resolve (gint x_pos,
+			   gint x_offset,
+			   gint len,
+			   guint8 * embedding_level_list,
+			   FriBidiCharType base_dir,
+			   guint16 * vis2log, gint16 * char_widths,
+			   /* output */
+			   gint * res_log_pos,
+			   gint * res_vis_pos,
+			   gint * res_cursor_x_pos,
+			   gboolean * res_cursor_dir_is_rtl,
+			   gboolean * res_attach_before);
 #endif /* FRIBIDI_H */

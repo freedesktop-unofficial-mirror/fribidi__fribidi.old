@@ -20,8 +20,6 @@
 
 /*======================================================================
 //  A main program for fribidi.
-//
-//  Dov Grobgeld
 //----------------------------------------------------------------------*/
 
 #include <stdio.h>
@@ -29,348 +27,422 @@
 #include <stdarg.h>
 #include "fribidi.h"
 
-#include "fribidi_tables.i"
+#define appname "fribidi"
 
-#define CASE(s) if(!strcmp(S_, s))
+#define MAX_STR_LEN 65000
 
-void die(gchar *fmt, ...)
+void
+die (gchar * fmt, ...)
 {
-    va_list ap;
-    va_start(ap,fmt); 
-    
-    vfprintf(stderr, fmt, ap);
-    exit(-1);
+  va_list ap;
+  va_start (ap, fmt);
+
+  fprintf (stderr, "%s: ", appname);
+  vfprintf (stderr, fmt, ap);
+  fprintf (stderr, "Try `%s --help' for more information.\n", appname);
+  exit (-1);
 }
 
-#define UNI_LRM 0x200E
-#define UNI_RLM 0x200F
-#define UNI_LRE 0x202a
-#define UNI_RLE 0x202b
-#define UNI_PDF 0x202c
-#define UNI_LRO 0x202d
-#define UNI_RLO 0x202e
-
-#define WS FRIBIDI_TYPE_WS
-#define BS FRIBIDI_TYPE_BS
-#define EO FRIBIDI_TYPE_EO
-#define CTL FRIBIDI_TYPE_CTL
-#define LRE FRIBIDI_TYPE_LRE
-#define RLE FRIBIDI_TYPE_RLE
-#define ES FRIBIDI_TYPE_ES
-#define LRO FRIBIDI_TYPE_LRO
-#define RLO FRIBIDI_TYPE_RLO
-#define AL FRIBIDI_TYPE_AL
-#define SS FRIBIDI_TYPE_SS
-#define ET FRIBIDI_TYPE_ET
-#define NSM FRIBIDI_TYPE_NSM
-#define LTR FRIBIDI_TYPE_LTR
-#define ON FRIBIDI_TYPE_ON
-#define AN FRIBIDI_TYPE_AN
-#define BN FRIBIDI_TYPE_BN
-#define RTL FRIBIDI_TYPE_RTL
-#define CS FRIBIDI_TYPE_CS
-#define PDF FRIBIDI_TYPE_PDF
-#define EN FRIBIDI_TYPE_EN
-
-FriBidiCharType FriBidiPropertyBlockSmallCaps[] = {
-//0   1   2   3   4   5   6   7   8   9   a   b   c   d   e   f
-  ON ,ON ,ON ,ON ,LTR,RTL,ON ,ON ,ON ,ON ,ON ,ON ,ON ,BS ,RLO,RLE,/*00-0f*/
-  LRO,LRE,PDF,WS ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,/*10-1f*/
-  WS ,ON ,ON ,ON ,ET ,ON ,ON ,ON ,ON ,ON ,ON ,ET ,CS ,ON ,ES ,ES ,/*20-2f*/
-  EN ,EN ,EN ,EN ,EN ,EN ,AN ,AN ,AN ,AN ,CS ,ON ,ON ,ON ,ON ,ON ,/*30-3f*/
-  RTL,AL ,AL ,AL ,AL ,AL ,AL ,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,/*40-4f*/
-  RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,ON ,BS ,ON ,ON ,ON ,/*50-5f*/
-  NSM,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,/*60-6f*/
-  LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,ON ,SS ,ON ,WS ,ON ,/*70-7f*/
-};
-
-#undef WS
-#undef BS
-#undef EO
-#undef CTL
-#undef LRE
-#undef RLE
-#undef ES
-#undef LRO
-#undef RLO
-#undef AL
-#undef SS
-#undef ET
-#undef NSM
-#undef LTR
-#undef ON
-#undef AN
-#undef BN
-#undef RTL
-#undef CS
-#undef PDF
-#undef EN
-
-void charset_to_unicode(gint char_set,
-			guchar *s,
-			/* output */
-			FriBidiChar *us,
-			int *length
-			)
+int
+main (int argc, char *argv[])
 {
-  int i, j;
-  int len = strlen(s);
-
-  if (char_set == 0)
-    {
-      for (i=0; i< (sizeof(FriBidiPropertyBlockSmallCaps) /
-                    sizeof(FriBidiPropertyBlockSmallCaps[0])); i++)
-        FriBidiPropertyBlocks[0][i] = FriBidiPropertyBlockSmallCaps[i];
-      j = 0;
-      for (i=0; i<len+1; i++)
-	{
-	  guchar ch = s[i];
-
-	  /* we use '_' for explicit marks. The list is:
-	   *
-	   * _>  LRM
-	   * _<  RLM
-	   * _l  LRE
-	   * _r  RLE
-	   * _o  PDF
-	   * _L  LRO
-	   * _R  RLO
-	   * __  underscore itself
-	   *
-	   */
-	  
-
-	  if (ch == '_') {
-            (*length)--;
-	    switch (ch = s[++i]) {
-	      case '>': us[j++] = UNI_LRM; break;
-	      case '<': us[j++] = UNI_RLM; break;
-	      case 'l': us[j++] = UNI_LRE; break;
-	      case 'r': us[j++] = UNI_RLE; break;
-	      case 'o': us[j++] = UNI_PDF; break;
-	      case 'L': us[j++] = UNI_LRO; break;
-	      case 'R': us[j++] = UNI_RLO; break;	    
-	      case '_': us[j++] = '_'; break;	    
-	      default: us[j++] = '_'; i--; break;
-	    }	    	  
-	  } else
-	    us[j++] = s[i];
-	}
-    }
-  else if (char_set == FRIBIDI_CHARSET_8859_6)
-      fribidi_iso8859_6_to_unicode(s, us);
-  else if (char_set == FRIBIDI_CHARSET_8859_8)
-      fribidi_iso8859_8_to_unicode(s, us);
-  else if (char_set == FRIBIDI_CHARSET_8859_6)
-      fribidi_iso8859_6_to_unicode(s, us);
-  else if (char_set == FRIBIDI_CHARSET_ISIRI_3342)
-      fribidi_isiri_3342_to_unicode(s, us);
-  else if (char_set == FRIBIDI_CHARSET_CP1255)
-      fribidi_cp1255_to_unicode(s, us);
-  else if (char_set == FRIBIDI_CHARSET_CP1256)
-      fribidi_cp1256_to_unicode(s, us);
-  else if (char_set == FRIBIDI_CHARSET_UTF8)
-      *length = fribidi_utf8_to_unicode(s, us);
-  else
-    die("Sorry! Not implemented!\n");
-}
-
-gboolean do_clean = FALSE;
-
-void unicode_to_charset(gint char_set,
-			FriBidiChar *us,
-			int length,
-			/* output */
-			gchar *s)
-{
-  if (char_set == 0)
-    {
-      int i, j = 0;
-      for (i=0, j=0; i<length; i++) 
-	{
-	  FriBidiChar ch = us[i];
-	  switch (ch)
-	    {
-	      case UNI_LRM: s[j++] = '_'; s[j++] = '>'; break;
-	      case UNI_RLM: s[j++] = '_'; s[j++] = '<'; break;
-	      case UNI_LRE: s[j++] = '_'; s[j++] = 'l'; break;
-	      case UNI_RLE: s[j++] = '_'; s[j++] = 'r'; break;
-	      case UNI_PDF: s[j++] = '_'; s[j++] = 'o'; break;
-	      case UNI_LRO: s[j++] = '_'; s[j++] = 'L'; break;
-	      case UNI_RLO: s[j++] = '_'; s[j++] = 'R'; break;
-	      case '_'    : s[j++] = '_'; s[j++] = '_'; break;
-	      default:
-	        if (ch < 256) {
-		  if (ch >= 32 || !do_clean)
-	            s[j++] = ch;
-		} else
-	          s[j++] = '¿';
-		if (do_clean)
-		  j += 2;
-	    }
-	  if (do_clean)
-	    j -= 2;
-	}
-      s[j] = 0;
-    }
-  else if (char_set == FRIBIDI_CHARSET_8859_6)
-    fribidi_unicode_to_iso8859_6(us, length, s); 
-  else if (char_set == FRIBIDI_CHARSET_8859_8)
-    fribidi_unicode_to_iso8859_8(us, length, s);
-  else if (char_set == FRIBIDI_CHARSET_ISIRI_3342)
-    fribidi_unicode_to_isiri_3342(us, length, s);
-  else if (char_set == FRIBIDI_CHARSET_CP1255)
-    fribidi_unicode_to_cp1255(us, length, s);
-  else if (char_set == FRIBIDI_CHARSET_CP1256)
-    fribidi_unicode_to_cp1256(us, length, s);
-  else if (char_set == FRIBIDI_CHARSET_UTF8)
-      (void) fribidi_unicode_to_utf8(us, length, s);
-  else
-    die("Sorry! Not implemented!\n");
-}
-
-int main(int argc, char *argv[])
-{
-  int argp=1;
+  int argp;
   FILE *IN;
-  gboolean text_width = 80;
-  gboolean do_pad = TRUE;
-  gboolean do_fill = FALSE;
-  gint char_set = 0;
-  guchar *bol_text = NULL, *eol_text = NULL;
-  FriBidiCharType input_base_direction = FRIBIDI_TYPE_ON;
-  
+  gboolean do_pad, do_fill, do_clean, file_found, show_input;
+  gboolean show_visual, show_ltov, show_vtol, show_levels, show_changes;
+  gint char_set, text_width;
+  guchar *bol_text, *eol_text;
+  FriBidiCharType input_base_direction;
+
+  argp = 1;
+  text_width = 80;
+  do_pad = TRUE;
+  do_fill = FALSE;
+  do_clean = FALSE;
+  show_input = FALSE;
+  show_visual = TRUE;
+  show_ltov = FALSE;
+  show_vtol = FALSE;
+  show_levels = FALSE;
+  show_changes = FALSE;
+  char_set = FRIBIDI_CHARSET_DEFAULT;
+  bol_text = NULL;
+  eol_text = NULL;
+  input_base_direction = FRIBIDI_TYPE_ON;
+  file_found = FALSE;
+
+#define CASE(s) if (strcmp (S_, (s)) == 0)
+#define CASE2(s1, s2) if (strcmp (S_, (s1)) == 0 || strcmp (S_, (s2)) == 0)
+#define NEXTARG (argp++ < argc ? argv[argp] : "")
 
   /* Parse the command line */
-  while(argp < argc && argv[argp][0] == '-')
+  while (argp < argc || (argp == argc && !file_found))
     {
-      gchar *S_ = argv[argp++];
-      CASE("-help")
-	{
-	  printf("fribidi - A command line interface to the fribidi library.\n"
-		 "\n"
-		 "Syntax:\n"
-		 "    fribidi {options} [filename]\n"
-		 "\n"
-		 "Options:\n"
-		 "    -nopad       Don't right adjustify RTL lines\n"
-		 "    -fill        Fill lines up to margin. (Not implemented).\n"
-		 "    -width w     Specify width of text\n"
-		 "    -eol eol     End lines with the string given by eol.\n"
-		 "    -bol bol     Start lines with the string given by bol.\n"
-		 "    -rtl         Force base direction to RTL.\n"
-		 "    -ltr         Force base direction to LTR.\n"
-		 "    -debug       Output debug info about the progress of the algorithm.\n"
-		 "    -clean       Remove explicit format codes in output. (CapRTL mode only)\n"
-		 "    -charset cs  Specify charset. Default is CapRTL. Available options are:\n"
-		 "                     * 8859-8 (Hebrew)\n"
-		 "                     * 8859-6 (Arabic)\n"
-		 "                     * CP1255 (Hebrew/Yiddish)\n"
-		 "                     * CP1256 (MS-Arabic)\n"
-		 "                     * ISIRI-3342 (Farsi)\n"
-                 "                     * UTF-8\n"
+      gchar *S_;
 
-		 );
-	  
-	  exit(0);
-	}
-      CASE("-nopad") { do_pad = FALSE; continue; }
-      CASE("-width") { text_width = atoi(argv[argp++]); continue; }
-      CASE("-eol")   { eol_text = argv[argp++]; continue; }
-      CASE("-bol")   { bol_text = argv[argp++]; continue; }
-      CASE("-rtl")   { input_base_direction = FRIBIDI_TYPE_RTL; continue; }
-      CASE("-ltr")   { input_base_direction = FRIBIDI_TYPE_LTR; continue; }
-      CASE("-fill")  { do_fill = TRUE; continue; }
-      CASE("-debug")
-        {
-	  if (fribidi_set_debug(TRUE))
+      if (argp < argc)
+	S_ = argv[argp++];
+      else
+	S_ = "-";
+
+      if (S_[0] == '-' && S_[1])
+	{
+	  CASE2 ("-?", "--help")
+	  {
+	    gint i;
+
+	    printf
+	      ("Usage: %s [OPTION]... [FILE]...\n"
+	       "A command line interface for the %s library,\n"
+	       "Converts a logical string to visual.\n"
+	       "\n"
+	       "  -?, --help            Display this information and exit\n"
+	       "  -V, --version         Display version information and exit\n"
+	       "  -d, --debug           Output debug info\n"
+	       "  -t, --test            Set default character set to CapRTL, turn on padding\n"
+	       "      --showinput       Output the input string too\n"
+	       "  -C, --charset CS      Specify character set, default is %s\n"
+	       "      --charsetdesc CS  Show descreptions for character set CS, if any and exit\n"
+	       "  -p, --nopad           Do not right justify RTL lines\n"
+	       "  -f, --fill            Fill lines up to margin\n"
+	       "  -W, --width W         Screem width for padding, default is %d\n"
+	       "  -B, --bol BOL         Output string BOL before the visual string\n"
+	       "  -E, --eol EOL         Output string EOL after the visual string\n"
+	       "  -R, --rtl             Force base direction to RTL\n"
+	       "  -L, --ltr             Force base direction to LTR\n"
+	       "  -c, --clean           Remove explicit format codes in visual string\n"
+	       "                        output, currently does not affect other outputs\n"
+	       "      --ltov            Output Logical to Visual position map\n"
+	       "      --vtol            Output Visual to Logical position map\n"
+	       "      --levels          Output Embedding Levels\n"
+	       "      --changes         Output information about changes between\n"
+	       "                        logical and visual string (start, length)\n"
+	       "      --novisual        Do not output the visual string, to be used\n"
+	       "                        with --ltov, --vtol, --levels, --changes\n"
+	       "  Options affect only subsequent arguments\n"
+	       "\n"
+	       "Output:\n"
+	       "  For each line of input, output something like this:\n"
+	       "    [BOL][input-str` => '][[padding space]visual-str]\n"
+	       "    [\\n ltov-map][\\n vtol-map][\\n levels][\\n changes][EOL]\n"
+	       "\n"
+	       "Available character sets are:\n", appname, appname,
+	       fribidi_char_set_name (char_set), text_width);
+	    for (i = 1; i <= FRIBIDI_CHAR_SETS_NUM; i++)
+	      printf ("  * %-23s%-4s%s", fribidi_char_set_title (i),
+		      (fribidi_char_set_desc (i) ? "X" : ""),
+		      (i & 1 ? "" : "\n"));
+	    if (FRIBIDI_CHAR_SETS_NUM & 1)
+	      printf ("\n");
+	    printf
+	      ("  X: Character set has descreptions, use --charsetdesc to see\n");
+	    printf
+	      ("\nReport bugs online at <http://fribidi.sourceforge.net/bugs.php>.\n");
+	    exit (0);
+	  }
+	  CASE2 ("-V", "--version")
+	  {
+	    printf
+	      ("%s %s\n"
+	       "Copyright (C) 2001 FriBidi Project.\n"
+	       "%s comes with NO WARRANTY, to the extent permitted by law.\n"
+	       "You may redistribute copies of %s under the terms of\n"
+	       "the GNU General Public License.\n"
+	       "For more information about these matters, see the files name COPYING.\n",
+	       appname, VERSION, appname, appname);
+	    exit (0);
+	  }
+	  CASE2 ("-p", "--nopad")
+	  {
+	    do_pad = FALSE;
 	    continue;
-	  else {
-	    die("Fribidi must be compiled with DEBUG option to enable debugging.\n");
 	  }
+	  CASE2 ("-W", "--width")
+	  {
+	    text_width = atoi (NEXTARG);
+	    continue;
+	  }
+	  CASE2 ("-E", "--eol")
+	  {
+	    eol_text = NEXTARG;
+	    continue;
+	  }
+	  CASE2 ("-B", "--bol")
+	  {
+	    bol_text = NEXTARG;
+	    continue;
+	  }
+	  CASE2 ("-R", "--rtl")
+	  {
+	    input_base_direction = FRIBIDI_TYPE_RTL;
+	    continue;
+	  }
+	  CASE2 ("-L", "--ltr")
+	  {
+	    input_base_direction = FRIBIDI_TYPE_LTR;
+	    continue;
+	  }
+	  CASE2 ("-f", "--fill")
+	  {
+	    do_fill = TRUE;
+	    continue;
+	  }
+	  CASE2 ("-c", "--clean")
+	  {
+	    do_clean = TRUE;
+	    continue;
+	  }
+	  CASE ("--showinput")
+	  {
+	    show_input = TRUE;
+	    continue;
+	  }
+	  CASE ("--ltov")
+	  {
+	    show_ltov = TRUE;
+	    continue;
+	  }
+	  CASE ("--vtol")
+	  {
+	    show_vtol = TRUE;
+	    continue;
+	  }
+	  CASE ("--levels")
+	  {
+	    show_levels = TRUE;
+	    continue;
+	  }
+	  CASE ("--changes")
+	  {
+	    show_changes = TRUE;
+	    continue;
+	  }
+	  CASE2 ("-K", "--novisual")
+	  {
+	    show_visual = FALSE;
+	    continue;
+	  }
+	  CASE2 ("-d", "--debug")
+	  {
+	    if (!fribidi_set_debug (TRUE))
+	      die
+		("%s lib must be compiled with DEBUG option to enable\nturn debug info on.\n",
+		 PACKAGE);
+	    continue;
+	  }
+	  CASE2 ("-t", "--test")
+	  {
+	    char_set = FRIBIDI_CHARSET_CAP_RTL;
+	    do_pad = TRUE;
+	    continue;
+	  }
+	  CASE2 ("-C", "--charset")
+	  {
+	    S_ = NEXTARG;
+	    char_set = fribidi_parse_charset (S_);
+	    if (!char_set)
+	      die ("unrecognized charset `%s'\n", S_);
+	    continue;
+	  }
+	  CASE ("--charsetdesc")
+	  {
+	    guchar *comment;
+
+	    S_ = NEXTARG;
+	    char_set = fribidi_parse_charset (S_);
+	    if (!char_set)
+	      die ("unrecognized character set `%s'\n", S_);
+	    S_ = fribidi_char_set_name (char_set);
+	    comment = fribidi_char_set_desc (char_set);
+	    if (!comment)
+	      die ("no description available for character set `%s'\n", S_);
+	    else
+	      printf ("Descriptions for character set %s:\n"
+		      "\n" "%s", fribidi_char_set_title (char_set), comment);
+
+	    exit (0);
+	  }
+	  die ("unrecognized option `%s'\n", S_);
 	}
-      CASE("-clean") { do_clean = TRUE; continue; }
-      CASE("-charset")
+      else
 	{
-	  gchar *S_ = argv[argp++];
-	  while(1) {
-	    CASE("CP1255") { char_set = FRIBIDI_CHARSET_CP1255; break; }
-	    CASE("CP1256") { char_set = FRIBIDI_CHARSET_CP1256; break; }
-	    CASE("8859-6") { char_set = FRIBIDI_CHARSET_8859_8; break; }
-	    CASE("8859-8") { char_set = FRIBIDI_CHARSET_8859_8; break; }
-	    CASE("ISIRI-3342") { char_set = FRIBIDI_CHARSET_ISIRI_3342; break;}
-            CASE("UTF-8")  { char_set = FRIBIDI_CHARSET_UTF8; break; }
-	    die("Unknown char set %s!\n", S_);
+	  file_found = TRUE;
+
+	  /* Open the infile for reading */
+	  if (S_[0] == '-' && !S_[1])
+	    {
+	      IN = stdin;
+	    }
+	  else
+	    {
+	      IN = fopen (S_, "r");
+	      if (!IN)
+		{
+		  fprintf (stderr, "%s: %s: No such file or directory\n",
+			   appname, S_);
+		  continue;
+		}
+	    }
+
+	  /* Read and process input one line at a time */
+	  {
+	    guchar S_[MAX_STR_LEN];
+	    gint padding_width;
+
+	    if (show_input)
+	      padding_width = (text_width - 10) / 2;
+	    else
+	      padding_width = text_width;
+
+	    while (fgets (S_, sizeof (S_) - 1, IN))
+	      {
+		int len;
+		char *new_line, *nl_found;
+		FriBidiChar logical[FRIBIDI_MAX_STRING_LENGTH];
+		FriBidiChar visual[FRIBIDI_MAX_STRING_LENGTH];
+		guchar outstring[MAX_STR_LEN];
+		FriBidiCharType base;
+		int i, j, k;
+
+		nl_found = "";
+		S_[sizeof (S_) - 1] = 0;
+		len = strlen (S_);
+		/* chop */
+		if (S_[len - 1] == '\n')
+		  {
+		    len--;
+		    S_[len] = '\0';
+		    new_line = "\n";
+		  }
+		else
+		  {
+		    new_line = "";
+		  }
+
+		len = fribidi_charset_to_unicode (char_set, S_, logical);
+
+		{
+		  guint16 *ltov, *vtol;
+		  guint8 *levels;
+		  gint new_len;
+
+		  if (show_ltov)
+		    ltov = g_new (guint16, len + 1);
+		  else
+		    ltov = NULL;
+		  if (show_vtol)
+		    vtol = g_new (guint16, len + 1);
+		  else
+		    vtol = NULL;
+		  if (show_levels)
+		    levels = g_new (guint8, len + 1);
+		  else
+		    levels = NULL;
+
+		  if (show_input)
+		    {
+		      printf ("%-*s => ", padding_width, S_);
+		    }
+
+		  /* Create a bidi string. */
+		  base = input_base_direction;
+		  fribidi_log2vis (logical, len, &base,
+				   /* output */
+				   visual, ltov, vtol, levels);
+
+		  new_len = len;
+		  if (show_visual)
+		    {
+		      printf (nl_found);
+
+		      if (bol_text)
+			printf ("%s", bol_text);
+
+		      /* Remove explicit marks, if asked for. */
+		      if (do_clean)
+			len = fribidi_remove_explicits (visual, len);
+
+		      /* Convert it to something to print. */
+		      new_len = fribidi_unicode_to_charset (char_set, visual,
+							    len, outstring);
+
+		      if (base == FRIBIDI_TYPE_RTL && do_pad && *outstring)
+			{
+			  j = strlen (outstring);
+			  k = (j - 1) % padding_width + 1;
+			  for (i = (j - 1) / padding_width - 1; i >= 0; i--)
+			    printf ("%.*s", padding_width,
+				    outstring + (i * padding_width + k));
+			  printf ("%*.*s", padding_width, k, outstring);
+			}
+		      else
+			{
+			  printf ("%s", outstring);
+			  if (do_fill)
+			    {
+			      j = strlen (outstring);
+			      k = padding_width - j % padding_width;
+			      if (k)
+				printf ("%*s", k, "");
+			    }
+			}
+		      if (eol_text)
+			printf ("%s", eol_text);
+
+		      nl_found = "\n";
+		    }
+		  if (show_ltov)
+		    {
+		      gint i;
+
+		      printf (nl_found);
+		      for (i = 0; i < len; i++)
+			printf ("%d ", ltov[i]);
+		      nl_found = "\n";
+		    }
+		  if (show_vtol)
+		    {
+		      gint i;
+
+		      printf (nl_found);
+		      for (i = 0; i < len; i++)
+			printf ("%d ", vtol[i]);
+		      nl_found = "\n";
+		    }
+		  if (show_levels)
+		    {
+		      gint i;
+
+		      printf (nl_found);
+		      for (i = 0; i < len; i++)
+			printf ("%d ", levels[i]);
+		      nl_found = "\n";
+		    }
+		  if (show_changes)
+		    {
+		      int change_start, change_len;
+		      fribidi_find_string_changes (logical, len,
+						   visual, new_len,
+						   &change_start,
+						   &change_len);
+		      printf ("%sChange start[length] = %d[%d]",
+			      nl_found, change_start, change_len);
+		      nl_found = "\n";
+		    }
+
+		  if (show_ltov)
+		    g_free (ltov);
+		  if (show_vtol)
+		    g_free (vtol);
+		  if (show_levels)
+		    g_free (levels);
+		}
+
+		if (*nl_found)
+		  printf (new_line);
+	      }
 	  }
-	  continue;
 	}
-      die("Unknown option %s!\n", S_);
     }
-
-  /* Open the infile for reading */
-  if (argp >= argc)
-    {
-      IN = stdin;
-    }
-  else
-    {
-      gchar *fn = argv[argp++];
-      IN = fopen(fn, "r");
-    }
-
-  /* Read and process input one line at a time */
-  {
-    guchar S_[65520];
-    
-    while(fgets(S_, sizeof(S_) - 1, IN))
-      {
-	int len;
-	FriBidiChar us[65520], out_us[65520];
-	guchar outstring[65520];
-	FriBidiCharType base;
-	int i, j, k;
-	
-        S_[sizeof(S_) - 1] = 0;
-	len  = strlen(S_);
-	/* chop */
-	if (S_[len-1] == '\n') {
-	  len--;
-	  S_[len] = '\0';
-	}
-
-	charset_to_unicode(char_set, S_, us, &len);
-      
-	/* Create a bidi string */
-	base = input_base_direction;
-	fribidi_log2vis(us,
-			len,
-			&base,
-			/* output */
-			out_us,
-			NULL,   /* No need for log_to_vis mapping */
-			NULL,   /* No need for vis_to_log mapping */
-			NULL    /* No need for embedding level */
-			);
-
-	/* Convert it to something to print */
-	unicode_to_charset(char_set, out_us, len, outstring);
-
-	if (bol_text)
-	  printf("%s", bol_text);
-	
-	if (base == FRIBIDI_TYPE_RTL && do_pad && *outstring) {
-	  j = strlen(outstring);
-	  k = (j-1) % text_width + 1;
-	  for (i=(j-1)/text_width-1; i>=0; i--)
-	    printf("%.*s", text_width, outstring + (i * text_width + k));
-	  printf("%*.*s", text_width, k, outstring);
-	} else
-	  printf("%s", outstring);
-	
-	if (eol_text)
-	  printf("%s", eol_text);
-	printf("\n");
-      } /* one line worth */
-  }
   return 0;
 }

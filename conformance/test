@@ -6,7 +6,7 @@
 path=`dirname $(which $0)`
 
 if ! test -f "$path/../fribidi"; then
-  echo "You must make fribidi first."
+  echo "test: you must make fribidi first"
   exit 1
 fi
 
@@ -25,10 +25,10 @@ convertsub () {
 
 while [ -n "$1" ]; do
   if test "$1" = "-debug"; then
-    p1=$p1" -debug"
+    p1=$p1" --debug"
     p2=$p2" -verbose"
   elif test "$1" = "-clean"; then
-    p1=$p1" -clean"
+    p1=$p1" --clean"
     p2=$p2" -clean"
   else
     par=$par" $1"
@@ -41,7 +41,7 @@ done
 
 cat $par | 
 while read line; do
-  echo "$line" | $path/../fribidi $p1 -nopad >> $path/test.out
+  echo "$line" | $path/../fribidi --charset CapRTL --nopad $p1 >> $path/test.out
 #  echo "$line" | $path/reference/bidiref $p2 >> $path/test.ref
   refline="$line"
   convertsub "_R" "`echo -e \"\\16\"`"
