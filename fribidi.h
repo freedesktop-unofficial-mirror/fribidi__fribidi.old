@@ -20,8 +20,7 @@
 #ifndef FRIBIDI_H
 #define FRIBIDI_H
 
-#define PACKAGE "fribidi"
-#define VERSION "0.9.0"
+#include "config.h"
 
 #include "fribidi_types.h"
 #include "fribidi_char_sets.h"

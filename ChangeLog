@@ -1,4 +1,8 @@
-2001-03-22  Behdad Esfahbod <behdad@bamdad.org>
+2001-03-27 Roozbeh Pournader <roozbeh@sharif.edu>
+	* fribidi.h: Removed definition of PACKAGE and VERSION. #included
+	"config.h"
+
+2001-03-26 Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c, fribidi_types.h: Some bugs introduced in the last
 	changes removed, "Resolving weak types" rewritten, no known
 	conformance bugs. Macros defined for external use, changed their
@@ -14,14 +18,13 @@
 	should set them, but I don't know how to.
 	
 	* fribidi_char_sets.c, fribidi_char_sets.h, fribidi_char_sets_*:
-	Each charset moved to a pair of .c/.h file.
-	CapRTL defined as a character set for testing with the reference
-	implementation, with explicit marks escape strings, beware that
-	it differs from the old capital rtl, it is a character set, only
-	for test, with the property that contains all character types in
-	ascii characters.
-	Some functions defined to make charset conversion easy.
-	An interface designed for adding new charsets.
+	Each charset moved to a pair of .c/.h file.  CapRTL defined as a
+	character set for testing with the reference implementation, with
+	explicit marks escape strings, beware that it differs from the old
+	capital rtl, it is a character set, only for test, with the property
+	that contains all character types in ascii characters.  Some
+	functions defined to make charset conversion easy.  An interface
+	designed for adding new charsets.
 
 	* fribidi_main.c: API revised, many new options added,	
 	Default charset changed to UTF-8
@@ -41,13 +44,13 @@
 	* run.tests, tests/test-CapRTL, tests/test-CapRTL.reference,
 	tests/test-explicit, tests/test-explicit.reference,
 	tests/test-hebrew, tests/test-hebrew.reference: New test datas
-	added, for better testing of weak types and explitcit support.
-	Test outputs updated for the new CapRTL character set.
-	Test output fot test-hebrew added.
+	added, for better testing of weak types and explicit support.  Test
+	outputs updated for the new CapRTL character set.  Test output fot
+	test-hebrew added.
 	
 	* Makefile.in, Makefile.am: Updated to use fribidi instead of
-	test_fribidi for test targets.
-	New source files added to libfribidi_la_SOURCES
+	test_fribidi for test targets.  New source files added to
+	libfribidi_la_SOURCES.
 	
 	* TODO: Some done tasks removed, some new tasks added!
 
