@@ -2,6 +2,6 @@
 
 aclocal \
 && autoheader \
-&& automake --include-deps \
+&& automake --gnu --include-deps \
 && autoconf
 
