@@ -115,7 +115,7 @@ fribidi_SOURCES = fribidi_main.c $(GETOPT_SRC)
 fribidi_LDADD = libfribidi.la
 
 
-fribidi_tab_mirroring.i: $(fribidi_create_mirroring_SOURCES)	\
+fribidi_tab_mirroring.i: $(fribidi_create_mirroring_SOURCES) fribidi_types.h	\
 		unidata/BidiMirroring.txt
 	$(MAKE) fribidi_create_mirroring
 	if test -d unidata; then UNIDATA=unidata;	\
