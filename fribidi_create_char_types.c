@@ -190,6 +190,10 @@ write_char_type (char *file, int max_depth)
       fprintf (f, "#define %s FRIBIDI_PROP_TYPE_%s\n", names[i], names[i]);
   fprintf (f, "\n");
 
+  fprintf (f, "#define PACKTAB_UINT8 fribidi_uint8\n");
+  fprintf (f, "#define PACKTAB_UINT16 fribidi_uint16\n");
+  fprintf (f, "#define PACKTAB_UINT32 fribidi_uint32\n");
+  
   if (!pack_table
       (table, FRIBIDI_UNICODE_CHARS, SIZEOF_CHAR, max_depth, 3, names,
        key_type_name, table_name, macro_name, f))
