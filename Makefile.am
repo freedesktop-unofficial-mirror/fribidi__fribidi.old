@@ -99,11 +99,11 @@ fribidi_SOURCES = fribidi_main.c wcwidth.c $(GETOPT_SRC)
 fribidi_LDADD = libfribidi.la
 
 unidata/BidiMirroring.txt:
-	(test -e unidata || mkdir unidata) && cd unidata &&	\
+	(test -d unidata || mkdir unidata) && cd unidata &&	\
 	wget http://www.unicode.org/Public/UNIDATA/BidiMirroring.txt
 
 unidata/UnicodeData.txt:
-	(test -e unidata || mkdir unidata) && cd unidata &&	\
+	(test -d unidata || mkdir unidata) && cd unidata &&	\
 	wget http://www.unicode.org/Public/UNIDATA/UnicodeData.txt
 
 build_fribidi_tab_mirroring.i: fribidi_create_mirroring	\
@@ -145,7 +145,7 @@ config.h: fribidi_tab_char_type_stamp
 $(srcdir)/fribidi_char_type.c: config.h
 
 tests/test_%.reference: tests/test_%.input fribidi
-	(test -e tests || mkdir tests) &&	\
+	(test -d tests || mkdir tests) &&	\
 	testcase="$@" && 	\
 	charset="$${testcase#*_}" && charset="$${charset%%_*}" &&	\
 	./fribidi --test --charset "$$charset" $< > "$@" || \
