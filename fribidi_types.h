@@ -20,7 +20,11 @@
 #ifndef FRIBIDI_TYPES_H
 #define FRIBIDI_TYPES_H
 
+#ifndef FRIBIDI_USE_MINI_GLIB
 #include <glib.h>
+#else
+#include "fribidi_mini_glib.h"
+#endif
 
 typedef guint32 FriBidiChar;
 

@@ -19,7 +19,6 @@
 #ifndef FRIBIDI_H
 #define FRIBIDI_H
 
-#include <glib.h>
 #include "fribidi_types.h"
 #include "fribidi_char_sets.h"
 

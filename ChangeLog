@@ -1,3 +1,14 @@
+2001-03-09  Dov Grobgeld  <dov@orbotech.orbotech.co.il>
+
+	* fribidi_mini_glib.c, fribidi_mini_glib.h : Applied patch
+	received from Dan Kenigsberg <danken@cs.technion.ac.il> that
+	allows compiling fribidi without glib if the flag
+	FRIBIDI_USE_MINI_GLIB is turned on. This option is currently
+	turned on when compiling through Makefile.noglib .
+
+	* TODO: Added the task of making autoconf automatically turn
+	on FRIBIDI_USE_MINI_GLIB if glib isn't found.
+
 2001-03-07  Behdad Esfahbod <behdad@bamdad.org>
 
 	* fribidi.c: Removed dead codes, many parts rewritten more efficient,

@@ -18,7 +18,6 @@
  * Boston, MA 02111-1307, USA.
  */
 #define DEBUG
-#include <glib.h>
 #include "fribidi.h"
 #ifdef DEBUG
 #include <stdio.h>

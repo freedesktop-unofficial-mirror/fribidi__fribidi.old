@@ -89,7 +89,7 @@ libfribidiincdir = $(includedir)/fribidi
 libfribidiinc_HEADERS =  	fribidi.h 	fribidi_char_sets.h 	fribidi_types.h
 
 
-EXTRA_DIST =          unidata/CreateGetType.pl 	tests/test-hebrew 	tests/test-capital-rtl 	run.tests 	test.reference 	ANNOUNCE 	acinclude.m4
+EXTRA_DIST =          unidata/CreateGetType.pl 	tests/test-hebrew 	tests/test-capital-rtl 	run.tests 	test.reference 	ANNOUNCE 	acinclude.m4         fribidi_mini_glib.h 	fribidi_mini_glib.c         Makefile.noglib
 
 
 test_fribidi_SOURCES = test_fribidi.c

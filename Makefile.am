@@ -28,7 +28,11 @@ EXTRA_DIST = \
 	run.tests \
 	test.reference \
 	ANNOUNCE \
-	acinclude.m4
+	acinclude.m4 \
+        fribidi_mini_glib.h \
+	fribidi_mini_glib.c \
+        Makefile.noglib
+
 
 test_fribidi_SOURCES = test_fribidi.c
 test_fribidi_LDADD = libfribidi.la $(GLIB_LIBS)

@@ -1,14 +1,12 @@
-I have relased a new version 0.1.15 of fribidi which is mainly based
-on a set of excellent patches that I received from Omer Zak
-<omerz@actcom.co.il>. The highlights of the changes are:
+This is fribidi version 0.9.0 that a large extent an internal rewrite,
+made by Behdad Esfahbod <behdad@bamdad.org>.
 
-     * Made several compile options for better fine tuning for embedded
-       systems.
+    * Explicit overrides (LRE, RLE, RLO, LRO) support!
+    * Internal speedups.
+    * Option to compile fribidi without glib.
 
-     * Fixed some bugs in complience of unicode algorithm.
+See ChangeLog for detailed changes.
 
-     * Fixed interface in which the v2l and the l2v maps were
-       mixed up.
 
 Here's the blurb in case someone missed it:
 

@@ -50,3 +50,16 @@ General issues:
   exact unicode counterparts; but others (and all in the range 0x80-0x9f,
   and 0xff) have not; so how should that be handled when converting to
   unicode to preserve at best the direction information?
+
+----
+
+mini_glib use < received from Dan K... >
+
+* test executables with mini_glib 
+* build execs in Makefile_mini_glib
+* create a shared-object library
+
+*** add the mini_glib option to configure, so that whenever no glib is arround,
+    mini_glib is used.
+
+* use smarter malloc/free scheme, even with mini_glib

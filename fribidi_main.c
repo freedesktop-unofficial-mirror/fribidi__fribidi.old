@@ -27,8 +27,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <glib.h>
 #include "fribidi.h"
+
 #include "fribidi_tables.i"
 
 #define CASE(s) if(!strcmp(S_, s))
