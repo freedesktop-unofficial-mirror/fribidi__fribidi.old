@@ -78,14 +78,14 @@ fribidi_unicode_to_utf8 (FriBidiChar *us, int length, char *s)
 	{			/* 7 sig bits */
 	  *t++ = mychar;
 	}
-      else if (mychar <= 0x7FF)	/* 11 sig bits */
-	{
-	  *t++ = 0xC0 | (unsigned char) ((mychar >> 6) & 0x1F);	/* upper 5 bits */
+      else if (mychar <= 0x7FF)
+	{			/* 11 sig bits */
+	  *t++ = 0xC0 | (unsigned char) (mychar >> 6);	/* upper 5 bits */
 	  *t++ = 0x80 | (unsigned char) (mychar & 0x3F);	/* lower 6 bits */
 	}
       else if (mychar <= 0xFFFF)
 	{			/* 16 sig bits */
-	  *t++ = 0xE0 | (unsigned char) ((mychar >> 12) & 0x0F);	/* upper 4 bits */
+	  *t++ = 0xE0 | (unsigned char) (mychar >> 12);	/* upper 4 bits */
 	  *t++ = 0x80 | (unsigned char) ((mychar >> 6) & 0x3F);	/* next 6 bits */
 	  *t++ = 0x80 | (unsigned char) (mychar & 0x3F);	/* lowest 6 bits */
 	}
