@@ -32,10 +32,6 @@
 #define SIZEOF_CHAR sizeof (char)
 #endif
 
-#ifndef SIZEOF_CHARP
-#define SIZEOF_CHARP sizeof (char *)
-#endif
-
 static void
 err (char *msg)
 {
@@ -195,8 +191,8 @@ write_char_type (char *file, int max_depth)
   fprintf (f, "\n");
 
   if (!pack_table
-      (table, FRIBIDI_UNICODE_CHARS, SIZEOF_CHAR, SIZEOF_CHARP, max_depth, 3,
-       names, key_type_name, table_name, macro_name, f))
+      (table, FRIBIDI_UNICODE_CHARS, SIZEOF_CHAR, max_depth, 3, names,
+       key_type_name, table_name, macro_name, f))
     err ("error: insufficient memory, decrease max_depth");
 
   for (i = type_names_count - 1; i >= 0; i--)

@@ -203,8 +203,8 @@ fribidi_xpos_resolve (FriBidiEnv *fribidienv,
 		      FriBidiStrIndex *res_log_pos,
 		      FriBidiStrIndex *res_vis_pos,
 		      int *res_cursor_x_pos,
-		      fribidi_boolean * res_cursor_dir_is_rtl,
-		      fribidi_boolean * res_attach_before)
+		      fribidi_boolean *res_cursor_dir_is_rtl,
+		      fribidi_boolean *res_attach_before)
 {
   int char_width_sum = 0;
   FriBidiStrIndex char_idx;

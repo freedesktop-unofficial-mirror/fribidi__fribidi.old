@@ -47,11 +47,11 @@ typedef struct
   char *(*desc) (void);
   /* Some charsets like CapRTL may need to change some fribidis tables, by
      calling this function, they can do this changes. */
-    fribidi_boolean (*enter) (void);
+  fribidi_boolean (*enter) (void);
   /* Some charsets like CapRTL may need to change some fribidis tables, by
      calling this function, they can undo their changes, perhaps to enter
      another mode. */
-    fribidi_boolean (*leave) (void);
+  fribidi_boolean (*leave) (void);
 }
 FriBidiCharSetHandler;
 

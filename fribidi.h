@@ -242,8 +242,8 @@ extern "C"
 			     FriBidiStrIndex *res_log_pos,
 			     FriBidiStrIndex *res_vis_pos,
 			     int *res_cursor_x_pos,
-			     fribidi_boolean * res_cursor_dir_is_rtl,
-			     fribidi_boolean * res_attach_before);
+			     fribidi_boolean *res_cursor_dir_is_rtl,
+			     fribidi_boolean *res_attach_before);
 
 /*======================================================================
  *  fribidi_runs_log2vis takes a list of logical runs and returns a
