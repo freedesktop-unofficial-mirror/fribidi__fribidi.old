@@ -2,6 +2,8 @@
 	* fribidi.h: Removed definition of PACKAGE and VERSION. #included
 	"config.h"
 
+	* Makefile.am: make "make dist" work.
+
 2001-03-26 Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c, fribidi_types.h: Some bugs introduced in the last
 	changes removed, "Resolving weak types" rewritten, no known
