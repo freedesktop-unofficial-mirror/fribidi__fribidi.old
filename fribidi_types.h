@@ -30,10 +30,10 @@ extern "C"
 {
 #endif
 
-  typedef int8 FriBidiLevel;
-  typedef uint32 FriBidiChar;
-  typedef int FriBidiStrIndex;
-  typedef int32 FriBidiMaskType;
+  typedef fribidi_int8 FriBidiLevel;
+  typedef fribidi_uint32 FriBidiChar;
+  typedef fribidi_int FriBidiStrIndex;
+  typedef fribidi_int32 FriBidiMaskType;
   typedef FriBidiMaskType FriBidiCharType;
 
   char *fribidi_type_name (FriBidiCharType c);
@@ -41,7 +41,7 @@ extern "C"
 /* The following type is used by fribidi_utils */
   typedef struct
   {
-    int length;
+    FriBidiStrIndex length;
     void *attribute;
   }
   FriBidiRunType;

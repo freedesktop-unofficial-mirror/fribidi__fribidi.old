@@ -253,7 +253,7 @@ fribidi_char_set_desc_cap_rtl (void)
   return s;
 }
 
-boolean
+fribidi_boolean
 fribidi_char_set_enter_cap_rtl (void)
 {
   if (!caprtl_to_unicode)
@@ -297,13 +297,13 @@ fribidi_char_set_enter_cap_rtl (void)
 	  }
     }
 
-  return TRUE;
+  return FRIBIDI_TRUE;
 }
 
-boolean
+fribidi_boolean
 fribidi_char_set_leave_cap_rtl (void)
 {
-  return TRUE;
+  return FRIBIDI_TRUE;
 }
 
 #endif

@@ -32,21 +32,24 @@ extern "C"
 {
 #endif
 
-#define INT8 char
-#define INT16 short
-#define INT32 long
+#define FRIBIDI_INT8	char
+#define FRIBIDI_INT16	short
+#define FRIBIDI_INT32	long
+#define FRIBIDI_INT	int
 
-  typedef int boolean;
+  typedef int fribidi_boolean;
 
-  typedef signed INT8 int8;
-  typedef unsigned INT8 uint8;
-  typedef signed INT16 int16;
-  typedef unsigned INT16 uint16;
-  typedef signed INT32 int32;
-  typedef unsigned INT32 uint32;
+  typedef signed FRIBIDI_INT8 fribidi_int8;
+  typedef unsigned FRIBIDI_INT8 fribidi_uint8;
+  typedef signed FRIBIDI_INT16 fribidi_int16;
+  typedef unsigned FRIBIDI_INT16 fribidi_uint16;
+  typedef signed FRIBIDI_INT32 fribidi_int32;
+  typedef unsigned FRIBIDI_INT32 fribidi_uint32;
+  typedef signed FRIBIDI_INT fribidi_int;
+  typedef unsigned FRIBIDI_INT fribidi_uint;
 
-#define TRUE 1
-#define FALSE 0
+#define FRIBIDI_TRUE	1
+#define FRIBIDI_FALSE	0
 
   typedef struct _FriBidiList FriBidiList;
   struct _FriBidiList

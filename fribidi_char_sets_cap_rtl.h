@@ -37,8 +37,8 @@ extern "C"
 #define fribidi_char_set_name_cap_rtl "CapRTL"
 #define fribidi_char_set_title_cap_rtl "CapRTL (Test)"
   char *fribidi_char_set_desc_cap_rtl (void);
-  boolean fribidi_char_set_enter_cap_rtl (void);
-  boolean fribidi_char_set_leave_cap_rtl (void);
+  fribidi_boolean fribidi_char_set_enter_cap_rtl (void);
+  fribidi_boolean fribidi_char_set_leave_cap_rtl (void);
 
   int fribidi_cap_rtl_to_unicode (char *s, int length,
 				  /* Output */

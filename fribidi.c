@@ -748,7 +748,7 @@ fribidi_analyse_string (FriBidiEnv *fribidienv,
   DBG ("Resolving weak types\n");
   {
     FriBidiCharType last_strong, prev_type_org;
-    boolean w4;
+    fribidi_boolean w4;
 
     last_strong = base_dir;
 
@@ -797,7 +797,7 @@ fribidi_analyse_string (FriBidiEnv *fribidienv,
     /* Resolving dependency of loops for rules W4 and W5, W5 may
        want to prevent W4 to take effect in the next turn, do this 
        through "w4". */
-    w4 = TRUE;
+    w4 = FRIBIDI_TRUE;
     /* Resolving dependency of loops for rules W4 and W5 with W7,
        W7 may change an EN to L but it sets the prev_type_org if needed,
        so W4 and W5 in next turn can still do their works. */
@@ -818,7 +818,7 @@ fribidi_analyse_string (FriBidiEnv *fribidienv,
 	if (this_type == FRIBIDI_TYPE_AL)
 	  {
 	    RL_TYPE (pp) = FRIBIDI_TYPE_RTL;
-	    w4 = TRUE;
+	    w4 = FRIBIDI_TRUE;
 	    prev_type_org = FRIBIDI_TYPE_ON;
 	    continue;
 	  }
@@ -835,7 +835,7 @@ fribidi_analyse_string (FriBidiEnv *fribidienv,
 	    RL_TYPE (pp) = prev_type;
 	    this_type = RL_TYPE (pp);
 	  }
-	w4 = TRUE;
+	w4 = FRIBIDI_TRUE;
 
 	/* W5. A sequence of European terminators adjacent to European
 	   numbers changes to All European numbers. */
@@ -844,7 +844,7 @@ fribidi_analyse_string (FriBidiEnv *fribidienv,
 		|| next_type == FRIBIDI_TYPE_EN))
 	  {
 	    RL_TYPE (pp) = FRIBIDI_TYPE_EN;
-	    w4 = FALSE;
+	    w4 = FRIBIDI_FALSE;
 	    this_type = RL_TYPE (pp);
 	  }
 
@@ -1079,7 +1079,7 @@ fribidi_remove_bidi_marks (FriBidiEnv *fribidienv,
 			   FriBidiLevel *embedding_level_list)
 {
   FriBidiStrIndex i, j;
-  boolean private_from_this = FALSE;
+  fribidi_boolean private_from_this = FRIBIDI_FALSE;
 
   DBG ("Entering fribidi_remove_bidi_marks()\n");
 
@@ -1087,7 +1087,7 @@ fribidi_remove_bidi_marks (FriBidiEnv *fribidienv,
      not given by the caller, we have to make a private instance of it. */
   if (position_to_this_list && !position_from_this_list)
     {
-      private_from_this = TRUE;
+      private_from_this = FRIBIDI_TRUE;
       position_from_this_list =
 	(FriBidiStrIndex *) fribidi_malloc (fribidienv,
 					    sizeof (FriBidiStrIndex) *
@@ -1130,7 +1130,7 @@ fribidi_remove_bidi_marks (FriBidiEnv *fribidienv,
  *  fribidi_log2vis() calls the function_analyse_string() and then
  *  does reordering and fills in the output strings.
  *----------------------------------------------------------------------*/
-boolean
+fribidi_boolean
 fribidi_log2vis (FriBidiEnv *fribidienv,
 		 /* input */
 		 const FriBidiChar *str, FriBidiStrIndex len,
@@ -1143,21 +1143,21 @@ fribidi_log2vis (FriBidiEnv *fribidienv,
 {
   TypeLink *type_rl_list, *pp = (TypeLink *) NULL;
   FriBidiLevel max_level;
-  boolean private_V_to_L = FALSE;
+  fribidi_boolean private_V_to_L = FRIBIDI_FALSE;
 
   DBG ("Entering fribidi_log2vis()\n");
 
   if (len == 0)
     {
       DBG ("Leaving fribidi_log2vis()\n");
-      return TRUE;
+      return FRIBIDI_TRUE;
     }
 
   /* If l2v is to be calculated we must have v2l as well. If it is not
      given by the caller, we have to make a private instance of it. */
   if (position_L_to_V_list && !position_V_to_L_list)
     {
-      private_V_to_L = TRUE;
+      private_V_to_L = FRIBIDI_TRUE;
       position_V_to_L_list =
 	(FriBidiStrIndex *) fribidi_malloc (fribidienv,
 					    sizeof (FriBidiStrIndex) * len);
@@ -1169,7 +1169,7 @@ fribidi_log2vis (FriBidiEnv *fribidienv,
       fprintf (stderr, "%s: cannot handle strings > %ld characters\n",
 	       FRIBIDI_PACKAGE, (long) FRIBIDI_MAX_STRING_LENGTH);
 #endif
-      return FALSE;
+      return FRIBIDI_FALSE;
     }
   fribidi_analyse_string (fribidienv, str, len, pbase_dir,
 			  /* output */
@@ -1251,7 +1251,7 @@ fribidi_log2vis (FriBidiEnv *fribidienv,
 		if (pp->level & 1)
 		  {
 		    FriBidiStrIndex i;
-		    boolean is_nsm_seq, seq_end;
+		    fribidi_boolean is_nsm_seq, seq_end;
 
 		    is_nsm_seq = 0;
 		    for (i = RL_POS (pp) + RL_LEN (pp) - 1; i >= RL_POS (pp);
@@ -1334,7 +1334,7 @@ fribidi_log2vis (FriBidiEnv *fribidienv,
   free_rl_list (fribidienv, type_rl_list);
 
   DBG ("Leaving fribidi_log2vis()\n");
-  return TRUE;
+  return FRIBIDI_TRUE;
 
 }
 
@@ -1342,7 +1342,7 @@ fribidi_log2vis (FriBidiEnv *fribidienv,
  *  fribidi_log2vis_get_embedding_levels() is used in order to just get
  *  the embedding levels.
  *----------------------------------------------------------------------*/
-boolean
+fribidi_boolean
 fribidi_log2vis_get_embedding_levels (FriBidiEnv *fribidienv,
 				      /* input */
 				      const FriBidiChar *str,
@@ -1359,7 +1359,7 @@ fribidi_log2vis_get_embedding_levels (FriBidiEnv *fribidienv,
   if (len == 0)
     {
       DBG ("Leaving fribidi_log2vis_get_embedding_levels()\n");
-      return TRUE;
+      return FRIBIDI_TRUE;
     }
 
   fribidi_analyse_string (fribidienv, str, len, pbase_dir,
@@ -1377,7 +1377,7 @@ fribidi_log2vis_get_embedding_levels (FriBidiEnv *fribidienv,
   free_rl_list (fribidienv, type_rl_list);
 
   DBG ("Leaving fribidi_log2vis_get_embedding_levels()\n");
-  return TRUE;
+  return FRIBIDI_TRUE;
 }
 
 

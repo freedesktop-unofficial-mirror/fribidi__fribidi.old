@@ -2,6 +2,10 @@
 	* fribidi_wcwidth.c: Updated to latest source of 2002-05-08.
 	* fribidi_wcwidth.i: Added, fribidi_wcwidth.c includes this to reduces
 	changes needed in fribidi_wcwidth.c.
+	* fribidi_mem.h, fribidi_types.h, *.c: Common type names like int32,
+	boolean, ..., changed name to have fribidi prefix.
+	* fribidi_char_sets_utf8.c: Fixed to support 4-byte length utf-8
+	sequences.
 
 2002-05-04  Behdad Esfahbod <fribidi@behdad.org>
 	* fribidi_wcwidth.c: Updated to latest source of 2002-05-03.

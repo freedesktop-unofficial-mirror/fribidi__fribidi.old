@@ -184,23 +184,26 @@ fribidi_free (FriBidiEnv *fribidienv, void *ptr)
  *  fribidi_mirroring_status() returns whether mirroring is on or off,
  *  default is on.
  *----------------------------------------------------------------------*/
-boolean
+fribidi_boolean
 fribidi_mirroring_status (FriBidiEnv *fbenv)
 {
   VALIDATE_FRIBIDIENV (fbenv);
 
-  return (0 != (fbenv->iFlags & FRIBIDIENV_MIRRORING_MODE) ? TRUE : FALSE);
+  return (0 !=
+	  (fbenv->
+	   iFlags & FRIBIDIENV_MIRRORING_MODE) ? FRIBIDI_TRUE :
+	  FRIBIDI_FALSE);
 }
 
 /*======================================================================
  *  fribidi_set_mirroring() sets mirroring on or off.
  *----------------------------------------------------------------------*/
 void
-fribidi_set_mirroring (FriBidiEnv *fbenv, boolean mirror)
+fribidi_set_mirroring (FriBidiEnv *fbenv, fribidi_boolean mirror)
 {
   VALIDATE_FRIBIDIENV (fbenv);
 
-  if (FALSE != mirror)
+  if (FRIBIDI_FALSE != mirror)
     {
       fbenv->iFlags |= FRIBIDIENV_MIRRORING_MODE;
     }
@@ -214,23 +217,26 @@ fribidi_set_mirroring (FriBidiEnv *fbenv, boolean mirror)
  *  fribidi_reorder_nsm_status() returns whether reordering of nsm
  *  sequences is on or off, default is off.
  *----------------------------------------------------------------------*/
-boolean
+fribidi_boolean
 fribidi_reorder_nsm_status (FriBidiEnv *fbenv)
 {
   VALIDATE_FRIBIDIENV (fbenv);
 
-  return (0 != (fbenv->iFlags & FRIBIDIENV_REORDER_NSM_MODE) ? TRUE : FALSE);
+  return (0 !=
+	  (fbenv->
+	   iFlags & FRIBIDIENV_REORDER_NSM_MODE) ? FRIBIDI_TRUE :
+	  FRIBIDI_FALSE);
 }
 
 /*======================================================================
  *  fribidi_set_reorder_nsm() sets reordering of nsm sequences on or off.
  *----------------------------------------------------------------------*/
 void
-fribidi_set_reorder_nsm (FriBidiEnv *fbenv, boolean reorder)
+fribidi_set_reorder_nsm (FriBidiEnv *fbenv, fribidi_boolean reorder)
 {
   VALIDATE_FRIBIDIENV (fbenv);
 
-  if (FALSE != reorder)
+  if (FRIBIDI_FALSE != reorder)
     {
       fbenv->iFlags |= FRIBIDIENV_REORDER_NSM_MODE;
     }
@@ -244,30 +250,32 @@ fribidi_set_reorder_nsm (FriBidiEnv *fbenv, boolean reorder)
  *  fribidi_debug_status() returns whether debugging is on or off,
  *  default is off.
  *----------------------------------------------------------------------*/
-boolean
+fribidi_boolean
 fribidi_debug_status (FriBidiEnv *fbenv)
 {
 #ifdef DEBUG
   VALIDATE_FRIBIDIENV (fbenv);
 
-  return (0 != (fbenv->iFlags & FRIBIDIENV_DEBUG_MODE) ? TRUE : FALSE);
+  return (0 !=
+	  (fbenv->
+	   iFlags & FRIBIDIENV_DEBUG_MODE) ? FRIBIDI_TRUE : FRIBIDI_FALSE);
 #else /* DEBUG */
-  return FALSE;
+  return FRIBIDI_FALSE;
 #endif /* DEBUG */
 }
 
 /*======================================================================
  *  fribidi_set_debug() turn on or off debugging, default is off.
  *  if the library was compiled without DEBUG option, this function
- *  returns FALSE.
+ *  returns FRIBIDI_FALSE.
  *----------------------------------------------------------------------*/
-boolean
-fribidi_set_debug (FriBidiEnv *fbenv, boolean debug)
+fribidi_boolean
+fribidi_set_debug (FriBidiEnv *fbenv, fribidi_boolean debug)
 {
 #ifdef DEBUG
   VALIDATE_FRIBIDIENV (fbenv);
 
-  if (FALSE != debug)
+  if (FRIBIDI_FALSE != debug)
     {
       fbenv->iFlags |= FRIBIDIENV_DEBUG_MODE;
     }
@@ -277,7 +285,7 @@ fribidi_set_debug (FriBidiEnv *fbenv, boolean debug)
     }
   return debug;
 #else /* DEBUG */
-  return FALSE;
+  return FRIBIDI_FALSE;
 #endif /* DEBUG */
 }
 

@@ -92,12 +92,12 @@ extern "C"
 
 /* Some charsets like CapRTL may need to change some fribidis tables, by
    calling this function, they can do this changes. */
-  boolean fribidi_char_set_enter (FriBidiCharSet char_set);
+  fribidi_boolean fribidi_char_set_enter (FriBidiCharSet char_set);
 
 /* Some charsets like CapRTL may need to change some fribidis tables, by
    calling this function, they can undo their changes, perhaps to enter
    another mode. */
-  boolean fribidi_char_set_leave (FriBidiCharSet char_set);
+  fribidi_boolean fribidi_char_set_leave (FriBidiCharSet char_set);
 
 /* Return the charset which name is "s". */
   FriBidiCharSet fribidi_parse_charset (char *s);

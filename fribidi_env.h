@@ -106,7 +106,7 @@ extern "C"
  * currently defined.
  * But we want to keep all FriBidiEnv fields word-aligned.
  */
-  typedef uint32 FriBidiFlags;
+  typedef fribidi_uint32 FriBidiFlags;
 
 /* The following is defined in fribidi_mem.h, must be defined
  * there due to forward references.
@@ -135,8 +135,8 @@ extern "C"
     /* The following are reserved for future expansion without breaking
      * binary compatibility of existing software.
      */
-    uint32 iReserved1;
-    uint32 iReserved2;
+    fribidi_uint32 iReserved1;
+    fribidi_uint32 iReserved2;
     void *iReserved3;		/* If necessary, will point at extension to FriBidiEnv. */
   };
 
@@ -199,37 +199,38 @@ extern "C"
  *  fribidi_mirroring_status() returns whether mirroring is on or off,
  *  default is on.
  *----------------------------------------------------------------------*/
-  boolean fribidi_mirroring_status (FriBidiEnv *fbenv);
+  fribidi_boolean fribidi_mirroring_status (FriBidiEnv *fbenv);
 
 /*======================================================================
  *  fribidi_set_mirroring() sets mirroring on or off.
  *----------------------------------------------------------------------*/
-  void fribidi_set_mirroring (FriBidiEnv *fbenv, boolean mirror);
+  void fribidi_set_mirroring (FriBidiEnv *fbenv, fribidi_boolean mirror);
 
 /*======================================================================
  *  fribidi_reorder_nsm_status() returns whether reordering of nsm
  *  sequences is on or off, default is off.
  *----------------------------------------------------------------------*/
-  boolean fribidi_reorder_nsm_status (FriBidiEnv *fbenv);
+  fribidi_boolean fribidi_reorder_nsm_status (FriBidiEnv *fbenv);
 
 /*======================================================================
  *  fribidi_set_reorder_nsm() sets reordering of nsm sequences on or off.
  *----------------------------------------------------------------------*/
-  void fribidi_set_reorder_nsm (FriBidiEnv *fbenv, boolean reorder);
+  void fribidi_set_reorder_nsm (FriBidiEnv *fbenv, fribidi_boolean reorder);
 
 /*======================================================================
  *  fribidi_debug_status() returns whether debugging is on or off,
  *  default is off.  Returns false if fribidi is not compiled with debug
  *  enabled.
  *----------------------------------------------------------------------*/
-  boolean fribidi_debug_status (FriBidiEnv *fbenv);
+  fribidi_boolean fribidi_debug_status (FriBidiEnv *fbenv);
 
 /*======================================================================
  *  fribidi_set_debug() turn on or off debugging, default is off.
  *  if the library was compiled without DEBUG option, this function
- *  returns FALSE.
+ *  returns FRIBIDI_FALSE.
  *----------------------------------------------------------------------*/
-  boolean fribidi_set_debug (FriBidiEnv *fbenv, boolean debug);
+  fribidi_boolean fribidi_set_debug (FriBidiEnv *fbenv,
+				     fribidi_boolean debug);
 
 /*======================================================================
  *  Management of various styles of defining and using FriBidiEnv.
