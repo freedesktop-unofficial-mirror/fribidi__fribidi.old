@@ -41,8 +41,8 @@
 #endif
 
 #ifdef DEBUG
-#define DBG(s) if (fribidi_debug) { fprintf(stderr, s); }
-#define DBG2(s, t) if (fribidi_debug) { fprintf(stderr, s, t); }
+#define DBG(s) do { if (fribidi_debug) { fprintf(stderr, s); } } while (0)
+#define DBG2(s, t) do { if (fribidi_debug) { fprintf(stderr, s, t); } } while (0)
 #else
 #define DBG(s)
 #define DBG2(s, t)
@@ -168,12 +168,12 @@ free_type_link (TypeLink *link)
 }
 
 #define FRIBIDI_ADD_TYPE_LINK(p,q) \
-	{	\
+	do {	\
 		(p)->len = (q)->pos - (p)->pos;	\
 		(p)->next = (q);	\
 		(q)->prev = (p);	\
 		(p) = (q);	\
-	}
+	} while (0)
 
 static TypeLink *
 run_length_encode_types (FriBidiCharType *char_type, FriBidiStrIndex type_len)
@@ -195,7 +195,8 @@ run_length_encode_types (FriBidiCharType *char_type, FriBidiStrIndex type_len)
 	link = new_type_link ();
 	link->type = char_type[i];
 	link->pos = i;
-      FRIBIDI_ADD_TYPE_LINK (last, link)}
+	FRIBIDI_ADD_TYPE_LINK (last, link);
+      }
 
   /* Add the ending link */
   link = new_type_link ();
@@ -364,10 +365,10 @@ override_list (TypeLink *base, TypeLink *over)
 }
 
 /* Some convenience macros */
-#define RL_TYPE(list) (list)->type
-#define RL_LEN(list) (list)->len
-#define RL_POS(list) (list)->pos
-#define RL_LEVEL(list) (list)->level
+#define RL_TYPE(list) ((list)->type)
+#define RL_LEN(list) ((list)->len)
+#define RL_POS(list) ((list)->pos)
+#define RL_LEVEL(list) ((list)->level)
 
 static TypeLink *
 merge_with_prev (TypeLink *second)
@@ -437,7 +438,7 @@ compact_neutrals (TypeLink *list)
    change the current level or override status.
 */
 #define PUSH_STATUS \
-    { \
+    do { \
       if (new_level <= UNI_MAX_BIDI_LEVEL) \
         { \
           if (level == UNI_MAX_BIDI_LEVEL - 1) \
@@ -449,13 +450,13 @@ compact_neutrals (TypeLink *list)
           override = new_override; \
         } else \
 	  over_pushed++; \
-    }
+    } while (0)
 
 /* If there was a valid matching code, restore (pop) the last remembered
    (pushed) embedding level and directional override.
 */
 #define POP_STATUS \
-    { \
+    do { \
       if (over_pushed || stack_size) \
       { \
         if (over_pushed > first_interval) \
@@ -469,7 +470,7 @@ compact_neutrals (TypeLink *list)
             override = status_stack[stack_size].override; \
           } \
       } \
-    }
+    } while (0)
 
 /*==========================================================================
  * There was no support for sor and eor in the absence of Explicit Embedding
@@ -479,7 +480,8 @@ compact_neutrals (TypeLink *list)
 /* Return the type of previous char or the sor, if already at the start of
    a run level. */
 #define PREV_TYPE_OR_SOR(pp) \
-    (RL_LEVEL(pp->prev) == RL_LEVEL(pp) ? \
+    ( \
+     RL_LEVEL(pp->prev) == RL_LEVEL(pp) ? \
       RL_TYPE(pp->prev) : \
       FRIBIDI_LEVEL_TO_DIR(MAX(RL_LEVEL(pp->prev), RL_LEVEL(pp))) \
     )
@@ -487,7 +489,8 @@ compact_neutrals (TypeLink *list)
 /* Return the type of next char or the eor, if already at the end of
    a run level. */
 #define NEXT_TYPE_OR_EOR(pp) \
-    (!pp->next ? \
+    ( \
+     !pp->next ? \
       FRIBIDI_LEVEL_TO_DIR(RL_LEVEL(pp)) : \
       (RL_LEVEL(pp->next) == RL_LEVEL(pp) ? \
         RL_TYPE(pp->next) : \

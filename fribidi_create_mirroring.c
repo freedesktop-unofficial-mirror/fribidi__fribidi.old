@@ -128,7 +128,7 @@ int
 main (int argc, char **argv)
 {
   char *p;
-  
+
   p = (argc >= 2) ? argv[1] : "unidata";
   bidi_mirroring_file = malloc (50 + strlen (p));
   sprintf (bidi_mirroring_file, "%s/BidiMirroring.txt", p);

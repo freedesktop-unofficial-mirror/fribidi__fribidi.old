@@ -2,12 +2,12 @@
 #
 #	Everything:
 #		(this is equivalent to two others together)
-#			fribidiN-version-release-arch.rpm
+#			@PACKAGE@N-version-release-arch.rpm
 #	Runtime material: Shared library and command line tool
-#			libfribidiN-version-release-arch.rpm
+#			lib@PACKAGE@N-version-release-arch.rpm
 #	Development material: Static library and header files
-#		(requires libfribidi)
-#			libfribidi-devel-version-release-arch.rpm
+#		(requires lib@PACKAGE@)
+#			lib@PACKAGE@N-devel-version-release-arch.rpm
 #	Where N is the major version number.
 
 %define name @PACKAGE@
@@ -24,8 +24,8 @@ Version: %{ver}
 Release: %{rel}
 Serial: %{apiver}
 Copyright: LGPL
-Source: http://prdownloads.sourceforge.net/fribidi/%{name}-%{ver}.tar.gz
-URL: http://fribidi.sourceforge.net/
+Source: http://prdownloads.sourceforge.net/%{name}/%{name}-%{ver}.tar.gz
+URL: http://%{name}.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}
 Summary: Library implementing the Unicode Bidirectional Algorithm
 Group: System/Libraries
@@ -87,16 +87,16 @@ fi
 	--mandir=%{_mandir}             --infodir=%{_infodir}           \
 	--localstatedir=%{_localstatedir} --sharedstatedir=%{_sharedstatedir}
  
-make CFLAGS="$RPM_OPT_FLAGS"
+make OPT_CFLAGS="$RPM_OPT_FLAGS"
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{prefix}
+rm -rf "$RPM_BUILD_ROOT"
+mkdir -p "$RPM_BUILD_ROOT%{prefix}"
 make DESTDIR="$RPM_BUILD_ROOT" install
 
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf "$RPM_BUILD_ROOT"
 
 %post -n %{name}%{major} -p /sbin/ldconfig
 %postun -n %{name}%{major} -p /sbin/ldconfig
@@ -133,6 +133,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+
+* Sat Jan 26 2002  Behdad Esfahbod <behdad@bamdad.org>
+- CFLAGS changed to OPT_CFLAGS.
 
 * Wed Jan  9 2002  Behdad Esfahbod <behdad@bamdad.org>
 - First spec released.
