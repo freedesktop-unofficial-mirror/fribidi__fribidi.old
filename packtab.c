@@ -82,7 +82,7 @@ found ()
 	  best_cluster[i] = clusters[i];
 	}
     }
-};
+}
 
 static void
 bt (int node_size)

@@ -110,7 +110,6 @@ get_type (char *s)
 #define default_type "LTR"
 
 static int table[FRIBIDI_UNICODE_CHARS];
-static char *unicode_data_version;
 
 static void
 init_table ()
@@ -143,7 +142,7 @@ static void
 read_unicode_data ()
 {
   char s[500], tp[10];
-  int i;
+  unsigned int i;
   FILE *f;
 
   printf ("Reading `UnicodeData.txt'\n");

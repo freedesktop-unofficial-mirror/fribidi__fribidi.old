@@ -258,11 +258,13 @@ fribidi_char_set_enter_cap_rtl (void)
 {
   if (!caprtl_to_unicode)
     {
-      int request[FRIBIDI_TYPES_COUNT + 1] = { };
+      int request[FRIBIDI_TYPES_COUNT + 1];
       int i, count;
 
       caprtl_to_unicode =
 	(FriBidiChar *) malloc (CAPRTL_CHARS * sizeof caprtl_to_unicode[0]);
+      for (i = 0; i < FRIBIDI_TYPES_COUNT; i++)
+	request[i] = 0;
       for (i = 0; i < CAPRTL_CHARS; i++)
 	if (fribidi_get_mirror_char (i, NULL))
 	  caprtl_to_unicode[i] = i;

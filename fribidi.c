@@ -195,15 +195,14 @@ run_length_encode_types (FriBidiCharType *char_type, FriBidiStrIndex type_len)
 	link = new_type_link ();
 	link->type = char_type[i];
 	link->pos = i;
-	FRIBIDI_ADD_TYPE_LINK(last,link)
-      }
+      FRIBIDI_ADD_TYPE_LINK (last, link)}
 
   /* Add the ending link */
   link = new_type_link ();
   link->type = FRIBIDI_TYPE_EOT;
   link->level = FRIBIDI_LEVEL_END;
   link->pos = type_len;
-  FRIBIDI_ADD_TYPE_LINK(last,link);
+  FRIBIDI_ADD_TYPE_LINK (last, link);
 
   return list;
 }

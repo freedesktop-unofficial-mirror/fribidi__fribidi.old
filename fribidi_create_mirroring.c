@@ -24,13 +24,6 @@
 #include <string.h>
 
 static void
-err (char *msg)
-{
-  fprintf (stderr, "fribidi_create_mirroring: error: %s\n", msg);
-  exit (1);
-}
-
-static void
 err2 (char *fmt, char *p)
 {
   fprintf (stderr, "fribidi_create_mirroring: error: ");
@@ -49,7 +42,7 @@ static void
 read_bidi_mirroring ()
 {
   char s[500];
-  int i, j;
+  unsigned int i, j;
   FILE *f;
 
   for (i = 0; i < 0x110000; i++)
@@ -109,7 +102,8 @@ write_mirror (char *file)
 	   "  equivalent.\n"
 	   "\n"
 	   "  There are lots of characters that are designed as being mirrored\n"
-	   "  but do not have any mirrored glyph, e.g. the sign for there exist.\n"
+	   "  but do not have any mirrored glyph, e.g. the sign for there exist.\n");
+  fprintf (f,
 	   "  Are these used in Arabic? That is are all the mathematical signs\n"
 	   "  that are assigned to be mirrorable actually mirrored in Arabic?\n"
 	   "  If that is the case, we'll change the below code to include also\n"

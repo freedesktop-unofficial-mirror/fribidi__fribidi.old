@@ -103,7 +103,7 @@ benchmark (char *S_, int niter)
   int len, i;
   FriBidiChar us[MAX_STR_LEN], out_us[MAX_STR_LEN];
   FriBidiStrIndex positionLtoV[MAX_STR_LEN], positionVtoL[MAX_STR_LEN];
-  uint8 embedding_list[MAX_STR_LEN];
+  FriBidiLevel embedding_list[MAX_STR_LEN];
   FriBidiCharType base;
   double time0, time1;
 
