@@ -76,7 +76,7 @@ fribidi_char_from_type (FriBidiCharType c)
 gchar *
 fribidi_type_name (FriBidiCharType c)
 {
-#define _FRIBIDI_CASE(type) case FRIBIDI_TYPE_##type: return #type
+#define _FRIBIDI_CASE(type)	case FRIBIDI_TYPE_##type: return #type
   switch (c)
     {
       _FRIBIDI_CASE (LTR);
@@ -115,7 +115,7 @@ fribidi_type_name (FriBidiCharType c)
 /* If MEM_OPTIMIZED defined, map fribidi_prop_types to fribidi_types,
    it has the overhead of one more array lookup in fribidi_get_type(),
    the order of types here should be the same as
-   "typedef enum FriBidiPropCharType in fribidi_types.h */
+   "#define FRIBIDI_PROP_TYPE_* indexes in fribidi_types.h */
 FriBidiCharType prop_to_type[] = {
   FRIBIDI_TYPE_LTR,		/* Strong left to right */
   FRIBIDI_TYPE_RTL,		/* Right to left characters */

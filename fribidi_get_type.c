@@ -21,7 +21,6 @@
  * <fwpg@sharif.edu>. 
  */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "fribidi.h"
 #include "fribidi_tables.i"

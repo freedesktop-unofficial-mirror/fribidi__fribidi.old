@@ -4,6 +4,15 @@
 #include <stdlib.h>
 #include <limits.h>
 
+#define INT8 char
+#if (SIZEOF_INT==2)
+#define INT16 int
+#define INT32 long
+#else
+#define INT16 short
+#define INT32 int
+#endif
+
 typedef char gchar;
 typedef short gshort;
 typedef long glong;
@@ -30,12 +39,12 @@ typedef const void *gconstpointer;
 #define G_MINLONG       LONG_MIN
 #define G_MAXLONG       LONG_MAX
 
-typedef signed char gint8;
-typedef unsigned char guint8;
-typedef signed short gint16;
-typedef unsigned short guint16;
-typedef signed int gint32;
-typedef unsigned int guint32;
+typedef signed INT8 gint8;
+typedef unsigned INT8 guint8;
+typedef signed INT16 gint16;
+typedef unsigned INT16 guint16;
+typedef signed INT32 gint32;
+typedef unsigned INT32 guint32;
 
 /* from glib.h */
 

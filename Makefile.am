@@ -1,23 +1,3 @@
-if DEBUG
-DEBUGF = -DDEBUG
-else
-DEBUGF =
-endif
-
-if MEM_OPTIMIZED
-MEM_OPTIMIZEDF = -DMEM_OPTIMIZED
-else
-MEM_OPTIMIZEDF =
-endif
-
-if MALLOC
-MALLOCF = -DUSE_SIMPLE_MALLOC
-else
-MALLOCF =
-endif
-
-CFLAGS = $(DEBUGF) $(MEM_OPTIMIZEDF) $(MALLOCF)
-
 MAINTAINERCLEANFILES = Makefile.in configure aclocal.m4 config.h.in
 
 noinst_PROGRAMS = fribidi_benchmark

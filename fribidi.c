@@ -178,7 +178,7 @@ run_length_encode_types (FriBidiCharType *char_type, gint type_len)
   list->pos = 0;
   last = list;
 
-  /* Sweep over the string_types */
+  /* Sweep over the string_type s */
   current.type = FRIBIDI_LEVEL_START;
   current.len = 0;
   current.pos = -1;
@@ -684,11 +684,11 @@ fribidi_analyse_string (	/* input */
     stack_size = 0;
     over_pushed = 0;
     first_interval = 0;
-    status_stack = g_new(LevelInfo, MAX_LEVEL + 2);
+    status_stack = g_new (LevelInfo, MAX_LEVEL + 2);
 
     for (pp = type_rl_list->next; pp->next; pp = pp->next)
       {
-	gint this_type = RL_TYPE (pp);
+	FriBidiCharType this_type = RL_TYPE (pp);
 	if (FRIBIDI_IS_EXPLICIT_OR_BN (this_type))
 	  {
 	    if (FRIBIDI_IS_STRONG (this_type))
@@ -748,7 +748,7 @@ fribidi_analyse_string (	/* input */
     stack_size = 0;
     over_pushed = 0;
 
-    g_free(status_stack);
+    g_free (status_stack);
   }
   /* X10. The remaining rules are applied to each run of characters at the
      same level. For each run, determine the start-of-level-run (sor) and
@@ -775,13 +775,14 @@ fribidi_analyse_string (	/* input */
   /* 4. Resolving weak types */
   DBG ("Resolving weak types\n");
   {
-    gint last_strong, prev_type_org, w4;
+    FriBidiCharType last_strong, prev_type_org;
+    gboolean w4;
 
     last_strong = base_dir;
 
     for (pp = type_rl_list->next; pp->next; pp = pp->next)
       {
-	gint prev_type, this_type, next_type;
+	FriBidiCharType prev_type, this_type, next_type;
 
 	prev_type = PREV_TYPE_OR_SOR (pp);
 	this_type = RL_TYPE (pp);
@@ -817,7 +818,7 @@ fribidi_analyse_string (	/* input */
     /* Resolving dependency of loops for rules W4 and W5, W5 may
        want to prevent W4 to take effect in the next turn, do this 
        through "w4". */
-    w4 = 1;
+    w4 = TRUE;
     /* Resolving dependency of loops for rules W4 and W5 with W7,
        W7 may change an EN to L but it sets the prev_type_org if needed,
        so W4 and W5 in next turn can still do their works. */
@@ -825,7 +826,7 @@ fribidi_analyse_string (	/* input */
 
     for (pp = type_rl_list->next; pp->next; pp = pp->next)
       {
-	gint prev_type, this_type, next_type;
+	FriBidiCharType prev_type, this_type, next_type;
 
 	prev_type = PREV_TYPE_OR_SOR (pp);
 	this_type = RL_TYPE (pp);
@@ -838,7 +839,7 @@ fribidi_analyse_string (	/* input */
 	if (this_type == FRIBIDI_TYPE_AL)
 	  {
 	    RL_TYPE (pp) = FRIBIDI_TYPE_RTL;
-	    w4 = 1;
+	    w4 = TRUE;
 	    prev_type_org = FRIBIDI_TYPE_ON;
 	    continue;
 	  }
@@ -855,7 +856,7 @@ fribidi_analyse_string (	/* input */
 	    RL_TYPE (pp) = prev_type;
 	    this_type = RL_TYPE (pp);
 	  }
-	w4 = 1;
+	w4 = TRUE;
 
 	/* W5. A sequence of European terminators adjacent to European
 	   numbers changes to All European numbers. */
@@ -864,7 +865,7 @@ fribidi_analyse_string (	/* input */
 		|| next_type == FRIBIDI_TYPE_EN))
 	  {
 	    RL_TYPE (pp) = FRIBIDI_TYPE_EN;
-	    w4 = 0;
+	    w4 = FALSE;
 	    this_type = RL_TYPE (pp);
 	  }
 
@@ -901,7 +902,7 @@ fribidi_analyse_string (	/* input */
        For each neutral, resolve it. */
     for (pp = type_rl_list->next; pp->next; pp = pp->next)
       {
-	gint prev_type, this_type, next_type;
+	FriBidiCharType prev_type, this_type, next_type;
 
 	/* "European and arabic numbers are treated as though they were R"
 	   FRIBIDI_CHANGE_NUMBER_TO_RTL does this. */
@@ -933,7 +934,8 @@ fribidi_analyse_string (	/* input */
 
     for (pp = type_rl_list->next; pp->next; pp = pp->next)
       {
-	gint this_type, level;
+	FriBidiCharType this_type;
+	gint level;
 
 	this_type = RL_TYPE (pp);
 	level = RL_LEVEL (pp);
@@ -941,10 +943,10 @@ fribidi_analyse_string (	/* input */
 	/* I1. Even */
 	/* I2. Odd */
 	if (FRIBIDI_IS_NUMBER (this_type))
-	  RL_LEVEL (pp) = (RL_LEVEL (pp) + 2) & ~1;
+	  RL_LEVEL (pp) = (level + 2) & ~1;
 	else
-	  RL_LEVEL (pp) = (RL_LEVEL (pp) ^ FRIBIDI_DIR_TO_LEVEL (this_type)) +
-	    (RL_LEVEL (pp) & 1);
+	  RL_LEVEL (pp) = (level ^ FRIBIDI_DIR_TO_LEVEL (this_type)) +
+	    (level & 1);
 
 	if (RL_LEVEL (pp) > max_level)
 	  max_level = RL_LEVEL (pp);

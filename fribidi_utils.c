@@ -30,10 +30,10 @@
 
 /*======================================================================
  *  The find_visual_ranges() function is used to convert between a
- *  continous span in either logical or visual space to a one, two or
- *  three discontinous spans in the other space. The function outputs
- *  the number of ranges needed to display the mapped range as
- *  well as the resolved ranges.
+ *  continous span in either logical or visual space to a one, two, 
+ *  three, ..., sixty-three discontinous spans in the other space.
+ *  The function outputs the number of ranges needed to display the
+ *  mapped range as well as the resolved ranges.
  *
  *  The variable is_v2l_map indicates whether the position map is
  *  is in the direction of visual-to-logical. This information is
@@ -42,6 +42,9 @@
  *
  *  This function is typically used to resolve a logical range to visual
  *  ranges e.g. to display the selection.
+ *
+ *  TBD: it does not support vis2log_map parameter yet, also it should
+ *  merge the continous intervals found to one.
  *
  *  Example:
  *     The selection is between logical characters 10 to 45. Calculate
@@ -65,7 +68,7 @@ fribidi_map_range (gint in_span[2],	/* Start and end span */
 		   FriBidiStrIndex *position_map,
 		   guint8 *embedding_level_list,
 		   /* output */
-		   int *num_mapped_spans, int mapped_spans[3][2])
+		   int *num_mapped_spans, int mapped_spans[63][2])
 {
   gint ch_idx;
   gboolean in_range = FALSE;
@@ -84,16 +87,9 @@ fribidi_map_range (gint in_span[2],	/* Start and end span */
   for (ch_idx = 0; ch_idx <= len; ch_idx++)
     {
       int mapped_pos;
-      gboolean is_char_rtl;
 
       if (ch_idx < len)
-	{
-	  mapped_pos = position_map[ch_idx];
-	  if (is_v2l_map)
-	    is_char_rtl = embedding_level_list[mapped_pos];
-	  else
-	    is_char_rtl = embedding_level_list[ch_idx];
-	}
+	mapped_pos = position_map[ch_idx];
       else
 	mapped_pos = -1;	/* Will cause log_pos < start_idx to trigger below */
 
@@ -323,8 +319,7 @@ fribidi_is_char_rtl (guint8 *embedding_level_list,
 void
 fribidi_runs_log2vis (		/* input */
 		       GList *logical_runs,	/* List of FriBidiRunType */
-		       gint len, FriBidiStrIndex *log2vis,
-		       FriBidiCharType base_dir,
+		       gint len, FriBidiStrIndex *log2vis, FriBidiCharType base_dir,	/* TBD: remove it, not needed */
 		       /* output */
 		       GList **visual_runs)
 {
@@ -379,5 +374,5 @@ fribidi_runs_log2vis (		/* input */
 	  current_idx = i;
 	}
     }
-  g_free (visual_runs);
+  g_free (visual_attribs);
 }

@@ -1,3 +1,6 @@
 
-#undef PACKAGE
-#undef VERSION
+#undef DEBUG
+
+#undef MEM_OPTIMIZED
+
+#undef USE_SIMPLE_MALLOC
