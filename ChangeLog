@@ -5,6 +5,11 @@
 	* fribidi.c, fribidi_char_sets_cap_rtl.c: added some comment lines
 	to places that bugs probably exist. find with searching for "--RP".
 
+	* COPYING.LIB: renamed to COPYING (based on a recent suggestion on
+	GNU web site).
+	* bootstrap: removed lines that suppressed warnings about missing
+	COPYING.
+
 2001-03-30  Roozbeh Pournader <roozbeh@sharif.edu>
 	* Makefile.noglib: replaced by a new version from Dan Kenigsberg
 	<danken@cs.technion.ac.il>.
