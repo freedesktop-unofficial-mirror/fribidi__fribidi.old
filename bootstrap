@@ -2,6 +2,6 @@
 
 aclocal \
 && autoheader \
-&& automake --gnu --include-deps \
+&& automake --gnu --include-deps 2>&1 | grep -v "COPYING. not found"\
 && autoconf
 
