@@ -35,48 +35,18 @@ extern FriBidiCharType prop_to_type[];
 FriBidiCharType
 fribidi_get_type (FriBidiChar uch)
 {
-  int i = uch % 256, j = uch / 256;
-  FriBidiPropCharType *block = FriBidiPropertyBlocks[j];
-  if (block)
-#ifdef MEM_OPTIMIZED
-    return prop_to_type[block[i]];
-#else
-    return block[i];
-#endif
-  else
+  if (uch <= 0x10ffff)
     {
-      switch (j)
-	{
-	case 0x05:
-	  if (i >= 0x90)
-	    return FRIBIDI_TYPE_RTL;
-	  else
-	    break;
-
-	case 0xFB:
-	  if (i >= 0x50)
-	    return FRIBIDI_TYPE_AL;
-	  else if (i >= 0x1D)
-	    return FRIBIDI_TYPE_RTL;
-	  else
-	    break;
-	case 0x06:
-	case 0xFC:
-	case 0xFD:
-	  return FRIBIDI_TYPE_AL;
-	case 0x07:
-	  if (i <= 0xBF)
-	    return FRIBIDI_TYPE_AL;
-	  else
-	    break;
-	case 0xFE:
-	  if (i >= 0x70)
-	    return FRIBIDI_TYPE_AL;
-	  else
-	    break;
-	}
-      return FRIBIDI_TYPE_LTR;
+      FriBidiPropCharType *block = FriBidiPropertyBlocks[uch / 256];
+#ifdef MEM_OPTIMIZED
+      return prop_to_type[block[uch % 256]];
+#else
+      return block[uch % 256];
+#endif
     }
+  else
+    return FRIBIDI_TYPE_LTR;
+  /* Non-Unicode chars */
 }
 
 gboolean

@@ -1,3 +1,15 @@
+2001-05-29  Behdad Esfahbod <behdad@sharif.edu>
+	* fribidi_get_type.c: Updated to use new 'fribidi_tables.i'.
+	* fribidi_utils.c: very small code cleanup.
+
+2001-05-29  Roozbeh Pournader <roozbeh@sharif.edu>
+	* unidata/CreateGetType.pl, fribidi_tables.i, Makefile.am: Updated
+	for Unicode 3.1. Replace PropList parsing with UnicodeData parsing.
+	Unassigned characters are now treated as specified in Table 3-7 of
+	UAX #9.
+	* unidata/PropList.txt: removed.
+	* unidata/UnicodeData.txt: added.
+
 2001-05-22  Behdad Esfahbod <behdad@sharif.edu>
 	* fribidi_char_sets_utf8.c: Fixed a little bug in utf-8 -> unicode
 	converter.

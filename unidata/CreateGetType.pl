@@ -23,10 +23,10 @@
 # <fwpg@sharif.edu>. 
 
 ######################################################################
-#  This is a Perl program for automatically building the cfunction
+#  This is a Perl program for automatically building the function
 #  fribidi_get_type() which returns the Bidi type of a unicode
 #  character. To build this function the script parses the
-#  PropList.txt, and BidiMirroring.txt files.
+#  UnicodeData.txt and BidiMirroring.txt files.
 #
 #  The latest version of these files are always available at:
 #     http://www.unicode.org/Public/UNIDATA/
@@ -34,10 +34,9 @@
 
 use strict;
 
-#my $unicode_data_file = "UnicodeData.txt";
-my $unicode_proplist_file = "PropList.txt";
+my $unicode_data_file = "UnicodeData.txt";
 my $unicode_mirroring_file = "BidiMirroring.txt";
-my $proplist_version;
+my $unicode_version = "3.1";
 my $mirroring_version;
 my @bidi_entities;
 my @mirrors;
@@ -67,28 +66,18 @@ my %type_names = ("0x10000090" => ["CTL", "Control units"],
 		  "0x10000094" => ["RLO", "LRO"],		  
 		 );
 
-open(PROP, $unicode_proplist_file)
-   or die "Failed opening $unicode_proplist_file!\n";
-
-#open(DATA, $unicode_data_file)
-#   or die "Failed opening $unicode_data_file!\n";
+open(DATA, $unicode_data_file)
+   or die "Failed opening $unicode_data_file!\n";
 
 open(MIRR, $unicode_mirroring_file)
    or die "Failed opening $unicode_mirroring_file!\n";
-
-$_ = <PROP>;
-if (/^Property dump: UnicodeData-(.*).txt/) {
-   $proplist_version = $1;
-}
 
 $_ = <MIRR>;
 if (/^# BidiMirroring-(.*).txt/) {
    $mirroring_version = $1;
 }
 
-#parse_unicode_data_for_bidi_entries();
-parse_prop_for_bidi_entities();
-find_bidi_controls();
+parse_unicode_data_for_bidi_entries();
 #print_bidi_entities();
 parse_for_mirror_chars();
 #print_mirrored_chars();
@@ -104,7 +93,7 @@ sub parse_unicode_data_for_bidi_entries {
 	    $type = $tt;
 	}
 	$num = hex($num);
-	
+
 	if ($prev_type eq $type && $num == $prev_num+1) {
 	    $bidi_entities[-1][2]++;
 	} else {
@@ -113,64 +102,6 @@ sub parse_unicode_data_for_bidi_entries {
 	$prev_num = $num;
 	$prev_type = $type;
     }
-}
-
-sub parse_prop_for_bidi_entities {
-    my @property_bidi_entities;
-    my ($type, $type_num, $type_descr);
-    while(<PROP>) {
-	tr/\r\n//d;
-	if (/^Property dump for:\s*(.*bidi.*)/i) {
-	    $type = $1;
-	    $_=<PROP>;
-	    $type=~ / /;
-	    ($type_num, $type_descr) = ($`, $');
-	    next;
-	}
-	if ($type && /^\s*$/) {
-	    $type = "";
-	}
-	next unless $type;
-
-	my($range) = split;
-	my($first,$last,$len);
-	if ($range =~ /\./) {
-	   ($first,$last) = map(hex, split(/\.\./, $range));
-	    $len = $last - $first +1;
-	} else {
-	    ($first, $len) = (hex($range), 1);
-	}
-#	print "$first $type_names{$type_num}->[0] $len\n";
-	$type = $type_names{$type_num} || die "Undefined num $type_num!\n";
-
-	push(@property_bidi_entities, [$first, $type_names{$type_num}->[0], $len]);
-    }
-
-    @bidi_entities = sort { $a->[0] <=> $b->[0] } @property_bidi_entities;
-}
-
-######################################################################
-#  Manually change the bidi control characters that are not
-#  explicitely listed in the PropList file to their corresponding
-#  values.
-#
-#  This should be changed to be more generic, but I don't expect
-#  this behaviour to change in the PropList file in the near
-#  future.
-######################################################################
-sub find_bidi_controls {
-    # Erase all bidi controls
-    @bidi_entities = grep($_->[1] !~ /^(CTL|EO)/o, @bidi_entities);
-
-    # Manually add the bidi controls that are not listed in PropList
-    push(@bidi_entities,
-	 [0x202a, 'LRE', 1],
-	 [0x202b, 'RLE', 1],
-	 [0x202d, 'LRO', 1],
-	 [0x202e, 'RLO', 1]);
-
-    # resort
-    @bidi_entities = sort { $a->[0] <=> $b->[0] } @bidi_entities;
 }
 
 sub parse_for_mirror_chars {
@@ -205,7 +136,6 @@ sub split_entity {
     return ($first, $last, $type);
 };
 
-
 sub create_block {
     my ($block,$name, $ranges) = @_;
     my($title) = <<__;
@@ -217,7 +147,7 @@ __
     my $ind = 0;
     for my $i ($block*256 .. $block*256 + 255) {
        my $found = 0;
-           
+
        if ($i % 16 == 0) {
            $result .= "  ";
        }
@@ -234,7 +164,17 @@ __
            }
        }
        if (!$found) {
-	   $result .= sprintf("%-3s,", $last_type);
+           # Based on Table 3-7 from UTR #9
+
+           if (0x0590 <= $i && $i <= 0x05FF || 0xFB1D <= $i && $i <= 0xFB4F) {
+	       $result .= sprintf("%-3s,", "RTL");
+	   } elsif (0x0600 <= $i && $i <= 0x07BF ||
+                    0xFB50 <= $i && $i <= 0xFDFF ||
+                    0xFE70 <= $i && $i <= 0xFEFF) {
+	       $result .= sprintf("%-3s,", "AL");
+           } else {
+	       $result .= sprintf("%-3s,", "LTR");
+	   }
        }
        if ($i % 16 == 15) {
            $result .= "\n";
@@ -251,7 +191,7 @@ sub create_c_file {
 
     my $c_file =<<__;
 /*========================================================================
- *  This file was automatically created from $unicode_proplist_file, version $proplist_version,
+ *  This file was automatically created from $unicode_data_file, version $unicode_version,
  *  and $unicode_mirroring_file, version $mirroring_version, by the perl script CreateGetType.pl.
  *----------------------------------------------------------------------*/
 /* *INDENT-OFF* */
@@ -267,11 +207,11 @@ __
     
     my $i = 0;
     my $block_array = <<__;
-FriBidiPropCharType *FriBidiPropertyBlocks[256] = {
+FriBidiPropCharType *FriBidiPropertyBlocks[] = {
 __
 
     my %seen_blocks;
-    for my $block (0..255) {
+    for my $block (0..0x10FF) {
        my @block_ranges;
 
        while ($i < @bidi_entities) {
@@ -282,9 +222,8 @@ __
            } else {
                if ($last >= $block * 256) {
                    push @block_ranges, [ $first > $block * 256 ? $first : $block * 256,
-                                         $last < $block * 256 + 255 ? $last : $block * 256 + 255, 
+                                         $last < $block * 256 + 255 ? $last : $block * 256 + 255,
                                          $type ];
-                                    
                }
                if ($last < ($block + 1) * 256) {
                    $i++;
@@ -294,38 +233,28 @@ __
            }
        }
 
+       
+       $block_array .= "  ";
        if (@block_ranges == 0) {
-           $block_array .= "  NULL,\n";
-           
-#       }
-#       elsif (@block_ranges == 1
-#		&& $block_ranges[0]->[1] - $block_ranges[0]->[0] >= 255
-#		&& exists $solid_blocks{$block_ranges[0]->[2]}) {
-#           my $name = $solid_blocks{$block_ranges[0]->[2]};
-#           $block_array .= "  $name,\n";
-           
+           # assuming 0100..01FF will be all LTR
+           $block_array .= "FriBidiPropertyBlock0100";
        } else {
-           my $name = sprintf ("FriBidiPropertyBlock%04x", $block * 256);
+           my $name = sprintf ("FriBidiPropertyBlock%02lX00", $block);
+           my($title, $block_ctx) = create_block ($block, $name, \@block_ranges);
 
-	   my($title, $block_ctx) = create_block ($block, $name, \@block_ranges);
-
-	   # use the fact that a hash table uses a good hash function. ;-)
-	   if (exists $seen_blocks{$block_ctx}) {
-	       my $name = $seen_blocks{$block_ctx};
-	       $block_array .= "  $name,\n";
-	   } else {
-	       $num_used_blocks++;
-	       $block_array .= "  $name,\n";
-	       $c_file .= $title . $block_ctx;
+           # use the fact that a hash table uses a good hash function. ;-)
+           # (What does that mean?! --RP)
+           if (exists $seen_blocks{$block_ctx}) {
+               my $name = $seen_blocks{$block_ctx};
+               $block_array .= "$name";
+           } else {
+               $num_used_blocks++;
+               $block_array .= "$name";
+               $c_file .= $title . $block_ctx;
                $seen_blocks{$block_ctx} = $name;
-	   }
-
-#           if (@block_ranges == 1
-#	       && $block_ranges[0]->[1] - $block_ranges[0]->[0] >= 255
-#	      ) {
-#               $solid_blocks{$block_ranges[0]->[2]} = $name;
-#           }
+           }
        }
+       $block_array .= sprintf (", /* %02lX00..%02lXFF */\n", $block, $block);
     }
    $c_file .= "/* $num_used_blocks blocks defined */\n\n";
 

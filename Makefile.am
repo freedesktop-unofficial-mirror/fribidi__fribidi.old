@@ -75,14 +75,14 @@ unidata/BidiMirroring.txt:
 	    wget http://www.unicode.org/Public/UNIDATA/BidiMirroring.txt ;	\
 	fi
 
-unidata/PropList.txt:
+unidata/UnicodeData.txt:
 	cd $(top_srcdir)/unidata &&	\
-	if ! test -f PropList.txt ; then	\
-	    wget http://www.unicode.org/Public/UNIDATA/PropList.txt ;	\
+	if ! test -f UnicodeData.txt ; then	\
+	    wget http://www.unicode.org/Public/UNIDATA/UnicodeData.txt ;	\
 	fi
 
 fribidi_tables.i: unidata/CreateGetType.pl	\
-	unidata/BidiMirroring.txt unidata/PropList.txt
+	unidata/BidiMirroring.txt unidata/UnicodeData.txt
 	cd $(top_srcdir)/unidata &&	\
 	./CreateGetType.pl > ../fribidi_tables.i
 

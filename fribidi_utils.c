@@ -301,11 +301,8 @@ gboolean
 fribidi_is_char_rtl (guint8 *embedding_level_list,
 		     FriBidiCharType base_dir, int idx)
 {
-  if (!embedding_level_list)
-    return FALSE;
-  else if (idx == -1)
-    return base_dir == FRIBIDI_TYPE_RTL;
-
+  if (!embedding_level_list || idx < 0)
+    return FRIBIDI_IS_RTL(base_dir);
   /* Otherwise check if the embedding level is odd */
   else
     return embedding_level_list[idx] % 2;

@@ -191,7 +191,7 @@ FriBidiRunType;
 #define FRIBIDI_DIR_TO_LEVEL(dir) (dir & 1)
 
 /* Is right to left? */
-#define FRIBIDI_IS_RTL(p)      ((P) & FRIBIDI_MASK_RTL)
+#define FRIBIDI_IS_RTL(p)      ((p) & FRIBIDI_MASK_RTL)
 /* Is arabic? */
 #define FRIBIDI_IS_ARABIC(p)   ((p) & FRIBIDI_MASK_ARABIC)
 
