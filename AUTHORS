@@ -5,21 +5,22 @@ Owen Tayler <otaylor@redhat.com>
    * Contributed very important memory leak and speed patches.
 
 Raphael Finkel <raphael@cs.uky.edu>       
-   * Contributed utf8 converters
+   * Contributed UTF-8 converters.
 
 Pablo Saratxaga <pablo@mandrakesoft.com>  
-   * Contributed several arabic charset converters
+   * Contributed several arabic charset converters.
 
 Manish Singh <yosh@gimp.org> 
-   * Contributed patch to make fribidi use libtool
+   * Contributed patch to make fribidi use libtool.
 
 Omer Zak <omerz@actcom.co.il>
-   * Contributed several bug fixes, improved interface ut8 converters,
-     and several considerations for embedded systems.
+   * Contributed several bug fixes, improved interface UTF-8 converters, and
+     several considerations for embedded systems.
 
 Behdad Esfahbod <behdad@bamdad.org>
-   * Added explicit bidi support.
-   * Fixed many bugs in Arabic bidi types.
+   * Added explicit bidi support, fixed many bugs in Arabic bidi types,
+     changed Fribidi to use bitmasks.
 
 Roozbeh Pournader <roozbeh@sharif.edu>
-   * Changed the Perl script used for automatic character data extraction.
+   * Changed the Perl script used for automatic character data extraction,
+     fixed small things here and there.
