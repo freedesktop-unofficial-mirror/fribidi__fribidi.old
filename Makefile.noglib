@@ -1,0 +1,5 @@
+LIB_OBJECTS=fribidi.o fribidi_char_sets.o fribidi_get_type.o fribidi_utils.o fribidi_mini_glib.o
+CFLAGS = -DFRIBIDI_USE_MINI_GLIB
+
+all: $(LIB_OBJECTS)
+	ar -r libfribidi.a $(LIB_OBJECTS)
