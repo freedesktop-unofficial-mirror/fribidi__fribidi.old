@@ -2,17 +2,21 @@
 #
 #	Everything:
 #		(this is equivalent to two others together)
-#			fribidi-version-release-arch.rpm
+#			fribidiN-version-release-arch.rpm
 #	Runtime material: Shared library and command line tool
-#			libfribidi-version-release-arch.rpm
+#			libfribidiN-version-release-arch.rpm
 #	Development material: Static library and header files
 #		(requires libfribidi)
 #			libfribidi-devel-version-release-arch.rpm
+#	Where N is the major version number.
 
 %define name @PACKAGE@
-%define ver @VERSION@
-%define rel @SPECRELEASE@
-%define apiver @INTERFACE_VERSION@
+%define ver @FRIBIDI_VERSION@
+%define major @FRIBIDI_MAJOR_VERSION@
+%define minor @FRIBIDI_MINOR_VERSION@
+%define micro @FRIBIDI_MICRO_VERSION@
+%define apiver @FRIBIDI_INTERFACE_VERSION@
+%define rel @FRIBIDI_SPEC_RELEASE@
 %define prefix %{_prefix}
 
 Name: %{name}
@@ -20,42 +24,49 @@ Version: %{ver}
 Release: %{rel}
 Serial: %{apiver}
 Copyright: LGPL
-Source: http://telia.dl.sourceforge.net/fribidi/%{name}-%{ver}.tar.gz
+Source: http://prdownloads.sourceforge.net/fribidi/%{name}-%{ver}.tar.gz
 URL: http://fribidi.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}
-
 Summary: Library implementing the Unicode Bidirectional Algorithm
 Group: System/Libraries
-Provides: lib%{name}
-Provides: lib%{name}-devel
 %description
 A library to handle bidirectional scripts (eg. hebrew, arabic), so that
 the display is done in the proper way; while the text data itself is
 always written in logical order.
 
-Install %{name} if you want to run or develop programs that use %{name}.
-
-
-%package -n lib%{name}
+%package -n %{name}%{major}
 Summary: Library implementing the Unicode Bidirectional Algorithm
 Group: System/Libraries
-Conflicts: %{name}
-%description -n lib%{name}
-The lib%{name} package includes the shared libraries for the %{name} package.
+Provides: lib%{name}%{major}
+Provides: lib%{name}%{major}-devel
+%description -n %{name}%{major}
+A library to handle bidirectional scripts (eg. hebrew, arabic), so that
+the display is done in the proper way; while the text data itself is
+always written in logical order.
 
-Install lib%{name} if you want to run programs which use %{name}.
+Install %{name}%{major} if you want to run or develop programs that use %{name}.
 
 
-%package -n lib%{name}-devel
+%package -n lib%{name}%{major}
+Summary: Library implementing the Unicode Bidirectional Algorithm
+Group: System/Libraries
+Conflicts: %{name}%{major}
+%description -n lib%{name}%{major}
+The lib%{name}%{major} package includes the shared libraries for the %{name}%{major} package.
+
+Install lib%{name}%{major} if you want to run programs which use %{name}.
+
+
+%package -n lib%{name}%{major}-devel
 Summary: Library implementing the Unicode Bidirectional Algorithm
 Group: Development/C
-Requires: lib%{name} = %{ver}
-Conflicts: %{name}
-%description -n lib%{name}-devel
-The lib%{name}-devel package includes the static libraries and header files
-for the %{name} package.
+Requires: lib%{name}%{major} = %{ver}
+Conflicts: %{name}%{major}
+%description -n lib%{name}%{major}-devel
+The lib%{name}%{major}-devel package includes the static libraries and header files
+for the %{name}%{major} package.
 
-Install lib%{name}-devel if you want to develop programs which will use
+Install lib%{name}%{major}-devel if you want to develop programs which will use
 %{name}.
 
 
@@ -87,13 +98,13 @@ make DESTDIR="$RPM_BUILD_ROOT" install
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post -n %{name}%{major} -p /sbin/ldconfig
+%postun -n %{name}%{major} -p /sbin/ldconfig
 
-%post -n lib%{name} -p /sbin/ldconfig
-%postun -n lib%{name} -p /sbin/ldconfig
+%post -n lib%{name}%{major} -p /sbin/ldconfig
+%postun -n lib%{name}%{major} -p /sbin/ldconfig
 
-%files
+%files -n %{name}%{major}
 %defattr(-,root,root)
 %doc README AUTHORS COPYING ChangeLog TODO THANKS NEWS
 %{_bindir}/%{name}
@@ -105,7 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.so
 %{_includedir}/*
 
-%files -n lib%{name}
+%files -n lib%{name}%{major}
 %defattr(-, root, root)
 %doc README AUTHORS COPYING ChangeLog TODO THANKS NEWS
 %{_bindir}/%{name}
@@ -113,7 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.so.*
 %{_libdir}/pkgconfig/%{name}.pc
 
-%files -n lib%{name}-devel
+%files -n lib%{name}%{major}-devel
 %defattr(-, root, root)
 %{_libdir}/*.a
 %{_libdir}/*.la

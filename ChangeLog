@@ -1,3 +1,7 @@
+2002-01-18  Behdad Esfahbod <behdad@bamdad.org>
+	* configure.in, fribidi.spec.in: Clean up, different version components
+	defined, rpm names changed from fribidi to fribidi{majorversion}.
+
 2002-01-14  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c: Rewrote run_length_encode_types() main loop.
 

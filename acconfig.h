@@ -16,3 +16,5 @@
 #undef HAS_FRIBIDI_TAB_CHAR_TYPE_7_I
 #undef HAS_FRIBIDI_TAB_CHAR_TYPE_8_I
 #undef HAS_FRIBIDI_TAB_CHAR_TYPE_9_I
+/* We should #undef this symbol, to make autoheader shut up */
+#undef HAS_FRIBIDI_TAB_CHAR_TYPE__I
