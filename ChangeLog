@@ -5,7 +5,7 @@
 2001-03-26 Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c, fribidi_types.h: Some bugs introduced in the last
 	changes removed, "Resolving weak types" rewritten, no known
-	conformance bugs. Macros defined for external use, changed their
+	conformance bugs. Defined macros for external use, changed their
 	name to have a prefix of FRIBIDI_.
 	
 	* fribidi.c, fribidi.h: Function fribidi_remove_explicits() added
@@ -35,8 +35,8 @@
 	--changes, --novisual, --charsetdesc added.	
 	Now use the charset conventions, lots of code removed.
 	
-	* test_fribidi.c: Just removed!
-	`fribidi --showinput --fill --clean' should be used instead.
+	* test_fribidi.c: got removed. `fribidi --showinput --fill --clean'
+	should be used instead.
 
 	* fribidi_benchmark: Explicit support added, now benchmarks with
 	two strings, one without explicit marks and one with them.
