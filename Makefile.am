@@ -1,3 +1,6 @@
+
+MAINTAINERCLEANFILES = Makefile.in configure aclocal.m4 config.h.in
+
 noinst_PROGRAMS = fribidi_benchmark
 
 INCLUDES = $(GLIB_CFLAGS)

@@ -1,3 +1,10 @@
+2001-04-10  Behdad Esfahbod <behdad@bamdad.org>
+	* *.c/*.h: Changed all "guchar"s to "gchar" and neede casts done.
+
+	* Makefile.am: Added MAINTAINERCLEANFILES to remove files
+	"configure", "config.h.in", "Makefile.in", "aclocal.m4" by
+	maintainer-clean target.
+
 2001-04-07  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi_main.c, fribidi_benchmark.c: Check for HAVE_CONFIG_H flag.
 
