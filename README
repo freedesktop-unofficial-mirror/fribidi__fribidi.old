@@ -13,10 +13,10 @@ Audience
 It is our hope that this library will stimulate the implementation of Hebrew
 and Arabic in lots of free software. Here is a small list of projects that
 would benifit from the use of the FriBidi library, but of course there are
-many more: Wine, Mozilla, Qt, KDE, AbiWord, lynx, OpenOffice.
+many more: Wine, Mozilla, Qt, KDE, lynx, OpenOffice.
 
 It may be interesting for you to know that Fribidi is already being used in
-projects like Gnome, GTK+, Pango, and Xterm.
+projects like Gnome, GTK+, Pango, AbiWord, and Xterm.
 
 Downloading
 ===========

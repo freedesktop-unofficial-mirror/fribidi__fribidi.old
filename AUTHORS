@@ -36,3 +36,8 @@ Abel Cheung <maddog@linux.org.hk>
 
 Dominique Unruh <dominique@unruh.de>
 	* Contributed a patch for reordering NSMs (rule L3).
+
+Tomas Frydrych <tomas@frydrych.uklinux.net>
+	* Contirbuted patches for compiling fribidi under Microsoft
+	Visual C++.
+
