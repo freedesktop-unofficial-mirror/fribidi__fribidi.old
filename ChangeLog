@@ -1,3 +1,5 @@
+2001-12-11  Roozbeh Pournader <roozbeh@sharif.edu>
+	* configure.in: changed the version to 0.9.1.
 2001-12-10  Roozbeh Pournader <roozbeh@sharif.edu>
 	* fribidi.c: fixed a memory boundary bug (fix by Hidetoshi Tajima
 	<hidetoshi.tajima@sun.com>).
