@@ -1291,10 +1291,10 @@ fribidi_log2vis (		/* input */
 	      {
 		if (pp->level & 1)
 		  {
-		    FriBidiStrIndex i;
-		    fribidi_boolean is_nsm_seq, seq_end;
+		    FriBidiStrIndex i, seq_end = 0;
+		    fribidi_boolean is_nsm_seq;
 
-		    is_nsm_seq = 0;
+		    is_nsm_seq = FRIBIDI_FALSE;
 		    for (i = RL_POS (pp) + RL_LEN (pp) - 1; i >= RL_POS (pp);
 			 i--)
 		      {
