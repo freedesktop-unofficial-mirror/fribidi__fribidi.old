@@ -32,7 +32,6 @@ libfribidiinc_HEADERS = \
 EXTRA_DIST = \
         unidata/CreateGetType.pl \
 	tests/test-hebrew \
-	tests/test-capital-rtl \
 	run.tests \
 	test.reference \
 	ANNOUNCE \
@@ -49,7 +48,7 @@ bin_PROGRAMS = fribidi
 fribidi_SOURCES = fribidi_main.c
 fribidi_LDADD = libfribidi.la $(GLIB_LIBS)
 
-test.reference : tests/test-CapRTL tests/test-explicit test/test-hebrew
+test.reference: tests/test-CapRTL tests/test-explicit tests/test-hebrew
 	./fribidi --fill --showinput --charset CapRTL tests/test-CapRTL > \
 	tests/test-CapRTL.reference
 	./fribidi --fill --showinput --charset CapRTL tests/test-explicit > \
@@ -57,7 +56,7 @@ test.reference : tests/test-CapRTL tests/test-explicit test/test-hebrew
 	./fribidi --fill --showinput --charset ISO8859-8 tests/test-hebrew > \
 	tests/test-hebrew.reference
 
-test : fribidi
+test: fribidi
 	./run.tests
 
 TESTS = run.tests
