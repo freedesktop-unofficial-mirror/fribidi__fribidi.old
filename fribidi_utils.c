@@ -61,7 +61,7 @@
  *                       &num_vis_ranges, *vis_ranges);
  **----------------------------------------------------------------------*/
 void
-fribidi_map_range (FriBidiEnv* fribidienv,
+fribidi_map_range (FriBidiEnv *fribidienv,
 		   /* input */
 		   FriBidiStrIndex in_span[2],	/* Start and end span */
 		   FriBidiStrIndex len, boolean is_v2l_map,	/* Needed for embedding_level */
@@ -113,15 +113,15 @@ fribidi_map_range (FriBidiEnv* fribidienv,
  *  length of the section in the new string that needs redrawing.
  *----------------------------------------------------------------------*/
 void
-fribidi_find_string_changes ( FriBidiEnv* fribidienv,
-			      /* input */
-			      const FriBidiChar *old_str,
-			      FriBidiStrIndex old_len,
-			      const FriBidiChar *new_str,
-			      FriBidiStrIndex new_len,
-			      /* output */
-			      FriBidiStrIndex *change_start,
-			      FriBidiStrIndex *change_len)
+fribidi_find_string_changes (FriBidiEnv *fribidienv,
+			     /* input */
+			     const FriBidiChar *old_str,
+			     FriBidiStrIndex old_len,
+			     const FriBidiChar *new_str,
+			     FriBidiStrIndex new_len,
+			     /* output */
+			     FriBidiStrIndex *change_start,
+			     FriBidiStrIndex *change_len)
 {
   FriBidiStrIndex i, num_bol, num_eol;
 
@@ -193,13 +193,12 @@ fribidi_find_string_changes ( FriBidiEnv* fribidienv,
  *
  *----------------------------------------------------------------------*/
 void
-fribidi_xpos_resolve (FriBidiEnv* fribidienv,
+fribidi_xpos_resolve (FriBidiEnv *fribidienv,
 		      /* input */
 		      int x_pos, int x_offset, FriBidiStrIndex len,
 		      const FriBidiLevel *embedding_level_list,
 		      FriBidiCharType base_dir,
-		      const FriBidiStrIndex *vis2log,
-		      const int *char_widths,
+		      const FriBidiStrIndex *vis2log, const int *char_widths,
 		      /* output */
 		      FriBidiStrIndex *res_log_pos,
 		      FriBidiStrIndex *res_vis_pos,
@@ -303,7 +302,7 @@ fribidi_xpos_resolve (FriBidiEnv* fribidienv,
  *  if the embedding level for the character is odd.
  *----------------------------------------------------------------------*/
 boolean
-fribidi_is_char_rtl (FriBidiEnv* fribidienv,
+fribidi_is_char_rtl (FriBidiEnv *fribidienv,
 		     const FriBidiLevel *embedding_level_list,
 		     FriBidiCharType base_dir, FriBidiStrIndex idx)
 {
@@ -320,16 +319,15 @@ fribidi_is_char_rtl (FriBidiEnv* fribidienv,
  *  the same attributes.
  *----------------------------------------------------------------------*/
 void
-fribidi_runs_log2vis ( FriBidiEnv* fribidienv,
-		       /* input */
-		       const FriBidiList *logical_runs,	/* List of FriBidiRunType */
-		       FriBidiStrIndex len,
-		       const FriBidiStrIndex *log2vis,
-		       FriBidiCharType base_dir,	/* TBD: remove it, not needed */
-		       /* output */
-		       FriBidiList **visual_runs)
+fribidi_runs_log2vis (FriBidiEnv *fribidienv,
+		      /* input */
+		      const FriBidiList *logical_runs,	/* List of FriBidiRunType */
+		      FriBidiStrIndex len, const FriBidiStrIndex *log2vis, FriBidiCharType base_dir,	/* TBD: remove it, not needed */
+		      /* output */
+		      FriBidiList **visual_runs)
 {
-  void **visual_attribs = (void **) fribidi_malloc (fribidienv, sizeof (void *) * len);
+  void **visual_attribs =
+    (void **) fribidi_malloc (fribidienv, sizeof (void *) * len);
   void *current_attrib;
   FriBidiStrIndex pos, i;
   const FriBidiList *list;
@@ -361,16 +359,16 @@ fribidi_runs_log2vis ( FriBidiEnv* fribidienv,
     {
       if (i == len || current_attrib != visual_attribs[i])
 	{
-	  FriBidiRunType *run =
-	    (FriBidiRunType *) fribidi_malloc (fribidienv, sizeof (FriBidiRunType));
+	  FriBidiRunType *run = (FriBidiRunType *) fribidi_malloc (fribidienv,
+								   sizeof
+								   (FriBidiRunType));
 	  run->length = i - current_idx;
 	  run->attribute = current_attrib;
 
 	  /* Keeping track of the last node is crucial for efficiency
 	     for long lists... */
 	  if (last == NULL)
-	    last = *visual_runs = fribidi_list_append (fribidienv,
-						       NULL, run);
+	    last = *visual_runs = fribidi_list_append (fribidienv, NULL, run);
 	  else
 	    {
 	      fribidi_list_append (fribidienv, last, run);

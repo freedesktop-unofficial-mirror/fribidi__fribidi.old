@@ -57,9 +57,10 @@
  *  It initializes the doubly-linked list of memory chunks and the flags.
  *----------------------------------------------------------------------*/
 
-void init_fribidienv(FriBidiEnv* fribidienv, FriBidiFlags aFlags)
+void
+init_fribidienv (FriBidiEnv *fribidienv, FriBidiFlags aFlags)
 {
-  VALIDATE_FRIBIDIENV(fribidienv);
+  VALIDATE_FRIBIDIENV (fribidienv);
   fribidienv->iAllocatedMemoryChunks = NULL;
   fribidienv->iFlags = aFlags;
   /* fribidienv->iReserved3 = NULL; */
@@ -71,19 +72,21 @@ void init_fribidienv(FriBidiEnv* fribidienv, FriBidiFlags aFlags)
  * so there is no need for a separate init_fribidienv() call (but it
  * does not harm).
  *----------------------------------------------------------------------*/
-void destroy_fribidienv(FriBidiEnv* fribidienv)
+void
+destroy_fribidienv (FriBidiEnv *fribidienv)
 {
-  FriBidiMemChunkPrefix* lChunkPtr;
-  FriBidiMemChunkPrefix* lChunkNext;
+  FriBidiMemChunkPrefix *lChunkPtr;
+  FriBidiMemChunkPrefix *lChunkNext;
 
-  VALIDATE_FRIBIDIENV(fribidienv);
+  VALIDATE_FRIBIDIENV (fribidienv);
 
   lChunkPtr = fribidienv->iAllocatedMemoryChunks;
-  while (NULL != lChunkPtr) {
-    lChunkNext = (FriBidiMemChunkPrefix*) (lChunkPtr->iNext);
-    free(lChunkPtr);
-    lChunkPtr = lChunkNext;
-  }
+  while (NULL != lChunkPtr)
+    {
+      lChunkNext = (FriBidiMemChunkPrefix *) (lChunkPtr->iNext);
+      free (lChunkPtr);
+      lChunkPtr = lChunkNext;
+    }
   fribidienv->iAllocatedMemoryChunks = NULL;
 }
 
@@ -93,17 +96,20 @@ void destroy_fribidienv(FriBidiEnv* fribidienv)
  * This function may throw an Out-Of-Memory exception in
  * environments, which support exceptions.
  *----------------------------------------------------------------------*/
-void* fribidi_malloc(FriBidiEnv* fribidienv, size_t size)
+void *
+fribidi_malloc (FriBidiEnv *fribidienv, size_t size)
 {
-  FriBidiMemChunkPrefix* lChunk_ptr;
-  FriBidiMemChunkPrefix* lNextChunk_ptr;
+  FriBidiMemChunkPrefix *lChunk_ptr;
+  FriBidiMemChunkPrefix *lNextChunk_ptr;
 
-  VALIDATE_FRIBIDIENV(fribidienv);
+  VALIDATE_FRIBIDIENV (fribidienv);
 
-  lChunk_ptr = (FriBidiMemChunkPrefix*) malloc(sizeof(FriBidiMemChunkPrefix) + size);
-  if (NULL == lChunk_ptr) {
-    FRIBIDI_OOM_ACTION;
-  }
+  lChunk_ptr =
+    (FriBidiMemChunkPrefix *) malloc (sizeof (FriBidiMemChunkPrefix) + size);
+  if (NULL == lChunk_ptr)
+    {
+      FRIBIDI_OOM_ACTION;
+    }
 
   /* Before:
    * fribidienv->iAllocatedMemoryChunks points at lNextChunk_ptr.
@@ -122,13 +128,14 @@ void* fribidi_malloc(FriBidiEnv* fribidienv, size_t size)
 
   lNextChunk_ptr = fribidienv->iAllocatedMemoryChunks;
   fribidienv->iAllocatedMemoryChunks = lChunk_ptr;
-  if (NULL != lNextChunk_ptr) {
-    lNextChunk_ptr->iPrev = lChunk_ptr;
-  }
+  if (NULL != lNextChunk_ptr)
+    {
+      lNextChunk_ptr->iPrev = lChunk_ptr;
+    }
   lChunk_ptr->iNext = lNextChunk_ptr;
-  lChunk_ptr->iPrev = (FriBidiMemChunkPrefix*)fribidienv;
+  lChunk_ptr->iPrev = (FriBidiMemChunkPrefix *) fribidienv;
 
-  return((void*) (&lChunk_ptr[1]));
+  return ((void *) (&lChunk_ptr[1]));
 }
 
 /*======================================================================
@@ -136,11 +143,12 @@ void* fribidi_malloc(FriBidiEnv* fribidienv, size_t size)
  * FriBidiEnv instance and free it.
  * If the memory chunk is not properly linked, then panic.
  *----------------------------------------------------------------------*/
-void fribidi_free(FriBidiEnv* fribidienv, void* ptr)
+void
+fribidi_free (FriBidiEnv *fribidienv, void *ptr)
 {
-  FriBidiMemChunkPrefix* lChunk_ptr;
-  FriBidiMemChunkPrefix* lNextChunk_ptr;
-  FriBidiMemChunkPrefix* lPrevChunk_ptr;
+  FriBidiMemChunkPrefix *lChunk_ptr;
+  FriBidiMemChunkPrefix *lNextChunk_ptr;
+  FriBidiMemChunkPrefix *lPrevChunk_ptr;
 
   /* VALIDATE_FRIBIDIENV(fribidienv); */
   /* At normal operation (i.e. not when debugging the memory management
@@ -148,23 +156,25 @@ void fribidi_free(FriBidiEnv* fribidienv, void* ptr)
    * fribidi_free().
    */
 
-  if (NULL == ptr) return;
+  if (NULL == ptr)
+    return;
 
-  lChunk_ptr = (FriBidiMemChunkPrefix*)
-              (((char *)ptr) - sizeof(FriBidiMemChunkPrefix));
+  lChunk_ptr = (FriBidiMemChunkPrefix *)
+    (((char *) ptr) - sizeof (FriBidiMemChunkPrefix));
 
-  lNextChunk_ptr = (FriBidiMemChunkPrefix*) (lChunk_ptr->iNext);
-  lPrevChunk_ptr = (FriBidiMemChunkPrefix*) (lChunk_ptr->iPrev);
+  lNextChunk_ptr = (FriBidiMemChunkPrefix *) (lChunk_ptr->iNext);
+  lPrevChunk_ptr = (FriBidiMemChunkPrefix *) (lChunk_ptr->iPrev);
 
-  assert(NULL != lPrevChunk_ptr);
+  assert (NULL != lPrevChunk_ptr);
 
   /* Remove the current memory chunk from the doubly-linked list. */
   lPrevChunk_ptr->iNext = lNextChunk_ptr;
-  if (NULL != lNextChunk_ptr) {
-    lNextChunk_ptr->iPrev = lPrevChunk_ptr;
-  }
+  if (NULL != lNextChunk_ptr)
+    {
+      lNextChunk_ptr->iPrev = lPrevChunk_ptr;
+    }
 
-  free(lChunk_ptr);
+  free (lChunk_ptr);
 }
 
 
@@ -174,64 +184,73 @@ void fribidi_free(FriBidiEnv* fribidienv, void* ptr)
  *  fribidi_mirroring_status() returns whether mirroring is on or off,
  *  default is on.
  *----------------------------------------------------------------------*/
-boolean fribidi_mirroring_status (FriBidiEnv* fbenv)
+boolean
+fribidi_mirroring_status (FriBidiEnv *fbenv)
 {
-  VALIDATE_FRIBIDIENV(fbenv);
+  VALIDATE_FRIBIDIENV (fbenv);
 
-  return(0 != (fbenv->iFlags & FRIBIDIENV_MIRRORING_MODE) ? TRUE : FALSE);
+  return (0 != (fbenv->iFlags & FRIBIDIENV_MIRRORING_MODE) ? TRUE : FALSE);
 }
 
 /*======================================================================
  *  fribidi_set_mirroring() sets mirroring on or off.
  *----------------------------------------------------------------------*/
-void fribidi_set_mirroring (FriBidiEnv* fbenv, boolean mirror)
+void
+fribidi_set_mirroring (FriBidiEnv *fbenv, boolean mirror)
 {
-  VALIDATE_FRIBIDIENV(fbenv);
+  VALIDATE_FRIBIDIENV (fbenv);
 
-  if (FALSE != mirror) {
-    fbenv->iFlags |= FRIBIDIENV_MIRRORING_MODE;
-  }
-  else {
-    fbenv->iFlags &= (~FRIBIDIENV_MIRRORING_MODE);
-  }
+  if (FALSE != mirror)
+    {
+      fbenv->iFlags |= FRIBIDIENV_MIRRORING_MODE;
+    }
+  else
+    {
+      fbenv->iFlags &= (~FRIBIDIENV_MIRRORING_MODE);
+    }
 }
 
 /*======================================================================
  *  fribidi_reorder_nsm_status() returns whether reordering of nsm
  *  sequences is on or off, default is off.
  *----------------------------------------------------------------------*/
-boolean fribidi_reorder_nsm_status (FriBidiEnv* fbenv)
+boolean
+fribidi_reorder_nsm_status (FriBidiEnv *fbenv)
 {
-  VALIDATE_FRIBIDIENV(fbenv);
+  VALIDATE_FRIBIDIENV (fbenv);
 
-  return(0 != (fbenv->iFlags & FRIBIDIENV_REORDER_NSM_MODE) ? TRUE : FALSE);
+  return (0 != (fbenv->iFlags & FRIBIDIENV_REORDER_NSM_MODE) ? TRUE : FALSE);
 }
 
 /*======================================================================
  *  fribidi_set_reorder_nsm() sets reordering of nsm sequences on or off.
  *----------------------------------------------------------------------*/
-void fribidi_set_reorder_nsm (FriBidiEnv* fbenv, boolean reorder)
+void
+fribidi_set_reorder_nsm (FriBidiEnv *fbenv, boolean reorder)
 {
-  VALIDATE_FRIBIDIENV(fbenv);
+  VALIDATE_FRIBIDIENV (fbenv);
 
-  if (FALSE != reorder) {
-    fbenv->iFlags |= FRIBIDIENV_REORDER_NSM_MODE;
-  }
-  else {
-    fbenv->iFlags &= (~FRIBIDIENV_REORDER_NSM_MODE);
-  }
+  if (FALSE != reorder)
+    {
+      fbenv->iFlags |= FRIBIDIENV_REORDER_NSM_MODE;
+    }
+  else
+    {
+      fbenv->iFlags &= (~FRIBIDIENV_REORDER_NSM_MODE);
+    }
 }
 
 /*======================================================================
  *  fribidi_debug_status() returns whether debugging is on or off,
  *  default is off.
  *----------------------------------------------------------------------*/
-boolean fribidi_debug_status (FriBidiEnv* fbenv)
+boolean
+fribidi_debug_status (FriBidiEnv *fbenv)
 {
 #ifdef DEBUG
-  VALIDATE_FRIBIDIENV(fbenv);
+  VALIDATE_FRIBIDIENV (fbenv);
 
-  return(0 != (fbenv->iFlags & FRIBIDIENV_DEBUG_MODE) ? TRUE : FALSE);
+  return (0 != (fbenv->iFlags & FRIBIDIENV_DEBUG_MODE) ? TRUE : FALSE);
 #else /* DEBUG */
   return FALSE;
 #endif /* DEBUG */
@@ -242,17 +261,20 @@ boolean fribidi_debug_status (FriBidiEnv* fbenv)
  *  if the library was compiled without DEBUG option, this function
  *  returns FALSE.
  *----------------------------------------------------------------------*/
-boolean fribidi_set_debug (FriBidiEnv* fbenv, boolean debug)
+boolean
+fribidi_set_debug (FriBidiEnv *fbenv, boolean debug)
 {
 #ifdef DEBUG
-  VALIDATE_FRIBIDIENV(fbenv);
+  VALIDATE_FRIBIDIENV (fbenv);
 
-  if (FALSE != debug) {
-    fbenv->iFlags |= FRIBIDIENV_DEBUG_MODE;
-  }
-  else {
-    fbenv->iFlags &= (~FRIBIDIENV_DEBUG_MODE);
-  }
+  if (FALSE != debug)
+    {
+      fbenv->iFlags |= FRIBIDIENV_DEBUG_MODE;
+    }
+  else
+    {
+      fbenv->iFlags &= (~FRIBIDIENV_DEBUG_MODE);
+    }
   return debug;
 #else /* DEBUG */
   return FALSE;
@@ -264,7 +286,7 @@ boolean fribidi_set_debug (FriBidiEnv* fbenv, boolean debug)
  *  For environments with global FriBidiEnv instance.
  *----------------------------------------------------------------------*/
 #ifdef GLOBAL_FRIBIDIENV
-FriBidiEnv fribidi_global_env = {NULL, FRIBIDIENV_DEFAULT_SETTINGS};
+FriBidiEnv fribidi_global_env = { NULL, FRIBIDIENV_DEFAULT_SETTINGS };
 /* fribidi_global_env needs no explicit initialization. */
 #endif /* GLOBAL_FRIBIDIENV */
 

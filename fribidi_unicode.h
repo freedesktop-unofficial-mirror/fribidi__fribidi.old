@@ -31,7 +31,7 @@ extern "C"
 
 /* Unicode version */
 #define FRIBIDI_UNICODE_CHARS	0x110000
-#define FRIBIDI_UNICODE_VERSION	"3.1.1"
+#define FRIBIDI_UNICODE_VERSION	"3.2.0"
 
 /* UAX#9 Unicode BiDirectional Algorithm */
 #define UNI_MAX_BIDI_LEVEL 61

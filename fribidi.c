@@ -110,12 +110,12 @@ static TypeLink *free_type_links = NULL;
 #endif
 
 static TypeLink *
-new_type_link (FriBidiEnv* fribidienv)
+new_type_link (FriBidiEnv *fribidienv)
 {
   TypeLink *link;
 
 #ifdef USE_SIMPLE_MALLOC
-  link = (TypeLink*) fribidi_malloc (fribidienv, sizeof (TypeLink));
+  link = (TypeLink *) fribidi_malloc (fribidienv, sizeof (TypeLink));
 #else /* !USE_SIMPLE_MALLOC */
   if (free_type_links)
     {
@@ -145,10 +145,10 @@ new_type_link (FriBidiEnv* fribidienv)
 }
 
 static void
-free_type_link (FriBidiEnv* fribidienv, TypeLink *link)
+free_type_link (FriBidiEnv *fribidienv, TypeLink *link)
 {
 #ifdef USE_SIMPLE_MALLOC
-  fribidi_free (fribidienv,link);
+  fribidi_free (fribidienv, link);
 #else
   link->next = free_type_links;
   free_type_links = link;
@@ -164,7 +164,7 @@ free_type_link (FriBidiEnv* fribidienv, TypeLink *link)
 	} while (0)
 
 static TypeLink *
-run_length_encode_types (FriBidiEnv* fribidienv,
+run_length_encode_types (FriBidiEnv *fribidienv,
 			 FriBidiCharType *char_type, FriBidiStrIndex type_len)
 {
   TypeLink *list, *last, *link;
@@ -202,8 +202,7 @@ run_length_encode_types (FriBidiEnv* fribidienv,
    the override_list.
 */
 static void
-init_list (FriBidiEnv* fribidienv,
-	   TypeLink **start, TypeLink **end)
+init_list (FriBidiEnv *fribidienv, TypeLink **start, TypeLink **end)
 {
   TypeLink *list;
   TypeLink *link;
@@ -262,7 +261,7 @@ move_element_before (TypeLink *p, TypeLink *list)
    TBD: use some explanatory names instead of p, q, ...
 */
 static void
-override_list (FriBidiEnv* fribidienv, TypeLink *base, TypeLink *over)
+override_list (FriBidiEnv *fribidienv, TypeLink *base, TypeLink *over)
 {
   TypeLink *p = base, *q, *r, *s, *t;
   FriBidiStrIndex pos = 0, pos2;
@@ -361,7 +360,7 @@ override_list (FriBidiEnv* fribidienv, TypeLink *base, TypeLink *over)
 #define RL_LEVEL(list) ((list)->level)
 
 static TypeLink *
-merge_with_prev (FriBidiEnv* fribidienv, TypeLink *second)
+merge_with_prev (FriBidiEnv *fribidienv, TypeLink *second)
 {
   TypeLink *first = second->prev;
   first->next = second->next;
@@ -372,7 +371,7 @@ merge_with_prev (FriBidiEnv* fribidienv, TypeLink *second)
 }
 
 static void
-compact_list (FriBidiEnv* fribidienv, TypeLink *list)
+compact_list (FriBidiEnv *fribidienv, TypeLink *list)
 {
   if (list->next)
     for (list = list->next; list; list = list->next)
@@ -382,7 +381,7 @@ compact_list (FriBidiEnv* fribidienv, TypeLink *list)
 }
 
 static void
-compact_neutrals (FriBidiEnv* fribidienv, TypeLink *list)
+compact_neutrals (FriBidiEnv *fribidienv, TypeLink *list)
 {
   if (list->next)
     {
@@ -562,7 +561,7 @@ print_bidi_string (FriBidiChar *str)
   fprintf (stderr, "  Org. types : ");
   for (i = 0; str[i]; i++)
     fprintf (stderr, "%c",
-	     fribidi_char_from_type (fribidi_get_type (fribidienv,str[i])));
+	     fribidi_char_from_type (fribidi_get_type (fribidienv, str[i])));
   fprintf (stderr, "\n");
 }
 #endif
@@ -571,12 +570,12 @@ print_bidi_string (FriBidiChar *str)
  *  This function should follow the Unicode specification closely!
  *----------------------------------------------------------------------*/
 static void
-fribidi_analyse_string ( FriBidiEnv* fribidienv,
-			 /* input */
-			 const FriBidiChar *str, FriBidiStrIndex len,
-			 FriBidiCharType *pbase_dir,
-			 /* output */
-			 TypeLink **ptype_rl_list, FriBidiLevel *pmax_level)
+fribidi_analyse_string (FriBidiEnv *fribidienv,
+			/* input */
+			const FriBidiChar *str, FriBidiStrIndex len,
+			FriBidiCharType *pbase_dir,
+			/* output */
+			TypeLink **ptype_rl_list, FriBidiLevel *pmax_level)
 {
   FriBidiLevel base_level, max_level;
   FriBidiCharType base_dir;
@@ -589,13 +588,14 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
   DBG ("  Determine character types\n");
   {
     FriBidiCharType *char_type =
-      (FriBidiCharType *) fribidi_malloc (fribidienv, len * sizeof (FriBidiCharType));
+      (FriBidiCharType *) fribidi_malloc (fribidienv,
+					  len * sizeof (FriBidiCharType));
     for (i = 0; i < len; i++)
-      char_type[i] = fribidi_get_type (fribidienv,str[i]);
+      char_type[i] = fribidi_get_type (fribidienv, str[i]);
 
     /* Run length encode the character types */
     type_rl_list = run_length_encode_types (fribidienv, char_type, len);
-    fribidi_free (fribidienv,char_type);
+    fribidi_free (fribidienv, char_type);
   }
   DBG ("  Determine character types, Done\n");
 
@@ -627,7 +627,7 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
   DBG ("  Finding the base level, Done\n");
 
 #ifdef DEBUG
-  if (fribidi_debug_status(fribidienv))
+  if (fribidi_debug_status (fribidienv))
     {
       print_types_re (type_rl_list);
     }
@@ -654,7 +654,9 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
     over_pushed = 0;
     first_interval = 0;
     status_stack =
-      (LevelInfo *) fribidi_malloc (fribidienv, sizeof (LevelInfo) * (UNI_MAX_BIDI_LEVEL + 2));
+      (LevelInfo *) fribidi_malloc (fribidienv,
+				    sizeof (LevelInfo) * (UNI_MAX_BIDI_LEVEL +
+							  2));
 
     for (pp = type_rl_list->next; pp->next; pp = pp->next)
       {
@@ -718,7 +720,7 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
     stack_size = 0;
     over_pushed = 0;
 
-    fribidi_free (fribidienv,status_stack);
+    fribidi_free (fribidienv, status_stack);
   }
   /* X10. The remaining rules are applied to each run of characters at the
      same level. For each run, determine the start-of-level-run (sor) and
@@ -733,7 +735,7 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
   compact_list (fribidienv, type_rl_list);
 
 #ifdef DEBUG
-  if (fribidi_debug_status(fribidienv))
+  if (fribidi_debug_status (fribidienv))
     {
       print_types_re (type_rl_list);
       print_bidi_string (str);
@@ -865,7 +867,7 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
   compact_neutrals (fribidienv, type_rl_list);
 
 #ifdef DEBUG
-  if (fribidi_debug_status(fribidienv))
+  if (fribidi_debug_status (fribidienv))
     {
       print_resolved_levels (type_rl_list);
       print_resolved_types (type_rl_list);
@@ -897,7 +899,7 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
   compact_list (fribidienv, type_rl_list);
 
 #ifdef DEBUG
-  if (fribidi_debug_status(fribidienv))
+  if (fribidi_debug_status (fribidienv))
     {
       print_resolved_levels (type_rl_list);
       print_resolved_types (type_rl_list);
@@ -933,7 +935,7 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
   compact_list (fribidienv, type_rl_list);
 
 #ifdef DEBUG
-  if (fribidi_debug_status(fribidienv))
+  if (fribidi_debug_status (fribidienv))
     {
       print_bidi_string (str);
       print_resolved_levels (type_rl_list);
@@ -957,7 +959,7 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
   }
 
 #ifdef DEBUG
-  if (fribidi_debug_status(fribidienv))
+  if (fribidi_debug_status (fribidienv))
     {
       print_types_re (type_rl_list);
       print_resolved_levels (type_rl_list);
@@ -979,7 +981,7 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
       {
 	/* if state is on at the very first of string, do this too. */
 	if (j >= 0)
-	  k = fribidi_get_type (fribidienv,str[j]);
+	  k = fribidi_get_type (fribidienv, str[j]);
 	else
 	  k = FRIBIDI_TYPE_ON;
 	if (!state && FRIBIDI_IS_SEPARATOR (k))
@@ -991,7 +993,7 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
 	  {
 	    state = 0;
 	    p = new_type_link (fribidienv);
-	    p->prev = p->next = (TypeLink*) NULL;
+	    p->prev = p->next = (TypeLink *) NULL;
 	    p->pos = j + 1;
 	    p->len = pos - j;
 	    p->type = base_dir;
@@ -1004,7 +1006,7 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
   }
 
 #ifdef DEBUG
-  if (fribidi_debug_status(fribidienv))
+  if (fribidi_debug_status (fribidienv))
     {
       print_types_re (type_rl_list);
       print_resolved_levels (type_rl_list);
@@ -1025,7 +1027,7 @@ fribidi_analyse_string ( FriBidiEnv* fribidienv,
  *  fribidi_analyse_string(), after the list is not needed anymore.
  *----------------------------------------------------------------------*/
 static void
-free_rl_list (FriBidiEnv* fribidienv, TypeLink *type_rl_list)
+free_rl_list (FriBidiEnv *fribidienv, TypeLink *type_rl_list)
 {
 
   TypeLink *pp;
@@ -1070,7 +1072,7 @@ free_rl_list (FriBidiEnv* fribidienv, TypeLink *type_rl_list)
  *  the new length, updates each of other inputs if not NULL.
  *----------------------------------------------------------------------*/
 FriBidiStrIndex
-fribidi_remove_bidi_marks (FriBidiEnv* fribidienv,
+fribidi_remove_bidi_marks (FriBidiEnv *fribidienv,
 			   FriBidiChar *str, FriBidiStrIndex length,
 			   FriBidiStrIndex *position_to_this_list,
 			   FriBidiStrIndex *position_from_this_list,
@@ -1087,12 +1089,14 @@ fribidi_remove_bidi_marks (FriBidiEnv* fribidienv,
     {
       private_from_this = TRUE;
       position_from_this_list =
-	(FriBidiStrIndex *) fribidi_malloc (fribidienv, sizeof (FriBidiStrIndex) * length);
+	(FriBidiStrIndex *) fribidi_malloc (fribidienv,
+					    sizeof (FriBidiStrIndex) *
+					    length);
     }
 
   j = 0;
   for (i = 0; i < length; i++)
-    if (!FRIBIDI_IS_EXPLICIT (fribidi_get_type (fribidienv,str[i]))
+    if (!FRIBIDI_IS_EXPLICIT (fribidi_get_type (fribidienv, str[i]))
 	&& str[i] != UNI_LRM && str[i] != UNI_RLM)
       {
 	str[j] = str[i];
@@ -1127,17 +1131,17 @@ fribidi_remove_bidi_marks (FriBidiEnv* fribidienv,
  *  does reordering and fills in the output strings.
  *----------------------------------------------------------------------*/
 boolean
-fribidi_log2vis ( FriBidiEnv* fribidienv,
-		  /* input */
-		  const FriBidiChar *str, FriBidiStrIndex len,
-		  FriBidiCharType *pbase_dir,
-		  /* output */
-		  FriBidiChar *visual_str,
-		  FriBidiStrIndex *position_L_to_V_list,
-		  FriBidiStrIndex *position_V_to_L_list,
-		  FriBidiLevel *embedding_level_list)
+fribidi_log2vis (FriBidiEnv *fribidienv,
+		 /* input */
+		 const FriBidiChar *str, FriBidiStrIndex len,
+		 FriBidiCharType *pbase_dir,
+		 /* output */
+		 FriBidiChar *visual_str,
+		 FriBidiStrIndex *position_L_to_V_list,
+		 FriBidiStrIndex *position_V_to_L_list,
+		 FriBidiLevel *embedding_level_list)
 {
-  TypeLink *type_rl_list, *pp = (TypeLink*) NULL;
+  TypeLink *type_rl_list, *pp = (TypeLink *) NULL;
   FriBidiLevel max_level;
   boolean private_V_to_L = FALSE;
 
@@ -1155,7 +1159,8 @@ fribidi_log2vis ( FriBidiEnv* fribidienv,
     {
       private_V_to_L = TRUE;
       position_V_to_L_list =
-	(FriBidiStrIndex *) fribidi_malloc (fribidienv, sizeof (FriBidiStrIndex) * len);
+	(FriBidiStrIndex *) fribidi_malloc (fribidienv,
+					    sizeof (FriBidiStrIndex) * len);
     }
 
   if (len > FRIBIDI_MAX_STRING_LENGTH && position_V_to_L_list)
@@ -1215,7 +1220,7 @@ fribidi_log2vis ( FriBidiEnv* fribidienv,
     /* Reorder both the outstring and the order array */
     if (visual_str || position_V_to_L_list)
       {
-	if (fribidi_mirroring_status(fribidienv) && visual_str)
+	if (fribidi_mirroring_status (fribidienv) && visual_str)
 	  {
 	    /* L4. Mirror all characters that are in odd levels and have mirrors. */
 	    DBG ("  Mirroring\n");
@@ -1236,7 +1241,7 @@ fribidi_log2vis ( FriBidiEnv* fribidienv,
 	    DBG ("  Mirroring, Done\n");
 	  }
 
-	if (fribidi_reorder_nsm_status(fribidienv))
+	if (fribidi_reorder_nsm_status (fribidienv))
 	  {
 	    /* L3. Reorder NSMs. */
 	    DBG ("  Reordering NSM sequences\n");
@@ -1249,7 +1254,8 @@ fribidi_log2vis ( FriBidiEnv* fribidienv,
 		    boolean is_nsm_seq, seq_end;
 
 		    is_nsm_seq = 0;
-		    for (i = RL_POS (pp) + RL_LEN (pp) - 1; i >= RL_POS (pp); i--)
+		    for (i = RL_POS (pp) + RL_LEN (pp) - 1; i >= RL_POS (pp);
+			 i--)
 		      {
 			FriBidiCharType this_type;
 
@@ -1337,13 +1343,13 @@ fribidi_log2vis ( FriBidiEnv* fribidienv,
  *  the embedding levels.
  *----------------------------------------------------------------------*/
 boolean
-fribidi_log2vis_get_embedding_levels ( FriBidiEnv* fribidienv,
-				       /* input */
-				       const FriBidiChar *str,
-				       FriBidiStrIndex len,
-				       FriBidiCharType *pbase_dir,
-				       /* output */
-				       FriBidiLevel *embedding_level_list)
+fribidi_log2vis_get_embedding_levels (FriBidiEnv *fribidienv,
+				      /* input */
+				      const FriBidiChar *str,
+				      FriBidiStrIndex len,
+				      FriBidiCharType *pbase_dir,
+				      /* output */
+				      FriBidiLevel *embedding_level_list)
 {
   TypeLink *type_rl_list, *pp;
   FriBidiLevel max_level;
@@ -1376,10 +1382,12 @@ fribidi_log2vis_get_embedding_levels ( FriBidiEnv* fribidienv,
 
 
 
-const char fribidi_version_info[] =
-  FRIBIDI_PACKAGE " " FRIBIDI_VERSION " (interface version "
-  FRIBIDI_INTERFACE_VERSION_STR ")\n"
-  "Copyright (C) 2001 FriBidi Project (http://fribidi.sf.net/).\n" "\n"
+const char *fribidi_version_info =
+  FRIBIDI_PACKAGE " " FRIBIDI_VERSION "\n"
+  "interface version " FRIBIDI_INTERFACE_VERSION_STR "\n"
+  "Unicode version " FRIBIDI_UNICODE_VERSION "\n"
+  "\n"
+  "Copyright (C) 2002 FriBidi Project (http://fribidi.sf.net/).\n"
   FRIBIDI_PACKAGE " comes with NO WARRANTY, to the extent permitted by law.\n"
   "You may redistribute copies of " FRIBIDI_PACKAGE " under the terms of\n"
   "the GNU Lesser General Public License.\n"

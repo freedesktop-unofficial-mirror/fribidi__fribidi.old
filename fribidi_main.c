@@ -89,8 +89,7 @@ help (void)
 	  "                        --levels --changes\n"
 	  "  -d, --debug           Output debug information\n"
 	  "  -t, --test            Test %s, same as --clean --nobreak --showinput \\\n"
-	  "                        --reordernsm\n",
-	  FRIBIDI_PACKAGE);
+	  "                        --reordernsm\n", FRIBIDI_PACKAGE);
 #ifdef FRIBIDI_NO_CHARSETS
   printf ("  -c, --charset CS      Specify character set, default is %s \\\n"
 	  "                        CS should be a valid iconv character set name\n",
@@ -155,7 +154,7 @@ help (void)
 static void
 version (void)
 {
-  printf (fribidi_version_info);
+  printf ("%s", fribidi_version_info);
   exit (0);
 }
 
@@ -403,10 +402,14 @@ main (int argc, char *argv[])
 	      FriBidiStrIndex new_len;
 	      boolean log2vis;
 
-	      visual = show_visual ? ALLOCATE (NULL, FriBidiChar, len + 1) : NULL;
-	      ltov = show_ltov ? ALLOCATE (NULL, FriBidiStrIndex, len + 1) : NULL;
-	      vtol = show_vtol ? ALLOCATE (NULL, FriBidiStrIndex, len + 1) : NULL;
-	      levels = show_levels ? ALLOCATE (NULL, FriBidiLevel, len + 1) : NULL;
+	      visual =
+		show_visual ? ALLOCATE (NULL, FriBidiChar, len + 1) : NULL;
+	      ltov =
+		show_ltov ? ALLOCATE (NULL, FriBidiStrIndex, len + 1) : NULL;
+	      vtol =
+		show_vtol ? ALLOCATE (NULL, FriBidiStrIndex, len + 1) : NULL;
+	      levels =
+		show_levels ? ALLOCATE (NULL, FriBidiLevel, len + 1) : NULL;
 
 	      /* Create a bidi string. */
 	      base = input_base_direction;
@@ -424,8 +427,8 @@ main (int argc, char *argv[])
 		  /* Remove explicit marks, if asked for. */
 		  if (do_clean)
 		    len =
-		      fribidi_remove_bidi_marks (NULL, visual, len, ltov, vtol,
-						 levels);
+		      fribidi_remove_bidi_marks (NULL, visual, len, ltov,
+						 vtol, levels);
 
 		  if (show_visual)
 		    {

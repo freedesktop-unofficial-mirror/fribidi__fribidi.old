@@ -58,7 +58,7 @@ extern "C"
 
   typedef struct _FriBidiEnv FriBidiEnv;
 
-  FriBidiList *fribidi_list_append (FriBidiEnv* fribidienv,
+  FriBidiList *fribidi_list_append (FriBidiEnv *fribidienv,
 				    FriBidiList *list, void *data);
 
   typedef struct _FriBidiMemChunk FriBidiMemChunk;
@@ -66,17 +66,17 @@ extern "C"
 #define FRIBIDI_ALLOC_ONLY      1
 #define FRIBIDI_ALLOC_AND_FREE  2
 
-  FriBidiMemChunk *fribidi_mem_chunk_new (FriBidiEnv* fribidienv,
+  FriBidiMemChunk *fribidi_mem_chunk_new (FriBidiEnv *fribidienv,
 					  char *name,
 					  int atom_size,
 					  unsigned long area_size, int type);
-  void fribidi_mem_chunk_destroy (FriBidiEnv* fribidienv,
+  void fribidi_mem_chunk_destroy (FriBidiEnv *fribidienv,
 				  FriBidiMemChunk *mem_chunk);
-  void *fribidi_mem_chunk_alloc (FriBidiEnv* fribidienv,
+  void *fribidi_mem_chunk_alloc (FriBidiEnv *fribidienv,
 				 FriBidiMemChunk *mem_chunk);
-  void *fribidi_mem_chunk_alloc0 (FriBidiEnv* fribidienv,
+  void *fribidi_mem_chunk_alloc0 (FriBidiEnv *fribidienv,
 				  FriBidiMemChunk *mem_chunk);
-  void fribidi_mem_chunk_free (FriBidiEnv* fribidienv,
+  void fribidi_mem_chunk_free (FriBidiEnv *fribidienv,
 			       FriBidiMemChunk *mem_chunk, void *mem);
 
 #define fribidi_mem_chunk_create(fbenv, type, pre_alloc, alloc_type) ( \

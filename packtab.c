@@ -218,11 +218,13 @@ write_array ()
     {
       int kk, jj;
       fprintf (f, "\n\n#define %s", table_name);
-      if (best_t[lev + 1] != 1) {
-	fprintf (f, "Level%d_%0*X", best_lev - lev - 1, digits,
-		 x[i] * pow[n - nn]);
-      }
-      fprintf (f, " (%sLevel%d + 0x%0X)\n", table_name, best_lev - lev - 1, ofs);
+      if (best_t[lev + 1] != 1)
+	{
+	  fprintf (f, "Level%d_%0*X", best_lev - lev - 1, digits,
+		   x[i] * pow[n - nn]);
+	}
+      fprintf (f, " (%sLevel%d + 0x%0X)\n", table_name, best_lev - lev - 1,
+	       ofs);
       kk = x[i] * cluster;
       if (!lev)
 	if (name)

@@ -22,6 +22,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+#include "fribidi_unicode.h"
 
 static void
 err2 (char *fmt, char *p)
@@ -33,7 +37,6 @@ err2 (char *fmt, char *p)
 }
 
 static int table[0x110000];
-static char *bidi_mirroring_version;
 static char *bidi_mirroring_file;
 
 static int mirroring_count;
@@ -51,8 +54,8 @@ read_bidi_mirroring ()
   printf ("Reading `BidiMirroring.txt'\n");
   if (!(f = fopen (bidi_mirroring_file, "rt")))
     err2 ("cannot open `%s' for reading", bidi_mirroring_file);
-  fgets (s, sizeof s, f);
-  sscanf (s, "# BidiMirroring-%[^.]", bidi_mirroring_version = malloc (20));
+/*  fgets (s, sizeof s, f);
+  sscanf (s, "# BidiMirroring-%s.txt", bidi_mirroring_version = malloc (20));*/
   while (fgets (s, sizeof s, f))
     {
       if (s[0] == '#' || s[0] == '\0' || s[0] == '\n')
@@ -93,7 +96,7 @@ write_mirror (char *file)
     err2 ("cannot open `%s' for writing", file);
   fprintf (f, "/*\n"
 	   "  This file was automatically created from BidiMirroring.txt, version %s\n"
-	   "  by fribidi_create_mirroring\n*/\n\n", bidi_mirroring_version);
+	   "  by fribidi_create_mirroring\n*/\n\n", FRIBIDI_UNICODE_VERSION);
   fprintf (f, "#ifndef %s\n#define %s\n\n#include \"fribidi.h\"\n\n",
 	   FILENAME, FILENAME);
   fprintf (f, "/*\n"

@@ -30,11 +30,11 @@
 #include "fribidi_tab_mirroring.i"
 
 boolean
-fribidi_get_mirror_char ( FriBidiEnv* fribidienv,
-			  /* Input */
-			  FriBidiChar ch,
-			  /* Output */
-			  FriBidiChar *mirrored_ch)
+fribidi_get_mirror_char (FriBidiEnv *fribidienv,
+			 /* Input */
+			 FriBidiChar ch,
+			 /* Output */
+			 FriBidiChar *mirrored_ch)
 {
   int pos, step;
   boolean found;

@@ -1,3 +1,11 @@
+2002-04-07  Behdad Esfahbod <behdad@bamdad.org>
+	* unidata/*, fribidi_unicode.h, fribidi_wcwidth.c: Update to
+	Unicode 3.2.
+	* configure.in: Version information updated.
+	* fribidi.c: Version information changed to contain Unicode version too.
+	* 0.10.3 released.
+	* .indent.pro: FriBidiEnv added as a type.
+
 2002-03-25  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c: Fixed a bug introduced in adding L3 rule.
 

@@ -11,6 +11,7 @@
 -T FriBidiRunType
 -T FriBidiList
 -T FriBidiMemChunk
+-T FriBidiEnv
 -T int8
 -T uint8
 -T int16

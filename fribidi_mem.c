@@ -36,7 +36,7 @@ struct _FriBidiMemChunk
 };
 
 FriBidiList *
-fribidi_list_append (FriBidiEnv* fribidienv, FriBidiList *list, void *data)
+fribidi_list_append (FriBidiEnv *fribidienv, FriBidiList *list, void *data)
 {
   FriBidiList *node, *last;
 
@@ -55,11 +55,12 @@ fribidi_list_append (FriBidiEnv* fribidienv, FriBidiList *list, void *data)
 }
 
 FriBidiMemChunk *
-fribidi_mem_chunk_new (FriBidiEnv* fribidienv,
+fribidi_mem_chunk_new (FriBidiEnv *fribidienv,
 		       char *name, int atom_size, unsigned long area_size,
 		       int type)
 {
-  FriBidiMemChunk *m = (FriBidiMemChunk *) fribidi_malloc (fribidienv, sizeof (FriBidiMemChunk));
+  FriBidiMemChunk *m =
+    (FriBidiMemChunk *) fribidi_malloc (fribidienv, sizeof (FriBidiMemChunk));
 
   m->name = name;
   m->atom_size = atom_size;
@@ -73,15 +74,14 @@ fribidi_mem_chunk_new (FriBidiEnv* fribidienv,
 }
 
 void
-fribidi_mem_chunk_destroy (FriBidiEnv* fribidienv,
-			   FriBidiMemChunk *mem_chunk)
+fribidi_mem_chunk_destroy (FriBidiEnv *fribidienv, FriBidiMemChunk *mem_chunk)
 {
-  fribidi_free (fribidienv,mem_chunk);
+  fribidi_free (fribidienv, mem_chunk);
   return;
 }
 
 void *
-fribidi_mem_chunk_alloc (FriBidiEnv* fribidienv, FriBidiMemChunk *mem_chunk)
+fribidi_mem_chunk_alloc (FriBidiEnv *fribidienv, FriBidiMemChunk *mem_chunk)
 {
   void *m;
 
@@ -89,7 +89,8 @@ fribidi_mem_chunk_alloc (FriBidiEnv* fribidienv, FriBidiMemChunk *mem_chunk)
     {
       if (mem_chunk->empty_size < mem_chunk->atom_size)
 	{
-	  mem_chunk->chunk = fribidi_malloc (fribidienv, mem_chunk->area_size);
+	  mem_chunk->chunk =
+	    fribidi_malloc (fribidienv, mem_chunk->area_size);
 	  mem_chunk->empty_size = mem_chunk->area_size;
 	}
       m = mem_chunk->chunk;
@@ -103,7 +104,7 @@ fribidi_mem_chunk_alloc (FriBidiEnv* fribidienv, FriBidiMemChunk *mem_chunk)
 }
 
 void
-fribidi_mem_chunk_free (FriBidiEnv* fribidienv,
+fribidi_mem_chunk_free (FriBidiEnv *fribidienv,
 			FriBidiMemChunk *mem_chunk, void *mem)
 {
   if (mem_chunk->type == FRIBIDI_ALLOC_AND_FREE)

@@ -82,19 +82,20 @@ extern "C"
  * between it and a memory chunk in middle of the doubly-linked list.
  **********************************************************************/
 
-typedef struct _FriBidiMemChunkPrefix FriBidiMemChunkPrefix;
+  typedef struct _FriBidiMemChunkPrefix FriBidiMemChunkPrefix;
 
-struct _FriBidiMemChunkPrefix {
-  FriBidiMemChunkPrefix* iNext;
-               /* must be first item in the chunk prefix, so that the
-		* fribidi_free() can handle the list head without checking
-		* for special cases.
-		*/
-  FriBidiMemChunkPrefix* iPrev;
-               /* Points at either FriBidiMemChunkPrefix or at
-		* FriBidiEnv.
-		*/
-};
+  struct _FriBidiMemChunkPrefix
+  {
+    FriBidiMemChunkPrefix *iNext;
+    /* must be first item in the chunk prefix, so that the
+     * fribidi_free() can handle the list head without checking
+     * for special cases.
+     */
+    FriBidiMemChunkPrefix *iPrev;
+    /* Points at either FriBidiMemChunkPrefix or at
+     * FriBidiEnv.
+     */
+  };
 
 
 /*======================================================================
@@ -105,38 +106,39 @@ struct _FriBidiMemChunkPrefix {
  * currently defined.
  * But we want to keep all FriBidiEnv fields word-aligned.
  */
-typedef uint32 FriBidiFlags;
+  typedef uint32 FriBidiFlags;
 
 /* The following is defined in fribidi_mem.h, must be defined
  * there due to forward references.
  */
 /* typedef struct _FriBidiEnv FriBidiEnv; */
 
-struct _FriBidiEnv {
-  FriBidiMemChunkPrefix* iAllocatedMemoryChunks;
-           /* Pointer to doubly-linked list of allocated memory chunks.
-	    * Must be the first item in the structure, so that the
-	    * fribidi_free() can handle list head without checking for
-	    * special cases.
-	    */
-  FriBidiFlags iFlags;
-  /* The flags will define:
-   * - Debug mode
-   * - Mirroring
-   * - L3 rule on/off
-   * - remove BiDi marks on/off
-   * - Arabic joining on/off
-   * - Ligaturing on/off
-   * They will be set and cleared by inlined access procedures.
-   */
+  struct _FriBidiEnv
+  {
+    FriBidiMemChunkPrefix *iAllocatedMemoryChunks;
+    /* Pointer to doubly-linked list of allocated memory chunks.
+     * Must be the first item in the structure, so that the
+     * fribidi_free() can handle list head without checking for
+     * special cases.
+     */
+    FriBidiFlags iFlags;
+    /* The flags will define:
+     * - Debug mode
+     * - Mirroring
+     * - L3 rule on/off
+     * - remove BiDi marks on/off
+     * - Arabic joining on/off
+     * - Ligaturing on/off
+     * They will be set and cleared by inlined access procedures.
+     */
 
-  /* The following are reserved for future expansion without breaking
-   * binary compatibility of existing software.
-   */
-  uint32 iReserved1;
-  uint32 iReserved2;
-  void* iReserved3; /* If necessary, will point at extension to FriBidiEnv. */
-};
+    /* The following are reserved for future expansion without breaking
+     * binary compatibility of existing software.
+     */
+    uint32 iReserved1;
+    uint32 iReserved2;
+    void *iReserved3;		/* If necessary, will point at extension to FriBidiEnv. */
+  };
 
 /*======================================================================
  *  Initialize a FriBidiEnv structure.  Must be called before any
@@ -144,7 +146,7 @@ struct _FriBidiEnv {
  *
  *  It initializes the doubly-linked list of memory chunks and the flags.
  *----------------------------------------------------------------------*/
-void init_fribidienv(FriBidiEnv* fribidienv, FriBidiFlags aFlags);
+  void init_fribidienv (FriBidiEnv *fribidienv, FriBidiFlags aFlags);
 
 
 /*======================================================================
@@ -153,7 +155,7 @@ void init_fribidienv(FriBidiEnv* fribidienv, FriBidiFlags aFlags);
  * so there is no need for a separate init_fribidienv() call (but it
  * does not harm).
  *----------------------------------------------------------------------*/
-void destroy_fribidienv(FriBidiEnv* fribidienv);
+  void destroy_fribidienv (FriBidiEnv *fribidienv);
 
 
 /*======================================================================
@@ -161,7 +163,7 @@ void destroy_fribidienv(FriBidiEnv* fribidienv);
  * This function may throw an Out-Of-Memory exception in
  * environments, which support exceptions.
  *----------------------------------------------------------------------*/
-void* fribidi_malloc(FriBidiEnv* fribidienv, size_t size);
+  void *fribidi_malloc (FriBidiEnv *fribidienv, size_t size);
 
 
 /*======================================================================
@@ -169,7 +171,7 @@ void* fribidi_malloc(FriBidiEnv* fribidienv, size_t size);
  * FriBidiEnv instance and free it.
  * If the memory chunk is not properly linked, then panic.
  *----------------------------------------------------------------------*/
-void fribidi_free(FriBidiEnv* fribidienv, void* ptr);
+  void fribidi_free (FriBidiEnv *fribidienv, void *ptr);
 
 
 /*====================================================================*/
@@ -197,37 +199,37 @@ void fribidi_free(FriBidiEnv* fribidienv, void* ptr);
  *  fribidi_mirroring_status() returns whether mirroring is on or off,
  *  default is on.
  *----------------------------------------------------------------------*/
-boolean fribidi_mirroring_status (FriBidiEnv* fbenv);
+  boolean fribidi_mirroring_status (FriBidiEnv *fbenv);
 
 /*======================================================================
  *  fribidi_set_mirroring() sets mirroring on or off.
  *----------------------------------------------------------------------*/
-void fribidi_set_mirroring (FriBidiEnv* fbenv, boolean mirror);
+  void fribidi_set_mirroring (FriBidiEnv *fbenv, boolean mirror);
 
 /*======================================================================
  *  fribidi_reorder_nsm_status() returns whether reordering of nsm
  *  sequences is on or off, default is off.
  *----------------------------------------------------------------------*/
-boolean fribidi_reorder_nsm_status (FriBidiEnv* fbenv);
+  boolean fribidi_reorder_nsm_status (FriBidiEnv *fbenv);
 
 /*======================================================================
  *  fribidi_set_reorder_nsm() sets reordering of nsm sequences on or off.
  *----------------------------------------------------------------------*/
-void fribidi_set_reorder_nsm (FriBidiEnv* fbenv, boolean reorder);
+  void fribidi_set_reorder_nsm (FriBidiEnv *fbenv, boolean reorder);
 
 /*======================================================================
  *  fribidi_debug_status() returns whether debugging is on or off,
  *  default is off.  Returns false if fribidi is not compiled with debug
  *  enabled.
  *----------------------------------------------------------------------*/
-boolean fribidi_debug_status (FriBidiEnv* fbenv);
+  boolean fribidi_debug_status (FriBidiEnv *fbenv);
 
 /*======================================================================
  *  fribidi_set_debug() turn on or off debugging, default is off.
  *  if the library was compiled without DEBUG option, this function
  *  returns FALSE.
  *----------------------------------------------------------------------*/
-boolean fribidi_set_debug (FriBidiEnv* fbenv, boolean debug);
+  boolean fribidi_set_debug (FriBidiEnv *fbenv, boolean debug);
 
 /*======================================================================
  *  Management of various styles of defining and using FriBidiEnv.
@@ -239,8 +241,8 @@ boolean fribidi_set_debug (FriBidiEnv* fbenv, boolean debug);
 #ifdef GLOBAL_FRIBIDIENV
 #define VALIDATE_FRIBIDIENV(env) if ((env) == NULL) (env) = &(fribidi_global_env)
 
-extern FriBidiEnv fribidi_global_env;
-#endif /* GLOBAL_FRIBIDIENV */
+  extern FriBidiEnv fribidi_global_env;
+#endif				/* GLOBAL_FRIBIDIENV */
 
 
 /*======================================================================
@@ -248,7 +250,7 @@ extern FriBidiEnv fribidi_global_env;
  *----------------------------------------------------------------------*/
 #ifdef VERIFY_NO_GLOBAL_FRIBIDIENV
 #define VALIDATE_FRIBIDIENV(env)  if ((env) == NULL) Panic()
-#endif /* VERIFY_NO_GLOBAL_FRIBIDIENV */
+#endif				/* VERIFY_NO_GLOBAL_FRIBIDIENV */
 
 
 /*======================================================================
@@ -257,14 +259,14 @@ extern FriBidiEnv fribidi_global_env;
 #ifdef NO_FRIBIDIENV_VALIDATION
 #define VALIDATE_FRIBIDIENV(env) while (0) {}
   /* Null definition, for environments, which guarantee valid
-  ** environments, and need the efficiency.
-  */
-#endif /* NO_FRIBIDIENV_VALIDATION */
+     ** environments, and need the efficiency.
+   */
+#endif				/* NO_FRIBIDIENV_VALIDATION */
 
 #ifdef	__cplusplus
 }
 #endif
 
-#endif /* FRIBIDI_ENV_H */
+#endif				/* FRIBIDI_ENV_H */
 
 /* End of fribidi_env.h */
