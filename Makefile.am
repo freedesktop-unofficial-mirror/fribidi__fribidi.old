@@ -72,6 +72,8 @@ TEST_FILES =	\
 	tests/test_UTF-8_persian.reference
 
 TABLE_FILES =	\
+	fribidi_types.i	\
+	fribidi_char_sets.i	\
 	fribidi_tab_mirroring.i	\
 	fribidi_tab_char_type_2.i	\
 	fribidi_tab_char_type_9.i
