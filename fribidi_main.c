@@ -73,7 +73,7 @@ main (int argc, char *argv[])
 
 #define CASE(s) if (strcmp (S_, (s)) == 0)
 #define CASE2(s1, s2) if (strcmp (S_, (s1)) == 0 || strcmp (S_, (s2)) == 0)
-#define NEXTARG (argp++ < argc ? argv[argp] : "")
+#define NEXTARG (argp++, argp - 1 < argc ? argv[argp - 1] : "")
 
   /* Parse the command line */
   while (argp < argc || (argp == argc && !file_found))
