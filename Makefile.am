@@ -113,7 +113,7 @@ build_fribidi_tab_mirroring.i: fribidi_create_mirroring	\
 	./fribidi_create_mirroring "$$UNIDATA"
 
 fribidi_tab_mirroring.i:
-	$(MAKE) build_fribidi_tab_mirroring.i || (rm -f $@ && false)
+	$(MAKE) build_fribidi_tab_mirroring.i || ($(RM) -f "$@" && false)
 
 $(srcdir)/fribidi_mirroring.c: fribidi_tab_mirroring.i
 	touch $@
@@ -130,8 +130,8 @@ fribidi_tab_char_type_%.i: fribidi_create_char_types	\
 	else UNIDATA="$(srcdir)/unidata"; fi &&	\
 	./fribidi_create_char_types "`echo "$@"	\
 	  | $(SED) 's/[^0-9]*//g'`" "$$UNIDATA" ||	\
-	(rm -f $@; false)
-	rm -f fribidi_tab_char_type_stamp
+	($(RM) -f "$@"; false)
+	$(RM) -f fribidi_tab_char_type_stamp
 	$(MAKE) fribidi_tab_char_type_stamp
 
 fribidi_tab_char_type_stamp:
@@ -150,7 +150,7 @@ tests/test_%.reference: tests/test_%.input fribidi
 	testcase="$@" && 	\
 	charset="`echo "$@" | $(SED) 's/_[^_]*$$//;s/.*_//'`" &&	\
 	./fribidi --test --charset "$$charset" "$<" > "$@" || \
-	(rm -f "$@"; false)
+	($(RM) -f "$@"; false)
 
 test.reference:
 	for testcase in "$(srcdir)"/tests/test_*.input; do	\
