@@ -2,6 +2,6 @@
 
 autoheader \
 && aclocal \
-&& automake --gnu --add-missing \
+&& automake --gnu --include-deps --add-missing \
 && autoconf
 

@@ -26,14 +26,25 @@ libfribidiincdir = $(includedir)/fribidi
 libfribidiincdir = $(includedir)/fribidi
 libfribidiinc_HEADERS = \
 	fribidi.h \
+	fribidi_char_sets_utf8.h       \
+	fribidi_char_sets_cap_rtl.h    \
+	fribidi_char_sets_iso8859_6.h  \
+	fribidi_char_sets_iso8859_8.h  \
+	fribidi_char_sets_cp1255.h     \
+	fribidi_char_sets_cp1256.h     \
+	fribidi_char_sets_isiri_3342.h \
 	fribidi_char_sets.h \
 	fribidi_types.h
 
 EXTRA_DIST = \
         unidata/CreateGetType.pl \
+	tests/test-CapRTL \
+	tests/test-explicit \
 	tests/test-hebrew \
+	tests/test-CapRTL.reference \
+	tests/test-explicit.reference \
+	tests/test-hebrew.reference \
 	run.tests \
-	test.reference \
 	ANNOUNCE \
 	acinclude.m4 \
         fribidi_mini_glib.h \
@@ -48,13 +59,18 @@ bin_PROGRAMS = fribidi
 fribidi_SOURCES = fribidi_main.c
 fribidi_LDADD = libfribidi.la $(GLIB_LIBS)
 
-test.reference: tests/test-CapRTL tests/test-explicit tests/test-hebrew
-	./fribidi --fill --showinput --charset CapRTL tests/test-CapRTL > \
-	tests/test-CapRTL.reference
-	./fribidi --fill --showinput --charset CapRTL tests/test-explicit > \
-	tests/test-explicit.reference
-	./fribidi --fill --showinput --charset ISO8859-8 tests/test-hebrew > \
-	tests/test-hebrew.reference
+tests/test-CapRTL.reference: fribidi tests/test-CapRTL 
+	mkdir -p tests
+	./fribidi --fill --showinput --charset CapRTL $(top_srcdir)/tests/test-CapRTL > \
+	$(top_srcdir)/tests/test-CapRTL.reference
+
+tests/test-explicit.reference: fribidi tests/test-explicit 
+	./fribidi --fill --showinput --charset CapRTL $(top_srcdir)/tests/test-explicit > \
+	$(top_srcdir)/tests/test-explicit.reference
+
+tests/test-hebrew.reference: fribidi tests/test-hebrew
+	./fribidi --fill --showinput --charset ISO8859-8 $(top_srcdir)/tests/test-hebrew > \
+	$(top_srcdir)/tests/test-hebrew.reference
 
 test: fribidi
 	./run.tests
