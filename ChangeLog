@@ -1,3 +1,6 @@
+2001-04-07  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi_main.c, fribidi_benchmark.c: Check for HAVE_CONFIG_H flag.
+
 2001-04-03  Behdad Esfahbod <behdad@sharif.edu>
 	* fribidi_mini_glib.h, fribidi_mini_glib.c: Added functions
 	for working with MemChunks, some more definitions of glib added.

@@ -31,7 +31,9 @@
 #include <getopt.h>
 #include <string.h>
 #include "fribidi.h"
+#ifdef HAVE_CONFIG_H
 #include "config.h"
+#endif /* HAVE_CONFIG_H */
 
 #define appname "fribidi"
 #define appversion VERSION
@@ -153,7 +155,7 @@ main (int argc, char *argv[])
   eol_text = NULL;
   input_base_direction = FRIBIDI_TYPE_ON;
 
-  if ((s = getenv ("COLUMNS")))
+  if (s = getenv ("COLUMNS"))
     {
       int i;
 
@@ -161,7 +163,6 @@ main (int argc, char *argv[])
       if (i > 0)
 	text_width = i;
     }
-
 
 #define CHARSETDESC 257
 
