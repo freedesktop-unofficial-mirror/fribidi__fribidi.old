@@ -135,7 +135,7 @@ fribidi_tab_char_type_small:
 fribidi_tab_char_type_large:
 	$(MAKE) fribidi_tab_char_type_2.i
 
-fribidi_tab_char_type_%.i: $(fribidi_create_char_types_SOURCES)	\
+fribidi_tab_char_type_%.i: $(fribidi_create_char_types_SOURCES)	fribidi_types.h \
 		unidata/UnicodeData.txt
 	$(MAKE) fribidi_create_char_types
 	if test -d unidata; then UNIDATA=unidata;	\
