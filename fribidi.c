@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod.
+ * Copyright (C) 2001,2002 Behdad Esfahbod.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public  
@@ -31,24 +31,21 @@
 #include <stdio.h>
 #endif
 
+/* Redefine FRIBIDI_CHUNK_SIZE in config.h to override this. */
 #ifndef FRIBIDI_CHUNK_SIZE
+#ifdef MEM_OPTIMIZED
+#define FRIBIDI_CHUNK_SIZE 16
+#else
 #define FRIBIDI_CHUNK_SIZE 128
+#endif
 #endif
 
 #ifdef DEBUG
-#define DBG(s) if (fribidi_debug) { fprintf(stderr, s); }
-#define DBG2(s, t) if (fribidi_debug) { fprintf(stderr, s, t); }
+#define DBG(s) do { if (fribidi_debug) { fprintf(stderr, s); } } while (0)
+#define DBG2(s, t) do { if (fribidi_debug) { fprintf(stderr, s, t); } } while (0)
 #else
 #define DBG(s)
 #define DBG2(s, t)
-#endif
-
-#ifdef DEBUG
-/* for easier test with the reference code only */
-#define MAX_LEVEL 15
-#else
-/* default value */
-#define MAX_LEVEL 61
 #endif
 
 #ifdef DEBUG
@@ -170,11 +167,18 @@ free_type_link (TypeLink *link)
 #endif
 }
 
+#define FRIBIDI_ADD_TYPE_LINK(p,q) \
+	do {	\
+		(p)->len = (q)->pos - (p)->pos;	\
+		(p)->next = (q);	\
+		(q)->prev = (p);	\
+		(p) = (q);	\
+	} while (0)
+
 static TypeLink *
 run_length_encode_types (FriBidiCharType *char_type, FriBidiStrIndex type_len)
 {
   TypeLink *list, *last, *link;
-  TypeLink current;
 
   FriBidiStrIndex i;
 
@@ -182,45 +186,24 @@ run_length_encode_types (FriBidiCharType *char_type, FriBidiStrIndex type_len)
   list = new_type_link ();
   list->type = FRIBIDI_TYPE_SOT;
   list->level = FRIBIDI_LEVEL_START;
-  list->len = 0;
-  list->pos = 0;
   last = list;
 
   /* Sweep over the string_type s */
-  current.type = FRIBIDI_LEVEL_START;
-  current.len = 0;
-  current.pos = -1;
-  for (i = 0; i <= type_len; i++)
-    {
-      if (i == type_len || char_type[i] != current.type)
-	{
-	  if (current.pos >= 0)
-	    {
-	      link = new_type_link ();
-	      link->type = current.type;
-	      link->pos = current.pos;
-	      link->len = current.len;
-	      last->next = link;
-	      link->prev = last;
-	      last = last->next;
-	    }
-	  if (i == type_len)
-	    break;
-	  current.len = 0;
-	  current.pos = i;
-	}
-      current.type = char_type[i];
-      current.len++;
-    }
+  for (i = 0; i < type_len; i++)
+    if (char_type[i] != last->type)
+      {
+	link = new_type_link ();
+	link->type = char_type[i];
+	link->pos = i;
+	FRIBIDI_ADD_TYPE_LINK (last, link);
+      }
 
   /* Add the ending link */
   link = new_type_link ();
   link->type = FRIBIDI_TYPE_EOT;
   link->level = FRIBIDI_LEVEL_END;
-  link->len = 0;
   link->pos = type_len;
-  last->next = link;
-  link->prev = last;
+  FRIBIDI_ADD_TYPE_LINK (last, link);
 
   return list;
 }
@@ -382,10 +365,10 @@ override_list (TypeLink *base, TypeLink *over)
 }
 
 /* Some convenience macros */
-#define RL_TYPE(list) (list)->type
-#define RL_LEN(list) (list)->len
-#define RL_POS(list) (list)->pos
-#define RL_LEVEL(list) (list)->level
+#define RL_TYPE(list) ((list)->type)
+#define RL_LEN(list) ((list)->len)
+#define RL_POS(list) ((list)->pos)
+#define RL_LEVEL(list) ((list)->level)
 
 static TypeLink *
 merge_with_prev (TypeLink *second)
@@ -431,20 +414,20 @@ compact_neutrals (TypeLink *list)
  *-------------------------------------------------------------------------*/
 
 /* There's some little points in pushing and poping into the status stack:
-   1. when the embedding level is not valid (more than MAX_LEVEL=61),
+   1. when the embedding level is not valid (more than UNI_MAX_BIDI_LEVEL=61),
    you must reject it, and not to push into the stack, but when you see a
    PDF, you must find the matching code, and if it was pushed in the stack,
    pop it, it means you must pop if and only if you have pushed the
    matching code, the over_pushed var counts the number of rejected codes yet.
    2. there's a more confusing point too, when the embedding level is exactly
-   MAX_LEVEL-1=60, an LRO or LRE must be rejected because the new level would
-   be MAX_LEVEL+1=62, that is invalid, but an RLO or RLE must be accepted
-   because the new level is MAX_LEVEL=61, that is valid, so the rejected
-   codes may be not continuous in the logical order, in fact there is at
-   most two continuous intervals of codes, with a RLO or RLE between them.
-   to support the case, the first_interval var counts the number of rejected
-   codes in the first interval, when it is 0, means that there is only one
-   interval yet.
+   UNI_MAX_BIDI_LEVEL-1=60, an LRO or LRE must be rejected because the new
+   level would be UNI_MAX_BIDI_LEVEL+1=62, that is invalid, but an RLO or RLE
+   must be accepted because the new level is UNI_MAX_BIDI_LEVEL=61, that is
+   valid, so the rejected codes may be not continuous in the logical order,
+   in fact there is at most two continuous intervals of codes, with a RLO or
+   RLE between them.  To support this case, the first_interval var counts the
+   number of rejected codes in the first interval, when it is 0, means that
+   there is only one interval yet.
 */
 
 /* a. If this new level would be valid, then this embedding code is valid.
@@ -455,10 +438,10 @@ compact_neutrals (TypeLink *list)
    change the current level or override status.
 */
 #define PUSH_STATUS \
-    { \
-      if (new_level <= MAX_LEVEL) \
+    do { \
+      if (new_level <= UNI_MAX_BIDI_LEVEL) \
         { \
-          if (level == MAX_LEVEL - 1) \
+          if (level == UNI_MAX_BIDI_LEVEL - 1) \
             first_interval = over_pushed; \
           status_stack[stack_size].level = level; \
           status_stack[stack_size].override = override; \
@@ -467,13 +450,13 @@ compact_neutrals (TypeLink *list)
           override = new_override; \
         } else \
 	  over_pushed++; \
-    }
+    } while (0)
 
 /* If there was a valid matching code, restore (pop) the last remembered
    (pushed) embedding level and directional override.
 */
 #define POP_STATUS \
-    { \
+    do { \
       if (over_pushed || stack_size) \
       { \
         if (over_pushed > first_interval) \
@@ -487,7 +470,7 @@ compact_neutrals (TypeLink *list)
             override = status_stack[stack_size].override; \
           } \
       } \
-    }
+    } while (0)
 
 /*==========================================================================
  * There was no support for sor and eor in the absence of Explicit Embedding
@@ -497,7 +480,8 @@ compact_neutrals (TypeLink *list)
 /* Return the type of previous char or the sor, if already at the start of
    a run level. */
 #define PREV_TYPE_OR_SOR(pp) \
-    (RL_LEVEL(pp->prev) == RL_LEVEL(pp) ? \
+    ( \
+     RL_LEVEL(pp->prev) == RL_LEVEL(pp) ? \
       RL_TYPE(pp->prev) : \
       FRIBIDI_LEVEL_TO_DIR(MAX(RL_LEVEL(pp->prev), RL_LEVEL(pp))) \
     )
@@ -505,7 +489,8 @@ compact_neutrals (TypeLink *list)
 /* Return the type of next char or the eor, if already at the end of
    a run level. */
 #define NEXT_TYPE_OR_EOR(pp) \
-    (!pp->next ? \
+    ( \
+     !pp->next ? \
       FRIBIDI_LEVEL_TO_DIR(RL_LEVEL(pp)) : \
       (RL_LEVEL(pp->next) == RL_LEVEL(pp) ? \
         RL_TYPE(pp->next) : \
@@ -678,7 +663,7 @@ fribidi_analyse_string (	/* input */
     over_pushed = 0;
     first_interval = 0;
     status_stack =
-      (LevelInfo *) malloc (sizeof (LevelInfo) * (MAX_LEVEL + 2));
+      (LevelInfo *) malloc (sizeof (LevelInfo) * (UNI_MAX_BIDI_LEVEL + 2));
 
     for (pp = type_rl_list->next; pp->next; pp = pp->next)
       {
@@ -1098,6 +1083,20 @@ fribidi_set_mirroring (boolean mirror)
   mirroring = mirror;
 }
 
+static boolean reorder_nsm = FALSE;
+
+boolean
+fribidi_reorder_nsm_status (void)
+{
+  return reorder_nsm;
+}
+
+void
+fribidi_set_reorder_nsm (boolean reorder)
+{
+  reorder_nsm = reorder;
+}
+
 /*======================================================================
  *  Here starts the exposed front end functions.
  *----------------------------------------------------------------------*/
@@ -1184,7 +1183,7 @@ fribidi_log2vis (		/* input */
       return TRUE;
     }
 
-  /* If l2v is to be calculated we must have l2v as well. If it is not
+  /* If l2v is to be calculated we must have v2l as well. If it is not
      given by the caller, we have to make a private instance of it. */
   if (position_L_to_V_list && !position_V_to_L_list)
     {
@@ -1197,7 +1196,7 @@ fribidi_log2vis (		/* input */
     {
 #ifdef DEBUG
       fprintf (stderr, "%s: cannot handle strings > %ld characters\n",
-	       FRIBIDI_PACKAGE, FRIBIDI_MAX_STRING_LENGTH);
+	       FRIBIDI_PACKAGE, (long) FRIBIDI_MAX_STRING_LENGTH);
 #endif
       return FALSE;
     }
@@ -1210,8 +1209,6 @@ fribidi_log2vis (		/* input */
   {
     FriBidiLevel level_idx;
     FriBidiStrIndex i;
-
-    /* TBD: L3 */
 
     /* Set up the ordering array to sorted order */
     if (position_V_to_L_list)
@@ -1271,6 +1268,55 @@ fribidi_log2vis (		/* input */
 		  }
 	      }
 	    DBG ("  Mirroring, Done\n");
+	  }
+
+	if (reorder_nsm)
+	  {
+	    /* L3. Reorder NSMs. */
+	    DBG ("  Reordering NSM sequences\n");
+	    /* We apply this rule before L2, so go backward in odd levels. */
+	    for (pp = type_rl_list->next; pp->next; pp = pp->next)
+	      {
+		if (pp->level & 1)
+		  {
+		    FriBidiStrIndex i;
+		    boolean is_nsm_seq, seq_end;
+
+		    is_nsm_seq = 0;
+		    for (i = RL_POS (pp) + RL_LEN (pp) - 1; i >= RL_POS (pp);
+			 i--)
+		      {
+			FriBidiCharType this_type;
+
+			this_type = fribidi_get_type (str[i]);
+			if (is_nsm_seq && this_type != FRIBIDI_TYPE_NSM)
+			  {
+			    if (visual_str)
+			      {
+				bidi_string_reverse (visual_str + i,
+						     seq_end - i + 1);
+			      }
+			    if (position_V_to_L_list)
+			      {
+				index_array_reverse (position_V_to_L_list + i,
+						     seq_end - i + 1);
+			      }
+			    is_nsm_seq = 0;
+			  }
+			else if (!is_nsm_seq && this_type == FRIBIDI_TYPE_NSM)
+			  {
+			    seq_end = i;
+			    is_nsm_seq = 1;
+			  }
+		      }
+		    if (is_nsm_seq)
+		      {
+			DBG
+			  ("Warning: NSMs at the beggining of run level.\n");
+		      }
+		  }
+	      }
+	    DBG ("  Reordering NSM sequences, Done\n");
 	  }
 
 	/* L2. Reorder. */
@@ -1364,15 +1410,12 @@ fribidi_log2vis_get_embedding_levels (	/* input */
 
 
 
-
-
-
-
-
-char *fribidi_version_info =
-  FRIBIDI_PACKAGE " " FRIBIDI_VERSION " (interface version "
-  FRIBIDI_INTERFACE_VERSION_STR ")\n"
-  "Copyright (C) 2001 FriBidi Project (http://fribidi.sf.net/).\n" "\n"
+const char *fribidi_version_info =
+  FRIBIDI_PACKAGE " " FRIBIDI_VERSION "\n"
+  "interface version " FRIBIDI_INTERFACE_VERSION_STR "\n"
+  "Unicode version " FRIBIDI_UNICODE_VERSION "\n"
+  "\n"
+  "Copyright (C) 2002 FriBidi Project (http://fribidi.sf.net/).\n"
   FRIBIDI_PACKAGE " comes with NO WARRANTY, to the extent permitted by law.\n"
   "You may redistribute copies of " FRIBIDI_PACKAGE " under the terms of\n"
   "the GNU Lesser General Public License.\n"
@@ -1381,7 +1424,7 @@ char *fribidi_version_info =
 #ifdef DEBUG
   "--enable-debug\n"
 #endif
-#if (defined(MEM_OPTIMIZED))
+#ifdef MEM_OPTIMIZED
   "--enable-memopt\n"
 #endif
 #ifdef USE_SIMPLE_MALLOC

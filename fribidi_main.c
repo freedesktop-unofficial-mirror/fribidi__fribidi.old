@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod.
+ * Copyright (C) 2001,2002 Behdad Esfahbod.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public  
@@ -62,7 +62,8 @@ die (char *fmt, ...)
   exit (-1);
 }
 
-boolean do_break, do_pad, do_mirror, do_clean, show_input, show_changes;
+boolean do_break, do_pad, do_mirror, do_reorder_nsm, do_clean, show_input,
+  show_changes;
 boolean show_visual, show_basedir, show_ltov, show_vtol, show_levels;
 int text_width;
 char *char_set;
@@ -87,8 +88,8 @@ help (void)
 	  "  -v, --verbose         Verbose mode, same as --basedir --ltov --vtol \\\n"
 	  "                        --levels --changes\n"
 	  "  -d, --debug           Output debug information\n"
-	  "  -t, --test            Test %s, same as --clean --nobreak --showinput\n",
-	  FRIBIDI_PACKAGE);
+	  "  -t, --test            Test %s, same as --clean --nobreak --showinput \\\n"
+	  "                        --reordernsm\n", FRIBIDI_PACKAGE);
 #ifdef FRIBIDI_NO_CHARSETS
   printf ("  -c, --charset CS      Specify character set, default is %s \\\n"
 	  "                        CS should be a valid iconv character set name\n",
@@ -116,12 +117,13 @@ help (void)
     ("      --wltr            Set base direction to LTR if no strong character found \\\n"
      "                        (default)\n"
      "      --nomirror        Turn mirroring off, to do it later\n"
+     "      --reordernsm      Reorder NSM sequences to follow their base character\n"
      "      --clean           Remove explicit format codes in visual string \\\n"
      "                        output, currently does not affect other outputs\n"
-     "      --basedir         Output Base Direction\n"
-     "      --ltov            Output Logical to Visual position map\n"
-     "      --vtol            Output Visual to Logical position map\n");
-  printf ("      --levels          Output Embedding Levels\n"
+     "      --basedir         Output Base Direction\n");
+  printf ("      --ltov            Output Logical to Visual position map\n"
+	  "      --vtol            Output Visual to Logical position map\n"
+	  "      --levels          Output Embedding Levels\n"
 	  "      --changes         Output information about changes between \\\n"
 	  "                        logical and visual string (start, length)\n"
 	  "      --novisual        Do not output the visual string, to be used with \\\n"
@@ -152,7 +154,7 @@ help (void)
 static void
 version (void)
 {
-  printf (fribidi_version_info);
+  printf ("%s", fribidi_version_info);
   exit (0);
 }
 
@@ -169,6 +171,7 @@ main (int argc, char *argv[])
   do_pad = TRUE;
   do_mirror = TRUE;
   do_clean = FALSE;
+  do_reorder_nsm = FALSE;
   show_input = FALSE;
   show_visual = TRUE;
   show_basedir = FALSE;
@@ -217,6 +220,7 @@ main (int argc, char *argv[])
 	{"bol", 1, 0, 'B'},
 	{"eol", 1, 0, 'E'},
 	{"nomirror", 0, &do_mirror, FALSE},
+	{"reordernsm", 0, &do_reorder_nsm, TRUE},
 	{"clean", 0, &do_clean, TRUE},
 	{"ltr", 0, (int *) &input_base_direction, FRIBIDI_TYPE_L},
 	{"rtl", 0, (int *) &input_base_direction, FRIBIDI_TYPE_R},
@@ -275,6 +279,7 @@ main (int argc, char *argv[])
 	  do_clean = TRUE;
 	  show_input = TRUE;
 	  do_break = FALSE;
+	  do_reorder_nsm = TRUE;
 	  break;
 	case 'c':
 	  char_set = strdup (optarg);
@@ -322,6 +327,7 @@ main (int argc, char *argv[])
     die ("unrecognized character set `%s'\n", char_set);
 
   fribidi_set_mirroring (do_mirror);
+  fribidi_set_reorder_nsm (do_reorder_nsm);
   exit_val = 0;
   file_found = FALSE;
   while (optind < argc || !file_found)

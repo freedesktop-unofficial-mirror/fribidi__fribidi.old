@@ -1,7 +1,10 @@
 /*
-  This file was automatically created from BidiMirroring.txt, version 1
+  This file was automatically created from BidiMirroring.txt, version 3.2.0
   by fribidi_create_mirroring
 */
+
+#ifndef FRIBIDI_TAB_MIRRORING_I
+#define FRIBIDI_TAB_MIRRORING_I
 
 #include "fribidi.h"
 
@@ -21,7 +24,7 @@
 
 /* *INDENT-OFF* */
 
-struct
+static const struct
 {
   FriBidiChar ch, mirrored_ch;
 }
@@ -171,5 +174,7 @@ FriBidiMirroredChars[] =
 
 /* *INDENT-ON* */
 
-int nFriBidiMirroredChars = 140;
+const int nFriBidiMirroredChars = 140;
 
+
+#endif /* FRIBIDI_TAB_MIRRORING_I */

@@ -1,5 +1,5 @@
 /* FriBidi - Library of BiDi algorithm
- * Copyright (C) 2001 Behdad Esfahbod.
+ * Copyright (C) 2001,2002 Behdad Esfahbod.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public  
@@ -19,14 +19,22 @@
  * For licensing issues, contact <fwpg@sharif.edu>.
  */
 
-#include "fribidi_types.h"
-
 #ifndef FRIBIDI_UNICODE_H
 #define FRIBIDI_UNICODE_H
 
+#include "fribidi_types.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /* Unicode version */
 #define FRIBIDI_UNICODE_CHARS	0x110000
-#define FRIBIDI_UNICODE_VERSION	"3.1.1"
+#define FRIBIDI_UNICODE_VERSION	"3.2.0"
+
+/* UAX#9 Unicode BiDirectional Algorithm */
+#define UNI_MAX_BIDI_LEVEL 61
 
 /* BiDirectional marks */
 #define UNI_LRM		0x200E
@@ -52,8 +60,12 @@
 #define UNI_FARSI_ZERO	0x06F0
 
 /* wcwidth functions */
-int fribidi_wcwidth (FriBidiChar ch);
-int fribidi_wcswidth (const FriBidiChar *str, FriBidiStrIndex len);
-int fribidi_wcswidth_cjk (const FriBidiChar *str, FriBidiStrIndex len);
+  int fribidi_wcwidth (FriBidiChar ch);
+  int fribidi_wcswidth (const FriBidiChar *str, FriBidiStrIndex len);
+  int fribidi_wcswidth_cjk (const FriBidiChar *str, FriBidiStrIndex len);
 
-#endif /* FRIBIDI_UNICODE_H */
+#ifdef	__cplusplus
+}
+#endif
+
+#endif				/* FRIBIDI_UNICODE_H */
