@@ -1,3 +1,6 @@
+2002-05-04  Behdad Esfahbod <fribidi@behdad.org>
+	* fribidi_wcwidth.c: Updated to latest source of 2002-05-03.
+
 2002-04-07  Behdad Esfahbod <behdad@bamdad.org>
 	* unidata/*, fribidi_unicode.h, fribidi_wcwidth.c: Update to
 	Unicode 3.2.
