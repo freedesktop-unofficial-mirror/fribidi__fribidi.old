@@ -1,3 +1,8 @@
+2002-05-18  Behdad Esfahbod <fribidi@behdad.org>
+	* packtab.c: Updated the search and output generating routines,
+	to use select among int8, int16 and int32 types, this helps to
+	compress better, and generate fewer symbols.
+
 2002-05-16  Behdad Esfahbod <fribidi@behdad.org>
 	* fribidi_wcwidth.c: Updated to latest source of 2002-05-08.
 	* fribidi_wcwidth.i: Added, fribidi_wcwidth.c includes this to reduces

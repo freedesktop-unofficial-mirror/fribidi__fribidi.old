@@ -1,5 +1,5 @@
 /* FriBidi - Library of BiDi algorithm
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -12,7 +12,7 @@
  * Lesser General Public License for more details. 
  * 
  * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
+ * along with this library, in a file named COPYING; if not, write to the 
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA  
  * 
@@ -32,18 +32,14 @@
 #define SIZEOF_CHAR sizeof (char)
 #endif
 
-#ifndef SIZEOF_CHARP
-#define SIZEOF_CHARP sizeof (char *)
-#endif
-
-void
+static void
 err (char *msg)
 {
   fprintf (stderr, "fribidi_create_char_types: %s\n", msg);
   exit (1);
 }
 
-void
+static void
 err2 (char *fmt, char *p)
 {
   fprintf (stderr, "fribidi_create_char_types: ");
@@ -86,9 +82,9 @@ type_names[] =
 
 static char *names[type_names_count];
 
-char unidata_file[200];
+static char *unidata_file;
 
-char
+static char
 get_type (char *s)
 {
   int i;
@@ -103,16 +99,15 @@ get_type (char *s)
 #define table_name "FriBidiPropertyBlock"
 #define key_type_name "FriBidiPropCharType"
 #define macro_name "FRIBIDI_GET_TYPE"
-#define function_name "fribidi_get_type"
+#define function_name "fribidi_get_type_internal"
 #define char_type_name "FriBidiCharType"
 #define char_name "FriBidiChar"
 #define prop_to_type_name "fribidi_prop_to_type"
 #define default_type "LTR"
 
-int table[FRIBIDI_UNICODE_CHARS];
-char *unicode_data_version;
+static int table[FRIBIDI_UNICODE_CHARS];
 
-void
+static void
 init_table ()
 {
   int i;
@@ -139,11 +134,11 @@ init_table ()
     table[i] = AL;
 }
 
-void
+static void
 read_unicode_data ()
 {
   char s[500], tp[10];
-  int i;
+  unsigned int i;
   FILE *f;
 
   printf ("Reading `UnicodeData.txt'\n");
@@ -157,11 +152,28 @@ read_unicode_data ()
   fclose (f);
 }
 
-void
+static char *
+headermacro (char *file)
+{
+  char *t = strdup (file);
+  char *p = t;
+  while (*p)
+    {
+      if (*p >= 'a' && *p <= 'z')
+	*p += 'A' - 'a';
+      else if ((*p < 'A' || *p > 'Z') && (*p < '0' || *p > '9'))
+	*p = '_';
+      p++;
+    }
+  return t;
+}
+
+static void
 write_char_type (char *file, int max_depth)
 {
   int i;
   FILE *f;
+  char *FILENAME = headermacro (file);
 
   printf ("Writing `%s', it may take a few minutes\n", file);
   if (!(f = fopen (file, "wt")))
@@ -170,7 +182,8 @@ write_char_type (char *file, int max_depth)
 	   "  This file was automatically created from UnicodeData.txt version %s\n"
 	   "  by fribidi_create_char_types\n*/\n\n", FRIBIDI_UNICODE_VERSION);
 
-  fprintf (f, "#include \"fribidi.h\"\n\n");
+  fprintf (f, "#ifndef %s\n#define %s\n\n#include \"fribidi.h\"\n\n",
+	   FILENAME, FILENAME);
 
   for (i = 0; i < type_names_count; i++)
     if (names[i])
@@ -178,14 +191,13 @@ write_char_type (char *file, int max_depth)
   fprintf (f, "\n");
 
   if (!pack_table
-      (table, FRIBIDI_UNICODE_CHARS, SIZEOF_CHAR, SIZEOF_CHARP, max_depth, 3,
-       names, key_type_name, table_name, macro_name, f))
+      (table, FRIBIDI_UNICODE_CHARS, SIZEOF_CHAR, max_depth, 3, names,
+       key_type_name, table_name, macro_name, f))
     err ("error: insufficient memory, decrease max_depth");
 
   for (i = type_names_count - 1; i >= 0; i--)
     if (names[i])
       fprintf (f, "#undef %s\n", names[i]);
-  fprintf (f, "\n");
 
   fprintf (f,
 	   "/*======================================================================\n"
@@ -204,6 +216,7 @@ write_char_type (char *file, int max_depth)
 	   function_name, char_type_name, function_name, char_name,
 	   FRIBIDI_UNICODE_CHARS, prop_to_type_name, macro_name,
 	   default_type);
+  fprintf (f, "\n#endif /* %s */\n", FILENAME);
 
   fclose (f);
 }
@@ -212,11 +225,12 @@ int
 main (int argc, char **argv)
 {
   int max_depth;
-  char file[50];
+  char file[50], *p;
   if (argc < 2)
     err ("usage: fribidi_create_char_types max_depth [UnicodeData.txt path]");
-  snprintf (unidata_file, sizeof unidata_file,
-	    "%s/UnicodeData.txt", (argc >= 3) ? argv[2] : "unidata");
+  p = (argc >= 3) ? argv[2] : "unidata";
+  unidata_file = malloc (50 + strlen (p));
+  sprintf (unidata_file, "%s/UnicodeData.txt", p);
   max_depth = atoi (argv[1]);
   if (!max_depth)
     err ("invalid depth");

@@ -71,7 +71,9 @@ extern "C"
 /*======================================================================
  *  fribidi_get_type() returns bidi type of a character.
  *----------------------------------------------------------------------*/
-  FriBidiCharType fribidi_get_type (FriBidiChar uch);
+  FriBidiCharType fribidi_get_type_internal (FriBidiChar uch);
+ 
+#define fribidi_get_type(uch) fribidi_get_type_internal(uch)
 
 /*======================================================================
  *  fribidi_get_types() returns bidi type of a string.
