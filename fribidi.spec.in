@@ -12,12 +12,13 @@
 %define name @PACKAGE@
 %define ver @VERSION@
 %define rel @SPECRELEASE@
-
+%define apiver @INTERFACE_VERSION@
 %define prefix %{_prefix}
 
 Name: %{name}
 Version: %{ver}
 Release: %{rel}
+Serial: %{apiver}
 Copyright: LGPL
 Source: http://telia.dl.sourceforge.net/fribidi/%{name}-%{ver}.tar.gz
 URL: http://fribidi.sourceforge.net/

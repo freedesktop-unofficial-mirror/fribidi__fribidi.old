@@ -1,5 +1,9 @@
 Implementation issues:
 
+* packtab.c should produce outputs with much fewer symbols, with the idea
+  of putting different tables in one, and store the offsets instead of
+  pointers.
+
 * Add const keywords all over the source.
 
 * with --without-charsets, fribidi char set converters use iconv internally.

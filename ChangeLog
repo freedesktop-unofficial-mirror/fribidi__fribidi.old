@@ -1,3 +1,7 @@
+2002-01-12  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi.spec.in: Define RPM serial version as interface version.
+	* TODO: New tasks added.
+
 2002-01-11  Behdad Esfahbod <behdad@bamdad.org>
 	* packtab.c: Fixed the bug Owen Taylor <otaylor@redhat.com>, defines
 	internal arrays as "static const" in output.
