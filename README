@@ -3,22 +3,22 @@ This is is FriBidi, a Free Implementation of the Unicode BiDi algorithm.
 Background
 ==========
 One of the missing links stopping the penetration of free software in
-Israel is the lack of support for Hebrew. In order to have proper
-Hebrew support, the BiDi algorithm must be implemented. It is my hope
-that this library will stimulate more Hebrew free software.
-
-Of course the BiDi algorithm is not limited to Hebrew, so I expect
-that our Arab neighbors will also find this software useful. 
-
+Middle East is the lack of support for Hebrew and Arabic. In order to have
+proper Arabic and Hebrew support, the BiDi algorithm must be implemented. It
+is our hope that this library will stimulate more free software in Middle
+Eastern countries.
 
 Audience
 ========
 
-It is my hope that this library will stimulate the implementation of
+It is our hope that this library will stimulate the implementation of
 Hebrew and Arabic in lots of free software. Here is a small list of
 projects that would benifit from the use of the FriBidi library, but
-of course there are many more: Wine, Mozilla, Gtk, Gnome, Qt, KDE,
-AbiWord, lynx, StarOffice.
+of course there are many more: Wine, Mozilla, Gnome, Qt, KDE, AbiWord,
+lynx, OpenOffice.
+
+It may be interesting for you to know Fribidi is already being used in
+projects like GTK+ and Xterm.
 
 Downloading
 ===========
@@ -33,18 +33,20 @@ See INSTALL for a description of how to build and install this library.
 Implementation
 ==============
 The library implements most of the algorithm as described in the
-"Unicode Bidirectional Algorithm, Working Draft Unicode Technical Report
-#9, http://www.unicode.org/unicode/reports/tr9/". The major feature
-that is currently missing in fribidi is the support for explicit overrides.
+"Unicode Standard Annex #9, The Bidirectional Algorithm,
+http://www.unicode.org/unicode/reports/tr9/". There are still some bugs in
+resolving Arabic weak types, but Fribidi is being tested against Unicode
+Reference Code, and due to our belief, is one of the most-conforming
+implementation of the algorithm.
 
-In the API I was was inspired by the document "Bi-Di languages support
+In the API we were inspired by the document "Bi-Di languages support
 - BiDi API propasal", http://www.langbox.com/AraMosaic/mozilla/BiDi_API.html,
 by Franck Portaneri <franck@langbox.com> which he wrote as a proposal
 for adding BiDi support to Mozilla.
 
 Internally the library uses Unicode entirely. The character property
 function was automatically created from the Unicode property list
-document PropList.txt available from the Unicode ftp site. This
+document PropList.txt available from the Unicode FTP site. This
 means that every Unicode character should be treated in strict
 accordance with the Unicode specification. The same is true for the
 mirroring of characters, which also works for all the characters
@@ -132,7 +134,7 @@ Bugs and comments
 
 Report FriBidi bugs at:
 
-	http://sourceforge.net/bugs/?group_id=2722
+	http://fribidi.sourceforge.net/bugs.php
 
 And send your comments to:
 

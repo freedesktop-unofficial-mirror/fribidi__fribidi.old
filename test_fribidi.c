@@ -68,7 +68,14 @@ int main(int argc, char *argv[])
       CASE("-outputonly")  { do_output_only++; pad_width = 80; continue; };
       CASE("-test_vtol") { do_test_vtol++; continue; };
       CASE("-print_embedding") { do_print_embedding++; continue; };
-      CASE("-debug") { fribidi_set_debug(TRUE); continue; };
+      CASE("-debug") {
+        if (fribidi_set_debug(TRUE))
+	  continue;
+	else {
+	  fprintf(stderr, "Fribidi must be compiled with DEBUG option to enable debugging.\n");
+	  exit(-1);
+	}
+      }
       CASE("-order") { do_use_order++; continue; };
       CASE("-capital_rtl") { do_cap_as_rtl++; continue; }; 
       CASE("-nopad") { do_no_pad++; continue; };

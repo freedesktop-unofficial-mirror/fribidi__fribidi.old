@@ -1,5 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999 Dov Grobgeld
+ * Copyright (C) 2001 Behdad Esfahbod
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -49,15 +50,23 @@ typedef enum
   /* The following are only used internally */
   FRIBIDI_TYPE_L = FRIBIDI_TYPE_LTR, 
   FRIBIDI_TYPE_R = FRIBIDI_TYPE_RTL, 
-  FRIBIDI_TYPE_BN  = FRIBIDI_TYPE_ON + 2, 
-  FRIBIDI_TYPE_CM  , 
-  FRIBIDI_TYPE_SOT , 
-  FRIBIDI_TYPE_EOT , 
-  FRIBIDI_TYPE_N   , 
-  FRIBIDI_TYPE_E   , 
+  FRIBIDI_TYPE_BN  = FRIBIDI_TYPE_ON + 2,
+  FRIBIDI_TYPE_CM  ,
+  FRIBIDI_TYPE_SOT ,
+  FRIBIDI_TYPE_EOT ,
+  FRIBIDI_TYPE_N   ,
+  FRIBIDI_TYPE_E   ,
   FRIBIDI_TYPE_CTL , /* Control units */
-  FRIBIDI_TYPE_EO , /* Control units */
+  FRIBIDI_TYPE_EO  , /* Control units */
 } FriBidiCharType;
+
+#ifdef DEBUG
+char char_from_type[] = {
+  'L', 'R', 'l', 'r', '1', 'w', 'w', '9', 'w', 'P', 'S', '_', 'A',
+  '.', '+', '+', '+', '+', '-', 'n', '?',
+  'b', '?', '>', '<', 'n', 'e', '?', '?'
+};
+#endif
 
 /* The following type is used by fribidi_utils */
 typedef struct {

@@ -1,0 +1,5 @@
+#!/bin/sh
+# Find a single nonconforming test
+
+while ! test "`./dotest $1`"; do echo -n .; done
+cat test.in | ./test -clean

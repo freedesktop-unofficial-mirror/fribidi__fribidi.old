@@ -1,31 +1,31 @@
 /*======================================================================
-//  This file was automatically created from PropList-3.0.1.txt
+//  This file was automatically created from PropList.txt
 //  by the perl script CreateGetType.pl.
 //----------------------------------------------------------------------*/
 
 #include "fribidi.h"
 
-#define LTR FRIBIDI_TYPE_LTR
-#define RTL FRIBIDI_TYPE_RTL
-#define EN FRIBIDI_TYPE_EN
-#define ES FRIBIDI_TYPE_ES
-#define ET FRIBIDI_TYPE_ET
-#define AN FRIBIDI_TYPE_AN
-#define CS FRIBIDI_TYPE_CS
+#define WS FRIBIDI_TYPE_WS
 #define BS FRIBIDI_TYPE_BS
-#define SS FRIBIDI_TYPE_SS
+#define EO FRIBIDI_TYPE_EO
 #define CTL FRIBIDI_TYPE_CTL
 #define LRE FRIBIDI_TYPE_LRE
 #define RLE FRIBIDI_TYPE_RLE
+#define ES FRIBIDI_TYPE_ES
 #define LRO FRIBIDI_TYPE_LRO
 #define RLO FRIBIDI_TYPE_RLO
-#define WS FRIBIDI_TYPE_WS
-#define ON FRIBIDI_TYPE_ON
 #define AL FRIBIDI_TYPE_AL
+#define SS FRIBIDI_TYPE_SS
+#define ET FRIBIDI_TYPE_ET
 #define NSM FRIBIDI_TYPE_NSM
+#define LTR FRIBIDI_TYPE_LTR
+#define ON FRIBIDI_TYPE_ON
+#define AN FRIBIDI_TYPE_AN
 #define BN FRIBIDI_TYPE_BN
+#define RTL FRIBIDI_TYPE_RTL
+#define CS FRIBIDI_TYPE_CS
 #define PDF FRIBIDI_TYPE_PDF
-#define EO FRIBIDI_TYPE_EO
+#define EN FRIBIDI_TYPE_EN
 
 
 guchar FriBidiPropertyBlock0000[256] = {
@@ -916,27 +916,27 @@ guchar *FriBidiPropertyBlocks[256] = {
   FriBidiPropertyBlockff00,
 };
 
-#undef LTR
-#undef RTL
-#undef EN
-#undef ES
-#undef ET
-#undef AN
-#undef CS
+#undef WS
 #undef BS
-#undef SS
+#undef EO
 #undef CTL
 #undef LRE
 #undef RLE
+#undef ES
 #undef LRO
 #undef RLO
-#undef WS
-#undef ON
 #undef AL
+#undef SS
+#undef ET
 #undef NSM
+#undef LTR
+#undef ON
+#undef AN
 #undef BN
+#undef RTL
+#undef CS
 #undef PDF
-#undef EO
+#undef EN
 
 
 /*======================================================================
@@ -948,7 +948,7 @@ guchar *FriBidiPropertyBlocks[256] = {
 //  but do not have any mirrored glyph, e.g. the sign for there exist.
 //  Are these used in Arabic? That is are all the mathematical signs
 //  that are assigned to be mirrorable actually mirrored in Arabic?
-//  If that is the case, I'll change the below code to include also
+//  If that is the case, we'll change the below code to include also
 //  characters that mirror to themself. It will then be the responsibility
 //  of the display engine to actually mirror these.
 //----------------------------------------------------------------------*/
@@ -974,6 +974,19 @@ struct {
   {0x207E, 0x207D},
   {0x208D, 0x208E},
   {0x208E, 0x208D},
+  {0x2208, 0x220B},
+  {0x2209, 0x220C},
+  {0x220A, 0x220D},
+  {0x220B, 0x2208},
+  {0x220C, 0x2209},
+  {0x220D, 0x220A},
+  {0x223C, 0x223D},
+  {0x223D, 0x223C},
+  {0x2243, 0x22CD},
+  {0x2252, 0x2253},
+  {0x2253, 0x2252},
+  {0x2254, 0x2255},
+  {0x2255, 0x2254},
   {0x2264, 0x2265},
   {0x2265, 0x2264},
   {0x2266, 0x2267},
@@ -990,20 +1003,73 @@ struct {
   {0x2273, 0x2272},
   {0x2274, 0x2275},
   {0x2275, 0x2274},
+  {0x2276, 0x2277},
+  {0x2277, 0x2276},
+  {0x2278, 0x2279},
+  {0x2279, 0x2278},
+  {0x227A, 0x227B},
+  {0x227B, 0x227A},
+  {0x227C, 0x227D},
+  {0x227D, 0x227C},
+  {0x227E, 0x227F},
+  {0x227F, 0x227E},
+  {0x2280, 0x2281},
+  {0x2281, 0x2280},
+  {0x2282, 0x2283},
+  {0x2283, 0x2282},
+  {0x2284, 0x2285},
+  {0x2285, 0x2284},
+  {0x2286, 0x2287},
+  {0x2287, 0x2286},
+  {0x2288, 0x2289},
+  {0x2289, 0x2288},
+  {0x228A, 0x228B},
+  {0x228B, 0x228A},
+  {0x228F, 0x2290},
+  {0x2290, 0x228F},
+  {0x2291, 0x2292},
+  {0x2292, 0x2291},
   {0x22A2, 0x22A3},
   {0x22A3, 0x22A2},
+  {0x22B0, 0x22B1},
+  {0x22B1, 0x22B0},
+  {0x22B2, 0x22B3},
+  {0x22B3, 0x22B2},
+  {0x22B4, 0x22B5},
+  {0x22B5, 0x22B4},
+  {0x22B6, 0x22B7},
+  {0x22B7, 0x22B6},
   {0x22C9, 0x22CA},
   {0x22CA, 0x22C9},
   {0x22CB, 0x22CC},
   {0x22CC, 0x22CB},
+  {0x22CD, 0x2243},
+  {0x22D0, 0x22D1},
+  {0x22D1, 0x22D0},
   {0x22D6, 0x22D7},
   {0x22D7, 0x22D6},
   {0x22D8, 0x22D9},
   {0x22D9, 0x22D8},
+  {0x22DA, 0x22DB},
+  {0x22DB, 0x22DA},
   {0x22DC, 0x22DD},
   {0x22DD, 0x22DC},
+  {0x22DE, 0x22DF},
+  {0x22DF, 0x22DE},
+  {0x22E0, 0x22E1},
+  {0x22E1, 0x22E0},
+  {0x22E2, 0x22E3},
+  {0x22E3, 0x22E2},
+  {0x22E4, 0x22E5},
+  {0x22E5, 0x22E4},
   {0x22E6, 0x22E7},
   {0x22E7, 0x22E6},
+  {0x22E8, 0x22E9},
+  {0x22E9, 0x22E8},
+  {0x22EA, 0x22EB},
+  {0x22EB, 0x22EA},
+  {0x22EC, 0x22ED},
+  {0x22ED, 0x22EC},
   {0x22F0, 0x22F1},
   {0x22F1, 0x22F0},
   {0x2308, 0x2309},
@@ -1032,4 +1098,4 @@ struct {
   {0x301B, 0x301A}
 };
 
-gint nFriBidiMirroredChars = 74;
+gint nFriBidiMirroredChars = 140;

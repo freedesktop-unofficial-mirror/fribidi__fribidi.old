@@ -1,7 +1,7 @@
-Dov Grobgeld <dov@imagic.weizmann.ac.il>:
+Dov Grobgeld <dov@imagic.weizmann.ac.il>
    * Initial author and current maintainer.
    
-Owen Tayler <otaylor@redhat.com>:
+Owen Tayler <otaylor@redhat.com>
    * Contributed very important memory leak and speed patches.
 
 Raphael Finkel <raphael@cs.uky.edu>       
@@ -19,3 +19,7 @@ Omer Zak <omerz@actcom.co.il>
 
 Behdad Esfahbod <behdad@bamdad.org>
    * Added explicit bidi support.
+   * Fixed many bugs in Arabic bidi types.
+
+Roozbeh Pournader <roozbeh@sharif.edu>
+   * Changed the Perl script used for automatic character data extraction.

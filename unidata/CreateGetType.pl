@@ -2,6 +2,7 @@
 
 # FriBidi - Library of BiDi algorithm
 # Copyright (C) 1999 Dov Grobgeld
+# Copyright (C) 2001 Roozbeh Pournader
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Library General Public
@@ -23,14 +24,19 @@
 #  This is a Perl program for automatically building the cfunction
 #  fribidi_get_type() which returns the Bidi type of a unicode
 #  character. To build this function the script parses the
-#  PropList-*.txt and the UnicodeData-*.txt files.
+#  PropList.txt, and BidiMirroring.txt files.
+#
+#  The latest version of these files are always available at:
+#     http://www.unicode.org/Public/UNIDATA/
 ######################################################################
 
 use strict;
 
-my $unicode_version = "3.0.1";
-my $unicode_data_file = "UnicodeData-$unicode_version.txt";
-my $unicode_proplist_file = "PropList-$unicode_version.txt";
+#my $unicode_data_file = "UnicodeData.txt";
+my $unicode_proplist_file = "PropList.txt";
+my $unicode_mirroring_file = "BidiMirroring.txt";
+my $proplist_version;
+my $mirroring_version;
 my @bidi_entities;
 my @mirrors;
 
@@ -50,8 +56,8 @@ my %type_names = ("0x10000090" => ["CTL", "Control units"],
 		  "0x0B000000" => ["AL",  "Arabic right to left letter"],
 		  "0x0C000000" => ["NSM", "Non-spacing mark"],
 		  "0x0D000000" => ["BN",  "Boundary Neutral"],
-		  "0x0E000000" => ["PDF",  "Pop directional formatting"],
-		  "0x0F000000" => ["EO", "Embedding or override"],
+		  "0x0E000000" => ["PDF", "Pop directional formatting"],
+		  "0x0F000000" => ["EO",  "Embedding or override"],
 		  "0x80000009" => ["ON",  "Other Neutral"],
 		  "0x10000091" => ["LRE", "RLE"],		  
 		  "0x10000092" => ["RLE", "RLE"],		  
@@ -62,8 +68,21 @@ my %type_names = ("0x10000090" => ["CTL", "Control units"],
 open(PROP, $unicode_proplist_file)
    or die "Failed opening $unicode_proplist_file!\n";
 
-open(DATA, $unicode_data_file)
-   or die "Failed opening $unicode_data_file!\n";
+#open(DATA, $unicode_data_file)
+#   or die "Failed opening $unicode_data_file!\n";
+
+open(MIRR, $unicode_mirroring_file)
+   or die "Failed opening $unicode_mirroring_file!\n";
+
+$_ = <PROP>;
+if (/^Property dump: UnicodeData-(.*).txt/) {
+   $proplist_version = $1;
+}
+
+$_ = <MIRR>;
+if (/^# BidiMirroring-(.*).txt/) {
+   $mirroring_version = $1;
+}
 
 #parse_unicode_data_for_bidi_entries();
 parse_prop_for_bidi_entities();
@@ -153,42 +172,11 @@ sub find_bidi_controls {
 }
 
 sub parse_for_mirror_chars {
-    my @mirrored_chars;
-    my %mirror_name_to_num;
-    seek(DATA,0,0);
-    while(<DATA>) {
-	my @props = split(";");
-	next unless $props[9] eq "Y";
-
-	# Just save them for now
-	push(@mirrored_chars, [@props]);
-	$mirror_name_to_num{$props[1]} = $props[0];
-    }
-
-    # Now find mirrored characters for a small subset of all those
-    # characters defined as mirrorable.
-    foreach my $m (@mirrored_chars) {
-	my (@props) = @$m;
-	my $num = $props[0];
-	my $name = $props[1];
-	my ($mirror_name, $mirror_num);
-	my %opposite = ("UP RIGHT"=>"DOWN RIGHT",
-			"DOWN RIGHT"=>"UP RIGHT",
-			"LEFT"=>"RIGHT",
-			"RIGHT"=>"LEFT",
-			"LESS-THAN"=>"GREATER-THAN",
-			"GREATER-THAN"=>"LESS-THAN");
-	my $pattern = join("|", keys %opposite);
-	($mirror_name = $name)
-	    =~ s/\b($pattern)\b/$opposite{$&}/e;
-	if ($mirror_name_to_num{$mirror_name}) {
-	    $mirror_num = $mirror_name_to_num{$mirror_name};
-	} else {
-	    $mirror_num = $num;
+    seek(MIRR,0,0);
+    while(<MIRR>) {
+	if (/^([0-9A-F]*); ([0-9A-F]*)/) {
+	    push(@mirrors, [$1, $2]);
 	}
-
-	# Should I include characters that map to themself???
-	push(@mirrors, [$num, $mirror_num]) if $num ne $mirror_num;
     }
 }
 
@@ -260,9 +248,9 @@ sub create_c_file {
     my $num_used_blocks = 0;
 
     my $c_file =<<__;
-/*======================================================================
-//  This file was automatically created from $unicode_proplist_file
-//  by the perl script CreateGetType.pl.
+/*========================================================================
+//  This file was automatically created from $unicode_proplist_file, version $proplist_version,
+//  and $unicode_mirroring_file, version $mirroring_version, by the perl script CreateGetType.pl.
 //----------------------------------------------------------------------*/
 
 #include "fribidi.h"
@@ -361,7 +349,7 @@ __
 //  but do not have any mirrored glyph, e.g. the sign for there exist.
 //  Are these used in Arabic? That is are all the mathematical signs
 //  that are assigned to be mirrorable actually mirrored in Arabic?
-//  If that is the case, I'll change the below code to include also
+//  If that is the case, we'll change the below code to include also
 //  characters that mirror to themself. It will then be the responsibility
 //  of the display engine to actually mirror these.
 //----------------------------------------------------------------------*/

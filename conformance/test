@@ -1,0 +1,40 @@
+#!/bin/sh
+# Test ../fribidi with reference/bidiref, using stdin and diff the outputs
+
+convertsub () {
+  refline="`echo \"$refline\" | sed s/$1/$2/g`"
+}
+
+while [ -n "$1" ]; do
+  if test "$1" = "-debug"; then
+    p1=$p1" -debug"
+    p2=$p2" -verbose"
+  elif test "$1" = "-clean"; then
+    p1=$p1" -clean"
+    p2=$p2" -clean"
+  fi
+  shift
+done
+
+echo -n > test.out
+echo -n > test.ref
+
+while read line; do
+  echo "$line" | ../fribidi $p1 -nopad >> test.out
+#  echo "$line" | reference/bidiref $p2 >> test.ref
+  refline="$line"
+  convertsub "_R" "`echo -e \"\\16\"`"
+  convertsub "_r" "`echo -e \"\\17\"`"
+  convertsub "_L" "`echo -e \"\\20\"`"
+  convertsub "_l" "`echo -e \"\\21\"`"
+  convertsub "_o" "`echo -e \"\\22\"`"
+  refline=`echo "$refline" | reference/bidiref $p2`
+  convertsub "`echo -e \"\\16\"`" "_R"
+  convertsub "`echo -e \"\\17\"`" "_r"
+  convertsub "`echo -e \"\\20\"`" "_L"
+  convertsub "`echo -e \"\\21\"`" "_l"
+  convertsub "`echo -e \"\\22\"`" "_o"
+  echo "$refline" >> test.ref
+done
+
+diff test.out test.ref

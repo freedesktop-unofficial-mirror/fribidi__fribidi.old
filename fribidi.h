@@ -29,7 +29,7 @@ fribidi_get_mirror_char(/* Input */
 			FriBidiChar ch,
 			/* Output */
 			FriBidiChar *mirrored_ch);
-void
+int
 fribidi_set_debug(gboolean debug);
 
 void fribidi_log2vis(/* input */

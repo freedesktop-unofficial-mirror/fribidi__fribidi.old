@@ -1,0 +1,11 @@
+#!/bin/sh
+# Generate and test single tests, and archive the nonconforming ones.
+
+while true; do
+  ./findbad $@
+  echo -e "bad test found!!!\7"
+  if ! test -d badtests; then
+    mkdir badtests
+  fi
+  cp test.in badtests/$RANDOM.in
+done

@@ -1,16 +1,42 @@
-2000-01-13  Behdad Esfahbod <behdad@bamdad.org>
+2001-02-19  Behdad Esfahbod <behdad@bamdad.org>
+
+	* fribidi.c: Added support for all explicit marks (embeddings and
+	overrides), it means rules X1 .. X10 of specification.
+	
+	* fribidi.c: Added support for L1 rule of specification, it's
+	resetting the char type of some characters, just before reordering.
 
 	* fribidi.c: Added 'AL' to types that change the paragraph embedding
 	level, it previously only checked for 'R'.
 
-        * fribidi.c: Added some more debug information.
+	* fribidi.c: Define symbol NO_STDIO changed to DEBUG, to turn off
+	all debug codes compile time, also a function fribidi_set_debug,
+	turns on and off the debug output generations in run time.
 
-	* fribidi_main.c: Added support for inputting explicit marks.
+	* fribidi.c: Added some more debug information, all debug informations
+	revised and go to stderr now.
+
+	* fribidi.c: Fixed a bug in rule W5, that is when some european
+	terminators are between some arabic letters and some european
+	numbers.
+
+	* fribidi_main.c: Added support for inputting explicit marks, in
+	CapRTL charset mode.
 
 	* fribidi_main.c: Added command line option for debug mode.
 
 	* fribidi_main.c: Fixed a small bug that would annoy when the size
 	of original string may be different to the derived one.
+
+	* fribidi_main.c: Fixed a small bug in padding when the size of the
+	out string was more than the page width.
+
+	* fribidi_types.h: Added some types needed for debug info.
+
+2001-02-19  Roozbeh Pournader <roozbeh@sharif.edu>
+
+	* CreateGetType.pl: changed to use BidiMirroring.txt instead
+	of UnicodeData.txt.
 
 2000-11-12  Dov Grobgeld  <dov@imagic.weizmann.ac.il>
 
@@ -43,13 +69,13 @@
 	USE_SIMPLE_MALLOC that may be used to effect what code is being 
 	generated.
 
-	* fribidi_char_sets.h, fribidi_char_sets.c : Added Omer Zaks more 
+	* fribidi_char_sets.h, fribidi_char_sets.c: Added Omer Zaks more 
 	general ut8 to unicode and unicode to ut8 functions.
 	
 	* fribidi.c: [OZ] Replaced int to gint to better support embedded
 	libraries.
 
-	* Applied lots of code contributed by Omer Zak <omerz@actcom.co.il> ,
+	* Applied lots of code contributed by Omer Zak <omerz@actcom.co.il>:
 	detailed above.
 	
 

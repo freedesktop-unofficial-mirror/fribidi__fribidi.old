@@ -22,7 +22,7 @@ libfribidiinc_HEADERS = \
 	fribidi_types.h
 
 EXTRA_DIST = \
-        CreateGetType.pl \
+        unidata/CreateGetType.pl \
 	tests/test-hebrew \
 	tests/test-capital-rtl \
 	run.tests \

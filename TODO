@@ -1,10 +1,16 @@
+BiDi algorithms issues:
+
+* Handle the L3 rule of the BiDi algorithm
+
 General issues:
 
 * Clean up code
 
+* Add some more tests
+
 * Better documentation
 
-* Write some utility programs.
+* Write some utility programs
 
 * Write notes and a reference implementation for the following interactions
   with fribidi:
@@ -33,12 +39,12 @@ General issues:
   adding a single character.
 
 * Add handling of precomposed and presentation unicode chars when converting
-  to 8 bit encodings (breaking into several chars, or better match)
+  to 8-bit encodings (breaking into several chars, or better match)
 
-* Persian 8bit encoding ISIRI-3342 has the notion of strong typed chars like
-  spaces etc (all the range 0x00-0x3f,0x7f is strong typed left-to-right,
-  and duplicated in 0x80-0xbf,0xff as a strong typed right-to-left version.
-  several chars in the range 0xa0-0xbf have unicode counterparts; but
-  others (and all in the range 0x80-0x9f,0xff) have not; so how should that
-  be handled when converting to unicode to preserve at best the direction
-  information?
+* Persian 8-bit encoding ISIRI-3342 has the notion of strong typed chars like
+  spaces etc (all the characters in the range 0x00-0x7f are strongly typed
+  left-to-right, and sometimes have duplicates in 0x80-0xff as a strongly
+  typed right-to-left version.  several chars in the range 0xa0-0xbf have
+  exact unicode counterparts; but others (and all in the range 0x80-0x9f,
+  and 0xff) have not; so how should that be handled when converting to
+  unicode to preserve at best the direction information?
