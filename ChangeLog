@@ -1,3 +1,8 @@
+2002-06-17  Behdad Esfahbod <fribidi@behdad.org>
+	* fribidi_unicode.h: Set Unicode chars based on sizeof FriBidiChar.
+	Now if one changes FriBidiChar to 16bit, and regenerate char_type
+	tables, they will be 16bit too.
+
 2002-05-19  Behdad Esfahbod <fribidi@behdad.org>
 	* Fribidi 0.10.4 released.
 	* configure.in: Changed version information.
