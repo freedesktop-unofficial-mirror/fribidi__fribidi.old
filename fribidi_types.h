@@ -13,7 +13,7 @@
  * Lesser General Public License for more details. 
  * 
  * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
+ * along with this library, in a file named COPYING; if not, write to the 
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA  
  * 
@@ -23,21 +23,14 @@
 #ifndef FRIBIDI_TYPES_H
 #define FRIBIDI_TYPES_H
 
-#ifndef FRIBIDI_USE_MINI_GLIB
-#include <glib.h>
-#else
-#include "fribidi_mini_glib.h"
-#endif
+#include "fribidi_mem.h"
 
-/* FriBidiStrIndex should be defined to be guint 32, at least internally,
-   and maybe still have an interface with guint16. */
-typedef guint32 FriBidiChar;
-typedef guint16 FriBidiStrIndex;
-typedef guint32 FriBidiMaskType;
+typedef uint32 FriBidiChar;
+typedef uint16 FriBidiStrIndex;
+typedef int32 FriBidiMaskType;
 typedef FriBidiMaskType FriBidiCharType;
 
-gchar fribidi_char_from_type (FriBidiCharType c);
-gchar *fribidi_type_name (FriBidiCharType c);
+char *fribidi_type_name (FriBidiCharType c);
 
 /* The following type is used by fribidi_utils */
 typedef struct
@@ -47,8 +40,6 @@ typedef struct
 }
 FriBidiRunType;
 
-/* TBD: The following should be configuration parameters, once we can
-   figure out how to make configure set them... */
 #ifndef FRIBIDI_MAX_STRING_LENGTH
 #define FRIBIDI_MAX_STRING_LENGTH (sizeof (FriBidiStrIndex) == 2 ? 0xFFF0L : 0xFFFFFFF0L)
 #endif
@@ -58,6 +49,8 @@ FriBidiRunType;
  * Define some bit masks, that character types are based on, each one has
  * only one bit on.
  */
+
+/* Do not use enum, because 16bit processors do not allow 32bit enum values. */
 
 #define FRIBIDI_MASK_RTL	0x00000001L	/* Is right to left */
 #define FRIBIDI_MASK_ARABIC	0x00000002L	/* Is arabic */
@@ -94,6 +87,9 @@ FriBidiRunType;
 #define FRIBIDI_MASK_BS		0x00200000L
 #define FRIBIDI_MASK_SS		0x00400000L
 #define FRIBIDI_MASK_WS		0x00800000L
+
+/* We reserve the sign bit for user's private use: we will never use it,
+   then negative character types will be never assigned. */
 
 
 /*
@@ -182,6 +178,10 @@ FriBidiRunType;
  * implementation of FriBidiCharType.
  */
 
+
+/* Is private-use value? */
+#define FRIBIDI_TYPE_PRIVATE(p)	((p) < 0)
+
 /* Return the direction of the level number, FRIBIDI_TYPE_LTR for even and
    FRIBIDI_TYPE_RTL for odds. */
 #define FRIBIDI_LEVEL_TO_DIR(lev) (FRIBIDI_TYPE_LTR | (lev & 1))
@@ -259,40 +259,39 @@ FriBidiRunType;
 
 
 /*
- * Define character types that fribidi_tables.i uses. if MEM_OPTIMIZED
- * defined, then define them to be 0, 1, 2, ... and then in
- * fribidi_get_type.c map them on FriBidiCharType-s, else define them to
- * be equal to FribidiCharType-s
+ * Define character types that char_type_tables use.
+ * define them to be 0, 1, 2, ... and then in fribidi_get_type.c map them
+ * to FriBidiCharTypes.
  */
-#ifdef MEM_OPTIMIZED
-#define _FRIBIDI_PROP(type, index)	index
-typedef guint8 FriBidiPropCharType;
-#else
-#define _FRIBIDI_PROP(type, index)	FRIBIDI_TYPE_##type
-typedef FriBidiCharType FriBidiPropCharType;
-#endif
-#define FRIBIDI_PROP_TYPE_LTR	_FRIBIDI_PROP (LTR, 0)	/* Strong left to right */
-#define FRIBIDI_PROP_TYPE_RTL	_FRIBIDI_PROP (RTL, 1)	/* Right to left characters */
-#define FRIBIDI_PROP_TYPE_AL	_FRIBIDI_PROP (AL,  2)	/* Arabic characters */
-#define FRIBIDI_PROP_TYPE_LRE	_FRIBIDI_PROP (LRE, 3)	/* Left-To-Right embedding */
-#define FRIBIDI_PROP_TYPE_RLE	_FRIBIDI_PROP (RLE, 4)	/* Right-To-Left embedding */
-#define FRIBIDI_PROP_TYPE_LRO	_FRIBIDI_PROP (LRO, 5)	/* Left-To-Right override */
-#define FRIBIDI_PROP_TYPE_RLO	_FRIBIDI_PROP (RLO, 6)	/* Right-To-Left override */
-#define FRIBIDI_PROP_TYPE_PDF	_FRIBIDI_PROP (PDF, 7)	/* Pop directional override */
-#define FRIBIDI_PROP_TYPE_EN	_FRIBIDI_PROP (EN,  8)	/* European digit */
-#define FRIBIDI_PROP_TYPE_AN	_FRIBIDI_PROP (AN, 10)	/* Arabic digit */
-#define FRIBIDI_PROP_TYPE_ES	_FRIBIDI_PROP (ES, 11)	/* European number separator */
-#define FRIBIDI_PROP_TYPE_ET	_FRIBIDI_PROP (ET, 12)	/* European number terminator */
-#define FRIBIDI_PROP_TYPE_CS	_FRIBIDI_PROP (CS, 13)	/* Common Separator */
-#define FRIBIDI_PROP_TYPE_NSM	_FRIBIDI_PROP (NSM,14)	/* Non spacing mark */
-#define FRIBIDI_PROP_TYPE_BN	_FRIBIDI_PROP (BN, 15)	/* Boundary neutral */
-#define FRIBIDI_PROP_TYPE_BS	_FRIBIDI_PROP (BS, 16)	/* Block separator */
-#define FRIBIDI_PROP_TYPE_SS	_FRIBIDI_PROP (SS, 17)	/* Segment separator */
-#define FRIBIDI_PROP_TYPE_WS	_FRIBIDI_PROP (WS, 18)	/* Whitespace */
-#define FRIBIDI_PROP_TYPE_ON	_FRIBIDI_PROP (ON, 19)	/* Other Neutral */
-#define FRIBIDI_PROP_TYPE_WL	_FRIBIDI_PROP (WL, 20)	/* Weak left to right */
-#define FRIBIDI_PROP_TYPE_WR	_FRIBIDI_PROP (WR, 21)	/* Weak right to left */
-#define FRIBIDI_PROP_TYPE_SOT	_FRIBIDI_PROP (SOT,22)	/* Start of text */
-#define FRIBIDI_PROP_TYPE_EOT	_FRIBIDI_PROP (EOT,23)	/* End of text */
+typedef char FriBidiPropCharType;
+
+enum FriBidiPropEnum
+{
+  FRIBIDI_PROP_TYPE_LTR,	/* Strong left to right */
+  FRIBIDI_PROP_TYPE_RTL,	/* Right to left characters */
+  FRIBIDI_PROP_TYPE_AL,		/* Arabic characters */
+  FRIBIDI_PROP_TYPE_LRE,	/* Left-To-Right embedding */
+  FRIBIDI_PROP_TYPE_RLE,	/* Right-To-Left embedding */
+  FRIBIDI_PROP_TYPE_LRO,	/* Left-To-Right override */
+  FRIBIDI_PROP_TYPE_RLO,	/* Right-To-Left override */
+  FRIBIDI_PROP_TYPE_PDF,	/* Pop directional override */
+  FRIBIDI_PROP_TYPE_EN,		/* European digit */
+  FRIBIDI_PROP_TYPE_AN,		/* Arabic digit */
+  FRIBIDI_PROP_TYPE_ES,		/* European number separator */
+  FRIBIDI_PROP_TYPE_ET,		/* European number terminator */
+  FRIBIDI_PROP_TYPE_CS,		/* Common Separator */
+  FRIBIDI_PROP_TYPE_NSM,	/* Non spacing mark */
+  FRIBIDI_PROP_TYPE_BN,		/* Boundary neutral */
+  FRIBIDI_PROP_TYPE_BS,		/* Block separator */
+  FRIBIDI_PROP_TYPE_SS,		/* Segment separator */
+  FRIBIDI_PROP_TYPE_WS,		/* Whitespace */
+  FRIBIDI_PROP_TYPE_ON,		/* Other Neutral */
+  FRIBIDI_PROP_TYPE_WL,		/* Weak left to right */
+  FRIBIDI_PROP_TYPE_WR,		/* Weak right to left */
+  FRIBIDI_TYPES_COUNT		/* Number of different character types */
+};
+
+/* Map fribidi_prop_types to fribidi_types */
+extern FriBidiCharType *fribidi_prop_to_type;
 
 #endif

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # run.tests - Check that the algorithm does what it is supposed to
 
 if test -z "$srcdir"; then
@@ -19,20 +19,33 @@ if ! test -f "./fribidi"; then
 fi
 
 TEST () {
-  test="$1"
-  charset="$2"
-  echo "=== Running test $test"
-  ./fribidi --test --charset "$charset" \
-    "$path/tests/$test" > "$test.output"
+  testcase="$1"
+  test="${testcase##*/}"
+  test="${test%.input}"
+  charset="${testcase#*_}"
+  charset="${charset%%_*}"
+  echo -n "=== $test === "
+  if ! ./fribidi --charset "$charset" </dev/null >/dev/null 2>&1; then
+    echo " [Character set not supported]"
+    return 0
+  fi
+  ./fribidi --test --charset "$charset" "$testcase" > "$test.output"
 
-  if diff "$test.output" "$path/tests/$test.reference"; then
+  reference="${testcase%.input}.reference";
+  test -f "$reference" || reference="tests/${reference##*/}"
+  if diff "$test.output" "$reference"; then
     rm "$test.output"
+    echo " [Passed]"
     return 0
   else
+    echo " [Failed]"
     return 1
   fi
 }
 
-TEST test-CapRTL CapRTL &&
-TEST test-hebrew ISO8859-8 &&
-TEST test-explicit CapRTL
+retval=0
+for testcase in "$path/tests/"test_*.input; do
+  TEST "$testcase" || retval=1
+done
+
+exit $retval

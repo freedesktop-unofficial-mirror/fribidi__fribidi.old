@@ -13,7 +13,7 @@
  * Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License  
- * along with this library, in a file named COPYING.LIB; if not, write to the
+ * along with this library, in a file named COPYING; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA
  * 
@@ -21,31 +21,94 @@
  * <fwpg@sharif.edu>.
  */
 
+#include "fribidi_config.h"
+#ifndef FRIBIDI_NO_CHARSETS
+
+#include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "fribidi.h"
 
-extern FriBidiCharType FriBidiPropertyBlock0000[256];
-extern FriBidiCharType *FriBidiPropertyBlocks[256];
+#define WS FRIBIDI_PROP_TYPE_WS
+#define BS FRIBIDI_PROP_TYPE_BS
+#define EO FRIBIDI_PROP_TYPE_EO
+#define CTL FRIBIDI_PROP_TYPE_CTL
+#define LRE FRIBIDI_PROP_TYPE_LRE
+#define RLE FRIBIDI_PROP_TYPE_RLE
+#define ES FRIBIDI_PROP_TYPE_ES
+#define LRO FRIBIDI_PROP_TYPE_LRO
+#define RLO FRIBIDI_PROP_TYPE_RLO
+#define AL FRIBIDI_PROP_TYPE_AL
+#define SS FRIBIDI_PROP_TYPE_SS
+#define ET FRIBIDI_PROP_TYPE_ET
+#define NSM FRIBIDI_PROP_TYPE_NSM
+#define LTR FRIBIDI_PROP_TYPE_LTR
+#define ON FRIBIDI_PROP_TYPE_ON
+#define AN FRIBIDI_PROP_TYPE_AN
+#define BN FRIBIDI_PROP_TYPE_BN
+#define RTL FRIBIDI_PROP_TYPE_RTL
+#define CS FRIBIDI_PROP_TYPE_CS
+#define PDF FRIBIDI_PROP_TYPE_PDF
+#define EN FRIBIDI_PROP_TYPE_EN
 
-gchar
+static FriBidiPropCharType CapRTLCharTypes[] = {
+/* *INDENT-OFF* */
+  ON, ON, ON, ON, LTR,RTL,ON, ON, ON, ON, ON, ON, ON, BS, RLO,RLE, /* 00-0f */
+  LRO,LRE,PDF,WS, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON,  /* 10-1f */
+  WS, ON, ON, ON, ET, ON, ON, ON, ON, ON, ON, ET, CS, ON, ES, ES,  /* 20-2f */
+  EN, EN, EN, EN, EN, EN, AN, AN, AN, AN, CS, ON, ON, ON, ON, ON,  /* 30-3f */
+  RTL,AL, AL, AL, AL, AL, AL, RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL, /* 40-4f */
+  RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,ON, BS, ON, ON, ON,  /* 50-5f */
+  NSM,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, /* 60-6f */
+  LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,ON, SS, ON, WS, ON,  /* 70-7f */
+/* *INDENT-ON* */
+};
+
+#undef WS
+#undef BS
+#undef EO
+#undef CTL
+#undef LRE
+#undef RLE
+#undef ES
+#undef LRO
+#undef RLO
+#undef AL
+#undef SS
+#undef ET
+#undef NSM
+#undef LTR
+#undef ON
+#undef AN
+#undef BN
+#undef RTL
+#undef CS
+#undef PDF
+#undef EN
+
+#define CAPRTL_CHARS (sizeof CapRTLCharTypes / sizeof CapRTLCharTypes[0])
+
+static FriBidiChar *caprtl_to_unicode = NULL;
+
+char
 fribidi_unicode_to_cap_rtl_c (FriBidiChar uch)
 {
-  if (uch <= 0x7f)
-    return (gchar) uch;
-  else
-    return '¿';
+  int i;
+  for (i = 0; i < CAPRTL_CHARS; i++)
+    if (uch == caprtl_to_unicode[i])
+      return (char) i;
+  return '?';
 }
 
-gint
-fribidi_cap_rtl_to_unicode (gchar *s, FriBidiChar *us)
+int
+fribidi_cap_rtl_to_unicode (char *s, int len, FriBidiChar *us)
 {
-  gint i, j, len;
+  int i, j;
 
-  len = strlen (s);
   j = 0;
   for (i = 0; i < len; i++)
     {
-      gchar ch;
+      char ch;
 
       ch = s[i];
       if (ch == '_')
@@ -83,16 +146,16 @@ fribidi_cap_rtl_to_unicode (gchar *s, FriBidiChar *us)
 	    }
 	}
       else
-	us[j++] = (guchar) s[i];
+	us[j++] = caprtl_to_unicode[(int) s[i]];
     }
 
   return j;
 }
 
-gint
-fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, gchar *s)
+int
+fribidi_unicode_to_cap_rtl (FriBidiChar *us, int length, char *s)
 {
-  gint i, j;
+  int i, j;
 
   j = 0;
   for (i = 0; i < length; i++)
@@ -100,12 +163,7 @@ fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, gchar *s)
       FriBidiChar ch = us[i];
       if (!FRIBIDI_IS_EXPLICIT (fribidi_get_type (ch)) && ch != '_'
 	  && ch != UNI_LRM && ch != UNI_RLM)
-	{
-	  if (ch < 256)
-	    s[j++] = (gchar) ch;
-	  else
-	    s[j++] = '¿';
-	}
+	s[j++] = fribidi_unicode_to_cap_rtl_c (ch);
       else
 	{
 	  s[j++] = '_';
@@ -138,9 +196,9 @@ fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, gchar *s)
 	    default:
 	      j--;
 	      if (ch < 256)
-		s[j++] = (gchar) ch;
+		s[j++] = fribidi_unicode_to_cap_rtl_c (ch);
 	      else
-		s[j++] = '¿';
+		s[j++] = '?';
 	      break;
 	    }
 	}
@@ -150,140 +208,98 @@ fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, gchar *s)
   return j;
 }
 
-gchar *
+char *
 fribidi_char_set_desc_cap_rtl (void)
 {
-  /* *INDENT-OFF* */
-  return (gchar*)
-    "CapRTL is a character set for testing with the reference\n" \
-    "implementation, with explicit marks escape strings, and\n" \
-    "the property that contains all unicode character types in\n" \
-    "ASCII range 0-127.\n" \
-    "\n"
-    "CapRTL's character types:\n"
-    "  * 0x00    ON    * 0x01 ^A ON    * 0x02 ^B ON    * 0x03 ^C ON    \n"
-    "  * 0x04 ^D LTR   * 0x05 ^E RTL   * 0x06 ^F ON    * 0x07 ^G ON    \n"
-    "  * 0x08 ^H ON    * 0x09 ^I ON    * 0x0a ^J ON    * 0x0b ^K ON    \n"
-    "  * 0x0c ^L ON    * 0x0d ^M BS    * 0x0e ^N RLO   * 0x0f ^O RLE   \n"
-    "  * 0x10 ^P LRO   * 0x11 ^Q LRE   * 0x12 ^R PDF   * 0x13 ^S WS    \n"
-    "  * 0x14 ^T ON    * 0x15 ^U ON    * 0x16 ^V ON    * 0x17 ^W ON    \n"
-    "  * 0x18 ^X ON    * 0x19 ^Y ON    * 0x1a ^Z ON    * 0x1b    ON    \n"
-    "  * 0x1c    ON    * 0x1d    ON    * 0x1e    ON    * 0x1f    ON    \n"
-    "  * 0x20    WS    * 0x21 !  ON    * 0x22 \"  ON    * 0x23 #  ON    \n"
-    "  * 0x24 $  ET    * 0x25 %  ON    * 0x26 &  ON    * 0x27 '  ON    \n"
-    "  * 0x28 (  ON    * 0x29 )  ON    * 0x2a *  ON    * 0x2b +  ET    \n"
-    "  * 0x2c ,  CS    * 0x2d -  ON    * 0x2e .  ES    * 0x2f /  ES    \n"
-    "  * 0x30 0  EN    * 0x31 1  EN    * 0x32 2  EN    * 0x33 3  EN    \n"
-    "  * 0x34 4  EN    * 0x35 5  EN    * 0x36 6  AN    * 0x37 7  AN    \n"
-    "  * 0x38 8  AN    * 0x39 9  AN    * 0x3a :  CS    * 0x3b ;  ON    \n"
-    "  * 0x3c <  ON    * 0x3d =  ON    * 0x3e >  ON    * 0x3f ?  ON    \n"
-    "  * 0x40 @  RTL   * 0x41 A  AL    * 0x42 B  AL    * 0x43 C  AL    \n"
-    "  * 0x44 D  AL    * 0x45 E  AL    * 0x46 F  AL    * 0x47 G  RTL   \n"
-    "  * 0x48 H  RTL   * 0x49 I  RTL   * 0x4a J  RTL   * 0x4b K  RTL   \n"
-    "  * 0x4c L  RTL   * 0x4d M  RTL   * 0x4e N  RTL   * 0x4f O  RTL   \n"
-    "  * 0x50 P  RTL   * 0x51 Q  RTL   * 0x52 R  RTL   * 0x53 S  RTL   \n"
-    "  * 0x54 T  RTL   * 0x55 U  RTL   * 0x56 V  RTL   * 0x57 W  RTL   \n"
-    "  * 0x58 X  RTL   * 0x59 Y  RTL   * 0x5a Z  RTL   * 0x5b [  ON    \n"
-    "  * 0x5c \\  BS    * 0x5d ]  ON    * 0x5e ^  ON    * 0x5f _  ON    \n"
-    "  * 0x60 `  NSM   * 0x61 a  LTR   * 0x62 b  LTR   * 0x63 c  LTR   \n"
-    "  * 0x64 d  LTR   * 0x65 e  LTR   * 0x66 f  LTR   * 0x67 g  LTR   \n"
-    "  * 0x68 h  LTR   * 0x69 i  LTR   * 0x6a j  LTR   * 0x6b k  LTR   \n"
-    "  * 0x6c l  LTR   * 0x6d m  LTR   * 0x6e n  LTR   * 0x6f o  LTR   \n"
-    "  * 0x70 p  LTR   * 0x71 q  LTR   * 0x72 r  LTR   * 0x73 s  LTR   \n"
-    "  * 0x74 t  LTR   * 0x75 u  LTR   * 0x76 v  LTR   * 0x77 w  LTR   \n"
-    "  * 0x78 x  LTR   * 0x79 y  LTR   * 0x7a z  LTR   * 0x7b {  ON    \n"
-    "  * 0x7c |  SS    * 0x7d }  ON    * 0x7e ~  WS    * 0x7f    ON    \n"
-    "\n"
-    "Escape sequences:\n"
-    "  Character `_' is used to escape explicit marks. The list is:\n"
-    "    * _>  LRM\n"
-    "    * _<  RLM\n"
-    "    * _l  LRE\n"
-    "    * _r  RLE\n"
-    "    * _L  LRO\n"
-    "    * _R  RLO\n"
-    "    * _o  PDF\n"
-    "    * __  `_' itself\n" "\n";
-  /* *INDENT-ON* */
+  static char *s = 0;
+  int l, i, j;
+
+  if (s)
+    return s;
+
+  l = 4000;
+  s = (char *) malloc (l);
+  i = 0;
+  i += snprintf (s + i, l - i,
+		 "CapRTL is a character set for testing with the reference\n"
+		 "implementation, with explicit marks escape strings, and\n"
+		 "the property that contains all unicode character types in\n"
+		 "ASCII range 1-127.\n"
+		 "\n"
+		 "Warning: CapRTL character types are subject to change.\n"
+		 "\n" "CapRTL's character types:\n");
+  for (j = 0; j < CAPRTL_CHARS; j++)
+    {
+      if (j % 4 == 0)
+	s[i++] = '\n';
+      i += snprintf (s + i, l - i, "  * 0x%02x %c%c %-3s ", j,
+		     j < 0x20 ? '^' : ' ',
+		     j < 0x20 ? j + '@' : j < 0x7f ? j : ' ',
+		     fribidi_type_name (fribidi_prop_to_type
+					[(unsigned char)
+					 CapRTLCharTypes[j]]));
+    }
+  i += snprintf (s + i, l - i,
+		 "\n\n"
+		 "Escape sequences:\n"
+		 "  Character `_' is used to escape explicit marks. The list is:\n"
+		 "    * _>  LRM\n"
+		 "    * _<  RLM\n"
+		 "    * _l  LRE\n"
+		 "    * _r  RLE\n"
+		 "    * _L  LRO\n"
+		 "    * _R  RLO\n" "    * _o  PDF\n" "    * __  `_' itself\n"
+		 "\n");
+  return s;
 }
 
-#define WS FRIBIDI_PROP_TYPE_WS
-#define BS FRIBIDI_PROP_TYPE_BS
-#define EO FRIBIDI_PROP_TYPE_EO
-#define CTL FRIBIDI_PROP_TYPE_CTL
-#define LRE FRIBIDI_PROP_TYPE_LRE
-#define RLE FRIBIDI_PROP_TYPE_RLE
-#define ES FRIBIDI_PROP_TYPE_ES
-#define LRO FRIBIDI_PROP_TYPE_LRO
-#define RLO FRIBIDI_PROP_TYPE_RLO
-#define AL FRIBIDI_PROP_TYPE_AL
-#define SS FRIBIDI_PROP_TYPE_SS
-#define ET FRIBIDI_PROP_TYPE_ET
-#define NSM FRIBIDI_PROP_TYPE_NSM
-#define LTR FRIBIDI_PROP_TYPE_LTR
-#define ON FRIBIDI_PROP_TYPE_ON
-#define AN FRIBIDI_PROP_TYPE_AN
-#define BN FRIBIDI_PROP_TYPE_BN
-#define RTL FRIBIDI_PROP_TYPE_RTL
-#define CS FRIBIDI_PROP_TYPE_CS
-#define PDF FRIBIDI_PROP_TYPE_PDF
-#define EN FRIBIDI_PROP_TYPE_EN
-
-/* *INDENT-OFF* */
-FriBidiPropCharType FriBidiPropertyBlockCapRTL[256] = {
-  /* CapRTL charset table. */
-   ON, ON, ON, ON,LTR,RTL, ON, ON, ON, ON, ON, ON, ON, BS,RLO,RLE, /* 00-0f */
-  LRO,LRE,PDF, WS, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, /* 10-1f */
-   WS, ON, ON, ON, ET, ON, ON, ON, ON, ON, ON, ET, CS, ON, ES, ES, /* 20-2f */
-   EN, EN, EN, EN, EN, EN, AN, AN, AN, AN, CS, ON, ON, ON, ON, ON, /* 30-3f */
-  RTL, AL, AL, AL, AL, AL, AL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL, /* 40-4f */
-  RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL, ON, BS, ON, ON, ON, /* 50-5f */
-  NSM,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, /* 60-6f */
-  LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, ON, SS, ON, WS, ON, /* 70-7f */
-  /* These are not needed for the CapRTL charset, only to fill the table */
-   BN, BN, BN, BN, BN, BS, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, /* 80-8f */
-   BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, /* 90-9f */
-   CS, ON, ET, ET, ET, ET, ON, ON, ON, ON,LTR, ON, ON, ON, ON, ON, /* a0-af */
-   ET, ET, EN, EN, ON,LTR, ON, ON, ON, EN,LTR, ON, ON, ON, ON, ON, /* b0-bf */
-  LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, /* c0-cf */
-  LTR,LTR,LTR,LTR,LTR,LTR,LTR, ON,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, /* d0-df */
-  LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, /* e0-ef */
-  LTR,LTR,LTR,LTR,LTR,LTR,LTR, ON,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, /* f0-ff */
-};
-/* *INDENT-ON* */
-
-#undef WS
-#undef BS
-#undef EO
-#undef CTL
-#undef LRE
-#undef RLE
-#undef ES
-#undef LRO
-#undef RLO
-#undef AL
-#undef SS
-#undef ET
-#undef NSM
-#undef LTR
-#undef ON
-#undef AN
-#undef BN
-#undef RTL
-#undef CS
-#undef PDF
-#undef EN
-
-gboolean
+boolean
 fribidi_char_set_enter_cap_rtl (void)
 {
-  FriBidiPropertyBlocks[0] = FriBidiPropertyBlockCapRTL;
+  if (!caprtl_to_unicode)
+    {
+      int request[FRIBIDI_TYPES_COUNT + 1] = { };
+      int i, count;
+
+      caprtl_to_unicode =
+	(FriBidiChar *) malloc (CAPRTL_CHARS * sizeof caprtl_to_unicode[0]);
+      for (i = 0; i < CAPRTL_CHARS; i++)
+	if (fribidi_get_mirror_char (i, NULL))
+	  caprtl_to_unicode[i] = i;
+      for (count = 0, i = 0; i < CAPRTL_CHARS; i++)
+	if (caprtl_to_unicode[i] == 0)
+	  {
+	    request[(unsigned char) CapRTLCharTypes[i]]++;
+	    count++;
+	  }
+      for (i = 1; i < 0x10000 && count; i++)	/* Assign BMP chars to CapRTL entries */
+	if (!fribidi_get_mirror_char (i, NULL))
+	  {
+	    int j, k;
+	    for (j = 0; j < FRIBIDI_TYPES_COUNT; j++)
+	      if (fribidi_prop_to_type[j] == fribidi_get_type (i))
+		break;
+	    if (!request[j])	/* Do not need this type */
+	      continue;
+	    for (k = 0; k < CAPRTL_CHARS; k++)
+	      if (!caprtl_to_unicode[k] && j == CapRTLCharTypes[k])
+		break;
+	    if (k < CAPRTL_CHARS)
+	      {
+		request[j]--;
+		count--;
+		caprtl_to_unicode[k] = i;
+	      }
+	  }
+    }
+
   return TRUE;
 }
 
-gboolean
+boolean
 fribidi_char_set_leave_cap_rtl (void)
 {
-  FriBidiPropertyBlocks[0] = FriBidiPropertyBlock0000;
   return TRUE;
 }
+
+#endif

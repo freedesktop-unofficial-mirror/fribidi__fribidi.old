@@ -1,6 +1,10 @@
 Dov Grobgeld <dov@imagic.weizmann.ac.il>
-   * Initial author and current maintainer.
+   * Initial author.
    
+Behdad Esfahbod <behdad@bamdad.org>
+   * Current maintainer, Added explicit bidi support, fixed all conformance
+     bugs, changed the library to use bitmasks, rewrote many things.
+
 Owen Tayler <otaylor@redhat.com>
    * Contributed very important memory leak and speed patches.
 
@@ -17,12 +21,11 @@ Omer Zak <omerz@actcom.co.il>
    * Contributed several bug fixes, improved interface UTF-8 converters, and
      several considerations for embedded systems.
 
-Behdad Esfahbod <behdad@bamdad.org>
-   * Added explicit bidi support, fixed all conformance bugs, changed the
-     library to use bitmasks, rewrote many things.
-
 Roozbeh Pournader <roozbeh@sharif.edu>
    * Fixed small things here and there.
 
 Dan Kenigsberg <danken@cs.technion.ac.il>
    * Contributed a patch to make Fribidi work without Glib.
+
+Markus Kuhn <Markus.Kuhn@cl.cam.ac.uk>
+   * Free wcwidth() implementation.

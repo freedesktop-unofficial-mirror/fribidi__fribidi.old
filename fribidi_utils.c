@@ -12,7 +12,7 @@
  * Lesser General Public License for more details. 
  * 
  * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
+ * along with this library, in a file named COPYING; if not, write to the 
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA  
  * 
@@ -50,7 +50,7 @@
  *     The selection is between logical characters 10 to 45. Calculate
  *     the corresponding visual selection(s):
  *
- *     gint sel_span[2] = {10,45};
+ *     int sel_span[2] = {10,45};
  *
  *     fribidi_map_range(sel_span,
  *                       TRUE,
@@ -58,22 +58,19 @@
  *                       vis2log_map,
  *                       embedding_levels,
  *                       // output
- *                       &num_vis_ranges,
- *                       vis_ranges);
- *
- *----------------------------------------------------------------------*/
+ *                       &num_vis_ranges, *vis_ranges);
+ **----------------------------------------------------------------------*/
 void
-fribidi_map_range (gint in_span[2],	/* Start and end span */
-		   int len, gboolean is_v2l_map,	/* Needed for embedding_level */
-		   FriBidiStrIndex *position_map,
-		   guint8 *embedding_level_list,
+fribidi_map_range (int in_span[2],	/* Start and end span */
+		   int len, boolean is_v2l_map,	/* Needed for embedding_level */
+		   FriBidiStrIndex *position_map, uint8 *embedding_level_list,
 		   /* output */
 		   int *num_mapped_spans, int mapped_spans[63][2])
 {
-  gint ch_idx;
-  gboolean in_range = FALSE;
-  gint start_idx = in_span[0];
-  gint end_idx = in_span[1];
+  int ch_idx;
+  boolean in_range = FALSE;
+  int start_idx = in_span[0];
+  int end_idx = in_span[1];
 
   if (start_idx == -1)
     start_idx = 0;
@@ -190,18 +187,18 @@ fribidi_find_string_changes (	/* input */
  *
  *----------------------------------------------------------------------*/
 void
-fribidi_xpos_resolve (gint x_pos,
-		      gint x_offset,
-		      gint len,
-		      guint8 *embedding_level_list,
+fribidi_xpos_resolve (int x_pos,
+		      int x_offset,
+		      int len,
+		      uint8 *embedding_level_list,
 		      FriBidiCharType base_dir,
-		      FriBidiStrIndex *vis2log, gint16 *char_widths,
+		      FriBidiStrIndex *vis2log, int *char_widths,
 		      /* output */
-		      gint *res_log_pos,
-		      gint *res_vis_pos,
-		      gint *res_cursor_x_pos,
-		      gboolean *res_cursor_dir_is_rtl,
-		      gboolean *res_attach_before)
+		      int *res_log_pos,
+		      int *res_vis_pos,
+		      int *res_cursor_x_pos,
+		      boolean *res_cursor_dir_is_rtl,
+		      boolean *res_attach_before)
 {
   int char_width_sum = 0;
   int char_idx;
@@ -227,8 +224,8 @@ fribidi_xpos_resolve (gint x_pos,
       /* Find the cursor pos by a linear search on the row */
       for (char_idx = 0; char_idx < len; char_idx++)
 	{
-	  gint log_pos = vis2log[char_idx];
-	  gint char_width = char_widths[log_pos];
+	  int log_pos = vis2log[char_idx];
+	  int char_width = char_widths[log_pos];
 
 	  if (x_offset + char_width_sum + char_width > x_pos)
 	    {
@@ -297,12 +294,12 @@ fribidi_xpos_resolve (gint x_pos,
  *  was resolved in the rtl direction. This simply involves asking
  *  if the embedding level for the character is odd.
  *----------------------------------------------------------------------*/
-gboolean
-fribidi_is_char_rtl (guint8 *embedding_level_list,
+boolean
+fribidi_is_char_rtl (uint8 *embedding_level_list,
 		     FriBidiCharType base_dir, int idx)
 {
   if (!embedding_level_list || idx < 0)
-    return FRIBIDI_IS_RTL(base_dir);
+    return FRIBIDI_IS_RTL (base_dir);
   /* Otherwise check if the embedding level is odd */
   else
     return embedding_level_list[idx] % 2;
@@ -315,15 +312,15 @@ fribidi_is_char_rtl (guint8 *embedding_level_list,
  *----------------------------------------------------------------------*/
 void
 fribidi_runs_log2vis (		/* input */
-		       GList *logical_runs,	/* List of FriBidiRunType */
-		       gint len, FriBidiStrIndex *log2vis, FriBidiCharType base_dir,	/* TBD: remove it, not needed */
+		       FriBidiList *logical_runs,	/* List of FriBidiRunType */
+		       int len, FriBidiStrIndex *log2vis, FriBidiCharType base_dir,	/* TBD: remove it, not needed */
 		       /* output */
-		       GList **visual_runs)
+		       FriBidiList **visual_runs)
 {
-  void **visual_attribs = (void **) g_new (void *, len);
+  void **visual_attribs = (void **) malloc (sizeof (void *) * len);
   void *current_attrib;
   int pos, i;
-  GList *list, *last;
+  FriBidiList *list, *last;
   int current_idx;
 
 
@@ -351,17 +348,18 @@ fribidi_runs_log2vis (		/* input */
     {
       if (i == len || current_attrib != visual_attribs[i])
 	{
-	  FriBidiRunType *run = g_new (FriBidiRunType, 1);
+	  FriBidiRunType *run =
+	    (FriBidiRunType *) malloc (sizeof (FriBidiRunType));
 	  run->length = i - current_idx;
 	  run->attribute = current_attrib;
 
 	  /* Keeping track of the last node is crucial for efficiency
 	     for long lists... */
 	  if (last == NULL)
-	    last = *visual_runs = g_list_append (NULL, run);
+	    last = *visual_runs = fribidi_list_append (NULL, run);
 	  else
 	    {
-	      g_list_append (last, run);
+	      fribidi_list_append (last, run);
 	      last = last->next;
 	    }
 	  if (i == len)
@@ -371,5 +369,5 @@ fribidi_runs_log2vis (		/* input */
 	  current_idx = i;
 	}
     }
-  g_free (visual_attribs);
+  free (visual_attribs);
 }

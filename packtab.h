@@ -1,5 +1,4 @@
-/* FriBidi - Library of BiDi algorithm
- * Copyright (C) 1999,2000 Dov Grobgeld, and
+/* PackTab - Pack a static table
  * Copyright (C) 2001 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
@@ -17,31 +16,10 @@
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA  
  * 
- * For licensing issues, contact <dov@imagic.weizmann.ac.il> and 
- * <fwpg@sharif.edu>. 
+ * For licensing issues, contact <fwpg@sharif.edu>. 
  */
 
-#include "fribidi_config.h"
-#ifndef FRIBIDI_NO_CHARSETS
-
-#ifndef FRIBIDI_CHAR_SETS_CAP_RTL_H
-#define FRIBIDI_CHAR_SETS_CAP_RTL_H
-
-#include "fribidi.h"
-
-#define fribidi_char_set_name_cap_rtl "CapRTL"
-#define fribidi_char_set_title_cap_rtl "CapRTL (Test)"
-char *fribidi_char_set_desc_cap_rtl (void);
-boolean fribidi_char_set_enter_cap_rtl (void);
-boolean fribidi_char_set_leave_cap_rtl (void);
-
-int fribidi_cap_rtl_to_unicode (char *s, int length,
-				/* Output */
-				FriBidiChar *us);
-int fribidi_unicode_to_cap_rtl (FriBidiChar *us, int length,
-				/* Output */
-				char *s);
-
-#endif /* FRIBIDI_CHAR_SETS_CAP_RTL_H */
-
-#endif
+int pack_table (int *base, int key_num, int key_size, int ptr_size,
+		int max_depth, int tab_width, char **name,
+		char *key_type_name, char *table_name, char *macro_name,
+		FILE * out);

@@ -13,13 +13,17 @@
  * Lesser General Public License for more details. 
  * 
  * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
+ * along with this library, in a file named COPYING; if not, write to the 
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA  
  * 
  * For licensing issues, contact <dov@imagic.weizmann.ac.il> and 
  * <fwpg@sharif.edu>. 
  */
+
+#include "fribidi_config.h"
+#ifndef FRIBIDI_NO_CHARSETS
+
 #ifndef FRIBIDI_CHAR_SETS_CP1255_H
 #define FRIBIDI_CHAR_SETS_CP1255_H
 
@@ -31,13 +35,15 @@
 #define fribidi_char_set_enter_cp1255 NULL
 #define fribidi_char_set_leave_cp1255 NULL
 
-FriBidiChar fribidi_cp1255_to_unicode_c (gchar ch);
-gint fribidi_cp1255_to_unicode (gchar *s,
-				/* Output */
-				FriBidiChar *us);
-gchar fribidi_unicode_to_cp1255_c (FriBidiChar uch);
-gint fribidi_unicode_to_cp1255 (FriBidiChar *us, gint length,
-				/* Output */
-				gchar *s);
+FriBidiChar fribidi_cp1255_to_unicode_c (char ch);
+int fribidi_cp1255_to_unicode (char *s, int length,
+			       /* Output */
+			       FriBidiChar *us);
+char fribidi_unicode_to_cp1255_c (FriBidiChar uch);
+int fribidi_unicode_to_cp1255 (FriBidiChar *us, int length,
+			       /* Output */
+			       char *s);
 
 #endif /* FRIBIDI_CHAR_SETS_CP1255_H */
+
+#endif

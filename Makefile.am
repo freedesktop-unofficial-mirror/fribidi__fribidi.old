@@ -1,19 +1,13 @@
-MAINTAINERCLEANFILES = Makefile.in configure aclocal.m4 config.h.in
 
-noinst_PROGRAMS = fribidi_benchmark
+noinst_PROGRAMS = fribidi_benchmark	\
+		fribidi_create_char_types	\
+		fribidi_create_mirroring
 
-INCLUDES = $(GLIB_CFLAGS)
-
-lib_LTLIBRARIES = libfribidi.la
-
-libfribidi_la_SOURCES =	\
-	fribidi.c	\
-	fribidi_tables.i	\
-	fribidi_types.c		\
-	fribidi_get_type.c	\
-	fribidi_utils.c		\
+libfribidi_charsets =	\
 	fribidi_char_sets.c	\
-	fribidi_char_sets_utf8.c	\
+	fribidi_char_sets_utf8.c
+
+libfribidi_charsets_extra =	\
 	fribidi_char_sets_cap_rtl.c	\
 	fribidi_char_sets_iso8859_6.c	\
 	fribidi_char_sets_iso8859_8.c	\
@@ -21,7 +15,30 @@ libfribidi_la_SOURCES =	\
 	fribidi_char_sets_cp1256.c	\
 	fribidi_char_sets_isiri_3342.c
 
-libfribidi_la_LIBADD = $(GLIB_LIBS)
+libfribidi_charsets_h =	\
+	fribidi_char_sets.h	\
+	fribidi_char_sets_utf8.h
+libfribidi_charsets_extra_h =	\
+	fribidi_char_sets_cap_rtl.h	\
+	fribidi_char_sets_cp1255.h	\
+	fribidi_char_sets_cp1256.h	\
+	fribidi_char_sets_isiri_3342.h	\
+	fribidi_char_sets_iso8859_6.h	\
+	fribidi_char_sets_iso8859_8.h
+
+lib_LTLIBRARIES = libfribidi.la
+
+libfribidi_la_SOURCES =	\
+	fribidi.c	\
+	fribidi_types.c		\
+	fribidi_mem.c	\
+	fribidi_mirroring.c	\
+	fribidi_char_type.c	\
+	fribidi_utils.c	\
+	$(libfribidi_charsets)	\
+	$(libfribidi_charsets_extra)
+
+libfribidi_la_LIBADD = 
 
 libfribidiincdir = $(includedir)/fribidi
 
@@ -29,88 +46,127 @@ libfribidiincdir = $(includedir)/fribidi
 libfribidiinc_HEADERS =	\
 	fribidi.h	\
 	fribidi_types.h	\
-	fribidi_char_sets.h	\
-	fribidi_char_sets_cap_rtl.h	\
-	fribidi_char_sets_cp1255.h	\
-	fribidi_char_sets_cp1256.h	\
-	fribidi_char_sets_isiri_3342.h	\
-	fribidi_char_sets_iso8859_6.h	\
-	fribidi_char_sets_iso8859_8.h	\
-	fribidi_char_sets_utf8.h	\
-	@NO_GLIB_HEADERS@
+	fribidi_mem.h	\
+	fribidi_unicode.h	\
+	$(libfribidi_charsets_h)	\
+	$(libfribidi_charsets_extra_h)
 
-EXTRA_HEADERS =	\
-	fribidi_mini_glib.h	\
-	getopt.h
-
-getopt_files =	\
+GETOPT_SRC =	\
 	getopt.c	\
 	getopt1.c
+
+GETOPT_HDR =	\
+	getopt.h
+
+TEST_FILES =	\
+	tests/test_CapRTL_explicit.input	\
+	tests/test_CapRTL_explicit.reference	\
+	tests/test_CapRTL_implicit.input	\
+	tests/test_CapRTL_implicit.reference	\
+	tests/test_ISO8859-8_hebrew.input	\
+	tests/test_ISO8859-8_hebrew.reference	\
+	tests/test_UTF-8_persian.input	\
+	tests/test_UTF-8_persian.reference
+
+TABLE_FILES =	\
+	fribidi_tab_mirroring.i	\
+	fribidi_tab_char_type_2.i	\
+	fribidi_tab_char_type_9.i
+
+EXTRA_HEADERS =	\
+	packtab.h	\
+	$(GETOPT_HDR)
 
 EXTRA_DIST =	\
 	bootstrap \
 	run.tests	\
 	ANNOUNCE	\
 	acinclude.m4	\
-	Makefile.noglib	\
-	fribidi_mini_glib.c	\
-	unidata/CreateGetType.pl	\
-	tests/test-CapRTL	\
-	tests/test-CapRTL.reference	\
-	tests/test-explicit	\
-	tests/test-explicit.reference	\
-	tests/test-hebrew	\
-	tests/test-hebrew.reference
+	$(TEST_FILES)	\
+	$(TABLE_FILES)	\
+	$(EXTRA_HEADERS)
 
-fribidi_benchmark_SOURCES = fribidi_benchmark.c
-fribidi_benchmark_LDADD = libfribidi.la $(GLIB_LIBS) $(GETOPTLIB)
+fribidi_benchmark_SOURCES = fribidi_benchmark.c $(GETOPT_SRC)
+fribidi_benchmark_LDADD = libfribidi.la
+
+fribidi_create_char_types_SOURCES = fribidi_create_char_types.c packtab.c
+
+fribidi_create_mirroring_SOURCES = fribidi_create_mirroring.c
 
 bin_PROGRAMS = fribidi
-fribidi_SOURCES = fribidi_main.c
-fribidi_LDADD = libfribidi.la $(GLIB_LIBS) $(GETOPTLIB)
+fribidi_SOURCES = fribidi_main.c wcwidth.c $(GETOPT_SRC)
+fribidi_LDADD = libfribidi.la
 
 unidata/BidiMirroring.txt:
-	cd $(top_srcdir)/unidata &&	\
-	if ! test -f BididMirroring.txt ; then	\
-	    wget http://www.unicode.org/Public/UNIDATA/BidiMirroring.txt ;	\
-	fi
+	(test -e unidata || mkdir unidata) && cd unidata &&	\
+	wget http://www.unicode.org/Public/UNIDATA/BidiMirroring.txt
 
 unidata/UnicodeData.txt:
-	cd $(top_srcdir)/unidata &&	\
-	if ! test -f UnicodeData.txt ; then	\
-	    wget http://www.unicode.org/Public/UNIDATA/UnicodeData.txt ;	\
-	fi
+	(test -e unidata || mkdir unidata) && cd unidata &&	\
+	wget http://www.unicode.org/Public/UNIDATA/UnicodeData.txt
 
-fribidi_tables.i: unidata/CreateGetType.pl	\
-	unidata/BidiMirroring.txt unidata/UnicodeData.txt
-	cd $(top_srcdir)/unidata &&	\
-	./CreateGetType.pl > ../fribidi_tables.i
+build_fribidi_tab_mirroring.i: fribidi_create_mirroring	\
+		unidata/BidiMirroring.txt
+	if test -d unidata; then UNIDATA=unidata;	\
+	else UNIDATA="$(srcdir)/unidata"; fi &&	\
+	./fribidi_create_mirroring "$$UNIDATA"
 
-tests/test-CapRTL.reference: fribidi tests/test-CapRTL
-	./fribidi --test --charset CapRTL $(top_srcdir)/tests/test-CapRTL > \
-	$(top_srcdir)/tests/test-CapRTL.reference
+fribidi_tab_mirroring.i:
+	$(MAKE) build_fribidi_tab_mirroring.i || (rm -f $@ && false)
 
-tests/test-explicit.reference: fribidi tests/test-explicit
-	./fribidi --test --charset CapRTL $(top_srcdir)/tests/test-explicit > \
-	$(top_srcdir)/tests/test-explicit.reference
+$(srcdir)/fribidi_mirroring.c: fribidi_tab_mirroring.i
+	touch $@
 
-tests/test-hebrew.reference: fribidi tests/test-hebrew
-	./fribidi --test --charset ISO8859-8 $(top_srcdir)/tests/test-hebrew > \
-	$(top_srcdir)/tests/test-hebrew.reference
+fribidi_tab_char_type_small:
+	$(MAKE) fribidi_tab_char_type_9.i
 
-test.reference : tests/test-CapRTL.reference	\
-		tests/test-explicit.reference	\
-		tests/test-hebrew.reference
+fribidi_tab_char_type_large:
+	$(MAKE) fribidi_tab_char_type_2.i
+
+fribidi_tab_char_type_%.i: fribidi_create_char_types	\
+		unidata/UnicodeData.txt
+	if test -d unidata; then UNIDATA=unidata;	\
+	else UNIDATA="$(srcdir)/unidata"; fi &&	\
+	./fribidi_create_char_types "`echo "$@" | tr -dc 0-9`" "$$UNIDATA" ||	\
+	(rm -f $@; false)
+	rm -f fribidi_tab_char_type_stamp
+	$(MAKE) fribidi_tab_char_type_stamp
+
+fribidi_tab_char_type_stamp:
+	touch "$(srcdir)/fribidi_char_type.c" || $(MAKE) clean
+	touch $@
+
+config.h: fribidi_tab_char_type_stamp
+	./config.status --recheck
+	./config.status
+	touch $@
+
+$(srcdir)/fribidi_char_type.c: config.h
+
+tests/test_%.reference: tests/test_%.input fribidi
+	(test -e tests || mkdir tests) &&	\
+	testcase="$@" && 	\
+	charset="$${testcase#*_}" && charset="$${charset%%_*}" &&	\
+	./fribidi --test --charset "$$charset" $< > "$@" || \
+	(rm -f $@; false)
+
+test.reference:
+	for testcase in "$(srcdir)"/tests/test_*.input; do	\
+		test="$${testcase%.input}.reference" &&	\
+		test="tests/$${test##*/}" &&	\
+		$(MAKE) "$$test" ||	\
+		exit 1;	\
+	done
 
 test: fribidi
-	$(top_srcdir)/run.tests
+	"$(srcdir)/run.tests"
 
 TESTS = run.tests
 
 bin_SCRIPTS = fribidi-config
 
-noinst_LIBRARIES = libfribidi_mini_glib.a libgetopt.a
+CLEANFILES = 
 
-libfribidi_mini_glib_a_SOURCES = fribidi_mini_glib.c
+DISTCLEANFILES = fribidi_tab_char_type_stamp fribidi_config.h
 
-libgetopt_a_SOURCES = getopt.c getopt1.c
+MAINTAINERCLEANFILES = Makefile.in configure aclocal.m4 config.h.in

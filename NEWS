@@ -1,1 +1,14 @@
 See ChangeLog.
+
+Fribidi tested on sourceforge.net's compile farm`.
+
+Currently tested and has no problem with:
+
+	[x86] Linux 2.4 (RedHat 7.1)
+	[x86] Linux 2.2 (Debian 2.2)
+  	[x86] FreeBSD (4.3-RELEASE)
+  	[Alpha] Linux 2.2 (Debian 2.2)
+  	[PPC - RS/6000]  Linux 2.2 (Debian 2.2)
+  	[Sparc - Ultra60] Linux 2.2 (Debian 2.2)
+  	[Sparc - R220] Sun Solaris (8)
+  	[x86] Windows 2000 (Cygwin)

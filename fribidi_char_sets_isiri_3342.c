@@ -13,13 +13,16 @@
  * Lesser General Public License for more details. 
  * 
  * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
+ * along with this library, in a file named COPYING; if not, write to the 
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA  
  * 
  * For licensing issues, contact <dov@imagic.weizmann.ac.il> and 
  * <fwpg@sharif.edu>. 
  */
+
+#include "fribidi_config.h"
+#ifndef FRIBIDI_NO_CHARSETS
 
 #include <string.h>
 #include "fribidi.h"
@@ -41,23 +44,22 @@ FriBidiChar fribidi_isiri_3342_to_unicode_tab[] = {	/* 0xA0-0xFF */
 };
 
 FriBidiChar
-fribidi_isiri_3342_to_unicode_c (gchar sch)
+fribidi_isiri_3342_to_unicode_c (char sch)
 {
-  guchar ch = (guchar) sch;
+  unsigned char ch = (unsigned char) sch;
   if ((ch >= 0x80 && ch <= 0xa0) || ch == 0xff)
     return (ch - 0x80);		/* FIXME: but they are strong typed RTL ! */
   else if (ch >= 0xa1 && ch <= 0xfe)
     return fribidi_isiri_3342_to_unicode_tab[ch - 0xa0];
   /* TODO */
   else
-    return (gchar) ch;
+    return (char) ch;
 }
 
-gint
-fribidi_isiri_3342_to_unicode (gchar *s, FriBidiChar *us)
+int
+fribidi_isiri_3342_to_unicode (char *s, int len, FriBidiChar *us)
 {
   int i;
-  int len = strlen (s);
 
   for (i = 0; i < len + 1; i++)
     us[i] = fribidi_isiri_3342_to_unicode_c (s[i]);
@@ -65,160 +67,160 @@ fribidi_isiri_3342_to_unicode (gchar *s, FriBidiChar *us)
   return len;
 }
 
-gchar
+char
 fribidi_unicode_to_isiri_3342_c (FriBidiChar uch)
 {
   /* TODO */
   if (uch < 256)
-    return (gchar) uch;
+    return (char) uch;
   else
     switch (uch)
       {
       case 0x060C:
-	return (gchar) 0xAC;
+	return (char) 0xAC;
       case 0x061B:
-	return (gchar) 0xBB;
+	return (char) 0xBB;
       case 0x061F:
-	return (gchar) 0xBF;
+	return (char) 0xBF;
       case 0x0621:
-	return (gchar) 0xC2;
+	return (char) 0xC2;
       case 0x0622:
-	return (gchar) 0xC0;
+	return (char) 0xC0;
       case 0x0623:
-	return (gchar) 0xF8;
+	return (char) 0xF8;
       case 0x0624:
-	return (gchar) 0xF9;
+	return (char) 0xF9;
       case 0x0625:
-	return (gchar) 0xFA;
+	return (char) 0xFA;
       case 0x0626:
-	return (gchar) 0xFB;
+	return (char) 0xFB;
       case 0x0627:
-	return (gchar) 0xC1;
+	return (char) 0xC1;
       case 0x0628:
-	return (gchar) 0xC3;
+	return (char) 0xC3;
       case 0x0629:
-	return (gchar) 0xFC;
+	return (char) 0xFC;
       case 0x062A:
-	return (gchar) 0xC5;
+	return (char) 0xC5;
       case 0x062B:
-	return (gchar) 0xC6;
+	return (char) 0xC6;
       case 0x062C:
-	return (gchar) 0xC7;
+	return (char) 0xC7;
       case 0x062D:
-	return (gchar) 0xC9;
+	return (char) 0xC9;
       case 0x062E:
-	return (gchar) 0xCA;
+	return (char) 0xCA;
       case 0x062F:
-	return (gchar) 0xCB;
+	return (char) 0xCB;
       case 0x0630:
-	return (gchar) 0xCC;
+	return (char) 0xCC;
       case 0x0631:
-	return (gchar) 0xCD;
+	return (char) 0xCD;
       case 0x0632:
-	return (gchar) 0xCE;
+	return (char) 0xCE;
       case 0x0633:
-	return (gchar) 0xD0;
+	return (char) 0xD0;
       case 0x0634:
-	return (gchar) 0xD1;
+	return (char) 0xD1;
       case 0x0635:
-	return (gchar) 0xD2;
+	return (char) 0xD2;
       case 0x0636:
-	return (gchar) 0xD3;
+	return (char) 0xD3;
       case 0x0637:
-	return (gchar) 0xD4;
+	return (char) 0xD4;
       case 0x0638:
-	return (gchar) 0xD5;
+	return (char) 0xD5;
       case 0x0639:
-	return (gchar) 0xD6;
+	return (char) 0xD6;
       case 0x063A:
-	return (gchar) 0xD7;
+	return (char) 0xD7;
       case 0x0640:
-	return (gchar) 0xE9;
+	return (char) 0xE9;
       case 0x0641:
-	return (gchar) 0xD8;
+	return (char) 0xD8;
       case 0x0642:
-	return (gchar) 0xD9;
+	return (char) 0xD9;
       case 0x0643:
-	return (gchar) 0xFD;
+	return (char) 0xFD;
       case 0x0644:
-	return (gchar) 0xDC;
+	return (char) 0xDC;
       case 0x0645:
-	return (gchar) 0xDD;
+	return (char) 0xDD;
       case 0x0646:
-	return (gchar) 0xDE;
+	return (char) 0xDE;
       case 0x0647:
-	return (gchar) 0xE0;
+	return (char) 0xE0;
       case 0x0648:
-	return (gchar) 0xDF;
+	return (char) 0xDF;
       case 0x064A:
-	return (gchar) 0xFE;
+	return (char) 0xFE;
       case 0x064B:
-	return (gchar) 0xF3;
+	return (char) 0xF3;
       case 0x064C:
-	return (gchar) 0xF5;
+	return (char) 0xF5;
       case 0x064D:
-	return (gchar) 0xF4;
+	return (char) 0xF4;
       case 0x064E:
-	return (gchar) 0xF0;
+	return (char) 0xF0;
       case 0x064F:
-	return (gchar) 0xF2;
+	return (char) 0xF2;
       case 0x0650:
-	return (gchar) 0xF1;
+	return (char) 0xF1;
       case 0x0651:
-	return (gchar) 0xF6;
+	return (char) 0xF6;
       case 0x0652:
-	return (gchar) 0xF7;
+	return (char) 0xF7;
       case 0x066A:
-	return (gchar) 0xA5;
+	return (char) 0xA5;
       case 0x066B:
-	return (gchar) 0xAE;
+	return (char) 0xAE;
       case 0x066C:
-	return (gchar) 0xA7;
+	return (char) 0xA7;
       case 0x067E:
-	return (gchar) 0xC4;
+	return (char) 0xC4;
       case 0x0686:
-	return (gchar) 0xC8;
+	return (char) 0xC8;
       case 0x0698:
-	return (gchar) 0xCF;
+	return (char) 0xCF;
       case 0x06A9:
-	return (gchar) 0xDA;
+	return (char) 0xDA;
       case 0x06AF:
-	return (gchar) 0xDB;
+	return (char) 0xDB;
       case 0x06CC:
-	return (gchar) 0xE1;
+	return (char) 0xE1;
       case 0x06F0:
-	return (gchar) 0xB0;
+	return (char) 0xB0;
       case 0x06F1:
-	return (gchar) 0xB1;
+	return (char) 0xB1;
       case 0x06F2:
-	return (gchar) 0xB2;
+	return (char) 0xB2;
       case 0x06F3:
-	return (gchar) 0xB3;
+	return (char) 0xB3;
       case 0x06F4:
-	return (gchar) 0xB4;
+	return (char) 0xB4;
       case 0x06F5:
-	return (gchar) 0xB5;
+	return (char) 0xB5;
       case 0x06F6:
-	return (gchar) 0xB6;
+	return (char) 0xB6;
       case 0x06F7:
-	return (gchar) 0xB7;
+	return (char) 0xB7;
       case 0x06F8:
-	return (gchar) 0xB8;
+	return (char) 0xB8;
       case 0x06F9:
-	return (gchar) 0xB9;
+	return (char) 0xB9;
       case 0x200C:
-	return (gchar) 0xA1;
+	return (char) 0xA1;
       case 0x200D:
-	return (gchar) 0xA2;
+	return (char) 0xA2;
       default:
 	return '¿';
       }
 }
 
-gint
-fribidi_unicode_to_isiri_3342 (FriBidiChar *us, int length, gchar *s)
+int
+fribidi_unicode_to_isiri_3342 (FriBidiChar *us, int length, char *s)
 {
-  gint i;
+  int i;
 
   for (i = 0; i < length; i++)
     s[i] = fribidi_unicode_to_isiri_3342_c (us[i]);
@@ -226,3 +228,5 @@ fribidi_unicode_to_isiri_3342 (FriBidiChar *us, int length, gchar *s)
 
   return length;
 }
+
+#endif

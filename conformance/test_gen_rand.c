@@ -23,7 +23,7 @@ main (int argc, char **argv)
       c = rand () % (0x80 - 0x0E) + 0x0E;
       switch (c)
 	{
-//	case 0x60:		// rule L3 is not implemented in fribidi yet
+//      case 0x60:              // rule L3 is not implemented in fribidi yet
 	case 0x3C:
 	case 0x5F:		// used as a escape char
 	case 0x13:		// bidiref doesn't work proper with this

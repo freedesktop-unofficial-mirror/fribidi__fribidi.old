@@ -12,16 +12,21 @@
  * Lesser General Public License for more details. 
  * 
  * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
+ * along with this library, in a file named COPYING; if not, write to the 
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA  
  * 
  * For licensing issues, contact <fwpg@sharif.edu>. 
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 #include "fribidi.h"
 
-gchar
+#ifdef DEBUG
+
+char
 fribidi_char_from_type (FriBidiCharType c)
 {
   switch (c)
@@ -73,7 +78,9 @@ fribidi_char_from_type (FriBidiCharType c)
     }
 };
 
-gchar *
+#endif
+
+char *
 fribidi_type_name (FriBidiCharType c)
 {
 #define _FRIBIDI_CASE(type)	case FRIBIDI_TYPE_##type: return #type
@@ -109,14 +116,11 @@ fribidi_type_name (FriBidiCharType c)
       return "?";
     }
 #undef _FRIBIDI_CASE
-};
+}
 
-#ifdef MEM_OPTIMIZED
-/* If MEM_OPTIMIZED defined, map fribidi_prop_types to fribidi_types,
-   it has the overhead of one more array lookup in fribidi_get_type(),
-   the order of types here should be the same as
-   "#define FRIBIDI_PROP_TYPE_* indexes in fribidi_types.h */
-FriBidiCharType prop_to_type[] = {
+/* Map fribidi_prop_types to fribidi_types, the order of types here should
+   be the same as enum FriBidiPropEnum in fribidi_types.h */
+static FriBidiCharType fribidi_prop_to_type_array[] = {
   FRIBIDI_TYPE_LTR,		/* Strong left to right */
   FRIBIDI_TYPE_RTL,		/* Right to left characters */
   FRIBIDI_TYPE_AL,		/* Arabic characters */
@@ -138,7 +142,6 @@ FriBidiCharType prop_to_type[] = {
   FRIBIDI_TYPE_ON,		/* Other Neutral */
   FRIBIDI_TYPE_WL,		/* Weak left to right */
   FRIBIDI_TYPE_WR,		/* Weak right to left */
-  FRIBIDI_TYPE_SOT,		/* Start of text */
-  FRIBIDI_TYPE_EOT,		/* End of text */
 };
-#endif
+
+FriBidiCharType *fribidi_prop_to_type = fribidi_prop_to_type_array;

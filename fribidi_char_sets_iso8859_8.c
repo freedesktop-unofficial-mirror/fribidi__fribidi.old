@@ -13,13 +13,16 @@
  * Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License  
- * along with this library, in a file named COPYING.LIB; if not, write to the
+ * along with this library, in a file named COPYING; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA
  * 
  * For licensing issues, contact <dov@imagic.weizmann.ac.il> and
  * <fwpg@sharif.edu>.
  */
+
+#include "fribidi_config.h"
+#ifndef FRIBIDI_NO_CHARSETS
 
 #include <string.h>
 #include "fribidi.h"
@@ -39,9 +42,9 @@
 #define UNI_TAV 0x05EA
 
 FriBidiChar
-fribidi_iso8859_8_to_unicode_c (gchar sch)
+fribidi_iso8859_8_to_unicode_c (char sch)
 {
-  guchar ch = (guchar) sch;
+  unsigned char ch = (unsigned char) sch;
   /* optimization */
   if (ch < ISO_8859_8_LRO)
     return ch;
@@ -68,11 +71,10 @@ fribidi_iso8859_8_to_unicode_c (gchar sch)
     }
 }
 
-gint
-fribidi_iso8859_8_to_unicode (gchar *s, FriBidiChar *us)
+int
+fribidi_iso8859_8_to_unicode (char *s, int len, FriBidiChar *us)
 {
-  gint i;
-  gint len = strlen (s);
+  int i;
 
   for (i = 0; i < len + 1; i++)
     us[i] = fribidi_iso8859_8_to_unicode_c (s[i]);
@@ -80,37 +82,37 @@ fribidi_iso8859_8_to_unicode (gchar *s, FriBidiChar *us)
   return len;
 }
 
-gchar
+char
 fribidi_unicode_to_iso8859_8_c (FriBidiChar uch)
 {
   if (uch < 128)
-    return (gchar) uch;
+    return (char) uch;
   if (uch >= UNI_ALEF && uch <= UNI_TAV)
-    return (gchar) (uch - UNI_ALEF + ISO_ALEF);
+    return (char) (uch - UNI_ALEF + ISO_ALEF);
   switch (uch)
     {
     case UNI_RLM:
-      return (gchar) ISO_8859_8_RLM;
+      return (char) ISO_8859_8_RLM;
     case UNI_LRM:
-      return (gchar) ISO_8859_8_LRM;
+      return (char) ISO_8859_8_LRM;
     case UNI_RLO:
-      return (gchar) ISO_8859_8_RLO;
+      return (char) ISO_8859_8_RLO;
     case UNI_LRO:
-      return (gchar) ISO_8859_8_LRO;
+      return (char) ISO_8859_8_LRO;
     case UNI_RLE:
-      return (gchar) ISO_8859_8_RLE;
+      return (char) ISO_8859_8_RLE;
     case UNI_LRE:
-      return (gchar) ISO_8859_8_LRE;
+      return (char) ISO_8859_8_LRE;
     case UNI_PDF:
-      return (gchar) ISO_8859_8_PDF;
+      return (char) ISO_8859_8_PDF;
     }
   return '¿';
 }
 
-gint
-fribidi_unicode_to_iso8859_8 (FriBidiChar *us, int length, gchar *s)
+int
+fribidi_unicode_to_iso8859_8 (FriBidiChar *us, int length, char *s)
 {
-  gint i;
+  int i;
 
   for (i = 0; i < length; i++)
     s[i] = fribidi_unicode_to_iso8859_8_c (us[i]);
@@ -118,3 +120,5 @@ fribidi_unicode_to_iso8859_8 (FriBidiChar *us, int length, gchar *s)
 
   return length;
 }
+
+#endif

@@ -1,3 +1,81 @@
+2001-12-14  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi_get_type.c: Removed, replaced by fribidi_char_type.c and
+	fribidi_mirroring.c.
+	* Makefile.noglib, fribidi_mini_glib.c, fribidi_mini_glib.h: removed,
+	no glib dependency, replaced by fribidi_mem.c, and fribidi_mem.h.
+	* fribidi_tables.i: Removed, replaced by fribidi_tab_mirroring.i,
+	fribidi_tab_char_type_2.i, and fribidi_tab_char_type_9.i.
+	* unidata/CreateGetType.pl: Removed, replaced by
+	fribidi_create_mirroring.c, and fribidi_create_char_types.c.
+	* tests/test-CapRTL, tests/test-CapRTL.reference: Removed, replaced by
+	tests/test_CapRTL_implicit.input, and
+	tests/test_CapRTL_implicit.reference.
+	* tests/test-explicit, tests/test-explicit.reference: Removed, replaced
+	by tests/test_CapRTL_explicit.input, and
+	tests/test_CapRTL_explicit.reference.
+	* tests/test-hebrew, tests/test-hebrew.reference: Removed, replaced by
+	tests/test_ISO8859-8_hebrew.input, and
+	tests/test_ISO8859-8_hebrew.reference.
+	* tests/test_CapRTL_implicit.input,
+	tests/test_CapRTL_implicit.reference,
+	tests/test_CapRTL_explicit.input,
+	tests/test_CapRTL_explicit.reference,
+	tests/test_ISO8859-8_hebrew.input,
+	tests/test_ISO8859-8_hebrew.reference,
+	tests/test_UTF-8_persian.input,
+	tests/test_UTF-8_persian.reference: Added.
+	* wcwidth.c: Added, determines a characters width, to break lines.
+	* fribidi_create_mirroring.c: Added, creates fribidi_tab_mirroring.i
+	from unidata/BidiMirroring.txt
+	* fribidi_create_char_types.c: Added, creates fribidi_tab_char_type_*.i
+	from unidata/UnicodeData.txt
+	* fribidi_tab_mirroring.i: Added, mirroring table.
+	* fribidi_tab_char_type_2.i, fribidi_tab_char_type_9.i: Added, as
+	default character type tables, one optimized for speed, one for
+	space, MEM_OPTIMIZED flag will decide which one to use.
+	* fribidi_mirroring.c: Added, #includes fribidi_tab_mirroring.i.
+	* fribidi_char_type.c: Added, #includes one of
+	'fribidi_tab_char_type_*.i'.
+	* fribidi_mem.c, fribidi_mem.h: Added, define some types and functions
+	that was previously defined by glib.
+	* fribidi_unicode.h: Added, Unicode-dependent definitions moved here.
+	* packtab.c, packtab.h: Added, fribidi_create_char_type.c uses these,
+	to compress the types table.
+
+	* AUTHORS: Markus Kuhn added, as he has wrote wcwidth.c.
+	* INSTALL: "Building without glib" material removed.
+	* TODO: Updated, done tasks removed, new tasks added.
+	* NEWS: Updated, compile farm results added.
+	* Makefile.am: Lots of changes, to recent changes, new special
+	target fribidi_tab_char_type_N.i added, which N is replaced with
+	a digit between 2 and 9, and makes a table with compress level N.
+	* acinclude.m4: glib material removed.
+	* configure.in: VERISON update, INTERFACE_VERSION added. glib
+	material removed, fribidi_tab_char_types_N.i configuration added,
+	option --without-charsets added.
+	* fribidi-config.in: A small bug fixed, to set the --cflags output
+	correctly, glib material removed.
+	* fribidi.h: Preprocessor material added for easier link with c++
+	codes, new headers included.
+	* fribidi_benchmark.c: Character set dependency removed, uses no
+	charset code.
+	* fribidi_char_sets*.c, fribidi_char_sets*.h: Preprocessor material
+	added to reflect the effect of --without-charsets configure option.
+	* fribidi_char_sets_utf8.c, fribidi_char_sets_utf8.h: Unused code
+	removed.
+	* fribidi_main.c: Changed to reflect the effect of --without-charsets
+	configure option, and use iconv if no charsets.  Option --nobreak
+	added for no line breaks.  Line break code rewrote to break correctly
+	in UTF-8 mode.
+	* fribidi_types.h: In definition of FriBidiChar values, states that
+	sign bit is reserved for user's private use, FRIBIDI_TYPE_PRIVATE
+	macro defined to check for this.
+	* run.tests: Changed to test fribidi with all test files in tests/
+	directory, and also automatically extract the character set from
+	the test's name.
+	* *.c, *.h: glib material replaced with their equivalents: gchar
+	replaced with char, gint replaced by int, ...
+
 2001-12-11  Roozbeh Pournader <roozbeh@sharif.edu>
         * FriBidi 0.9.1 released.
 	* configure.in: changed the version to 0.9.1.
@@ -9,11 +87,11 @@
 	Omer Zak); cleaned up some vertical spacing.
 	* ChangeLog: changed Behdad's address to 'bamdad.org'.
 
-2001-08-23  Behdad Esfahbod <behdad@bamdad.org>
+2001-08-23  Behdad Esfahbod <behdad@sharif.edu>
 	* acinclude.m4, ltmain.sh, ltmain.in, ltconfig: Updated with
 	libtool-1.4 to configure under latest cygwin.
 
-2001-05-29  Behdad Esfahbod <behdad@bamdad.org>
+2001-05-29  Behdad Esfahbod <behdad@sharif.edu>
 	* fribidi_get_type.c: Updated to use new 'fribidi_tables.i'.
 	* fribidi_utils.c: very small code cleanup.
 
@@ -25,7 +103,7 @@
 	* unidata/PropList.txt: removed.
 	* unidata/UnicodeData.txt: added.
 
-2001-05-22  Behdad Esfahbod <behdad@bamdad.org>
+2001-05-22  Behdad Esfahbod <behdad@sharif.edu>
 	* fribidi_char_sets_utf8.c: Fixed a little bug in utf-8 -> unicode
 	converter.
 
@@ -68,7 +146,7 @@
 2001-04-07  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi_main.c, fribidi_benchmark.c: Check for HAVE_CONFIG_H flag.
 
-2001-04-03  Behdad Esfahbod <behdad@bamdad.org>
+2001-04-03  Behdad Esfahbod <behdad@sharif.edu>
 	* fribidi_mini_glib.h, fribidi_mini_glib.c: Added functions
 	for working with MemChunks, some more definitions of glib added.
 

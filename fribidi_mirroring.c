@@ -13,7 +13,7 @@
  * Lesser General Public License for more details. 
  * 
  * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
+ * along with this library, in a file named COPYING; if not, write to the 
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA  
  * 
@@ -21,42 +21,22 @@
  * <fwpg@sharif.edu>. 
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 #include <stdlib.h>
 #include "fribidi.h"
-#include "fribidi_tables.i"
 
-#ifdef MEM_OPTIMIZED
-extern FriBidiCharType prop_to_type[];
-#endif
+#include "fribidi_tab_mirroring.i"
 
-/*======================================================================
- *  fribidi_get_type() returns the bidi type of a character.
- *----------------------------------------------------------------------*/
-FriBidiCharType
-fribidi_get_type (FriBidiChar uch)
-{
-  if (uch <= 0x10ffff)
-    {
-      FriBidiPropCharType *block = FriBidiPropertyBlocks[uch / 256];
-#ifdef MEM_OPTIMIZED
-      return prop_to_type[block[uch % 256]];
-#else
-      return block[uch % 256];
-#endif
-    }
-  else
-    return FRIBIDI_TYPE_LTR;
-  /* Non-Unicode chars */
-}
-
-gboolean
+boolean
 fribidi_get_mirror_char (	/* Input */
 			  FriBidiChar ch,
 			  /* Output */
 			  FriBidiChar *mirrored_ch)
 {
   int pos, step;
-  gboolean found;
+  boolean found;
 
   pos = step = (nFriBidiMirroredChars / 2) + 1;
 
@@ -80,15 +60,9 @@ fribidi_get_mirror_char (	/* Input */
       else
 	break;
     }
-  if (FriBidiMirroredChars[pos].ch == ch)
-    {
-      *mirrored_ch = FriBidiMirroredChars[pos].mirrored_ch;
-      found = TRUE;
-    }
-  else
-    {
-      *mirrored_ch = ch;
-      found = FALSE;
-    }
+  found = FriBidiMirroredChars[pos].ch == ch;
+  if (mirrored_ch)
+    *mirrored_ch = found ? FriBidiMirroredChars[pos].mirrored_ch : ch;
+
   return found;
 }

@@ -13,13 +13,16 @@
  * Lesser General Public License for more details. 
  * 
  * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
+ * along with this library, in a file named COPYING; if not, write to the 
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA  
  * 
  * For licensing issues, contact <dov@imagic.weizmann.ac.il> and 
  * <fwpg@sharif.edu>. 
  */
+
+#include "fribidi_config.h"
+#ifndef FRIBIDI_NO_CHARSETS
 
 #include <string.h>
 #include "fribidi.h"
@@ -31,20 +34,19 @@
 #define UNI_SUKUN 0x0652
 
 FriBidiChar
-fribidi_iso8859_6_to_unicode_c (gchar sch)
+fribidi_iso8859_6_to_unicode_c (char sch)
 {
-  guchar ch = (guchar) sch;
+  unsigned char ch = (unsigned char) sch;
   if (ch >= ISO_HAMZA && ch <= ISO_SUKUN)
     return ch - ISO_HAMZA + UNI_HAMZA;
   else
     return ch;
 }
 
-gint
-fribidi_iso8859_6_to_unicode (gchar *s, FriBidiChar *us)
+int
+fribidi_iso8859_6_to_unicode (char *s, int len, FriBidiChar *us)
 {
-  gint i;
-  gint len = strlen (s);
+  int i;
 
   for (i = 0; i < len + 1; i++)
     us[i] = fribidi_iso8859_6_to_unicode_c (s[i]);
@@ -52,28 +54,28 @@ fribidi_iso8859_6_to_unicode (gchar *s, FriBidiChar *us)
   return len;
 }
 
-gchar
+char
 fribidi_unicode_to_iso8859_6_c (FriBidiChar uch)
 {
   if (uch >= UNI_HAMZA && uch <= UNI_SUKUN)
-    return (gchar) (uch - UNI_HAMZA + ISO_HAMZA);
+    return (char) (uch - UNI_HAMZA + ISO_HAMZA);
   /* TODO: handle pre-composed and presentation chars */
   else if (uch < 256)
-    return (gchar) uch;
+    return (char) uch;
   else if (uch == 0x060c)
-    return (gchar) 0xac;
+    return (char) 0xac;
   else if (uch == 0x061b)
-    return (gchar) 0xbb;
+    return (char) 0xbb;
   else if (uch == 0x061f)
-    return (gchar) 0xbf;
+    return (char) 0xbf;
   else
     return '¿';
 }
 
-gint
-fribidi_unicode_to_iso8859_6 (FriBidiChar *us, int length, gchar *s)
+int
+fribidi_unicode_to_iso8859_6 (FriBidiChar *us, int length, char *s)
 {
-  gint i;
+  int i;
 
   for (i = 0; i < length; i++)
     s[i] = fribidi_unicode_to_iso8859_6_c (us[i]);
@@ -81,3 +83,5 @@ fribidi_unicode_to_iso8859_6 (FriBidiChar *us, int length, gchar *s)
 
   return length;
 }
+
+#endif

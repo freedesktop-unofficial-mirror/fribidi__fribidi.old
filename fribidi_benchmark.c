@@ -13,7 +13,7 @@
  * Lesser General Public License for more details. 
  * 
  * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
+ * along with this library, in a file named COPYING; if not, write to the 
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA  
  * 
@@ -28,19 +28,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
-#include <getopt.h>
 #include <sys/times.h>
+#include "getopt.h"
 #include "fribidi.h"
 
 #define appname "fribidi_benchmark"
 #define appversion VERSION
 
-extern gchar *fribidi_version_info;
+extern char *fribidi_version_info;
 
 #define MAX_STR_LEN 1000
 
 static void
-die (gchar *fmt, ...)
+die (char *fmt, ...)
 {
   va_list ap;
   va_start (ap, fmt);
@@ -59,23 +59,21 @@ die (gchar *fmt, ...)
   "AnD hOw_L AbOuT, 123,987 tHiS_o a GO_oOD - _L_oTE_oST. " \
   "here_L is_o_o_o _R a good one_o And _r 123,987_LT_oHE_R next_o oNE:" \
   "_R_r and the last _LONE_o IS THE _rbest _lONE and" \
-  "A REAL BIG_l_o BUG! _L _l_r_R_L_laslaj siw_o_Rlkj sslk" \
   "a _L_L_L_LL_L_L_L_L_L_L_L_L_Rbug_o_o_o_o_o_o" \
-  "here_L is_o_o_o _R a good one_o And _r 123,987_LT_oHE_R next_o oNE:" \
   "_R_r and the last _LONE_o IS THE _rbest _lONE and" \
   "A REAL BIG_l_o BUG! _L _l_r_R_L_laslaj siw_o_Rlkj sslk" \
   "a _L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_Rbug" \
   "here_L is_o_o_o _R ab  one_o _r 123,987_LT_oHE_R t_o oNE:" \
 
-gint niter;
+int niter;
 
 static void
 help (void)
 {
   printf
     ("Usage: " appname " [OPTION]...\n"
-     "A program for benchmarking the speed of the " PACKAGE " library.\n"
-     "\n"
+     "A program for benchmarking the speed of the " FRIBIDI_PACKAGE
+     " library.\n" "\n"
      "  -h, --help            Display this information and exit\n"
      "  -V, --version         Display version information and exit\n"
      "  -n, --niter N         Number of iterations. Default is %d.\n"
@@ -100,16 +98,63 @@ utime (void)
 }
 
 static void
-benchmark (gchar *S_, FriBidiCharSet char_set, gint niter)
+benchmark (char *S_, int niter)
 {
-  gint len, i;
+  int len, i;
   FriBidiChar us[MAX_STR_LEN], out_us[MAX_STR_LEN];
   FriBidiStrIndex positionLtoV[MAX_STR_LEN], positionVtoL[MAX_STR_LEN];
-  guint8 embedding_list[MAX_STR_LEN];
+  uint8 embedding_list[MAX_STR_LEN];
   FriBidiCharType base;
   double time0, time1;
 
-  len = fribidi_charset_to_unicode (char_set, S_, us);
+  {
+    int j;
+    len = strlen (S_);
+    for (i = 0, j = 0; i < len; i++)
+      {
+	if (S_[i] == '_')
+	  switch (S_[++i])
+	    {
+	    case '>':
+	      us[j++] = UNI_LRM;
+	      break;
+	    case '<':
+	      us[j++] = UNI_RLM;
+	      break;
+	    case 'l':
+	      us[j++] = UNI_LRE;
+	      break;
+	    case 'r':
+	      us[j++] = UNI_RLE;
+	      break;
+	    case 'L':
+	      us[j++] = UNI_LRO;
+	      break;
+	    case 'R':
+	      us[j++] = UNI_RLO;
+	      break;
+	    case 'o':
+	      us[j++] = UNI_PDF;
+	      break;
+	    case '_':
+	      us[j++] = '_';
+	      break;
+	    default:
+	      us[j++] = '_';
+	      i--;
+	      break;
+	    }
+	else
+	  us[j++] = S_[i];
+	if (us[j] >= 'A' && us[j] <= 'F')
+	  us[j] += UNI_ARABIC_ALEF - 'A';
+	else if (us[j] >= 'G' && us[j] <= 'Z')
+	  us[j] += UNI_HEBREW_ALEF - 'G';
+	else if (us[j] >= '6' && us[j] <= '9')
+	  us[j] += UNI_ARABIC_ZERO - '0';
+      }
+    len = j;
+  }
 
   /* Start timer */
   time0 = utime ();
@@ -130,7 +175,7 @@ benchmark (gchar *S_, FriBidiCharSet char_set, gint niter)
   printf ("Length = %d\n", len);
   printf ("Iterations = %d\n", niter);
   printf ("%d len*iterations in %f seconds\n", len * niter, time1 - time0);
-  printf ("= %f kilo.length.iterations/second\n",
+  printf ("= %.0f kilo.length.iterations/second\n",
 	  1.0 * len * niter / 1000 / (time1 - time0));
 
   return;
@@ -139,7 +184,7 @@ benchmark (gchar *S_, FriBidiCharSet char_set, gint niter)
 int
 main (int argc, char *argv[])
 {
-  niter = 1000;
+  niter = 2000;
 
   /* Parse the command line */
   argv[0] = appname;
@@ -182,10 +227,10 @@ main (int argc, char *argv[])
     }
 
   printf ("* Without explicit marks:\n");
-  benchmark (TEST_STRING, FRIBIDI_CHARSET_CAP_RTL, niter);
+  benchmark (TEST_STRING, niter);
   printf ("\n");
   printf ("* With explicit marks:\n");
-  benchmark (TEST_STRING_EXPLICIT, FRIBIDI_CHARSET_CAP_RTL, niter);
+  benchmark (TEST_STRING_EXPLICIT, niter);
 
   return 0;
 }

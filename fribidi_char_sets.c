@@ -13,13 +13,16 @@
  * Lesser General Public License for more details. 
  * 
  * You should have received a copy of the GNU Lesser General Public License 
- * along with this library, in a file named COPYING.LIB; if not, write to the 
+ * along with this library, in a file named COPYING; if not, write to the 
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA  
  * 
  * For licensing issues, contact <dov@imagic.weizmann.ac.il> and 
  * <fwpg@sharif.edu>. 
  */
+
+#include "fribidi_config.h"
+#ifndef FRIBIDI_NO_CHARSETS
 
 #include "fribidi_char_sets.h"
 #include <string.h>
@@ -28,27 +31,27 @@ typedef struct
 {
   /* Convert the character string "s" to unicode string "us" and
      return it's length. */
-  gint (*charset_to_unicode) (gchar *s,
-			      /* output */
-			      FriBidiChar *us);
+  int (*charset_to_unicode) (char *s, int length,
+			     /* output */
+			     FriBidiChar *us);
   /* Convert the unicode string "us" with length "length" to character
      string "s" and return it's length. */
-  gint (*unicode_to_charset) (FriBidiChar *us, gint length,
-			      /* output */
-			      gchar *s);
+  int (*unicode_to_charset) (FriBidiChar *us, int length,
+			     /* output */
+			     char *s);
   /* Charset's name. */
-  gchar *name;
+  char *name;
   /* Charset's title. */
-  gchar *title;
+  char *title;
   /* Comments, if any. */
-  gchar *(*desc) (void);
+  char *(*desc) (void);
   /* Some charsets like CapRTL may need to change some fribidis tables, by
      calling this function, they can do this changes. */
-  gboolean (*enter) (void);
+  boolean (*enter) (void);
   /* Some charsets like CapRTL may need to change some fribidis tables, by
      calling this function, they can undo their changes, perhaps to enter
      another mode. */
-  gboolean (*leave) (void);
+  boolean (*leave) (void);
 }
 FriBidiCharSetHandler;
 
@@ -81,12 +84,12 @@ FriBidiCharSetHandler fribidi_char_sets[FRIBIDI_CHAR_SETS_NUM + 1] = {
 
 /* Return the charset which name is "s". */
 FriBidiCharSet
-fribidi_parse_charset (gchar *s)
+fribidi_parse_charset (char *s)
 {
-  gint i;
+  int i;
 
   for (i = FRIBIDI_CHAR_SETS_NUM; i; i--)
-    if (g_strcasecmp (s, fribidi_char_sets[i].name) == 0)
+    if (fribidi_strcasecmp (s, fribidi_char_sets[i].name) == 0)
       return i;
 
   return FRIBIDI_CHARSET_NOT_FOUND;
@@ -95,23 +98,23 @@ fribidi_parse_charset (gchar *s)
 
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
-gint
-fribidi_charset_to_unicode (FriBidiCharSet char_set, gchar *s,
+int
+fribidi_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
 			    /* output */
 			    FriBidiChar *us)
 {
   fribidi_char_set_enter (char_set);
   return fribidi_char_sets[char_set].charset_to_unicode == NULL ? 0 :
-    (*fribidi_char_sets[char_set].charset_to_unicode) (s, us);
+    (*fribidi_char_sets[char_set].charset_to_unicode) (s, length, us);
 }
 
 /* Convert the unicode string "us" with length "length" to character
    string "s" in charset "char_set" and return it's length. */
-gint
+int
 fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
-			    gint length,
+			    int length,
 			    /* output */
-			    gchar *s)
+			    char *s)
 {
   fribidi_char_set_enter (char_set);
   return fribidi_char_sets[char_set].unicode_to_charset == NULL ? 0 :
@@ -119,15 +122,15 @@ fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
 }
 
 /* Return the string containing the name of the charset. */
-gchar *
+char *
 fribidi_char_set_name (FriBidiCharSet char_set)
 {
-  return fribidi_char_sets[char_set].name == NULL ? (gchar *) "" :
+  return fribidi_char_sets[char_set].name == NULL ? (char *) "" :
     fribidi_char_sets[char_set].name;
 }
 
 /* Return the string containing the title of the charset. */
-gchar *
+char *
 fribidi_char_set_title (FriBidiCharSet char_set)
 {
   return fribidi_char_sets[char_set].title == NULL ?
@@ -135,7 +138,7 @@ fribidi_char_set_title (FriBidiCharSet char_set)
 }
 
 /* Return the string containing the comments about the charset, if any. */
-gchar *
+char *
 fribidi_char_set_desc (FriBidiCharSet char_set)
 {
   return fribidi_char_sets[char_set].desc == NULL ?
@@ -146,7 +149,7 @@ static FriBidiCharSet current_char_set = FRIBIDI_CHARSET_DEFAULT;
 
 /* Some charsets like CapRTL may need to change some fribidis tables, by
    calling this function, they can do this changes. */
-gboolean
+boolean
 fribidi_char_set_enter (FriBidiCharSet char_set)
 {
   if (char_set != current_char_set && fribidi_char_sets[char_set].enter)
@@ -162,7 +165,7 @@ fribidi_char_set_enter (FriBidiCharSet char_set)
 /* Some charsets like CapRTL may need to change some fribidis tables, by
    calling this function, they can undo their changes, maybe to enter
    another mode. */
-gboolean
+boolean
 fribidi_char_set_leave (FriBidiCharSet char_set)
 {
   if (char_set == current_char_set && fribidi_char_sets[char_set].leave)
@@ -170,3 +173,5 @@ fribidi_char_set_leave (FriBidiCharSet char_set)
   else
     return TRUE;
 }
+
+#endif
