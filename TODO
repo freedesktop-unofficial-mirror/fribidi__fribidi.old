@@ -1,0 +1,51 @@
+BiDi algorithms issues:
+
+* Change code to support latest revisions of the unicode technical report.
+
+* Support LRE, RLE, RLO and LRO.
+
+General issues:
+
+* Clean up code
+
+* Better documentation
+
+* Write some utility programs.
+
+* Write notes and a reference implementation for the following interactions
+  with fribidi:
+
+    - Terminal editing with cursor key interaction, e.g. through curses.
+      No mouse or cut and paste interaction.
+
+    - Like above (with fixed fonts?) but in an GUI environment where 
+      the mouse may be used to position the cursor.
+
+    - Like above but with the ability to do a mouse selection. At least
+      in logical mode, possibly in visual mode.
+
+    - Like above but with proportional fonts.
+
+    - Like above with proportional fonts and character attributes.
+
+    - Like above but with kerning between characters.
+
+* Write a description of the needed steps to convert a LTR editor into a
+  BiDi aware editor.
+
+* Make interfaces to other scripting languages if there is any interest.
+
+* Consider the implications of a minimal incremental algorithm for
+  adding a single character.
+
+* Add handling of precomposed and presentation unicode chars when converting
+  to 8 bit encodings (breaking into several chars, or better match)
+
+* Farsi 8bit encoding ISIRI-3342 has the notion of strong typed chars like
+  spaces etc (all the range 0x00-0x3f,0x7f is strong typed left-to-right,
+  and duplicated in 0x80-0xbf,0xff as a strong typed right-to-left version.
+  several chars in the range 0xa0-0xbf have unicode counterparts; but
+  others (and all in the range 0x80-0x9f,0xff) have not; so how should that
+  be handled when converting to unicode to preserve at best the direction
+  information ?
+
