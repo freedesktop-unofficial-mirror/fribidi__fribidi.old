@@ -87,7 +87,7 @@ main (int argc, char *argv[])
 
       if (S_[0] == '-' && S_[1])
 	{
-	  CASE2 ("-?", "--help")
+	  CASE2 ("-h", "--help")
 	  {
 	    gint i;
 
@@ -96,7 +96,7 @@ main (int argc, char *argv[])
 	       "A command line interface for the %s library,\n"
 	       "Converts a logical string to visual.\n"
 	       "\n"
-	       "  -?, --help            Display this information and exit\n"
+	       "  -h, --help            Display this information and exit\n"
 	       "  -V, --version         Display version information and exit\n"
 	       "  -d, --debug           Output debug info\n"
 	       "  -t, --test            Set default character set to CapRTL, turn on padding\n"

@@ -23,7 +23,7 @@
 #include "fribidi.h"
 
 #define fribidi_char_set_name_iso8859_8 "ISO8859-8"
-#define fribidi_char_set_title_iso8859_8 "ISO8859-8 (Hebrew)"
+#define fribidi_char_set_title_iso8859_8 "ISO 8859-8 (Hebrew)"
 #define fribidi_char_set_desc_iso8859_8 NULL
 #define fribidi_char_set_enter_iso8859_8 NULL
 #define fribidi_char_set_leave_iso8859_8 NULL

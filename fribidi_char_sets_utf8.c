@@ -61,7 +61,7 @@ gint fribidi_unicode_to_utf8 (FriBidiChar * us, int length, guchar * s)
     {
       FriBidiChar mychar = us[i];
       if (mychar <= 0x7F)
-	{			/* 7 sig bits; plain 7-bit ascii */
+	{			/* 7 sig bits; plain 7-bit ASCII */
 	  *t++ = mychar;
 	}
       else if (mychar <= 0x7FF)	/* 11 sig bits; Hebrew is in this range */

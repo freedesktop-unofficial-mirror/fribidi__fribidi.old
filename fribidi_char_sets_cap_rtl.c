@@ -163,7 +163,7 @@ fribidi_char_set_desc_cap_rtl ()
     "CapRTL is a character set for testing with the reference\n" \
     "implementation, with explicit marks escape strings, and\n" \
     "the property that contains all unicode character types in\n" \
-    "ascii range 0-127.\n" \
+    "ASCII range 0-127.\n" \
     "\n"
     "CapRTL's character types:\n"
     "  * 0x00    ON    * 0x01 ^A ON    * 0x02 ^B ON    * 0x03 ^C ON    \n"

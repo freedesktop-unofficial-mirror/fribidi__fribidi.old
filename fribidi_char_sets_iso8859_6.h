@@ -23,7 +23,7 @@
 #include "fribidi.h"
 
 #define fribidi_char_set_name_iso8859_6 "ISO8859-6"
-#define fribidi_char_set_title_iso8859_6 "ISO8859-6 (Arabic)"
+#define fribidi_char_set_title_iso8859_6 "ISO 8859-6 (Arabic)"
 #define fribidi_char_set_desc_iso8859_6 NULL
 #define fribidi_char_set_enter_iso8859_6 NULL
 #define fribidi_char_set_leave_iso8859_6 NULL

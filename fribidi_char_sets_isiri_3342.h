@@ -23,7 +23,7 @@
 #include "fribidi.h"
 
 #define fribidi_char_set_name_isiri_3342 "ISIRI-3342"
-#define fribidi_char_set_title_isiri_3342 "ISIRI-3342 (Farsi)"
+#define fribidi_char_set_title_isiri_3342 "ISIRI 3342 (Persian)"
 #define fribidi_char_set_desc_isiri_3342 NULL
 #define fribidi_char_set_enter_isiri_3342 NULL
 #define fribidi_char_set_leave_isiri_3342 NULL
