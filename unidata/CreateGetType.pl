@@ -251,9 +251,10 @@ sub create_c_file {
 
     my $c_file =<<__;
 /*========================================================================
-//  This file was automatically created from $unicode_proplist_file, version $proplist_version,
-//  and $unicode_mirroring_file, version $mirroring_version, by the perl script CreateGetType.pl.
-//----------------------------------------------------------------------*/
+ *  This file was automatically created from $unicode_proplist_file, version $proplist_version,
+ *  and $unicode_mirroring_file, version $mirroring_version, by the perl script CreateGetType.pl.
+ *----------------------------------------------------------------------*/
+/* *INDENT-OFF* */
 
 #include "fribidi.h"
 
@@ -370,6 +371,8 @@ __
     $c_file .= "};\n\n";
     $c_file .= "gint nFriBidiMirroredChars = "
              . scalar(@mirrors) . ";\n";
+
+    $c_file .="\n\n/* *INDENT-ON* */\n";
 
     print $c_file;
 }

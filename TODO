@@ -64,11 +64,8 @@ General issues:
 
 mini_glib use < received from Dan K... >
 
-* test executables with mini_glib 
 * build execs in Makefile_mini_glib
 * create a shared-object library
 
 *** add the mini_glib option to configure, so that whenever no glib is arround,
     mini_glib is used.
-
-* use smarter malloc/free scheme, even with mini_glib
