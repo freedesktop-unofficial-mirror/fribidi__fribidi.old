@@ -106,12 +106,6 @@ bin_PROGRAMS = fribidi
 fribidi_SOURCES = fribidi_main.c $(GETOPT_SRC)
 fribidi_LDADD = libfribidi.la
 
-unidata/%:
-	file="$@" && file="`echo "$$file" | $(SED) 's|^unidata/||'`" &&	\
-	(test -d unidata || mkdir unidata) && cd unidata &&	\
-	$(DOWNLOAD) "http://www.unicode.org/Public/UNIDATA/$$file" ||	\
-	($(RM) -f "$$file"; false)
-
 build_fribidi_tab_mirroring.i: $(fribidi_create_mirroring_SOURCES)	\
 		unidata/BidiMirroring.txt
 	$(MAKE) fribidi_create_mirroring
