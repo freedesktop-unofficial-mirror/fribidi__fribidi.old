@@ -34,7 +34,7 @@ gboolean fribidi_get_mirror_char (	/* Input */
 				   /* Output */
 				   FriBidiChar * mirrored_ch);
 
-void fribidi_log2vis (		/* input */
+gboolean fribidi_log2vis (		/* input */
 		       FriBidiChar * str,
 		       gint len, FriBidiCharType * pbase_dir,
 		       /* output */

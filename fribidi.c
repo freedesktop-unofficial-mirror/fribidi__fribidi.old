@@ -1110,7 +1110,7 @@ fribidi_remove_explicits (FriBidiChar * str, gint length)
 //  fribidi_log2vis() calls the function_analyse_string() and then
 //  does reordering and fills in the output strings.
 //----------------------------------------------------------------------*/
-void
+gboolean
 fribidi_log2vis (		/* input */
 		  FriBidiChar * str, gint len, FriBidiCharType * pbase_dir,
 		  /* output */
@@ -1140,7 +1140,7 @@ fribidi_log2vis (		/* input */
       fprintf (stderr, "%s: cannot handle strings > %d characters\n",
 	       PACKAGE, FRIBIDI_MAX_STRING_LENGTH);
 #endif
-      return;
+      return FALSE;
     }
   fribidi_analyse_string (str, len, pbase_dir,
 			  /* output */
@@ -1232,6 +1232,8 @@ fribidi_log2vis (		/* input */
     g_free (position_V_to_L_list);
 
   free_rl_list (type_rl_list);
+
+  return TRUE;
 
 }
 

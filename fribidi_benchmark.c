@@ -23,6 +23,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <getopt.h>
 #include <sys/times.h>
 #include "fribidi.h"
 #include "config.h"
@@ -61,6 +62,30 @@ die (gchar * fmt, ...)
   "A REAL BIG_l_o BUG! _L _l_r_R_L_laslaj siw_o_Rlkj sslk" \
   "a _L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_L_Rbug" \
   "here_L is_o_o_o _R ab  one_o _r 123,987_LT_oHE_R t_o oNE:" \
+
+gint niter;
+
+void
+help (void)
+{
+  printf
+    ("Usage: " appname " [OPTION]...\n"
+     "A program for benchmarking the speed of the " PACKAGE " library.\n"
+     "\n"
+     "  -h, --help            Display this information and exit\n"
+     "  -V, --version         Display version information and exit\n"
+     "  -n, --niter N         Number of iterations. Default is %d.\n"
+     "\nReport bugs online at <http://fribidi.sourceforge.net/bugs.php>.\n"
+     , niter);
+  exit (0);
+}
+
+void
+version (void)
+{
+  printf (appname " " appversion "\n%s", fribidi_version_info);
+  exit (0);
+}
 
 double
 utime (void)
@@ -111,51 +136,48 @@ int
 main (int argc, char *argv[])
 {
   int argp;
-  gint niter;
 
   niter = 1000;
 
-#define CASE(s) if (strcmp (S_, (s)) == 0)
-#define CASE2(s1, s2) if (strcmp (S_, (s1)) == 0 || strcmp (S_, (s2)) == 0)
-
   /* Parse the command line */
-  argp = 1;
-  while (argp < argc)
+  argv[0] = appname;
+  while (1)
     {
-      gchar *S_;
+      int option_index = 0, c;
+      static struct option long_options[] = {
+	{"help", 0, 0, 'h'},
+	{"version", 0, 0, 'V'},
+	{"niter", 0, 0, 'n'},
+	{0, 0, 0, 0}
+      };
 
-      S_ = argv[argp++];
-      if (S_[0] == '-' && S_[1])
+      c = getopt_long (argc, argv, "hVvdtc:w:B:E:", long_options,
+		     &option_index);
+      if (c == -1)
+	break;
+
+      switch (c)
 	{
-	  CASE2 ("-?", "--help")
-	  {
-	    gint i;
-
-	    printf
-	      ("Usage: %s [OPTION]...\n"
-	       "A program for benchmarking the speed of the %s library.\n"
-	       "\n"
-	       "  -?, --help            Display this information and exit\n"
-	       "  -V, --version         Display version information and exit\n"
-	       "  -n, --niter N         Number of iterations. Default is %d.\n"
-	       "\nReport bugs online at <http://fribidi.sourceforge.net/bugs.php>.\n",
-	       appname, PACKAGE, niter);
-	    exit (0);
-	  }
-	  CASE2 ("-V", "--version")
-	  {
-	    printf (appname " " appversion "\n%s", fribidi_version_info);
-	    exit (0);
-	  }
-	  CASE2 ("-n", "--niter")
-	  {
-	    niter = atoi (argv[argp++]);
-	    continue;
-	  };
-	  die ("unrecognized option `%s'\n", S_);
+	case 0:
+	  break;
+	case 'h':
+	  help ();
+	  break;
+	case 'V':
+	  version ();
+	  break;
+	case 'n':
+	  niter = atoi (optarg);
+	  if (niter <= 0)
+	    die ("invalid number of iterations `%s'\n", optarg);
+	  break;
+	case ':':
+	case '?':
+	  die (NULL);
+	  break;
+	default:
+	  break;
 	}
-      else
-	die ("unrecognized parameter `%s'\n", S_);
     }
 
   printf ("* Without explicit marks:\n");

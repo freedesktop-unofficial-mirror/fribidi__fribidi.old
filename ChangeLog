@@ -1,3 +1,13 @@
+2001-03-30  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi.c, fribidi.h: Changed fribidi_log2vis() to return TRUE
+	if successful and FALSE otherwise.
+	
+	* fribidi_main.c, fribidi_benchmark.c: Changed to use getopt library,
+	to handle command line parameters better.
+	
+	* fribidi_main.c: Changed to if COLUMNS enviroment variable is
+	defined, use its value for text width.
+
 2001-03-29  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c, fribidi_char_sets.h, fribidi_char_sets_cap_rtl.c,
 	fribidi_main.c, tests/test-CapRTL, tests/test-CapRTL.reference,
@@ -8,6 +18,9 @@
 	* fribidi_main.c: Options --wltr and --wrtl added.
 
 	* TODO: A recently done task removed.
+
+2001-03-29  Roozbeh Pournader <roozbeh@sharif.edu>
+	* fribidi-0.9.0: fribidi-0.9.0 released.
 
 2001-03-28  Roozbeh Pournader <roozbeh@sharif.edu>
 	* bootstrap: swapped 'aclocal' and 'autoheader'. do not warn for
