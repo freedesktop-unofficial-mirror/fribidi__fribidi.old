@@ -1,8 +1,10 @@
 Implementation issues:
 
-* Update CapRTL with new Unicode reference version.
+* Add const keywords all over the source.
 
-* configure.in, Makefile.am: better check for downloader.
+* with --without-charsets, fribidi char set converters use iconv internally.
+
+* Update CapRTL with new Unicode reference version.
 
 * Revise Reorder api, in fribidi_main.c reorder after link break.
 
@@ -14,15 +16,13 @@ Implementation issues:
 * Fix iconv problem: Check for old iconvs (without wchar_t, without
   byteorder UTF-32 or UCS-4 types).
 
-* On freebsd, the compiler needs -liconv, let configure do it.
-
-* FriBidiStrIndex should be defined to be uint32, at least internally,
-  and maybe still have an interface with uint16.
+* When there is no glibc, libiconvs should be linked when --without-charset
+  is enabled.
 
 * Design better apis to do reorder based on available levels, remove
   explicit marks then calculate position maps, ....
 
-* Revise fribidi_util.c, add some functions, port other to support explicit
+* Revise fribidi_util.c, add some functions, update other to support explicit
   marks, and too many embedding levels, eg. fribidi_map_range.
 
 * Charset converters and fribidi_analyse change API to allocate mem if

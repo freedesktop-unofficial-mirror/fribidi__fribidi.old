@@ -1,6 +1,25 @@
+2002-02-10  Behdad Esfahbod <behdad@bamdad.org>
+	* configure.in: Changed the version to 0.10.1pre.
+	* TODO: Done tasks removed.
+	* *.h: "extern C" stuff added.
+	* fribidi-config.in: Include path changed from @includedir@/fribidi
+	to @includedir@.
+	* fribidi.c: Set FRIBIDI_CHUNK_SIZE according to MEM_OPTIMIZED flag
+	to 16 or 128.
+	* fribidi.c, fribidi_unicode.h, conformance/test: Do not set
+	MAX_LEVEL to 15 if flag DEBUG defined, renamed to
+	UNI_MAX_BIDI_LEVEL and moved to fribidi_unicode.h, should not check
+	fribidi with debug-enabled reference code anymore.  Updated
+	conformance/test to reflect this change.
+	* README: Sample input and output removed, refered to tests directory
+	* fribidi_config.h.in: Added, configure creates fribidi_config.h from
+	this.
+	* fribidi.spec.in: Added, configure creates fribidi.spec from this.
+	It can be used to create RPM packages.
+
 2002-01-04  Roozbeh Pournader <roozbeh@sharif.edu>
 	* FriBidi 0.10.0 released.
-	* configure.in: changed the version to 0.10.0.
+	* configure.in: Changed the version to 0.10.0.
 
 2002-01-02  Behdad Esfahbod <behdad@bamdad.org>
 	* bootstrap: automake option -a added

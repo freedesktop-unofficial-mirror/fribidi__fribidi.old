@@ -89,7 +89,9 @@ EXTRA_DIST =	\
 	run.tests	\
 	ANNOUNCE	\
 	acinclude.m4	\
+	fribidi_config.h.in	\
 	fribidi.pc.in	\
+	fribidi.spec.in	\
 	$(TEST_FILES)	\
 	$(TABLE_FILES)	\
 	$(UNIDATA_FILES)	\
@@ -174,6 +176,6 @@ pkgconfig_DATA = fribidi.pc
 
 CLEANFILES = 
 
-DISTCLEANFILES = fribidi_tab_char_type_stamp fribidi_config.h
+DISTCLEANFILES = fribidi_tab_char_type_stamp
 
 MAINTAINERCLEANFILES = Makefile.in configure aclocal.m4 config.h.in

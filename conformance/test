@@ -10,11 +10,15 @@ if ! test -f "$path/../fribidi"; then
 fi
 
 if ! test -f "$path/reference/bidiref"; then
-  if test -z "`echo -n | $path/../fribidi --debug 2>&1`"; then
-    debug="-DDEBUGGING"
-  else
-    debug=""
-  fi
+# fribidi does not set MAX_LEVEL to 15 if debug enabled, then reference
+# should not be compiled with debug enabled.
+
+#  if test -z "`echo -n | $path/../fribidi --debug 2>&1`"; then
+#    debug="-DDEBUGGING"
+#  else
+#    debug=""
+#  fi
+  debug=""
   g++ $debug -o $path/reference/bidiref $path/reference/bidiref.cpp
 fi
 

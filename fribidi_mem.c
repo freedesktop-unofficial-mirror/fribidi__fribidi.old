@@ -1,6 +1,5 @@
 /* FriBidi - Library of BiDi algorithm
- * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod.
+ * Copyright (C) 2001,2002 Behdad Esfahbod.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public  
@@ -17,8 +16,7 @@
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA
  * 
- * For licensing issues, contact <dov@imagic.weizmann.ac.il> and
- * <fwpg@sharif.edu>.
+ * For licensing issues, contact <fwpg@sharif.edu>.
  */
 
 #include <string.h>

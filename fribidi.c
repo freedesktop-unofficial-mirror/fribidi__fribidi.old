@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod.
+ * Copyright (C) 2001,2002 Behdad Esfahbod.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public  
@@ -31,8 +31,13 @@
 #include <stdio.h>
 #endif
 
+/* Redefine FRIBIDI_CHUNK_SIZE in config.h to override this. */
 #ifndef FRIBIDI_CHUNK_SIZE
+#ifdef MEM_OPTIMIZED
+#define FRIBIDI_CHUNK_SIZE 16
+#else
 #define FRIBIDI_CHUNK_SIZE 128
+#endif
 #endif
 
 #ifdef DEBUG
@@ -41,14 +46,6 @@
 #else
 #define DBG(s)
 #define DBG2(s, t)
-#endif
-
-#ifdef DEBUG
-/* for easier test with the reference code only */
-#define MAX_LEVEL 15
-#else
-/* default value */
-#define MAX_LEVEL 61
 #endif
 
 #ifdef DEBUG
@@ -431,20 +428,20 @@ compact_neutrals (TypeLink *list)
  *-------------------------------------------------------------------------*/
 
 /* There's some little points in pushing and poping into the status stack:
-   1. when the embedding level is not valid (more than MAX_LEVEL=61),
+   1. when the embedding level is not valid (more than UNI_MAX_BIDI_LEVEL=61),
    you must reject it, and not to push into the stack, but when you see a
    PDF, you must find the matching code, and if it was pushed in the stack,
    pop it, it means you must pop if and only if you have pushed the
    matching code, the over_pushed var counts the number of rejected codes yet.
    2. there's a more confusing point too, when the embedding level is exactly
-   MAX_LEVEL-1=60, an LRO or LRE must be rejected because the new level would
-   be MAX_LEVEL+1=62, that is invalid, but an RLO or RLE must be accepted
-   because the new level is MAX_LEVEL=61, that is valid, so the rejected
-   codes may be not continuous in the logical order, in fact there is at
-   most two continuous intervals of codes, with a RLO or RLE between them.
-   to support the case, the first_interval var counts the number of rejected
-   codes in the first interval, when it is 0, means that there is only one
-   interval yet.
+   UNI_MAX_BIDI_LEVEL-1=60, an LRO or LRE must be rejected because the new
+   level would be UNI_MAX_BIDI_LEVEL+1=62, that is invalid, but an RLO or RLE
+   must be accepted because the new level is UNI_MAX_BIDI_LEVEL=61, that is
+   valid, so the rejected codes may be not continuous in the logical order,
+   in fact there is at most two continuous intervals of codes, with a RLO or
+   RLE between them.  To support this case, the first_interval var counts the
+   number of rejected codes in the first interval, when it is 0, means that
+   there is only one interval yet.
 */
 
 /* a. If this new level would be valid, then this embedding code is valid.
@@ -456,9 +453,9 @@ compact_neutrals (TypeLink *list)
 */
 #define PUSH_STATUS \
     { \
-      if (new_level <= MAX_LEVEL) \
+      if (new_level <= UNI_MAX_BIDI_LEVEL) \
         { \
-          if (level == MAX_LEVEL - 1) \
+          if (level == UNI_MAX_BIDI_LEVEL - 1) \
             first_interval = over_pushed; \
           status_stack[stack_size].level = level; \
           status_stack[stack_size].override = override; \
@@ -678,7 +675,7 @@ fribidi_analyse_string (	/* input */
     over_pushed = 0;
     first_interval = 0;
     status_stack =
-      (LevelInfo *) malloc (sizeof (LevelInfo) * (MAX_LEVEL + 2));
+      (LevelInfo *) malloc (sizeof (LevelInfo) * (UNI_MAX_BIDI_LEVEL + 2));
 
     for (pp = type_rl_list->next; pp->next; pp = pp->next)
       {
@@ -1364,12 +1361,7 @@ fribidi_log2vis_get_embedding_levels (	/* input */
 
 
 
-
-
-
-
-
-char *fribidi_version_info =
+const char *fribidi_version_info =
   FRIBIDI_PACKAGE " " FRIBIDI_VERSION " (interface version "
   FRIBIDI_INTERFACE_VERSION_STR ")\n"
   "Copyright (C) 2001 FriBidi Project (http://fribidi.sf.net/).\n" "\n"
@@ -1381,7 +1373,7 @@ char *fribidi_version_info =
 #ifdef DEBUG
   "--enable-debug\n"
 #endif
-#if (defined(MEM_OPTIMIZED))
+#ifdef MEM_OPTIMIZED
   "--enable-memopt\n"
 #endif
 #ifdef USE_SIMPLE_MALLOC

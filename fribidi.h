@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -24,17 +24,17 @@
 #ifndef FRIBIDI_H
 #define FRIBIDI_H
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
 #include "fribidi_config.h"
 #include "fribidi_unicode.h"
 #include "fribidi_mem.h"
 #include "fribidi_types.h"
 #ifndef FRIBIDI_NO_CHARSETS
 #include "fribidi_char_sets.h"
+#endif
+
+#ifdef __cplusplus
+extern "C"
+{
 #endif
 
   boolean fribidi_log2vis (	/* input */
@@ -240,7 +240,7 @@ extern "C"
 			      FriBidiList **visual_runs);
 
 
-#ifdef __cplusplus
+#ifdef	__cplusplus
 }
 #endif
 

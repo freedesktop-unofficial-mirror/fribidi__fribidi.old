@@ -70,7 +70,7 @@ if test "$echo_exec_prefix" = "yes"; then
 fi
 
 if test "$echo_cflags" = "yes"; then
-      includes=-I@includedir@/fribidi
+      includes=-I@includedir@
       echo $includes
 fi
 

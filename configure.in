@@ -1,8 +1,14 @@
 AC_INIT(fribidi.c)
 
 PACKAGE=fribidi
-VERSION=0.10.0
+VERSION=0.10.1pre
 INTERFACE_VERSION=2
+dnl Release number for RPM spec file
+SPECRELEASE=1
+
+AC_SUBST(INTERFACE_VERSION)
+AC_SUBST(SPECRELEASE)
+
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE($PACKAGE, $VERSION)
 
@@ -96,21 +102,6 @@ fi
 echo "creating fribidi_tab_char_type_stamp"
 echo "time-stamp" > fribidi_tab_char_type_stamp
 
-echo "creating fribidi_config.h"
-PACKAGE=$PACKAGE
-VERSION=$VERSION
-cat > fribidi_config.h <<EOF
-/* fribidi_config.h.  Generated automatically by configure.  */
-
-#define FRIBIDI_PACKAGE "$PACKAGE"
-
-#define FRIBIDI_VERSION "$VERSION"
-
-#define FRIBIDI_INTERFACE_VERSION $INTERFACE_VERSION
-#define FRIBIDI_INTERFACE_VERSION_STR "$INTERFACE_VERSION"
-
-
-EOF
 
 dnl Check for configure options
 
@@ -161,13 +152,18 @@ AC_ARG_WITH(charsets, dnl
 esac],[charsets=true])
 if test x"$charsets" = xfalse; then
   AC_DEFINE(FRIBIDI_NO_CHARSETS)
-  echo "#define FRIBIDI_NO_CHARSETS 1" >> fribidi_config.h
+  FRIBIDI_NO_CHARSETS=1
+else
+  FRIBIDI_NO_CHARSETS=0
 fi
+AC_SUBST(FRIBIDI_NO_CHARSETS)
 
 AC_OUTPUT([
 Makefile
+fribidi_config.h
 fribidi-config
 fribidi.pc
+fribidi.spec
 ],[case "$CONFIG_FILES" in
 *fribidi-config*)chmod +x fribidi-config;;
 esac])

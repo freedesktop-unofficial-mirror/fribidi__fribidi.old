@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -29,21 +29,30 @@
 
 #include "fribidi_types.h"
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #define fribidi_char_set_name_iso8859_8 "ISO8859-8"
 #define fribidi_char_set_title_iso8859_8 "ISO 8859-8 (Hebrew)"
 #define fribidi_char_set_desc_iso8859_8 NULL
 #define fribidi_char_set_enter_iso8859_8 NULL
 #define fribidi_char_set_leave_iso8859_8 NULL
 
-FriBidiChar fribidi_iso8859_8_to_unicode_c (char ch);
-int fribidi_iso8859_8_to_unicode (char *s, int length,
-				  /* Output */
-				  FriBidiChar *us);
-char fribidi_unicode_to_iso8859_8_c (FriBidiChar uch);
-int fribidi_unicode_to_iso8859_8 (FriBidiChar *us, int length,
-				  /* Output */
-				  char *s);
+  FriBidiChar fribidi_iso8859_8_to_unicode_c (char ch);
+  int fribidi_iso8859_8_to_unicode (char *s, int length,
+				    /* Output */
+				    FriBidiChar *us);
+  char fribidi_unicode_to_iso8859_8_c (FriBidiChar uch);
+  int fribidi_unicode_to_iso8859_8 (FriBidiChar *us, int length,
+				    /* Output */
+				    char *s);
 
-#endif /* FRIBIDI_CHAR_SETS_ISO8859_8_H */
+#ifdef	__cplusplus
+}
+#endif
+
+#endif				/* FRIBIDI_CHAR_SETS_ISO8859_8_H */
 
 #endif

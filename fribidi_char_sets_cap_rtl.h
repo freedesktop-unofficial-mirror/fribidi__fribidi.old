@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -29,19 +29,28 @@
 
 #include "fribidi_types.h"
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #define fribidi_char_set_name_cap_rtl "CapRTL"
 #define fribidi_char_set_title_cap_rtl "CapRTL (Test)"
-char *fribidi_char_set_desc_cap_rtl (void);
-boolean fribidi_char_set_enter_cap_rtl (void);
-boolean fribidi_char_set_leave_cap_rtl (void);
+  char *fribidi_char_set_desc_cap_rtl (void);
+  boolean fribidi_char_set_enter_cap_rtl (void);
+  boolean fribidi_char_set_leave_cap_rtl (void);
 
-int fribidi_cap_rtl_to_unicode (char *s, int length,
-				/* Output */
-				FriBidiChar *us);
-int fribidi_unicode_to_cap_rtl (FriBidiChar *us, int length,
-				/* Output */
-				char *s);
+  int fribidi_cap_rtl_to_unicode (char *s, int length,
+				  /* Output */
+				  FriBidiChar *us);
+  int fribidi_unicode_to_cap_rtl (FriBidiChar *us, int length,
+				  /* Output */
+				  char *s);
 
-#endif /* FRIBIDI_CHAR_SETS_CAP_RTL_H */
+#ifdef	__cplusplus
+}
+#endif
+
+#endif				/* FRIBIDI_CHAR_SETS_CAP_RTL_H */
 
 #endif

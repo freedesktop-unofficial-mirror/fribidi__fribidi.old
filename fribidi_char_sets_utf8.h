@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -29,22 +29,31 @@
 
 #include "fribidi_types.h"
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #define fribidi_char_set_name_utf8 "UTF-8"
 #define fribidi_char_set_title_utf8 "UTF-8 (Unicode)"
 #define fribidi_char_set_desc_utf8 NULL
 #define fribidi_char_set_enter_utf8 NULL
 #define fribidi_char_set_leave_utf8 NULL
 
-int fribidi_unicode_to_utf8 (FriBidiChar *us, int length,
-			     /* Output */
-			     char *s);
+  int fribidi_unicode_to_utf8 (FriBidiChar *us, int length,
+			       /* Output */
+			       char *s);
 
 /* warning: the length of output string may exceed the length of the input */
 /* the length of the string is returned */
-int fribidi_utf8_to_unicode (char *s, int length,
-			     /* Output */
-			     FriBidiChar *us);
+  int fribidi_utf8_to_unicode (char *s, int length,
+			       /* Output */
+			       FriBidiChar *us);
 
+#ifdef	__cplusplus
+}
 #endif
+
+#endif				/* FRIBIDI_CHAR_SETS_UTF8_H */
 
 #endif
