@@ -23,14 +23,14 @@
 #include <stdio.h>
 #include <string.h>
 
-void
+static void
 err (char *msg)
 {
   fprintf (stderr, "fribidi_create_mirroring: error: %s\n", msg);
   exit (1);
 }
 
-void
+static void
 err2 (char *fmt, char *p)
 {
   fprintf (stderr, "fribidi_create_mirroring: error: ");
@@ -39,13 +39,13 @@ err2 (char *fmt, char *p)
   exit (1);
 }
 
-int table[0x110000];
-char *bidi_mirroring_version;
-char bidi_mirroring_file[200];
+static int table[0x110000];
+static char *bidi_mirroring_version;
+static char bidi_mirroring_file[200];
 
-int mirroring_count;
+static int mirroring_count;
 
-void
+static void
 read_bidi_mirroring ()
 {
   char s[500];
@@ -72,11 +72,28 @@ read_bidi_mirroring ()
   fclose (f);
 }
 
-void
+static char *
+headermacro (char *file)
+{
+  char *t = strdup (file);
+  char *p = t;
+  while (*p)
+    {
+      if (*p >= 'a' && *p <= 'z')
+	*p += 'A' - 'a';
+      else if ((*p < 'A' || *p > 'Z') && (*p < '0' || *p > '9'))
+	*p = '_';
+      p++;
+    }
+  return t;
+}
+
+static void
 write_mirror (char *file)
 {
   int i;
   FILE *f;
+  char *FILENAME = headermacro (file);
 
   printf ("Writing `%s'\n", file);
   if (!(f = fopen (file, "wt")))
@@ -84,7 +101,8 @@ write_mirror (char *file)
   fprintf (f, "/*\n"
 	   "  This file was automatically created from BidiMirroring.txt, version %s\n"
 	   "  by fribidi_create_mirroring\n*/\n\n", bidi_mirroring_version);
-  fprintf (f, "#include \"fribidi.h\"\n\n");
+  fprintf (f, "#ifndef %s\n#define %s\n\n#include \"fribidi.h\"\n\n",
+	   FILENAME, FILENAME);
   fprintf (f, "/*\n"
 	   "  Mirrored characters include all the characters in the Unicode list\n"
 	   "  that have been declared as being mirrored and that have a mirrored\n"
@@ -108,6 +126,7 @@ write_mirror (char *file)
   fprintf (f, "} ;\n\n");
   fprintf (f, "/* *INDE" "NT-ON* */\n\n");
   fprintf (f, "int nFriBidiMirroredChars = %d;\n\n", mirroring_count);
+  fprintf (f, "\n#endif /* %s */\n", FILENAME);
   fclose (f);
 }
 

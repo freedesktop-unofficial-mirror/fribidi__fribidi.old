@@ -3,6 +3,9 @@
   by fribidi_create_mirroring
 */
 
+#ifndef FRIBIDI_TAB_MIRRORING_I
+#define FRIBIDI_TAB_MIRRORING_I
+
 #include "fribidi.h"
 
 /*
@@ -173,3 +176,5 @@ FriBidiMirroredChars[] =
 
 int nFriBidiMirroredChars = 140;
 
+
+#endif /* FRIBIDI_TAB_MIRRORING_I */

@@ -162,19 +162,11 @@ solve ()
 }
 
 static void
-write_in ()
-{
-}
-
-static void
 write_array ()
 {
   int i, j, k, y, ii;
   if (best_t[lev] == 1)
-    {
-      write_in (f);
-      return;
-    }
+    return;
 
   nn -= (i = best_p[lev]);
   cluster = best_cluster[lev];
@@ -216,7 +208,7 @@ write_array ()
   for (ii = 0; ii < k; ii++)
     {
       int kk, jj;
-      fprintf (f, "%s ", key_type_name);
+      fprintf (f, "static const %s ", key_type_name);
       for (j = 0; j < lev; j++)
 	fprintf (f, "*");
       fprintf (f, "%s", table_name);

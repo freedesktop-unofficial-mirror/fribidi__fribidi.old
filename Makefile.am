@@ -107,18 +107,17 @@ bin_PROGRAMS = fribidi
 fribidi_SOURCES = fribidi_main.c $(GETOPT_SRC)
 fribidi_LDADD = libfribidi.la
 
-build_fribidi_tab_mirroring.i: $(fribidi_create_mirroring_SOURCES)	\
+fribidi_tab_mirroring.i: $(fribidi_create_mirroring_SOURCES)	\
 		unidata/BidiMirroring.txt
 	$(MAKE) fribidi_create_mirroring
 	if test -d unidata; then UNIDATA=unidata;	\
 	else UNIDATA="$(srcdir)/unidata"; fi &&	\
-	./fribidi_create_mirroring "$$UNIDATA"
+	./fribidi_create_mirroring "$$UNIDATA" ||	\
+	($(RM)  -f "$@"; false)
 
-fribidi_tab_mirroring.i:
-	$(MAKE) build_fribidi_tab_mirroring.i || ($(RM) -f $@; false)
 
 $(srcdir)/fribidi_mirroring.c: fribidi_tab_mirroring.i
-	touch $@
+	touch "$@" || $(MAKE) clean
 
 fribidi_tab_char_type_small:
 	$(MAKE) fribidi_tab_char_type_9.i
@@ -133,18 +132,18 @@ fribidi_tab_char_type_%.i: $(fribidi_create_char_types_SOURCES)	\
 	else UNIDATA="$(srcdir)/unidata"; fi &&	\
 	./fribidi_create_char_types "`echo "$@"	\
 	  | $(SED) 's/[^0-9]*//g'`" "$$UNIDATA" ||	\
-	($(RM) -f $@; false)
+	($(RM) -f "$@"; false)
 	$(RM) -f fribidi_tab_char_type_stamp
 	$(MAKE) fribidi_tab_char_type_stamp
 
 fribidi_tab_char_type_stamp:
 	touch "$(srcdir)/fribidi_char_type.c" || $(MAKE) clean
-	touch $@
+	touch "$@"
 
 config.h: fribidi_tab_char_type_stamp
 	./config.status --recheck
 	./config.status
-	touch $@
+	touch "$@"
 
 $(srcdir)/fribidi_char_type.c: config.h
 
