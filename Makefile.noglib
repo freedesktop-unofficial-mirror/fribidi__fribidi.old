@@ -1,4 +1,4 @@
-%% Contributed by Dan Kenigsberg <danken@cs.technion.ac.il>
+## Contributed by Dan Kenigsberg <danken@cs.technion.ac.il>
 
 LIB_OBJECTS=fribidi.o fribidi_char_sets.o fribidi_get_type.o \
    fribidi_utils.o \
