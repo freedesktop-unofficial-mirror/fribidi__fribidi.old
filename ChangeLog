@@ -1,3 +1,8 @@
+2002-05-16  Behdad Esfahbod <fribidi@behdad.org>
+	* fribidi_wcwidth.c: Updated to latest source of 2002-05-08.
+	* fribidi_wcwidth.i: Added, fribidi_wcwidth.c includes this to reduces
+	changes needed in fribidi_wcwidth.c.
+
 2002-05-04  Behdad Esfahbod <fribidi@behdad.org>
 	* fribidi_wcwidth.c: Updated to latest source of 2002-05-03.
 
