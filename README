@@ -4,7 +4,7 @@ Background
 ==========
 One of the missing links stopping the penetration of free software in Middle
 East is the lack of support for the Arabic and Hebrew alphabets. In order to
-have proper Arabic and Hebrew support, the BiDi algorithm must be
+have proper Arabic and Hebrew support, the BiDi algorithm should have been
 implemented. It is our hope that this library will stimulate more free
 software in the Middle Eastern countries.
 
@@ -13,10 +13,10 @@ Audience
 It is our hope that this library will stimulate the implementation of Hebrew
 and Arabic in lots of free software. Here is a small list of projects that
 would benifit from the use of the FriBidi library, but of course there are
-many more: Wine, Mozilla, Gnome, Qt, KDE, AbiWord, lynx, OpenOffice.
+many more: Wine, Mozilla, Qt, KDE, AbiWord, lynx, OpenOffice.
 
 It may be interesting for you to know that Fribidi is already being used in
-projects like GTK+ and Xterm.
+projects like Gnome, GTK+, Pango, and Xterm.
 
 Downloading
 ===========
@@ -30,12 +30,12 @@ See INSTALL for a description of how to build and install this library.
 
 Implementation
 ==============
-The library implements most of the algorithm as described in the "Unicode
-Standard Annex #9, The Bidirectional Algorithm", available at
-http://www.unicode.org/unicode/reports/tr9/. There are still some bugs in
-resolving Arabic weak types, but Fribidi is being tested against Unicode
-Reference Code, and it is our belief that it is one of the most-conforming
-implementation of the algorithm.
+The library implements the algorithm described in the "Unicode Standard
+Annex #9, The Bidirectional Algorithm", available at
+http://www.unicode.org/unicode/reports/tr9/. Fribidi has been tested
+exhaustively against the Unicode Reference Code, and due to our knowledge,
+it completely conforms to the specification, always producing the same
+result as the Reference Code.
 
 In the API we were inspired by the document "Bi-Di languages support
 - BiDi API propasal", http://www.langbox.com/AraMosaic/mozilla/BiDi_API.html,

@@ -18,9 +18,8 @@ Omer Zak <omerz@actcom.co.il>
      several considerations for embedded systems.
 
 Behdad Esfahbod <behdad@bamdad.org>
-   * Added explicit bidi support, fixed many bugs in Arabic bidi types,
-     changed Fribidi to use bitmasks.
+   * Added explicit bidi support, fixed all conformance bugs, changed the
+     library to use bitmasks.
 
 Roozbeh Pournader <roozbeh@sharif.edu>
-   * Changed the Perl script used for automatic character data extraction,
-     fixed small things here and there.
+   * fixed small things here and there.

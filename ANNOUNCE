@@ -1,6 +1,7 @@
 This is fribidi version 0.9.0 that a large extent an internal rewrite,
 made by Behdad Esfahbod <behdad@bamdad.org>.
 
+    * No Unicode bidi conformance bugs!
     * Explicit overrides (LRE, RLE, RLO, LRO) support!
     * Internal speedups.
     * Option to compile fribidi without glib.
@@ -10,11 +11,11 @@ See ChangeLog for detailed changes.
 ---
 Here's the blurb in case someone missed it:
 
-FriBidi is a free BiDi library that should adhere closely to the Unicode
-BiDi algorithm.
+FriBidi is a free BiDi library that exactly implements the Unicode BiDi
+algorithm.
 
 FriBidi is written in C and should provide a common API that will facilitate
-porting of various software to support BiDirection locals.
+porting of various software to support BiDirectional locales.
 
 FriBidi may be found at:
 
