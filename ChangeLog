@@ -1,3 +1,6 @@
+2001-03-28  Roozbeh Pournader <roozbeh@sharif.edu>
+	* bootstrap: swapped 'aclocal' and 'autoheader'.
+
 2001-03-28  Behdad Esfahbod <behdad@bamdad.org>
 	* Makefile.am: New target "fribidi_tables.i" defined to download
 	"unidata/BidiMirroring.txt" and "unidata/PropList.txt" if not
