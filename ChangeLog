@@ -22,6 +22,7 @@
 	* unidata/README: Added, Unicode disclaimer.
 	* Makefile.am: unidata/README, unidata/UnicodeData.txt,
 	BidiMirroring.txt: Added to distribution files.
+	* Removed wget mechanism for autogetting the Unicode data files.
 
 2001-12-31  Behdad Esfahbod <behdad@bamdad.org>
 	* configure.in: Check for sed added.

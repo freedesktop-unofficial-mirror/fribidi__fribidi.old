@@ -15,7 +15,6 @@ AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AC_PROG_RANLIB
 AC_PATH_PROG(SED, sed, $PATH)
-AC_PATH_PROG(DOWNLOAD, wget, $PATH)
 
 
 dnl Checks for libraries
