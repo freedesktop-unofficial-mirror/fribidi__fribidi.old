@@ -255,7 +255,7 @@ extern FriBidiEnv fribidi_global_env;
  *  For environments which need speed/code size optimization.
  *----------------------------------------------------------------------*/
 #ifdef NO_FRIBIDIENV_VALIDATION
-#define VALIDATE_FRIBIDIENV(env)
+#define VALIDATE_FRIBIDIENV(env) while (0) {}
   /* Null definition, for environments, which guarantee valid
   ** environments, and need the efficiency.
   */

@@ -228,9 +228,13 @@ void fribidi_set_reorder_nsm (FriBidiEnv* fbenv, boolean reorder)
  *----------------------------------------------------------------------*/
 boolean fribidi_debug_status (FriBidiEnv* fbenv)
 {
+#ifdef DEBUG
   VALIDATE_FRIBIDIENV(fbenv);
 
   return(0 != (fbenv->iFlags & FRIBIDIENV_DEBUG_MODE) ? TRUE : FALSE);
+#else /* DEBUG */
+  return FALSE;
+#endif /* DEBUG */
 }
 
 /*======================================================================
@@ -249,9 +253,9 @@ boolean fribidi_set_debug (FriBidiEnv* fbenv, boolean debug)
   else {
     fbenv->iFlags &= (~FRIBIDIENV_DEBUG_MODE);
   }
-  return(debug);
+  return debug;
 #else /* DEBUG */
-  return(FALSE);
+  return FALSE;
 #endif /* DEBUG */
 }
 

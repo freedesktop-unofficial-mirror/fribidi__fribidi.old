@@ -1,3 +1,6 @@
+2002-03-25  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi.c: Fixed a bug introduced in adding L3 rule.
+
 2002-03-16  Behdad Esfahbod <behdad@bamdad.org>
 	* Applied the FriBidiEnv patch from Omer Zak dated 2002-02-24,
 	updated it with to reflect the new changes.

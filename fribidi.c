@@ -1253,7 +1253,7 @@ fribidi_log2vis ( FriBidiEnv* fribidienv,
 		      {
 			FriBidiCharType this_type;
 
-			this_type = fribidi_get_type (NULL, visual_str[i]);
+			this_type = fribidi_get_type (NULL, str[i]);
 			if (is_nsm_seq && this_type != FRIBIDI_TYPE_NSM)
 			  {
 			    if (visual_str)
