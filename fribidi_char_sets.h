@@ -65,14 +65,16 @@ extern "C"
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
   FRIBIDI_API int fribidi_charset_to_unicode (FriBidiCharSet char_set,
-					      char *s, int length,
+					      char *s,
+					      int length,
 					      /* output */
 					      FriBidiChar *us);
 
 /* Convert the unicode string "us" with length "length" to character
    string "s" in charset "char_set" and return it's length. */
   FRIBIDI_API int fribidi_unicode_to_charset (FriBidiCharSet char_set,
-					      FriBidiChar *us, int length,
+					      FriBidiChar *us,
+					      int length,
 					      /* output */
 					      char *s);
 

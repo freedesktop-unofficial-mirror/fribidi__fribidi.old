@@ -48,7 +48,8 @@ extern char *fribidi_version_info;
 
 #define ALLOCATE(tp,ln) ((tp *) malloc (sizeof (tp) * (ln)))
 static void
-die (char *fmt, ...)
+die (char *fmt,
+     ...)
 {
   va_list ap;
   va_start (ap, fmt);
@@ -160,7 +161,8 @@ version (void)
 }
 
 int
-main (int argc, char *argv[])
+main (int argc,
+      char *argv[])
 {
   int exit_val;
   fribidi_boolean file_found;
@@ -403,10 +405,14 @@ main (int argc, char *argv[])
 	      FriBidiStrIndex new_len;
 	      fribidi_boolean log2vis;
 
-	      visual = show_visual ? ALLOCATE (FriBidiChar, len + 1) : NULL;
-	      ltov = show_ltov ? ALLOCATE (FriBidiStrIndex, len + 1) : NULL;
-	      vtol = show_vtol ? ALLOCATE (FriBidiStrIndex, len + 1) : NULL;
-	      levels = show_levels ? ALLOCATE (FriBidiLevel, len + 1) : NULL;
+	      visual = show_visual ? ALLOCATE (FriBidiChar,
+					       len + 1) : NULL;
+	      ltov = show_ltov ? ALLOCATE (FriBidiStrIndex,
+					   len + 1) : NULL;
+	      vtol = show_vtol ? ALLOCATE (FriBidiStrIndex,
+					   len + 1) : NULL;
+	      levels = show_levels ? ALLOCATE (FriBidiLevel,
+					       len + 1) : NULL;
 
 	      /* Create a bidi string. */
 	      base = input_base_direction;

@@ -88,7 +88,8 @@ extern "C"
  *  fribidi_get_types() returns bidi type of a string.
  *----------------------------------------------------------------------*/
   FRIBIDI_API void fribidi_get_types (	/* input */
-				       FriBidiChar *str, FriBidiStrIndex len,
+				       FriBidiChar *str,
+				       FriBidiStrIndex len,
 				       /* output */
 				       FriBidiCharType *type);
 
@@ -255,7 +256,8 @@ extern "C"
  *                  beyond the end of the line, res_attach_before is true.
  *
  *----------------------------------------------------------------------*/
-  FRIBIDI_API void fribidi_xpos_resolve (int x_pos, int x_offset,
+  FRIBIDI_API void fribidi_xpos_resolve (int x_pos,
+					 int x_offset,
 					 FriBidiStrIndex len,
 					 FriBidiLevel *embedding_level_list,
 					 FriBidiCharType base_dir,
@@ -265,9 +267,9 @@ extern "C"
 					 FriBidiStrIndex *res_log_pos,
 					 FriBidiStrIndex *res_vis_pos,
 					 int *res_cursor_x_pos,
-					 fribidi_boolean *
-					 res_cursor_dir_is_rtl,
-					 fribidi_boolean * res_attach_before);
+					 fribidi_boolean
+					 *res_cursor_dir_is_rtl,
+					 fribidi_boolean *res_attach_before);
 
 /*======================================================================
  *  fribidi_runs_log2vis takes a list of logical runs and returns a
@@ -276,6 +278,7 @@ extern "C"
  *----------------------------------------------------------------------*/
   FRIBIDI_API void fribidi_runs_log2vis (	/* input */
 					  FriBidiList *logical_runs,	/* List of FriBidiRunType */
+
 					  FriBidiStrIndex len,
 					  FriBidiStrIndex *log2vis,
 					  FriBidiCharType base_dir,

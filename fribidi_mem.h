@@ -63,7 +63,8 @@ extern "C"
     FriBidiList *prev;
   };
 
-  FriBidiList *fribidi_list_append (FriBidiList *list, void *data);
+  FriBidiList *fribidi_list_append (FriBidiList *list,
+				    void *data);
 
   typedef struct _FriBidiMemChunk FriBidiMemChunk;
 
@@ -72,11 +73,13 @@ extern "C"
 
   FriBidiMemChunk *fribidi_mem_chunk_new (char *name,
 					  int atom_size,
-					  unsigned long area_size, int type);
+					  unsigned long area_size,
+					  int type);
   void fribidi_mem_chunk_destroy (FriBidiMemChunk *mem_chunk);
   void *fribidi_mem_chunk_alloc (FriBidiMemChunk *mem_chunk);
   void *fribidi_mem_chunk_alloc0 (FriBidiMemChunk *mem_chunk);
-  void fribidi_mem_chunk_free (FriBidiMemChunk *mem_chunk, void *mem);
+  void fribidi_mem_chunk_free (FriBidiMemChunk *mem_chunk,
+			       void *mem);
 
 #define fribidi_mem_chunk_create(type, pre_alloc, alloc_type) ( \
   fribidi_mem_chunk_new (#type " mem chunks (" #pre_alloc ")", \
@@ -88,7 +91,8 @@ extern "C"
   (type *) fribidi_mem_chunk_alloc (chunk) \
 )
 
-  int fribidi_strcasecmp (const char *s1, const char *s2);
+  int fribidi_strcasecmp (const char *s1,
+			  const char *s2);
 
 #ifdef	__cplusplus
 }

@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -29,21 +29,32 @@
 
 #include "fribidi_types.h"
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #define fribidi_char_set_name_isiri_3342 "ISIRI-3342"
 #define fribidi_char_set_title_isiri_3342 "ISIRI 3342 (Persian)"
 #define fribidi_char_set_desc_isiri_3342 NULL
 #define fribidi_char_set_enter_isiri_3342 NULL
 #define fribidi_char_set_leave_isiri_3342 NULL
 
-FriBidiChar fribidi_isiri_3342_to_unicode_c (char ch);
-int fribidi_isiri_3342_to_unicode (char *s, int length,
-				   /* Output */
-				   FriBidiChar *us);
-char fribidi_unicode_to_isiri_3342_c (FriBidiChar uch);
-int fribidi_unicode_to_isiri_3342 (FriBidiChar *us, int length,
-				   /* Output */
-				   char *s);
+  FriBidiChar fribidi_isiri_3342_to_unicode_c (char ch);
+  int fribidi_isiri_3342_to_unicode (char *s,
+				     int length,
+				     /* Output */
+				     FriBidiChar *us);
+  char fribidi_unicode_to_isiri_3342_c (FriBidiChar uch);
+  int fribidi_unicode_to_isiri_3342 (FriBidiChar *us,
+				     int length,
+				     /* Output */
+				     char *s);
 
-#endif /* FRIBIDI_CHAR_SETS_ISIRI_3342_H */
+#ifdef	__cplusplus
+}
+#endif
+
+#endif				/* FRIBIDI_CHAR_SETS_ISIRI_3342_H */
 
 #endif

@@ -36,7 +36,8 @@ struct _FriBidiMemChunk
 };
 
 FriBidiList *
-fribidi_list_append (FriBidiList *list, void *data)
+fribidi_list_append (FriBidiList *list,
+		     void *data)
 {
   FriBidiList *node, *last;
 
@@ -55,7 +56,9 @@ fribidi_list_append (FriBidiList *list, void *data)
 }
 
 FriBidiMemChunk *
-fribidi_mem_chunk_new (char *name, int atom_size, unsigned long area_size,
+fribidi_mem_chunk_new (char *name,
+		       int atom_size,
+		       unsigned long area_size,
 		       int type)
 {
   FriBidiMemChunk *m = (FriBidiMemChunk *) malloc (sizeof (FriBidiMemChunk));
@@ -101,7 +104,8 @@ fribidi_mem_chunk_alloc (FriBidiMemChunk *mem_chunk)
 }
 
 void
-fribidi_mem_chunk_free (FriBidiMemChunk *mem_chunk, void *mem)
+fribidi_mem_chunk_free (FriBidiMemChunk *mem_chunk,
+			void *mem)
 {
   if (mem_chunk->type == FRIBIDI_ALLOC_AND_FREE)
     free (mem);
@@ -109,7 +113,8 @@ fribidi_mem_chunk_free (FriBidiMemChunk *mem_chunk, void *mem)
 }
 
 int
-fribidi_strcasecmp (const char *s1, const char *s2)
+fribidi_strcasecmp (const char *s1,
+		    const char *s2)
 {
   while (*s1 && toupper (*s1) == toupper (*s2))
     {

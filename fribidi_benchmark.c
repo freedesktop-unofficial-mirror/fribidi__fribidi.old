@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -40,7 +40,8 @@ extern char *fribidi_version_info;
 #define MAX_STR_LEN 1000
 
 static void
-die (char *fmt, ...)
+die (char *fmt,
+     ...)
 {
   va_list ap;
   va_start (ap, fmt);
@@ -98,12 +99,13 @@ utime (void)
 }
 
 static void
-benchmark (char *S_, int niter)
+benchmark (char *S_,
+	   int niter)
 {
   int len, i;
   FriBidiChar us[MAX_STR_LEN], out_us[MAX_STR_LEN];
   FriBidiStrIndex positionLtoV[MAX_STR_LEN], positionVtoL[MAX_STR_LEN];
-  uint8 embedding_list[MAX_STR_LEN];
+  FriBidiLevel embedding_list[MAX_STR_LEN];
   FriBidiCharType base;
   double time0, time1;
 
@@ -182,7 +184,8 @@ benchmark (char *S_, int niter)
 }
 
 int
-main (int argc, char *argv[])
+main (int argc,
+      char *argv[])
 {
   niter = 2000;
 

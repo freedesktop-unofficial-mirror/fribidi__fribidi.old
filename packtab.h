@@ -29,10 +29,16 @@ extern "C"
 
 #define packtab_version 2
 
-  int pack_table
-    (int *base, int key_num, int key_size, int max_depth, int tab_width,
-     char **name, char *key_type_name, char *table_name, char *macro_name,
-     FILE * out);
+  int pack_table (int *base,
+		  int key_num,
+		  int key_size,
+		  int max_depth,
+		  int tab_width,
+		  char **name,
+		  char *key_type_name,
+		  char *table_name,
+		  char *macro_name,
+		  FILE * out);
 
 #ifdef	__cplusplus
 }

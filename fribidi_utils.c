@@ -63,11 +63,15 @@
  **----------------------------------------------------------------------*/
 FRIBIDI_API void
 fribidi_map_range (FriBidiStrIndex in_span[2],	/* Start and end span */
-		   FriBidiStrIndex len, fribidi_boolean is_v2l_map,	/* Needed for embedding_level */
+
+		   FriBidiStrIndex len,
+		   fribidi_boolean is_v2l_map,	/* Needed for embedding_level */
+
 		   FriBidiStrIndex *position_map,
 		   FriBidiLevel *embedding_level_list,
 		   /* output */
-		   int *num_mapped_spans, FriBidiStrIndex mapped_spans[63][2])
+		   int *num_mapped_spans,
+		   FriBidiStrIndex mapped_spans[63][2])
 {
   FriBidiStrIndex ch_idx;
   fribidi_boolean in_range = FRIBIDI_FALSE;
@@ -114,7 +118,8 @@ fribidi_map_range (FriBidiStrIndex in_span[2],	/* Start and end span */
 FRIBIDI_API void
 fribidi_find_string_changes (	/* input */
 			      FriBidiChar *old_str,
-			      FriBidiStrIndex old_len, FriBidiChar *new_str,
+			      FriBidiStrIndex old_len,
+			      FriBidiChar *new_str,
 			      FriBidiStrIndex new_len,
 			      /* output */
 			      FriBidiStrIndex *change_start,
@@ -190,16 +195,19 @@ fribidi_find_string_changes (	/* input */
  *
  *----------------------------------------------------------------------*/
 FRIBIDI_API void
-fribidi_xpos_resolve (int x_pos, int x_offset, FriBidiStrIndex len,
+fribidi_xpos_resolve (int x_pos,
+		      int x_offset,
+		      FriBidiStrIndex len,
 		      FriBidiLevel *embedding_level_list,
 		      FriBidiCharType base_dir,
-		      FriBidiStrIndex *vis2log, int *char_widths,
+		      FriBidiStrIndex *vis2log,
+		      int *char_widths,
 		      /* output */
 		      FriBidiStrIndex *res_log_pos,
 		      FriBidiStrIndex *res_vis_pos,
 		      int *res_cursor_x_pos,
-		      fribidi_boolean * res_cursor_dir_is_rtl,
-		      fribidi_boolean * res_attach_before)
+		      fribidi_boolean *res_cursor_dir_is_rtl,
+		      fribidi_boolean *res_attach_before)
 {
   int char_width_sum = 0;
   FriBidiStrIndex char_idx;
@@ -297,7 +305,8 @@ fribidi_xpos_resolve (int x_pos, int x_offset, FriBidiStrIndex len,
  *----------------------------------------------------------------------*/
 FRIBIDI_API fribidi_boolean
 fribidi_is_char_rtl (FriBidiLevel *embedding_level_list,
-		     FriBidiCharType base_dir, FriBidiStrIndex idx)
+		     FriBidiCharType base_dir,
+		     FriBidiStrIndex idx)
 {
   if (!embedding_level_list || idx < 0)
     return FRIBIDI_IS_RTL (base_dir);
@@ -314,8 +323,12 @@ fribidi_is_char_rtl (FriBidiLevel *embedding_level_list,
 FRIBIDI_API void
 fribidi_runs_log2vis (		/* input */
 		       FriBidiList *logical_runs,	/* List of FriBidiRunType */
-		       FriBidiStrIndex len, FriBidiStrIndex *log2vis, FriBidiCharType base_dir,	/* TBD: remove it, not needed */
+
+		       FriBidiStrIndex len,
+		       FriBidiStrIndex *log2vis,
+		       FriBidiCharType base_dir,	/* TBD: remove it, not needed */
 		       /* output */
+
 		       FriBidiList **visual_runs)
 {
   void **visual_attribs = (void **) malloc (sizeof (void *) * len);

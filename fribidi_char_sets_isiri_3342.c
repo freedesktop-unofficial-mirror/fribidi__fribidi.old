@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -57,7 +57,9 @@ fribidi_isiri_3342_to_unicode_c (char sch)
 }
 
 int
-fribidi_isiri_3342_to_unicode (char *s, int len, FriBidiChar *us)
+fribidi_isiri_3342_to_unicode (char *s,
+			       int len,
+			       FriBidiChar *us)
 {
   int i;
 
@@ -218,7 +220,9 @@ fribidi_unicode_to_isiri_3342_c (FriBidiChar uch)
 }
 
 int
-fribidi_unicode_to_isiri_3342 (FriBidiChar *us, int length, char *s)
+fribidi_unicode_to_isiri_3342 (FriBidiChar *us,
+			       int length,
+			       char *s)
 {
   int i;
 

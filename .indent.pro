@@ -1,3 +1,5 @@
+-gnu
+-bfda
 -T TypeLink
 -T LevelInfo
 -T FriBidiChar
@@ -11,6 +13,7 @@
 -T FriBidiRunType
 -T FriBidiList
 -T FriBidiMemChunk
+-T FriBidiEnv
 -T fribidi_int8
 -T fribidi_uint8
 -T fribidi_int16
@@ -19,4 +22,4 @@
 -T fribidi_uint32
 -T fribidi_int
 -T fribidi_uint
--T fribiti_boolean
+-T fribidi_boolean

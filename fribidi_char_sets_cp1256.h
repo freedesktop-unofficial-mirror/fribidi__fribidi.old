@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -29,21 +29,32 @@
 
 #include "fribidi_types.h"
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #define fribidi_char_set_name_cp1256 "CP1256"
 #define fribidi_char_set_title_cp1256 "CP1256 (MS-Arabic)"
 #define fribidi_char_set_desc_cp1256 NULL
 #define fribidi_char_set_enter_cp1256 NULL
 #define fribidi_char_set_leave_cp1256 NULL
 
-FriBidiChar fribidi_cp1256_to_unicode_c (char ch);
-int fribidi_cp1256_to_unicode (char *s, int length,
-			       /* Output */
-			       FriBidiChar *us);
-char fribidi_unicode_to_cp1256_c (FriBidiChar uch);
-int fribidi_unicode_to_cp1256 (FriBidiChar *us, int length,
-			       /* Output */
-			       char *s);
+  FriBidiChar fribidi_cp1256_to_unicode_c (char ch);
+  int fribidi_cp1256_to_unicode (char *s,
+				 int length,
+				 /* Output */
+				 FriBidiChar *us);
+  char fribidi_unicode_to_cp1256_c (FriBidiChar uch);
+  int fribidi_unicode_to_cp1256 (FriBidiChar *us,
+				 int length,
+				 /* Output */
+				 char *s);
 
-#endif /* FRIBIDI_CHAR_SETS_CP1256_H */
+#ifdef	__cplusplus
+}
+#endif
+
+#endif				/* FRIBIDI_CHAR_SETS_CP1256_H */
 
 #endif
