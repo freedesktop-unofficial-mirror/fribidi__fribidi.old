@@ -1,6 +1,5 @@
 /* FriBidi - Library of BiDi algorithm
- * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod.
+ * Copyright (C) 2001,2002 Behdad Esfahbod.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public  
@@ -17,13 +16,24 @@
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA
  * 
- * For licensing issues, contact <dov@imagic.weizmann.ac.il> and
- * <fwpg@sharif.edu>.
+ * For licensing issues, contact <fwpg@sharif.edu>.
  */
 
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include "fribidi_mem.h"
+
+struct _FriBidiMemChunk
+{
+  char *name;
+  int atom_size;
+  int area_size;
+  int type;
+
+  int empty_size;
+  void *chunk;
+};
 
 FriBidiList *
 fribidi_list_append (FriBidiList *list, void *data)
@@ -43,17 +53,6 @@ fribidi_list_append (FriBidiList *list, void *data)
   last->next = node;
   return list;
 }
-
-struct _FriBidiMemChunk
-{
-  char *name;
-  int atom_size;
-  int area_size;
-  int type;
-
-  int empty_size;
-  void *chunk;
-};
 
 FriBidiMemChunk *
 fribidi_mem_chunk_new (char *name, int atom_size, unsigned long area_size,
@@ -92,7 +91,8 @@ fribidi_mem_chunk_alloc (FriBidiMemChunk *mem_chunk)
 	  mem_chunk->empty_size = mem_chunk->area_size;
 	}
       m = mem_chunk->chunk;
-      mem_chunk->chunk += mem_chunk->atom_size;
+      mem_chunk->chunk = (void *)
+	((char *) mem_chunk->chunk + mem_chunk->atom_size);
       mem_chunk->empty_size -= mem_chunk->atom_size;
     }
   else

@@ -41,11 +41,9 @@
 #endif
 
 #ifdef DEBUG
-#define DBG(s) do { if (fribidi_debug) { fprintf(stderr, s); } } while (0)
-#define DBG2(s, t) do { if (fribidi_debug) { fprintf(stderr, s, t); } } while (0)
+#define DBG(s...) do { if (fribidi_debug) { fprintf(stderr, s); } } while (0)
 #else
-#define DBG(s)
-#define DBG2(s, t)
+#define DBG(s...)
 #endif
 
 #ifdef DEBUG
@@ -631,8 +629,8 @@ fribidi_analyse_string (	/* input */
 	  }
     }
   base_dir = FRIBIDI_LEVEL_TO_DIR (base_level);
-  DBG2 ("  Base level : %c\n", fribidi_char_from_level (base_level));
-  DBG2 ("  Base dir   : %c\n", fribidi_char_from_type (base_dir));
+  DBG ("  Base level : %c\n", fribidi_char_from_level (base_level));
+  DBG ("  Base dir   : %c\n", fribidi_char_from_type (base_dir));
   DBG ("  Finding the base level, Done\n");
 
 #ifdef DEBUG

@@ -24,6 +24,10 @@
 #ifndef FRIBIDI_H
 #define FRIBIDI_H
 
+#ifndef NULL
+#define NULL 0
+#endif
+
 #include "fribidi_config.h"
 #include "fribidi_unicode.h"
 #include "fribidi_mem.h"
@@ -72,7 +76,7 @@ extern "C"
  *  fribidi_get_type() returns bidi type of a character.
  *----------------------------------------------------------------------*/
   FriBidiCharType fribidi_get_type_internal (FriBidiChar uch);
- 
+
 #define fribidi_get_type(uch) fribidi_get_type_internal(uch)
 
 /*======================================================================
