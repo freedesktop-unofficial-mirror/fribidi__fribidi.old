@@ -110,7 +110,7 @@ void fribidi_find_string_changes (	/* input */
  *                       length,
  *                       vis2log_map,
  *                       embedding_levels,
- *                        // output 
+ *                       // output
  *                       &num_vis_ranges,
  *                       vis_ranges);
  *
