@@ -164,7 +164,7 @@ solve ()
 static void
 write_array ()
 {
-  int i, j, k, y, ii;
+  int i, j, k, y, ii, ofs;
   if (best_t[lev] == 1)
     return;
 
@@ -205,17 +205,24 @@ write_array ()
   for (ii = 1; ii < k; ii++)
     if (x[ii] < x[i])
       i = ii;
+
+  fprintf (f, "static const %s ", key_type_name);
+  for (j = 0; j < lev; j++)
+    fprintf (f, "*");
+  fprintf (f, "%s", table_name);
+  /* if (best_t[lev + 1] != 1) */
+  fprintf (f, "Level%d", best_lev - lev - 1);
+  fprintf (f, "[%d*%d] = {", cluster, k);
+  ofs = 0;
   for (ii = 0; ii < k; ii++)
     {
       int kk, jj;
-      fprintf (f, "static const %s ", key_type_name);
-      for (j = 0; j < lev; j++)
-	fprintf (f, "*");
-      fprintf (f, "%s", table_name);
-      if (best_t[lev + 1] != 1)
+      fprintf (f, "\n\n#define %s", table_name);
+      if (best_t[lev + 1] != 1) {
 	fprintf (f, "Level%d_%0*X", best_lev - lev - 1, digits,
 		 x[i] * pow[n - nn]);
-      fprintf (f, "[%d] = {", cluster);
+      }
+      fprintf (f, " (%sLevel%d + 0x%0X)\n", table_name, best_lev - lev - 1, ofs);
       kk = x[i] * cluster;
       if (!lev)
 	if (name)
@@ -240,13 +247,14 @@ write_array ()
 		   x[i] * pow[n - nn] + j * pow[n - nn - best_p[lev]], digits,
 		   x[i] * pow[n - nn] + (j + 1) * pow[n - nn - best_p[lev]] -
 		   1);
-      fprintf (f, "\n};\n\n");
+      ofs += cluster;
       jj = i;
       for (j = 0; j < k; j++)
 	if (x[j] > x[i] && (x[j] < x[jj] || jj == i))
 	  jj = j;
       i = jj;
     }
+  fprintf (f, "\n};\n\n");
   lev++;
   write_array (f);
   lev--;

@@ -1,4 +1,8 @@
 2002-03-15  Behdad Esfahbod <behdad@bamdad.org>
+	* packtab.c: Updated the output generating routine, to generate much fewer
+	symbols, to reduce the relocation time (suggested by Owen Taylor).
+
+2002-03-15  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c, fribidi.h: Applied the patch from
 	Dominique Unruh <dominique@unruh.de> to reorder the NSM character
 	to follow their base character (rule L3), fribidi_reorder_nsm_status(),
