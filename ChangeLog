@@ -1,5 +1,6 @@
 2001-12-31  Behdad Esfahbod <behdad@bamdad.org>
-	* Makefile.am: test -e replaced by test -d.
+	* configure.in: Check for sed added.
+	* Makefile.am: Scripts fixed to work with sh (not bash).
 
 2001-12-14  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi_get_type.c: Removed, replaced by fribidi_char_type.c and

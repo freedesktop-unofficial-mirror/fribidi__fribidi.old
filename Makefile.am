@@ -128,7 +128,8 @@ fribidi_tab_char_type_%.i: fribidi_create_char_types	\
 		unidata/UnicodeData.txt
 	if test -d unidata; then UNIDATA=unidata;	\
 	else UNIDATA="$(srcdir)/unidata"; fi &&	\
-	./fribidi_create_char_types "`echo "$@" | tr -dc 0-9`" "$$UNIDATA" ||	\
+	./fribidi_create_char_types "`echo "$@"	\
+	  | $(SED) 's/[^0-9]*//g'`" "$$UNIDATA" ||	\
 	(rm -f $@; false)
 	rm -f fribidi_tab_char_type_stamp
 	$(MAKE) fribidi_tab_char_type_stamp
@@ -147,15 +148,15 @@ $(srcdir)/fribidi_char_type.c: config.h
 tests/test_%.reference: tests/test_%.input fribidi
 	(test -d tests || mkdir tests) &&	\
 	testcase="$@" && 	\
-	charset="$${testcase#*_}" && charset="$${charset%%_*}" &&	\
-	./fribidi --test --charset "$$charset" $< > "$@" || \
-	(rm -f $@; false)
+	charset="`echo "$@" | $(SED) 's/_[^_]*$$//;s/.*_//'`" &&	\
+	./fribidi --test --charset "$$charset" "$<" > "$@" || \
+	(rm -f "$@"; false)
 
 test.reference:
 	for testcase in "$(srcdir)"/tests/test_*.input; do	\
-		test="$${testcase%.input}.reference" &&	\
-		test="tests/$${test##*/}" &&	\
-		$(MAKE) "$$test" ||	\
+		test="`echo "$$testcase"	\
+		  | $(SED) 's/\.input$$/.reference/i; s|.*/||;'`" &&	\
+		$(MAKE) "tests/$$test" ||	\
 		exit 1;	\
 	done
 
