@@ -19,6 +19,8 @@
  * For licensing issues, contact <fwpg@sharif.edu>.
  */
 
+#include "fribidi_types.h"
+
 #ifndef FRIBIDI_UNICODE_H
 #define FRIBIDI_UNICODE_H
 
@@ -48,5 +50,10 @@
 #define UNI_ARABIC_ALEF	0x0627
 #define UNI_ARABIC_ZERO	0x0660
 #define UNI_FARSI_ZERO	0x06F0
+
+/* wcwidth functions */
+int fribidi_wcwidth (FriBidiChar ch);
+int fribidi_wcswidth (const FriBidiChar *str, FriBidiStrIndex len);
+int fribidi_wcswidth_cjk (const FriBidiChar *str, FriBidiStrIndex len);
 
 #endif /* FRIBIDI_UNICODE_H */

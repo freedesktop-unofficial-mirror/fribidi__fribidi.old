@@ -38,25 +38,47 @@ extern "C"
 #endif
 
   boolean fribidi_log2vis (	/* input */
-			    FriBidiChar *str,
-			    int len, FriBidiCharType *pbase_dir,
+			    FriBidiChar *str, FriBidiStrIndex len,
+			    FriBidiCharType *pbase_dirs,
 			    /* output */
 			    FriBidiChar *visual_str,
 			    FriBidiStrIndex *position_L_to_V_list,
 			    FriBidiStrIndex *position_V_to_L_list,
-			    uint8 *embedding_level_list);
+			    FriBidiLevel *embedding_level_list);
 
   boolean fribidi_log2vis_get_embedding_levels (	/* input */
 						 FriBidiChar *str,
-						 int len,
+						 FriBidiStrIndex len,
 						 FriBidiCharType *pbase_dir,
 						 /* output */
-						 uint8 *embedding_level_list);
+						 FriBidiLevel
+						 *embedding_level_list);
+
+/*======================================================================
+ *  fribidi_remove_bidi_marks() removes bidirectional marks, and returns
+ *  the new length, also updates each of other inputs if not NULL.
+ *----------------------------------------------------------------------*/
+  FriBidiStrIndex fribidi_remove_bidi_marks (FriBidiChar *str,
+					     FriBidiStrIndex length,
+					     FriBidiStrIndex
+					     *position_to_this_list,
+					     FriBidiStrIndex
+					     *position_from_this_list,
+					     FriBidiLevel
+					     *embedding_level_list);
 
 /*======================================================================
  *  fribidi_get_type() returns bidi type of a character.
  *----------------------------------------------------------------------*/
   FriBidiCharType fribidi_get_type (FriBidiChar uch);
+
+/*======================================================================
+ *  fribidi_get_types() returns bidi type of a string.
+ *----------------------------------------------------------------------*/
+  void fribidi_get_types (	/* input */
+			   FriBidiChar *str, FriBidiStrIndex len,
+			   /* output */
+			   FriBidiCharType *type);
 
 /*======================================================================
  *  fribidi_get_mirror_char() returns the mirrored character, if input
@@ -67,12 +89,6 @@ extern "C"
 				    FriBidiChar ch,
 				    /* Output */
 				    FriBidiChar *mirrored_ch);
-
-/*======================================================================
- *  fribidi_remove_explicits() removes explicit marks, and returns the
- *  new length.
- *----------------------------------------------------------------------*/
-  int fribidi_remove_explicits (FriBidiChar *str, int length);
 
 /*======================================================================
  *  fribidi_mirroring_status() returns whether mirroring is on or off,
@@ -99,10 +115,12 @@ extern "C"
  *----------------------------------------------------------------------*/
   void fribidi_find_string_changes (	/* input */
 				     FriBidiChar *old_str,
-				     int old_len,
-				     FriBidiChar *new_str, int new_len,
+				     FriBidiStrIndex old_len,
+				     FriBidiChar *new_str,
+				     FriBidiStrIndex new_len,
 				     /* output */
-				     int *change_start, int *change_len);
+				     FriBidiStrIndex *change_start,
+				     FriBidiStrIndex *change_len);
 
 
 /*======================================================================
@@ -124,7 +142,7 @@ extern "C"
  *     The selection is between logical characters 10 to 45. Calculate
  *     the corresponding visual selection(s):
  *
- *     int sel_span[2] = {10,45};
+ *     FriBidiStrIndex sel_span[2] = {10,45};
  *
  *     fribidi_map_range(sel_span,
  *                       TRUE,
@@ -134,21 +152,20 @@ extern "C"
  *                       // output
  *                       &num_vis_ranges, *vis_ranges);
  **----------------------------------------------------------------------*/
-  void fribidi_map_range (int span[2],
-			  int len,
+  void fribidi_map_range (FriBidiStrIndex span[2], FriBidiStrIndex len,
 			  boolean is_v2l_map,
 			  FriBidiStrIndex *position_map,
-			  uint8 *embedding_level_list,
+			  FriBidiLevel *embedding_level_list,
 			  /* output */
-			  int *num_mapped_spans, int spans[3][2]);
+			  int *num_mapped_spans, FriBidiStrIndex spans[3][2]);
 
 /*======================================================================
  *  fribidi_is_char_rtl() answers the question whether a character
  *  was resolved in the rtl direction. This simply involves asking
  *  if the embedding level for the character is odd.
  *----------------------------------------------------------------------*/
-  boolean fribidi_is_char_rtl (uint8 *embedding_level_list,
-			       FriBidiCharType base_dir, int idx);
+  boolean fribidi_is_char_rtl (FriBidiLevel *embedding_level_list,
+			       FriBidiCharType base_dir, FriBidiStrIndex idx);
 
 /*======================================================================
  *  fribidi_xpos_resolve() does the complicated translation of
@@ -198,15 +215,14 @@ extern "C"
  *                  beyond the end of the line, res_attach_before is true.
  *
  *----------------------------------------------------------------------*/
-  void fribidi_xpos_resolve (int x_pos,
-			     int x_offset,
-			     int len,
-			     uint8 *embedding_level_list,
+  void fribidi_xpos_resolve (int x_pos, int x_offset,
+			     FriBidiStrIndex len,
+			     FriBidiLevel *embedding_level_list,
 			     FriBidiCharType base_dir,
 			     FriBidiStrIndex *vis2log, int *char_widths,
 			     /* output */
-			     int *res_log_pos,
-			     int *res_vis_pos,
+			     FriBidiStrIndex *res_log_pos,
+			     FriBidiStrIndex *res_vis_pos,
 			     int *res_cursor_x_pos,
 			     boolean *res_cursor_dir_is_rtl,
 			     boolean *res_attach_before);
@@ -218,7 +234,7 @@ extern "C"
  *----------------------------------------------------------------------*/
   void fribidi_runs_log2vis (	/* input */
 			      FriBidiList *logical_runs,	/* List of FriBidiRunType */
-			      int len, FriBidiStrIndex *log2vis,
+			      FriBidiStrIndex len, FriBidiStrIndex *log2vis,
 			      FriBidiCharType base_dir,
 			      /* output */
 			      FriBidiList **visual_runs);

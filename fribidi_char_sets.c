@@ -60,8 +60,8 @@ FriBidiCharSetHandler;
 
 #define _FRIBIDI_ADD_CHAR_SET(char_set) \
   { \
-    fribidix_##char_set##_to_unicode, \
-    fribidix_unicode_to_##char_set, \
+    fribidi_##char_set##_to_unicode, \
+    fribidi_unicode_to_##char_set, \
     fribidi_char_set_name_##char_set, \
     fribidi_char_set_title_##char_set, \
     fribidi_char_set_desc_##char_set, \
@@ -87,6 +87,7 @@ FriBidiCharSet
 fribidi_parse_charset (char *s)
 {
   int i;
+
   for (i = FRIBIDI_CHAR_SETS_NUM; i; i--)
     if (fribidi_strcasecmp (s, fribidi_char_sets[i].name) == 0)
       return i;
@@ -98,9 +99,9 @@ fribidi_parse_charset (char *s)
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
 int
-fribidix_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
-			     /* output */
-			     FriBidiChar *us)
+fribidi_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
+			    /* output */
+			    FriBidiChar *us)
 {
   fribidi_char_set_enter (char_set);
   return fribidi_char_sets[char_set].charset_to_unicode == NULL ? 0 :
@@ -110,10 +111,10 @@ fribidix_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
 /* Convert the unicode string "us" with length "length" to character
    string "s" in charset "char_set" and return it's length. */
 int
-fribidix_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
-			     int length,
-			     /* output */
-			     char *s)
+fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
+			    int length,
+			    /* output */
+			    char *s)
 {
   fribidi_char_set_enter (char_set);
   return fribidi_char_sets[char_set].unicode_to_charset == NULL ? 0 :
@@ -173,4 +174,29 @@ fribidi_char_set_leave (FriBidiCharSet char_set)
     return TRUE;
 }
 
+
+/* 0.9.x interface, deprecated, just for compatibility. */
+int
+fribidi_charset_to_unicode_0_9 (FriBidiCharSet char_set, char *s,
+				/* output */
+				FriBidiChar *us)
+{
+  return fribidi_charset_to_unicode (char_set, s, strlen (s), us);
+}
+
+/* Also old character sets. */
+
+#define FRIBIDI_0_9_TO_UNICODE_DEFINE(cs)	\
+	int fribidi_##cs##_to_unicode_0_9 (char *s, FriBidiChar *us)	\
+	{	\
+	  return fribidi_##cs##_to_unicode (s, strlen(s), us);	\
+	}
+FRIBIDI_0_9_TO_UNICODE_DEFINE (utf8)
+FRIBIDI_0_9_TO_UNICODE_DEFINE (cap_rtl)
+FRIBIDI_0_9_TO_UNICODE_DEFINE (iso8859_6)
+FRIBIDI_0_9_TO_UNICODE_DEFINE (iso8859_8)
+FRIBIDI_0_9_TO_UNICODE_DEFINE (cp1255)
+FRIBIDI_0_9_TO_UNICODE_DEFINE (cp1256)
+FRIBIDI_0_9_TO_UNICODE_DEFINE (isiri_3342)
+#undef FRIBIDI_0_9_TO_UNICODE_DEFINE
 #endif

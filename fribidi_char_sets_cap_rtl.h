@@ -27,7 +27,7 @@
 #ifndef FRIBIDI_CHAR_SETS_CAP_RTL_H
 #define FRIBIDI_CHAR_SETS_CAP_RTL_H
 
-#include "fribidi.h"
+#include "fribidi_types.h"
 
 #define fribidi_char_set_name_cap_rtl "CapRTL"
 #define fribidi_char_set_title_cap_rtl "CapRTL (Test)"
@@ -35,20 +35,12 @@ char *fribidi_char_set_desc_cap_rtl (void);
 boolean fribidi_char_set_enter_cap_rtl (void);
 boolean fribidi_char_set_leave_cap_rtl (void);
 
-int fribidix_cap_rtl_to_unicode (char *s, int length,
-				 /* Output */
-				 FriBidiChar *us);
-int fribidix_unicode_to_cap_rtl (FriBidiChar *us, int length,
-				 /* Output */
-				 char *s);
-
-/* Old style, just for compatibility.  do not use these. */
-
-#define fribidi_cap_rtl_to_unicode(s, us)	\
-	fribidix_cap_rtl_to_unicode(s, strlen(s), us)
-
-#define fribidi_unicode_to_cap_rtl(us, length, s)	\
-	fribidix_unicode_to_cap_rtl(us, length, s)
+int fribidi_cap_rtl_to_unicode (char *s, int length,
+				/* Output */
+				FriBidiChar *us);
+int fribidi_unicode_to_cap_rtl (FriBidiChar *us, int length,
+				/* Output */
+				char *s);
 
 #endif /* FRIBIDI_CHAR_SETS_CAP_RTL_H */
 

@@ -6,10 +6,9 @@
  * Markus Kuhn -- 2001-09-08 -- public domain
  */
 
-/* Added by Behdad Esfahbod <behdad@bamdad.org> */
-#include <stdlib.h>
+/* Modified by Behdad Esfahbod <behdad@bamdad.org> to use fribidi types*/
 
-#include <wchar.h>
+#include "fribidi.h"
 
 struct interval
 {
@@ -19,7 +18,7 @@ struct interval
 
 /* auxiliary function for binary search in interval table */
 static int
-bisearch (wchar_t ucs, const struct interval *table, int max)
+bisearch (FriBidiChar ucs, const struct interval *table, int max)
 {
   int min = 0;
   int mid;
@@ -67,12 +66,10 @@ bisearch (wchar_t ucs, const struct interval *table, int max)
  *      ISO 8859-1 and WGL4 characters, Unicode control characters,
  *      etc.) have a column width of 1.
  *
- * This implementation assumes that wchar_t characters are encoded
- * in ISO 10646.
  */
 
 int
-wcwidth (wchar_t ucs)
+fribidi_wcwidth (FriBidiChar ucs)
 {
   /* sorted list of non-overlapping intervals of non-spacing characters */
   static const struct interval combining[] = {
@@ -137,12 +134,12 @@ wcwidth (wchar_t ucs)
 
 
 int
-wcswidth (const wchar_t * pwcs, size_t n)
+fribidi_wcswidth (const FriBidiChar *pwcs, FriBidiStrIndex n)
 {
   int w, width = 0;
 
   for (; *pwcs && n-- > 0; pwcs++)
-    if ((w = wcwidth (*pwcs)) < 0)
+    if ((w = fribidi_wcwidth (*pwcs)) < 0)
       return -1;
     else
       width += w;
@@ -160,7 +157,7 @@ wcswidth (const wchar_t * pwcs, size_t n)
  * recommended for general use.
  */
 static int
-wcwidth_cjk (wchar_t ucs)
+wcwidth_cjk (FriBidiChar ucs)
 {
   /* sorted list of non-overlapping intervals of East Asian Ambiguous
    * characters */
@@ -225,12 +222,12 @@ wcwidth_cjk (wchar_t ucs)
 		sizeof (ambiguous) / sizeof (struct interval) - 1))
     return 2;
 
-  return wcwidth (ucs);
+  return fribidi_wcwidth (ucs);
 }
 
 
 int
-wcswidth_cjk (const wchar_t * pwcs, size_t n)
+fribidi_wcswidth_cjk (const FriBidiChar *pwcs, FriBidiStrIndex n)
 {
   int w, width = 0;
 

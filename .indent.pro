@@ -1,12 +1,13 @@
 -T TypeLink
 -T LevelInfo
 -T FriBidiChar
--T FriBidiCharType
--T FriBidiPropCharType
--T FriBidiCharSet
--T FriBidiCharSetHandler
 -T FriBidiStrIndex
 -T FriBidiMaskType
+-T FriBidiCharType
+-T FriBidiPropCharType
+-T FriBidiLevel
+-T FriBidiCharSet
+-T FriBidiCharSetHandler
 -T FriBidiRunType
 -T FriBidiList
 -T FriBidiMemChunk

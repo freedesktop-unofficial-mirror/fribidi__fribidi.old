@@ -27,7 +27,7 @@
 #ifndef FRIBIDI_CHAR_SETS_CP1256_H
 #define FRIBIDI_CHAR_SETS_CP1256_H
 
-#include "fribidi.h"
+#include "fribidi_types.h"
 
 #define fribidi_char_set_name_cp1256 "CP1256"
 #define fribidi_char_set_title_cp1256 "CP1256 (MS-Arabic)"
@@ -36,21 +36,13 @@
 #define fribidi_char_set_leave_cp1256 NULL
 
 FriBidiChar fribidi_cp1256_to_unicode_c (char ch);
-int fribidix_cp1256_to_unicode (char *s, int length,
-				/* Output */
-				FriBidiChar *us);
+int fribidi_cp1256_to_unicode (char *s, int length,
+			       /* Output */
+			       FriBidiChar *us);
 char fribidi_unicode_to_cp1256_c (FriBidiChar uch);
-int fribidix_unicode_to_cp1256 (FriBidiChar *us, int length,
-				/* Output */
-				char *s);
-
-/* Old style, just for compatibility.  do not use these. */
-
-#define fribidi_cp1256_to_unicode(s, us)	\
-	fribidix_cp1256_to_unicode(s, strlen(s), us)
-
-#define fribidi_unicode_to_cp1256(us, length, s)	\
-	fribidix_unicode_to_cp1256(us, length, s)
+int fribidi_unicode_to_cp1256 (FriBidiChar *us, int length,
+			       /* Output */
+			       char *s);
 
 #endif /* FRIBIDI_CHAR_SETS_CP1256_H */
 

@@ -29,16 +29,17 @@
  *----------------------------------------------------------------------*/
 FriBidiCharType fribidi_get_type (FriBidiChar uch);
 
-/*
-  Files fribidi_tab_char_type_small.i and fribidi_tab_char_type_large.i
-  should be created by make, they should be symbolic linked to other files
-  named fribidi_tab_char_type_n.i, which n is a digit, between 2 and 9,
-  if you do not these files (you didn't run make), link, or copy file
-  fribidi_tab_char_type_2.i to fribidi_tab_char_type_large.i and
-  fribidi_tab_char_type_9.i to fribidi_tab_char_type_small.i
-  infact, smaller n causes to larger file, and vice versa, then you should
-  choose least n for larger, and largest n for small.
-*/
+void
+fribidi_get_types (		/* input */
+		    FriBidiChar *str, FriBidiStrIndex len,
+		    /* output */
+		    FriBidiCharType *type)
+{
+  FriBidiStrIndex i;
+
+  for (i = 0; i < len; i++)
+    type[i] = fribidi_get_type (str[i]);
+}
 
 #ifdef MEM_OPTIMIZED
 

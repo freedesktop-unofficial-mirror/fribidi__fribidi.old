@@ -422,8 +422,8 @@ _getopt_initialize (argc, argv, optstring)
     ordering = PERMUTE;
 
 #ifdef _LIBC
-  if (posixly_correct == NULL
-      && argc == original_argc && argv == original_argv)
+  if (posixly_correct == NULL && argc == original_argc
+      && argv == original_argv)
     {
       if (nonoption_flags_max_len == 0)
 	{

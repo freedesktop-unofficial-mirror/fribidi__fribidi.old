@@ -1,6 +1,6 @@
 AC_INIT(fribidi.c)
 
-PACKAGE=fribidi
+PACKAGE=FriBidi
 VERSION=0.10.0pre
 INTERFACE_VERSION=2
 AM_CONFIG_HEADER(config.h)
@@ -15,6 +15,7 @@ AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AC_PROG_RANLIB
 AC_PATH_PROG(SED, sed, $PATH)
+AC_PATH_PROG(DOWNLOAD, wget, $PATH)
 
 
 dnl Checks for libraries
@@ -167,6 +168,7 @@ fi
 AC_OUTPUT([
 Makefile
 fribidi-config
+fribidi.pc
 ],[case "$CONFIG_FILES" in
 *fribidi-config*)chmod +x fribidi-config;;
 esac])

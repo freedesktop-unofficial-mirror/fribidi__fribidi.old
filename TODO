@@ -1,5 +1,7 @@
 Implementation issues:
 
+* configure.in, Makefile.am: better check for downloader.
+
 * Revise Reorder api, in fribidi_main.c reorder after link break.
 
 * Add an option to fribidi_main.c to assume two consecutive returns as

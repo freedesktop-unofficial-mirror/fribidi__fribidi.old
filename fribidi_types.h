@@ -25,8 +25,9 @@
 
 #include "fribidi_mem.h"
 
+typedef int8 FriBidiLevel;
 typedef uint32 FriBidiChar;
-typedef uint16 FriBidiStrIndex;
+typedef int FriBidiStrIndex;
 typedef int32 FriBidiMaskType;
 typedef FriBidiMaskType FriBidiCharType;
 
@@ -41,7 +42,9 @@ typedef struct
 FriBidiRunType;
 
 #ifndef FRIBIDI_MAX_STRING_LENGTH
-#define FRIBIDI_MAX_STRING_LENGTH (sizeof (FriBidiStrIndex) == 2 ? 0xFFF0L : 0xFFFFFFF0L)
+#define FRIBIDI_MAX_STRING_LENGTH (sizeof (FriBidiStrIndex) == 2 ?	\
+    				   0x7FFE : (sizeof (FriBidiStrIndex) == 1 ? \
+					     0x7E : 0x8FFFFFFEL))
 #endif
 
 

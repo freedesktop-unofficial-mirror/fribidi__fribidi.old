@@ -63,16 +63,16 @@ FriBidiCharSet;
 
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
-int fribidix_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
-				 /* output */
-				 FriBidiChar *us);
+int fribidi_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
+				/* output */
+				FriBidiChar *us);
 
 /* Convert the unicode string "us" with length "length" to character
    string "s" in charset "char_set" and return it's length. */
-int fribidix_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
-				 int length,
-				 /* output */
-				 char *s);
+int fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
+				int length,
+				/* output */
+				char *s);
 
 /* Return the string containing the name of the charset. */
 char *fribidi_char_set_name (FriBidiCharSet char_set);
@@ -97,14 +97,33 @@ boolean fribidi_char_set_leave (FriBidiCharSet char_set);
 FriBidiCharSet fribidi_parse_charset (char *s);
 
 
-/* Old style, just for compatibility.  do not use these. */
+#ifdef FRIBIDI_0_9_INTERFACE
+/* 0.9.x interface, deprecated, just for compatibility. */
 
-#define fribidi_charset_to_unicode(char_set, s, us)	\
-	fribidix_charset_to_unicode(char_set, s, strlen(s), us)
+int fribidi_charset_to_unicode_0_9 (FriBidiCharSet char_set, char *s,
+				    /* output */
+				    FriBidiChar *us);
+#define fribidi_charset_to_unicode	fribidi_charset_to_unicode_0_9
 
-#define fribidi_unicode_to_charset(char_set, us, length, s)	\
-	fribidix_unicode_to_charset(char_set, us, length, s)
+/* Also old character sets. */
+#define fribidi_utf8_to_unicode		fribidi_utf8_to_unicode_0_9
+#define fribidi_cap_rtl_to_unicode	fribidi_cap_rtl_to_unicode_0_9
+#define fribidi_iso8859_6_to_unicode	fribidi_iso8859_6_to_unicode_0_9
+#define fribidi_iso8859_8_to_unicode	fribidi_iso8859_8_to_unicode_0_9
+#define fribidi_cp1255_to_unicode	fribidi_cp1255_to_unicode_0_9
+#define fribidi_cp1256_to_unicode	fribidi_cp1256_to_unicode_0_9
+#define fribidi_isiri_3342_to_unicode	fribidi_isiri_3342_to_unicode_0_9
 
+#define FRIBIDI_0_9_TO_UNICODE_EXPORT(cs)	\
+	int fribidi_##cs##_to_unicode_0_9 (char *s, FriBidiChar *us);
+FRIBIDI_0_9_TO_UNICODE_EXPORT (utf8)
+FRIBIDI_0_9_TO_UNICODE_EXPORT (cap_rtl)
+FRIBIDI_0_9_TO_UNICODE_EXPORT (iso8859_6)
+FRIBIDI_0_9_TO_UNICODE_EXPORT (iso8859_8)
+FRIBIDI_0_9_TO_UNICODE_EXPORT (cp1255)
+FRIBIDI_0_9_TO_UNICODE_EXPORT (cp1256)
+FRIBIDI_0_9_TO_UNICODE_EXPORT (isiri_3342)
+#undef FRIBIDI_0_9_TO_UNICODE_EXPORT
+#endif /* FRIBIDI_0_9_INTERFACE */
 #endif /* FRIBIDI_CHAR_SETS_H */
-
 #endif

@@ -31,7 +31,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <wchar.h>
 #include <string.h>
 #ifdef FRIBIDI_NO_CHARSETS
 #include <iconv.h>
@@ -41,8 +40,6 @@
 
 #define appname "fribidi"
 #define appversion VERSION
-
-int wcwidth (wchar_t ucs);
 
 extern char *fribidi_version_info;
 
@@ -362,10 +359,10 @@ main (int argc, char *argv[])
 	while (fgets (S_, sizeof (S_) - 1, IN))
 	  {
 	    char *new_line, *nl_found;
-	    FriBidiChar logical[FRIBIDI_MAX_STRING_LENGTH];
+	    FriBidiChar logical[MAX_STR_LEN];
 	    char outstring[MAX_STR_LEN];
 	    FriBidiCharType base;
-	    int len;
+	    FriBidiStrIndex len;
 
 	    nl_found = "";
 	    S_[sizeof (S_) - 1] = 0;
@@ -383,27 +380,26 @@ main (int argc, char *argv[])
 #ifdef FRIBIDI_NO_CHARSETS
 	    {
 	      char *st = S_, *ust = (char *) logical;
-	      int in_len = len;
+	      int in_len = (int) len;
 	      len = sizeof logical;
-	      iconv (to_ucs4, &st, &in_len, &ust, &len);
+	      iconv (to_ucs4, &st, &in_len, &ust, (int *) &len);
 	      len = (FriBidiChar *) ust - logical;
 	    }
 #else
-	    len =
-	      fribidix_charset_to_unicode (char_set_num, S_, len, logical);
+	    len = fribidi_charset_to_unicode (char_set_num, S_, len, logical);
 #endif
 
 	    {
 	      FriBidiChar *visual;
 	      FriBidiStrIndex *ltov, *vtol;
-	      uint8 *levels;
-	      int new_len;
+	      FriBidiLevel *levels;
+	      FriBidiStrIndex new_len;
 	      boolean log2vis;
 
 	      visual = show_visual ? ALLOCATE (FriBidiChar, len + 1) : NULL;
 	      ltov = show_ltov ? ALLOCATE (FriBidiStrIndex, len + 1) : NULL;
 	      vtol = show_vtol ? ALLOCATE (FriBidiStrIndex, len + 1) : NULL;
-	      levels = show_levels ? ALLOCATE (uint8, len + 1) : NULL;
+	      levels = show_levels ? ALLOCATE (FriBidiLevel, len + 1) : NULL;
 
 	      /* Create a bidi string. */
 	      base = input_base_direction;
@@ -418,6 +414,12 @@ main (int argc, char *argv[])
 
 		  new_len = len;
 
+		  /* Remove explicit marks, if asked for. */
+		  if (do_clean)
+		    len =
+		      fribidi_remove_bidi_marks (visual, len, ltov, vtol,
+						 levels);
+
 		  if (show_visual)
 		    {
 		      printf (nl_found);
@@ -425,16 +427,12 @@ main (int argc, char *argv[])
 		      if (bol_text)
 			printf ("%s", bol_text);
 
-		      /* Remove explicit marks, if asked for. */
-		      if (do_clean)
-			len = fribidi_remove_explicits (visual, len);
-
 		      /* Convert it to input charset and print. */
 		      {
-			int idx, st;
+			FriBidiStrIndex idx, st;
 			for (idx = 0; idx < len;)
 			  {
-			    int wid, inlen;
+			    FriBidiStrIndex wid, inlen;
 
 			    wid = break_width;
 			    st = idx;
@@ -442,7 +440,7 @@ main (int argc, char *argv[])
 			    if (char_set_num != FRIBIDI_CHARSET_CAP_RTL)
 #endif
 			      while (wid > 0 && idx < len)
-				wid -= wcwidth (visual[idx++]);
+				wid -= fribidi_wcwidth (visual[idx++]);
 #ifndef FRIBIDI_NO_CHARSETS
 			    else
 			      while (wid > 0 && idx < len)
@@ -462,21 +460,23 @@ main (int argc, char *argv[])
 			      int in_len = inlen * sizeof visual[0];
 			      new_len = sizeof outstring;
 			      iconv (from_ucs4, &ust, &in_len, &str,
-				     &new_len);
+				     (int *) &new_len);
 			      *str = '\0';
 			      new_len = str - outstring;
 			    }
 #else
 			    new_len =
-			      fribidix_unicode_to_charset (char_set_num,
-							   visual + st, inlen,
-							   outstring);
+			      fribidi_unicode_to_charset (char_set_num,
+							  visual + st, inlen,
+							  outstring);
 #endif
 			    if (FRIBIDI_IS_RTL (base))
 			      printf ("%*s",
-				      (int) (padding_width +
-					     strlen (outstring) -
-					     (break_width - wid)), outstring);
+				      (int) (do_pad ? (padding_width +
+						       strlen (outstring) -
+						       (break_width -
+							wid)) : 0),
+				      outstring);
 			    else
 			      printf ("%s", outstring);
 			    if (idx < len)
@@ -497,34 +497,34 @@ main (int argc, char *argv[])
 		    }
 		  if (show_ltov)
 		    {
-		      int i;
+		      FriBidiStrIndex i;
 
 		      printf (nl_found);
 		      for (i = 0; i < len; i++)
-			printf ("%d ", ltov[i]);
+			printf ("%ld ", (long) ltov[i]);
 		      nl_found = "\n";
 		    }
 		  if (show_vtol)
 		    {
-		      int i;
+		      FriBidiStrIndex i;
 
 		      printf (nl_found);
 		      for (i = 0; i < len; i++)
-			printf ("%d ", vtol[i]);
+			printf ("%ld ", (long) vtol[i]);
 		      nl_found = "\n";
 		    }
 		  if (show_levels)
 		    {
-		      int i;
+		      FriBidiStrIndex i;
 
 		      printf (nl_found);
 		      for (i = 0; i < len; i++)
-			printf ("%d ", levels[i]);
+			printf ("%d ", (int) levels[i]);
 		      nl_found = "\n";
 		    }
 		  if (show_changes)
 		    {
-		      int change_start, change_len;
+		      FriBidiStrIndex change_start, change_len;
 		      fribidi_find_string_changes (logical, len,
 						   visual, new_len,
 						   &change_start,

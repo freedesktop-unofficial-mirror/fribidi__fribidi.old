@@ -1,6 +1,23 @@
-2002-01-01  Behdad Esfahbod <behdad@bamdad.org>
-	* fribidi_char_set_*.[ch]: Old interface is back, new interface
-	starts with fribidix instead of fribidi.
+2002-01-02  Behdad Esfahbod <behdad@bamdad.org>
+	* bootstrap: automake option -a added
+	* fribidi_types.h: FriBidiStrIndex type changed from uint16 to int.
+	FriBidiLevel introduced, as uint8 to hold the type for bidi levels.
+	* fribidi.c, fribidi.h, fribidi_utils.c, fribidi_main.c: Updated to
+	use FriBidiLeveli and FriBidiStrIndex.
+	* fribidi.h, fribidi.c: fribidi_remove_explicits() replaced by
+	fribidi_remove_bidi_marks() which also updates l2v, v2l and levels.
+	* fribidi.h, fribidi_char_type.c: fribidi_get_types() added.
+	* wcwidth.c: Replaced by fribidi_wcwidth.c.
+	* fribidi_wcwidth.c: Markus Kuhn's implementation of wcwidth(),
+	updated to use fribidi's types.
+	* fribidi.pc.in: Added, input file for pkgconfig support.
+	* configure.in, Makefile.am: Updated to make fribidi.pc, which
+	pkgconfig needs.
+	* AUTHORS: Abel Cheung <maddog@linux.org.hk> added, has implemented
+	pkgconfig support.
+	* fribidi_char_sets.h, fribidi_char_sets.c: Check for macro
+	FRIBIDI_0_9_INTERFACE to define fribidi_*_to_unicode functions with
+	0.9.x interface.
 
 2001-12-31  Behdad Esfahbod <behdad@bamdad.org>
 	* configure.in: Check for sed added.

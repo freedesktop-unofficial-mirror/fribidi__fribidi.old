@@ -220,10 +220,9 @@ main (int argc, char **argv)
   max_depth = atoi (argv[1]);
   if (!max_depth)
     err ("invalid depth");
-  if (max_depth < 2)
-    max_depth = 2;
-  if (max_depth > 9)
-    max_depth = 9;
+  if (max_depth < 2 || max_depth > 9)
+    err2 ("invalid max_depth `%s', max_depth should be between 2 and 9",
+	  argv[1]);
   sprintf (file, "fribidi_tab_char_type_%d.i", max_depth);
   init_table ();
   read_unicode_data ();

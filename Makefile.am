@@ -34,6 +34,7 @@ libfribidi_la_SOURCES =	\
 	fribidi_mem.c	\
 	fribidi_mirroring.c	\
 	fribidi_char_type.c	\
+	fribidi_wcwidth.c	\
 	fribidi_utils.c	\
 	$(libfribidi_charsets)	\
 	$(libfribidi_charsets_extra)
@@ -83,6 +84,7 @@ EXTRA_DIST =	\
 	run.tests	\
 	ANNOUNCE	\
 	acinclude.m4	\
+	fribidi.pc.in	\
 	$(TEST_FILES)	\
 	$(TABLE_FILES)	\
 	$(EXTRA_HEADERS)
@@ -95,16 +97,14 @@ fribidi_create_char_types_SOURCES = fribidi_create_char_types.c packtab.c
 fribidi_create_mirroring_SOURCES = fribidi_create_mirroring.c
 
 bin_PROGRAMS = fribidi
-fribidi_SOURCES = fribidi_main.c wcwidth.c $(GETOPT_SRC)
+fribidi_SOURCES = fribidi_main.c $(GETOPT_SRC)
 fribidi_LDADD = libfribidi.la
 
-unidata/BidiMirroring.txt:
+unidata/%:
+	file="$@" && file="`echo "$$file" | $(SED) 's|^unidata/||'`" &&	\
 	(test -d unidata || mkdir unidata) && cd unidata &&	\
-	wget http://www.unicode.org/Public/UNIDATA/BidiMirroring.txt
-
-unidata/UnicodeData.txt:
-	(test -d unidata || mkdir unidata) && cd unidata &&	\
-	wget http://www.unicode.org/Public/UNIDATA/UnicodeData.txt
+	$(DOWNLOAD) "http://www.unicode.org/Public/UNIDATA/$$file" ||	\
+	($(RM) -f "$$file"; false)
 
 build_fribidi_tab_mirroring.i: fribidi_create_mirroring	\
 		unidata/BidiMirroring.txt
@@ -113,7 +113,7 @@ build_fribidi_tab_mirroring.i: fribidi_create_mirroring	\
 	./fribidi_create_mirroring "$$UNIDATA"
 
 fribidi_tab_mirroring.i:
-	$(MAKE) build_fribidi_tab_mirroring.i || ($(RM) -f "$@" && false)
+	$(MAKE) build_fribidi_tab_mirroring.i || ($(RM) -f $@; false)
 
 $(srcdir)/fribidi_mirroring.c: fribidi_tab_mirroring.i
 	touch $@
@@ -130,7 +130,7 @@ fribidi_tab_char_type_%.i: fribidi_create_char_types	\
 	else UNIDATA="$(srcdir)/unidata"; fi &&	\
 	./fribidi_create_char_types "`echo "$@"	\
 	  | $(SED) 's/[^0-9]*//g'`" "$$UNIDATA" ||	\
-	($(RM) -f "$@"; false)
+	($(RM) -f $@; false)
 	$(RM) -f fribidi_tab_char_type_stamp
 	$(MAKE) fribidi_tab_char_type_stamp
 
@@ -166,6 +166,9 @@ test: fribidi
 TESTS = run.tests
 
 bin_SCRIPTS = fribidi-config
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = fribidi.pc
 
 CLEANFILES = 
 
