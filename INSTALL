@@ -1,13 +1,13 @@
 Simple install procedure
 ========================
 
-  % gzip -cd fribidi-0.1.0.tar.gz | tar xvf - # unpack the sources
-  % cd fribidi-0.1.0                          # change to the toplevel directory
-  % ./configure                            # run the `configure' script
-  % make                                   # build FriBidi
-  % make check                             # Check that it built properly
+  % gzip -cd fribidi-0.1.x.tar.gz | tar xvf - # unpack the sources
+  % cd fribidi-0.1.x                          # change to the toplevel directory
+  % ./configure                               # run the `configure' script
+  % make                                      # build FriBidi
+  % make check                                # Check that it built properly
   [ Become root if necessary ]
-  % make install                           # install FriBidi
+  % make install                              # install FriBidi
 
 The Nitty-Gritty
 ================

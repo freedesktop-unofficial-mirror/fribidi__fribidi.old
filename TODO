@@ -1,9 +1,3 @@
-BiDi algorithms issues:
-
-* Change code to support latest revisions of the unicode technical report.
-
-* Support LRE, RLE, RLO and LRO.
-
 General issues:
 
 * Clean up code
@@ -41,11 +35,10 @@ General issues:
 * Add handling of precomposed and presentation unicode chars when converting
   to 8 bit encodings (breaking into several chars, or better match)
 
-* Farsi 8bit encoding ISIRI-3342 has the notion of strong typed chars like
+* Persian 8bit encoding ISIRI-3342 has the notion of strong typed chars like
   spaces etc (all the range 0x00-0x3f,0x7f is strong typed left-to-right,
   and duplicated in 0x80-0xbf,0xff as a strong typed right-to-left version.
   several chars in the range 0xa0-0xbf have unicode counterparts; but
   others (and all in the range 0x80-0x9f,0xff) have not; so how should that
   be handled when converting to unicode to preserve at best the direction
-  information ?
-
+  information?
