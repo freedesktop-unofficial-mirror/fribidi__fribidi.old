@@ -7,7 +7,7 @@ path=`dirname $0`
 trap 'rm -f $path/test.{in,out,ref} &> /dev/null ; exit' INT
 
 while true; do
-  $path/findbad $@
+  $path/findbad "$@"
   echo -e "findbads: bad test found!!!\7"
   if ! test -d $path/badtests; then
     mkdir $path/badtests

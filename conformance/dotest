@@ -13,4 +13,4 @@ fi
 
 $path/$generator $1 | sed 's|\\\\||g' > $path/test.in
 shift
-$path/test $@ $path/test.in
+$path/test "$@" $path/test.in
