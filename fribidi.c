@@ -1410,7 +1410,7 @@ fribidi_log2vis_get_embedding_levels (	/* input */
 
 const char *fribidi_version_info =
   FRIBIDI_PACKAGE " " FRIBIDI_VERSION "\n"
-  "interface version " FRIBIDI_INTERFACE_VERSION_STR "\n"
+  "interface version " TOSTR(FRIBIDI_INTERFACE_VERSION) "\n"
   "Unicode version " FRIBIDI_UNICODE_VERSION "\n"
   "\n"
   "Copyright (C) 2002 FriBidi Project (http://fribidi.sf.net/).\n"
