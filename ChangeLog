@@ -1,3 +1,7 @@
+2002-01-04  Roozbeh Pournader <roozbeh@sharif.edu>
+	* FriBidi 0.10.0 released.
+	* configure.in: changed the version to 0.10.0.
+
 2002-01-02  Behdad Esfahbod <behdad@bamdad.org>
 	* bootstrap: automake option -a added
 	* fribidi_types.h: FriBidiStrIndex type changed from uint16 to int.
@@ -107,7 +111,7 @@
 	replaced with char, gint replaced by int, ...
 
 2001-12-11  Roozbeh Pournader <roozbeh@sharif.edu>
-        * FriBidi 0.9.1 released.
+	* FriBidi 0.9.1 released.
 	* configure.in: changed the version to 0.9.1.
 
 2001-12-10  Roozbeh Pournader <roozbeh@sharif.edu>
@@ -202,7 +206,7 @@
 	still use the free_type_link_list, for efficiency.
 
 2001-03-31  Behdad Esfahbod <behdad@bamdad.org>
-        * fribidi_benchmark.c: #included <stdarg.h>, to compile under cygwin.
+	* fribidi_benchmark.c: #included <stdarg.h>, to compile under cygwin.
 
 	* fribidi.c, fribidi.h: Changed fribidi_log2vis_get_embedding_levels()
 	to return TRUE if successful and FALSE otherwise.
@@ -683,11 +687,11 @@
 	
 	* Replaced all the ET rules with the simpler ET,EN=>EN,EN
 	
-        * Added `gtk-config --cflags` and `gtk-config -ldflags` to Makefile.am.
+	* Added `gtk-config --cflags` and `gtk-config -ldflags` to Makefile.am.
 	
-        * Made test_fribidi read from stdin if no file given.
+	* Made test_fribidi read from stdin if no file given.
 	
-        * Added options -outputonly to test_fribidi.
+	* Added options -outputonly to test_fribidi.
 
 1999-01-11  Dov Grobgeld  <dov@imagic.weizmann.ac.il>
 
