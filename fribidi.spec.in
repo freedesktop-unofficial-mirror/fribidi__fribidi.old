@@ -23,7 +23,7 @@ Name: %{name}
 Version: %{ver}
 Release: %{rel}
 Serial: %{apiver}
-Copyright: LGPL
+License: LGPL
 Source: http://prdownloads.sourceforge.net/%{name}/%{name}-%{ver}.tar.gz
 URL: http://%{name}.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}
@@ -122,7 +122,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_bindir}/%{name}
 %{_bindir}/%{name}-config
 %{_libdir}/*.so.*
-%{_libdir}/pkgconfig/%{name}.pc
 
 %files -n lib%{name}%{major}-devel
 %defattr(-, root, root)
@@ -130,9 +129,14 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_libdir}/*.la
 %{_libdir}/*.so
 %{_includedir}/*
+%{_libdir}/pkgconfig/%{name}.pc
 
 
 %changelog
+
+* Tue Mar 12 2002  Behdad Esfahbod <behdad@bamdad.org>
+- Use License instead of Copyright
+- Moved pkgconfig to devel package instead of lib package.
 
 * Sat Jan 26 2002  Behdad Esfahbod <behdad@bamdad.org>
 - CFLAGS changed to OPT_CFLAGS.

@@ -1,3 +1,6 @@
+2002-03-12  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi.spec.in: Small cleanup.
+
 2002-03-08  Behdad Esfahbod <behdad@bamdad.org>
 	* Makefile.am: Small cleanup.
 	* bootstrap: automake options removed, added in Makefile.am.
