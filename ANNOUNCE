@@ -21,7 +21,7 @@ locals.
 
 FriBidi may be found at:
 
-   http://imagic.weizmann.ac.il/~dov/freesw/FriBidi
+   http://fribidi.sourceforge.net/
 
 Here is an example of what the library can do, where capital letters
 are treated as having Right-To-Left direction.

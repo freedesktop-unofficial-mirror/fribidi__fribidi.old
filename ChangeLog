@@ -1,3 +1,17 @@
+2000-01-13  Behdad Esfahbod <behdad@bamdad.org>
+
+	* fribidi.c: Added 'AL' to types that change the paragraph embedding
+	level, it previously only checked for 'R'.
+
+        * fribidi.c: Added some more debug information.
+
+	* fribidi_main.c: Added support for inputting explicit marks.
+
+	* fribidi_main.c: Added command line option for debug mode.
+
+	* fribidi_main.c: Fixed a small bug that would annoy when the size
+	of original string may be different to the derived one.
+
 2000-11-12  Dov Grobgeld  <dov@imagic.weizmann.ac.il>
 
 	* fribidi.c: [OZ] Applied Owen Taylor's patch from 2000-07-19 to

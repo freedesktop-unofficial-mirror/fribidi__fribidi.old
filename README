@@ -24,7 +24,7 @@ Downloading
 ===========
 The latest version of FriBidi may be found at:
 
-   http://imagic.weizmann.ac.il/~dov/freesw/FriBidi
+   http://fribidi.sourceforge.net/
 
 Building
 ========
@@ -129,5 +129,5 @@ fribidi with the help option to learn its usage.
 
 Bugs and comments
 =================
-Send bug reports and comments about FriBidi to dov@imagic.weizmann.ac.il.
-
+Send bug reports and comments about FriBidi to
+<fribidi-discuss@lists.sourceforge.net>.

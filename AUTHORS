@@ -17,3 +17,5 @@ Omer Zak <omerz@actcom.co.il>
    * Contributed several bug fixes, improved interface ut8 converters,
      and several considerations for embedded systems.
 
+Behdad Esfahbod <behdad@bamdad.org>
+   * Fixed some bugs and typos.
