@@ -45,7 +45,7 @@
 #ifndef FRIBIDI_ENV_H
 #define FRIBIDI_ENV_H
 
-#include "fribidi_mem.h"
+#include "fribidi_types.h"
 
 /* One of the following must be #defined. */
 #define GLOBAL_FRIBIDIENV
@@ -113,7 +113,7 @@ extern "C"
  */
 /* typedef struct _FriBidiEnv FriBidiEnv; */
 
-  struct _FriBidiEnv
+  typedef struct _FriBidiEnv
   {
     FriBidiMemChunkPrefix *iAllocatedMemoryChunks;
     /* Pointer to doubly-linked list of allocated memory chunks.
@@ -138,7 +138,9 @@ extern "C"
     fribidi_uint32 iReserved1;
     fribidi_uint32 iReserved2;
     void *iReserved3;		/* If necessary, will point at extension to FriBidiEnv. */
-  };
+  }
+  FriBidiEnv;
+
 
 /*======================================================================
  *  Initialize a FriBidiEnv structure.  Must be called before any

@@ -64,50 +64,52 @@ extern "C"
 
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
-  int fribidi_charset_to_unicode (FriBidiCharSet char_set,
-				  char *s,
-				  int length,
-				  /* output */
-				  FriBidiChar *us);
+  FRIBIDI_API int fribidi_charset_to_unicode (FriBidiCharSet char_set,
+					      char *s,
+					      int length,
+					      /* output */
+					      FriBidiChar *us);
 
 /* Convert the unicode string "us" with length "length" to character
    string "s" in charset "char_set" and return it's length. */
-  int fribidi_unicode_to_charset (FriBidiCharSet char_set,
-				  FriBidiChar *us,
-				  int length,
-				  /* output */
-				  char *s);
+  FRIBIDI_API int fribidi_unicode_to_charset (FriBidiCharSet char_set,
+					      FriBidiChar *us,
+					      int length,
+					      /* output */
+					      char *s);
 
 /* Return the string containing the name of the charset. */
-  char *fribidi_char_set_name (FriBidiCharSet char_set);
+  FRIBIDI_API char *fribidi_char_set_name (FriBidiCharSet char_set);
 
 /* Return the string containing the title (name with a short description)
    of the charset. */
-  char *fribidi_char_set_title (FriBidiCharSet char_set);
+  FRIBIDI_API char *fribidi_char_set_title (FriBidiCharSet char_set);
 
 /* Return the string containing a descreption about the charset, if any. */
-  char *fribidi_char_set_desc (FriBidiCharSet char_set);
+  FRIBIDI_API char *fribidi_char_set_desc (FriBidiCharSet char_set);
 
 /* Some charsets like CapRTL may need to change some fribidis tables, by
    calling this function, they can do this changes. */
-  fribidi_boolean fribidi_char_set_enter (FriBidiCharSet char_set);
+  FRIBIDI_API fribidi_boolean fribidi_char_set_enter (FriBidiCharSet
+						      char_set);
 
 /* Some charsets like CapRTL may need to change some fribidis tables, by
    calling this function, they can undo their changes, perhaps to enter
    another mode. */
-  fribidi_boolean fribidi_char_set_leave (FriBidiCharSet char_set);
+  FRIBIDI_API fribidi_boolean fribidi_char_set_leave (FriBidiCharSet
+						      char_set);
 
 /* Return the charset which name is "s". */
-  FriBidiCharSet fribidi_parse_charset (char *s);
+  FRIBIDI_API FriBidiCharSet fribidi_parse_charset (char *s);
 
 
 #ifdef FRIBIDI_INTERFACE_1
 /* Interface version 1, deprecated, just for compatibility. */
 
-  int fribidi_charset_to_unicode_1 (FriBidiCharSet char_set,
-				    char *s,
-				    /* output */
-				    FriBidiChar *us);
+  FRIBIDI_API int fribidi_charset_to_unicode_1 (FriBidiCharSet char_set,
+						char *s,
+						/* output */
+						FriBidiChar *us);
 #define fribidi_charset_to_unicode	fribidi_charset_to_unicode_1
 
 /* Also old character sets. */

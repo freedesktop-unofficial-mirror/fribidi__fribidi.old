@@ -30,8 +30,6 @@ extern "C"
 {
 #endif
 
-  typedef struct _FriBidiEnv FriBidiEnv;
-
   FriBidiList *fribidi_list_append (FriBidiEnv *fribidienv,
 				    FriBidiList *list,
 				    void *data);

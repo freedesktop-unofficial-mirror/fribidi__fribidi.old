@@ -20,6 +20,7 @@ libfribidi_charsets_extra =	\
 libfribidi_charsets_h =	\
 	fribidi_char_sets.h	\
 	fribidi_char_sets_utf8.h
+
 libfribidi_charsets_extra_h =	\
 	fribidi_char_sets_cap_rtl.h	\
 	fribidi_char_sets_cp1255.h	\
@@ -27,6 +28,9 @@ libfribidi_charsets_extra_h =	\
 	fribidi_char_sets_isiri_3342.h	\
 	fribidi_char_sets_iso8859_6.h	\
 	fribidi_char_sets_iso8859_8.h
+
+libfribidi_extra_h =	\
+	fribidi_mem.h
 
 lib_LTLIBRARIES = libfribidi.la
 
@@ -50,7 +54,6 @@ libfribidiinc_HEADERS =	\
 	fribidi.h	\
 	fribidi_types.h	\
 	fribidi_env.h	\
-	fribidi_mem.h	\
 	fribidi_unicode.h	\
 	$(libfribidi_charsets_h)	\
 	$(libfribidi_charsets_extra_h)	\
@@ -90,6 +93,7 @@ OTHER_FILES =	\
 
 EXTRA_HEADERS =	\
 	packtab.h	\
+	$(libfribidi_extra_h)	\
 	$(GETOPT_HDR)
 
 EXTRA_DIST =	\
