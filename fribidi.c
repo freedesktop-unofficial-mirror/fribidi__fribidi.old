@@ -27,6 +27,10 @@
 #include <stdio.h>
 #endif
 
+#ifndef FRIBIDI_CHUNK_SIZE
+#define FRIBIDI_CHUNK_SIZE 128
+#endif
+
 #ifdef DEBUG
 #define DBG(s) if (fribidi_debug) { fprintf(stderr, s); }
 #define DBG2(s, t) if (fribidi_debug) { fprintf(stderr, s, t); }
@@ -42,6 +46,7 @@
 /* default value */
 #define MAX_LEVEL 61
 #endif
+
 /*======================================================================
  * Typedef for the run-length list.
  *----------------------------------------------------------------------*/
@@ -118,7 +123,7 @@ new_type_link (void)
 
 #ifdef USE_SIMPLE_MALLOC
   link = g_malloc (sizeof (TypeLink));
-#else
+#else /* !USE_SIMPLE_MALLOC */
   if (free_type_links)
     {
       link = free_type_links;
@@ -126,20 +131,15 @@ new_type_link (void)
     }
   else
     {
-#ifdef FRIBIDI_USE_MINI_GLIB
-      link = g_malloc (sizeof (TypeLink));
-#else /* !FRIBIDI_USE_MINI_GLIB */
       static GMemChunk *mem_chunk = NULL;
 
       if (!mem_chunk)
-	mem_chunk = g_mem_chunk_new ("TypeLinkList",
-				     sizeof (TypeLink),
-				     sizeof (TypeLink) * 128, G_ALLOC_ONLY);
+	mem_chunk =
+	  g_mem_chunk_create (TypeLink, FRIBIDI_CHUNK_SIZE, G_ALLOC_ONLY);
 
       link = g_chunk_new (TypeLink, mem_chunk);
-#endif /* FRIBIDI_USE_MINI_GLIB */
     }
-#endif /* USE_SIMPLE_MALLOC */
+#endif /* !USE_SIMPLE_MALLOC */
 
   link->len = 0;
   link->pos = 0;
@@ -222,7 +222,7 @@ run_length_encode_types (FriBidiCharType *char_type, gint type_len)
 static void
 init_list (TypeLink **start, TypeLink **end)
 {
-  TypeLink *list = NULL;
+  TypeLink *list;
   TypeLink *link;
 
   /* Add the starting link */
@@ -505,17 +505,21 @@ compact_neutrals (TypeLink *list)
 /* Return the type of previous char or the sor, if already at the start of
    a run level. */
 #define PREV_TYPE_OR_SOR(pp) \
-    (RL_LEVEL(pp->prev)==RL_LEVEL(pp) ? RL_TYPE(pp->prev) : FRIBIDI_LEVEL_TO_DIR( \
-      (RL_LEVEL(pp->prev)>RL_LEVEL(pp) ? RL_LEVEL(pp->prev) : RL_LEVEL(pp)) \
-    ))
+    (RL_LEVEL(pp->prev) == RL_LEVEL(pp) ? \
+      RL_TYPE(pp->prev) : \
+      FRIBIDI_LEVEL_TO_DIR(MAX(RL_LEVEL(pp->prev), RL_LEVEL(pp))) \
+    )
 
 /* Return the type of next char or the eor, if already at the end of
    a run level. */
 #define NEXT_TYPE_OR_EOR(pp) \
-    (!pp->next ? FRIBIDI_LEVEL_TO_DIR(RL_LEVEL(pp)) : \
-    (RL_LEVEL(pp->next)==RL_LEVEL(pp) ? RL_TYPE(pp->next) : FRIBIDI_LEVEL_TO_DIR( \
-      (RL_LEVEL(pp->next)>RL_LEVEL(pp) ? RL_LEVEL(pp->next) : RL_LEVEL(pp)) \
-    )))
+    (!pp->next ? \
+      FRIBIDI_LEVEL_TO_DIR(RL_LEVEL(pp)) : \
+      (RL_LEVEL(pp->next) == RL_LEVEL(pp) ? \
+        RL_TYPE(pp->next) : \
+        FRIBIDI_LEVEL_TO_DIR(MAX(RL_LEVEL(pp->next), RL_LEVEL(pp))) \
+      ) \
+    )
 
 
 /* Return the embedding direction of a link. */

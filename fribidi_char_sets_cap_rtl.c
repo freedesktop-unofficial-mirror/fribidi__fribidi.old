@@ -159,6 +159,7 @@ fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, guchar *s)
 guchar *
 fribidi_char_set_desc_cap_rtl (void)
 {
+  /* *INDENT-OFF* */
   return
     "CapRTL is a character set for testing with the reference\n" \
     "implementation, with explicit marks escape strings, and\n" \
@@ -205,8 +206,11 @@ fribidi_char_set_desc_cap_rtl (void)
     "    * _<  RLM\n"
     "    * _l  LRE\n"
     "    * _r  RLE\n"
+    "    * _L  LRO\n"
+    "    * _R  RLO\n"
     "    * _o  PDF\n"
-    "    * _L  LRO\n" "    * _R  RLO\n" "    * __  `_' itself\n" "\n";
+    "    * __  `_' itself\n" "\n";
+  /* *INDENT-ON* */
 }
 
 #define WS FRIBIDI_PROP_TYPE_WS
@@ -231,30 +235,28 @@ fribidi_char_set_desc_cap_rtl (void)
 #define PDF FRIBIDI_PROP_TYPE_PDF
 #define EN FRIBIDI_PROP_TYPE_EN
 
+/* *INDENT-OFF* */
 FriBidiPropCharType FriBidiPropertyBlockCapRTL[256] = {
   /* CapRTL charset table. */
-  ON, ON, ON, ON, LTR, RTL, ON, ON, ON, ON, ON, ON, ON, BS, RLO, RLE,	/*00-0f */
-  LRO, LRE, PDF, WS, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON,	/*10-1f */
-  WS, ON, ON, ON, ET, ON, ON, ON, ON, ON, ON, ET, CS, ON, ES, ES,	/*20-2f */
-  EN, EN, EN, EN, EN, EN, AN, AN, AN, AN, CS, ON, ON, ON, ON, ON,	/*30-3f */
-  RTL, AL, AL, AL, AL, AL, AL, RTL, RTL, RTL, RTL, RTL, RTL, RTL, RTL, RTL,	/*40-4f */
-  RTL, RTL, RTL, RTL, RTL, RTL, RTL, RTL, RTL, RTL, RTL, ON, BS, ON, ON, ON,	/*50-5f */
-  NSM, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR,	/*60-6f */
-  LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, ON, SS, ON, WS, ON,	/*70-7f */
-  /* These are not needed for the CapRTL charset, only to fill the table. */
-  BN, BN, BN, BN, BN, BS, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN,
-  BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN,
-  CS, ON, ET, ET, ET, ET, ON, ON, ON, ON, LTR, ON, ON, ON, ON, ON,
-  ET, ET, EN, EN, ON, LTR, ON, ON, ON, EN, LTR, ON, ON, ON, ON, ON,
-  LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR,
-  LTR,
-  LTR, LTR, LTR, LTR, LTR, LTR, LTR, ON, LTR, LTR, LTR, LTR, LTR, LTR, LTR,
-  LTR,
-  LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR, LTR,
-  LTR,
-  LTR, LTR, LTR, LTR, LTR, LTR, LTR, ON, LTR, LTR, LTR, LTR, LTR, LTR, LTR,
-  LTR,
+   ON, ON, ON, ON,LTR,RTL, ON, ON, ON, ON, ON, ON, ON, BS,RLO,RLE, /* 00-0f */
+  LRO,LRE,PDF, WS, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, ON, /* 10-1f */
+   WS, ON, ON, ON, ET, ON, ON, ON, ON, ON, ON, ET, CS, ON, ES, ES, /* 20-2f */
+   EN, EN, EN, EN, EN, EN, AN, AN, AN, AN, CS, ON, ON, ON, ON, ON, /* 30-3f */
+  RTL, AL, AL, AL, AL, AL, AL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL, /* 40-4f */
+  RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL,RTL, ON, BS, ON, ON, ON, /* 50-5f */
+  NSM,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, /* 60-6f */
+  LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, ON, SS, ON, WS, ON, /* 70-7f */
+  /* These are not needed for the CapRTL charset, only to fill the table */
+   BN, BN, BN, BN, BN, BS, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, /* 80-8f */
+   BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, BN, /* 90-9f */
+   CS, ON, ET, ET, ET, ET, ON, ON, ON, ON,LTR, ON, ON, ON, ON, ON, /* a0-af */
+   ET, ET, EN, EN, ON,LTR, ON, ON, ON, EN,LTR, ON, ON, ON, ON, ON, /* b0-bf */
+  LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, /* c0-cf */
+  LTR,LTR,LTR,LTR,LTR,LTR,LTR, ON,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, /* d0-df */
+  LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, /* e0-ef */
+  LTR,LTR,LTR,LTR,LTR,LTR,LTR, ON,LTR,LTR,LTR,LTR,LTR,LTR,LTR,LTR, /* f0-ff */
 };
+/* *INDENT-ON* */
 
 #undef WS
 #undef BS

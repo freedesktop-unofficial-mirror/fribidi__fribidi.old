@@ -41,7 +41,7 @@ extern guchar *fribidi_version_info;
 #define MAX_STR_LEN 65000
 
 static void
-die (gchar *fmt, ...)
+die (guchar *fmt, ...)
 {
   va_list ap;
   va_start (ap, fmt);

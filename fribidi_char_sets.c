@@ -86,9 +86,7 @@ fribidi_parse_charset (guchar *s)
   gint i;
 
   for (i = FRIBIDI_CHAR_SETS_NUM; i; i--)
-    /* Function strcasecmp() is used here, cab be replaced with strcmp(),
-       if strcasecmp() is not available. */
-    if (strcasecmp (s, fribidi_char_sets[i].name) == 0)
+    if (g_strcasecmp (s, fribidi_char_sets[i].name) == 0)
       return i;
 
   return FRIBIDI_CHARSET_NOT_FOUND;
@@ -113,7 +111,7 @@ gint
 fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
 			    gint length,
 			    /* output */
-			    gchar *s)
+			    guchar *s)
 {
   fribidi_char_set_enter (char_set);
   return fribidi_char_sets[char_set].unicode_to_charset == NULL ? 0 :

@@ -74,7 +74,7 @@ gint fribidi_charset_to_unicode (FriBidiCharSet char_set, guchar *s,
 gint fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
 				 gint length,
 				 /* output */
-				 gchar *s);
+				 guchar *s);
 
 /* Return the string containing the name of the charset. */
 guchar *fribidi_char_set_name (FriBidiCharSet char_set);

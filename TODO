@@ -3,6 +3,7 @@ Implementation issues:
 * Set autoconf to use fribidi_mini_glib, to compile with DEBUG, and other
   define symbols, and it can set FriBidiStrIndex to be guint32 instead of
   guint16, define FRIBIDI_MAX_STRING_LENGTH based on sizeof(FriBidiStrIndex).
+  Also must set some types in fribidi_mini_glib.h.
 
 * Design better apis to do reorder based on available levels, remove
   explicit marks then calculate position maps, ....

@@ -1,3 +1,9 @@
+2001-04-03  Behdad Esfahbod <behdad@sharif.edu>
+	* fribidi_mini_glib.h, fribidi_mini_glib.c: Added functions
+	for working with MemChunks, some more definitions of glib added.
+
+	* fribidi.c: No more dependency on FRIBIDI_USE_MINI_GLIB flag. 
+
 2001-04-01  Behdad Esfahbod <behdad@bamdad.org>
 	* Makefile.noglib: fribidi_types.c added to sources.
 	
@@ -503,7 +509,7 @@
 	
         * Made test_fribidi read from stdin if no file given.
 	
-        * Added options -outputonly to test_fribidi .
+        * Added options -outputonly to test_fribidi.
 
 1999-01-11  Dov Grobgeld  <dov@imagic.weizmann.ac.il>
 
