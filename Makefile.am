@@ -83,6 +83,9 @@ UNIDATA_FILES =	\
 	unidata/UnicodeData.txt	\
 	unidata/BidiMirroring.txt
 
+OTHER_FILES =	\
+	fribidi_wcwidth.i
+
 EXTRA_HEADERS =	\
 	packtab.h	\
 	$(GETOPT_HDR)
@@ -99,6 +102,7 @@ EXTRA_DIST =	\
 	$(TEST_FILES)	\
 	$(TABLE_FILES)	\
 	$(UNIDATA_FILES)	\
+	$(OTHER_FILES)	\
 	$(EXTRA_HEADERS)
 
 fribidi_benchmark_SOURCES = fribidi_benchmark.c $(GETOPT_SRC)
