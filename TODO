@@ -1,8 +1,8 @@
 Implementation issues:
 
-* Set autoconf to use fribidi_mini_glib, to compile with DEBUG, and other
-  define symbols, and it can set FriBidiStrIndex to be guint32 instead of
-  guint16, define FRIBIDI_MAX_STRING_LENGTH based on sizeof(FriBidiStrIndex).
+* Set autoconf to compile with DEBUG, and other define symbols, and it
+  can set FriBidiStrIndex to be guint32 instead of guint16, define
+  FRIBIDI_MAX_STRING_LENGTH based on sizeof(FriBidiStrIndex).
   Also must set some types in fribidi_mini_glib.h.
 
 * Design better apis to do reorder based on available levels, remove
@@ -59,13 +59,3 @@ General issues:
   exact unicode counterparts; but others (and all in the range 0x80-0x9f,
   and 0xff) have not; so how should that be handled when converting to
   unicode to preserve at best the direction information?
-
-----
-
-mini_glib use < received from Dan K... >
-
-* build execs in Makefile_mini_glib
-* create a shared-object library
-
-*** add the mini_glib option to configure, so that whenever no glib is arround,
-    mini_glib is used.

@@ -1,4 +1,12 @@
 2001-04-11  Behdad Esfahbod <behdad@bamdad.org>
+	* acinclude.m4: Added macro definitions of libtool.
+
+	* configure.in, Makefile.am: Changed to use fribidi_mini_glib
+	whenever glib library not found.
+
+	* TODO: Removed done tasks.
+
+2001-04-11  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi_char_sets_*.c: Fixed bugs introduced in guchar to gchar
 	conversion.
 

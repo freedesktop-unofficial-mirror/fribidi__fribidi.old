@@ -20,7 +20,8 @@ libfribidi_la_SOURCES =	\
 	fribidi_char_sets_iso8859_8.c	\
 	fribidi_char_sets_cp1255.c	\
 	fribidi_char_sets_cp1256.c	\
-	fribidi_char_sets_isiri_3342.c
+	fribidi_char_sets_isiri_3342.c	\
+	@NO_GLIB_SOURCES@
 
 libfribidi_la_LIBADD = $(GLIB_LIBS)
 
@@ -37,16 +38,19 @@ libfribidiinc_HEADERS =	\
 	fribidi_char_sets_isiri_3342.h	\
 	fribidi_char_sets_iso8859_6.h	\
 	fribidi_char_sets_iso8859_8.h	\
-	fribidi_char_sets_utf8.h
+	fribidi_char_sets_utf8.h	\
+	@NO_GLIB_HEADERS@
+
+EXTRA_HEADERS =	\
+	fribidi_mini_glib.h
 
 EXTRA_DIST =	\
 	bootstrap \
 	run.tests	\
 	ANNOUNCE	\
 	acinclude.m4	\
-	fribidi_mini_glib.h	\
-	fribidi_mini_glib.c	\
 	Makefile.noglib	\
+	fribidi_mini_glib.c	\
 	unidata/CreateGetType.pl	\
 	tests/test-CapRTL	\
 	tests/test-CapRTL.reference	\
@@ -101,3 +105,7 @@ test: fribidi
 TESTS = run.tests
 
 bin_SCRIPTS = fribidi-config
+
+
+noinst_LIBRARIES = libfribidi_mini_glib.a
+libfribidi_mini_glib_a_SOURCES = fribidi_mini_glib.c

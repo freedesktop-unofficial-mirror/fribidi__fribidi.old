@@ -468,9 +468,8 @@ compact_neutrals (TypeLink *list)
         { \
           if (level == MAX_LEVEL - 1) \
             first_interval = over_pushed; \
-          status_stack->level = level; \
-          status_stack->override = override; \
-          status_stack++; \
+          status_stack[stack_size].level = level; \
+          status_stack[stack_size].override = override; \
           stack_size++; \
           level = new_level; \
           override = new_override; \
@@ -491,10 +490,9 @@ compact_neutrals (TypeLink *list)
           { \
             if (over_pushed == first_interval) \
               first_interval = 0; \
-            status_stack--; \
             stack_size--; \
-            level = status_stack->level; \
-            override = status_stack->override; \
+            level = status_stack[stack_size].level; \
+            override = status_stack[stack_size].override; \
           } \
       } \
     }
@@ -677,7 +675,7 @@ fribidi_analyse_string (	/* input */
        Only embedding levels from 0 to 61 are valid in this phase. */
     gint level, override, new_level, new_override, i;
     gint stack_size, over_pushed, first_interval;
-    LevelInfo the_status_stack[MAX_LEVEL + 2], *status_stack;
+    LevelInfo *status_stack;
     TypeLink temp_link;
 
     level = base_level;
@@ -686,7 +684,7 @@ fribidi_analyse_string (	/* input */
     stack_size = 0;
     over_pushed = 0;
     first_interval = 0;
-    status_stack = the_status_stack;
+    status_stack = g_new(LevelInfo, MAX_LEVEL + 2);
 
     for (pp = type_rl_list->next; pp->next; pp = pp->next)
       {
@@ -747,9 +745,10 @@ fribidi_analyse_string (	/* input */
     /* Implementing X8. It has no effect on a single paragraph! */
     level = base_level;
     override = FRIBIDI_TYPE_ON;
-    status_stack = the_status_stack;
     stack_size = 0;
     over_pushed = 0;
+
+    g_free(status_stack);
   }
   /* X10. The remaining rules are applied to each run of characters at the
      same level. For each run, determine the start-of-level-run (sor) and
