@@ -566,40 +566,6 @@ static void print_bidi_string(FriBidiChar *str)
 #endif
 
 /*======================================================================
-//  search_rl_for strong searches the run length list in the direction
-//  indicated by dir for a strong directional. It returns a pointer to
-//  the found character or NULL if none is found. */
-//----------------------------------------------------------------------*/
-static TypeLink *
-search_rl_for_strong(TypeLink *pos,
-                     gint  dir)
-{
-  TypeLink *pp = pos;
-
-  if (dir < 0)
-    {
-      for (pp = pos; pp; pp=pp->prev)
-        {
-          FriBidiCharType char_type = RL_TYPE(pp);
-          if (char_type == FRIBIDI_TYPE_R || char_type == FRIBIDI_TYPE_L ||
-	      char_type == FRIBIDI_TYPE_RLO || char_type == FRIBIDI_TYPE_LRO)
-            return pp;
-        }
-    }
-  else
-    {
-      for (pp = pos; pp; pp=pp->next)
-        {
-          FriBidiCharType char_type = RL_TYPE(pp);
-          if (char_type == FRIBIDI_TYPE_R || char_type == FRIBIDI_TYPE_L ||
-	      char_type == FRIBIDI_TYPE_RLO || char_type == FRIBIDI_TYPE_LRO)
-            return pp;
-        }
-    }
-  return NULL;
-}
-
-/*======================================================================
 //  This function should follow the Unicode specification closely!
 //----------------------------------------------------------------------*/
 static void
