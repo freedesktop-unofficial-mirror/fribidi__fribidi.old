@@ -2,22 +2,21 @@ This is is FriBidi, a Free Implementation of the Unicode BiDi algorithm.
 
 Background
 ==========
-One of the missing links stopping the penetration of free software in
-Middle East is the lack of support for the Arabic and Hebrew
-alphabets. In order to have proper Arabic and Hebrew support, the BiDi
-algorithm must be implemented. It is our hope that this library will
-stimulate more free software in the Middle Eastern countries.
+One of the missing links stopping the penetration of free software in Middle
+East is the lack of support for the Arabic and Hebrew alphabets. In order to
+have proper Arabic and Hebrew support, the BiDi algorithm must be
+implemented. It is our hope that this library will stimulate more free
+software in the Middle Eastern countries.
 
 Audience
 ========
-It is our hope that this library will stimulate the implementation of
-Hebrew and Arabic in lots of free software. Here is a small list of
-projects that would benifit from the use of the FriBidi library, but
-of course there are many more: Wine, Mozilla, Gnome, Qt, KDE, AbiWord,
-lynx, OpenOffice.
+It is our hope that this library will stimulate the implementation of Hebrew
+and Arabic in lots of free software. Here is a small list of projects that
+would benifit from the use of the FriBidi library, but of course there are
+many more: Wine, Mozilla, Gnome, Qt, KDE, AbiWord, lynx, OpenOffice.
 
-It may be interesting for you to know that Fribidi is already being
-used in projects like GTK+ and Xterm.
+It may be interesting for you to know that Fribidi is already being used in
+projects like GTK+ and Xterm.
 
 Downloading
 ===========
@@ -31,28 +30,28 @@ See INSTALL for a description of how to build and install this library.
 
 Implementation
 ==============
-The library implements most of the algorithm as described in the
-"Unicode Standard Annex #9, The Bidirectional Algorithm,
-http://www.unicode.org/unicode/reports/tr9/". There are still some bugs in
+The library implements most of the algorithm as described in the "Unicode
+Standard Annex #9, The Bidirectional Algorithm", available at
+http://www.unicode.org/unicode/reports/tr9/. There are still some bugs in
 resolving Arabic weak types, but Fribidi is being tested against Unicode
-Reference Code, and it is our belief, that it is one of the most-conforming
+Reference Code, and it is our belief that it is one of the most-conforming
 implementation of the algorithm.
 
 In the API we were inspired by the document "Bi-Di languages support
 - BiDi API propasal", http://www.langbox.com/AraMosaic/mozilla/BiDi_API.html,
-by Franck Portaneri <franck@langbox.com> which he wrote as a proposal
-for adding BiDi support to Mozilla.
+by Franck Portaneri <franck@langbox.com> which he wrote as a proposal for
+adding BiDi support to Mozilla.
 
-Internally the library uses Unicode entirely. The character property
-function was automatically created from the Unicode property list
-document PropList.txt available from the Unicode FTP site. This
-means that every Unicode character should be treated in strict
-accordance with the Unicode specification. The same is true for the
-mirroring of characters, which also works for all the characters
-listed as mirrorable in the the Unicode specification.
+Internally, the library uses Unicode entirely. The character property
+function was automatically created from the Unicode property list document
+PropList.txt available from the Unicode FTP site. This means that every
+Unicode character is treated in strict accordance with the Unicode
+specification. The same is true for the mirroring of characters, which also
+works for all the characters listed as mirrorable in the the Unicode
+specification.
 
 Other character sets must be converted into Unicode before the library
-may be used. In order to use e.g. iso8859-8, the function
+may be used. In order to use, e.g. iso8859-8, the function
 
      void
      fribidi_iso8859_8_to_unicode(guchar *s,
@@ -100,9 +99,9 @@ In any of the output pointers == NULL, then that information is not
 calculated.
 
 A test program test_fribidi has been written to test out the algorithm.
-test_fribidi currently works on iso8859-8 by default, but by adding
-the flag -capital_rtl it treats capital letters as RTL, as is done
-for illustration purposes in the Unicode specification. 
+test_fribidi currently works on iso8859-8 by default, but by adding the flag
+-capital_rtl it treats capital letters as RTL, as is done for illustration
+purposes in the Unicode specification.
 
 How it looks like
 =================
