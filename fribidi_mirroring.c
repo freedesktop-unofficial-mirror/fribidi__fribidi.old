@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -29,14 +29,14 @@
 
 #include "fribidi_tab_mirroring.i"
 
-boolean
+fribidi_boolean
 fribidi_get_mirror_char (	/* Input */
 			  FriBidiChar ch,
 			  /* Output */
 			  FriBidiChar *mirrored_ch)
 {
   int pos, step;
-  boolean found;
+  fribidi_boolean found;
 
   pos = step = (nFriBidiMirroredChars / 2) + 1;
 

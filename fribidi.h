@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -24,11 +24,6 @@
 #ifndef FRIBIDI_H
 #define FRIBIDI_H
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
 #include "fribidi_config.h"
 #include "fribidi_unicode.h"
 #include "fribidi_mem.h"
@@ -37,22 +32,28 @@ extern "C"
 #include "fribidi_char_sets.h"
 #endif
 
-  boolean fribidi_log2vis (	/* input */
-			    FriBidiChar *str, FriBidiStrIndex len,
-			    FriBidiCharType *pbase_dirs,
-			    /* output */
-			    FriBidiChar *visual_str,
-			    FriBidiStrIndex *position_L_to_V_list,
-			    FriBidiStrIndex *position_V_to_L_list,
-			    FriBidiLevel *embedding_level_list);
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
-  boolean fribidi_log2vis_get_embedding_levels (	/* input */
-						 FriBidiChar *str,
-						 FriBidiStrIndex len,
-						 FriBidiCharType *pbase_dir,
-						 /* output */
-						 FriBidiLevel
-						 *embedding_level_list);
+  fribidi_boolean fribidi_log2vis (	/* input */
+				    FriBidiChar *str, FriBidiStrIndex len,
+				    FriBidiCharType *pbase_dirs,
+				    /* output */
+				    FriBidiChar *visual_str,
+				    FriBidiStrIndex *position_L_to_V_list,
+				    FriBidiStrIndex *position_V_to_L_list,
+				    FriBidiLevel *embedding_level_list);
+
+  fribidi_boolean fribidi_log2vis_get_embedding_levels (	/* input */
+							 FriBidiChar *str,
+							 FriBidiStrIndex len,
+							 FriBidiCharType
+							 *pbase_dir,
+							 /* output */
+							 FriBidiLevel
+							 *embedding_level_list);
 
 /*======================================================================
  *  fribidi_remove_bidi_marks() removes bidirectional marks, and returns
@@ -85,26 +86,38 @@ extern "C"
  *  character has a mirror, or the input itself.
  *  if mirrored_ch is NULL, just returns if character has a mirror or not.
  *----------------------------------------------------------------------*/
-  boolean fribidi_get_mirror_char (	/* Input */
-				    FriBidiChar ch,
-				    /* Output */
-				    FriBidiChar *mirrored_ch);
+  fribidi_boolean fribidi_get_mirror_char (	/* Input */
+					    FriBidiChar ch,
+					    /* Output */
+					    FriBidiChar *mirrored_ch);
 
 /*======================================================================
  *  fribidi_mirroring_status() returns whether mirroring is on or off,
  *  default is on.
  *----------------------------------------------------------------------*/
-  boolean fribidi_mirroring_status (void);
+  fribidi_boolean fribidi_mirroring_status (void);
 
 /*======================================================================
- *  fribidi_set_mirroring() sets mirroring on or off,
+ *  fribidi_set_mirroring() sets mirroring on or off.
  *----------------------------------------------------------------------*/
-  void fribidi_set_mirroring (boolean mirror);
+  void fribidi_set_mirroring (fribidi_boolean mirror);
 
 /*======================================================================
- *  fribidi_set_debug() turn on or off debugging, default is off.
+ *  fribidi_reorder_nsm_status() returns whether reordering of NSM
+ *  sequences is on or off, default is off.
  *----------------------------------------------------------------------*/
-  boolean fribidi_set_debug (boolean debug);
+  fribidi_boolean fribidi_reorder_nsm_status (void);
+
+/*======================================================================
+ *  fribidi_set_reorder_nsm() sets reordering of NSM characters on or off.
+ *----------------------------------------------------------------------*/
+  void fribidi_set_reorder_nsm (fribidi_boolean);
+
+/*======================================================================
+ *  fribidi_set_debug() turn on or off debugging, default is off, return
+ *  false is fribidi is not compiled with debug enabled.
+ *----------------------------------------------------------------------*/
+  fribidi_boolean fribidi_set_debug (fribidi_boolean debug);
 
 /* fribidi_utils.c */
 
@@ -145,7 +158,7 @@ extern "C"
  *     FriBidiStrIndex sel_span[2] = {10,45};
  *
  *     fribidi_map_range(sel_span,
- *                       TRUE,
+ *                       FRIBIDI_TRUE,
  *                       length,
  *                       vis2log_map,
  *                       embedding_levels,
@@ -153,7 +166,7 @@ extern "C"
  *                       &num_vis_ranges, *vis_ranges);
  **----------------------------------------------------------------------*/
   void fribidi_map_range (FriBidiStrIndex span[2], FriBidiStrIndex len,
-			  boolean is_v2l_map,
+			  fribidi_boolean is_v2l_map,
 			  FriBidiStrIndex *position_map,
 			  FriBidiLevel *embedding_level_list,
 			  /* output */
@@ -164,8 +177,9 @@ extern "C"
  *  was resolved in the rtl direction. This simply involves asking
  *  if the embedding level for the character is odd.
  *----------------------------------------------------------------------*/
-  boolean fribidi_is_char_rtl (FriBidiLevel *embedding_level_list,
-			       FriBidiCharType base_dir, FriBidiStrIndex idx);
+  fribidi_boolean fribidi_is_char_rtl (FriBidiLevel *embedding_level_list,
+				       FriBidiCharType base_dir,
+				       FriBidiStrIndex idx);
 
 /*======================================================================
  *  fribidi_xpos_resolve() does the complicated translation of
@@ -224,8 +238,8 @@ extern "C"
 			     FriBidiStrIndex *res_log_pos,
 			     FriBidiStrIndex *res_vis_pos,
 			     int *res_cursor_x_pos,
-			     boolean *res_cursor_dir_is_rtl,
-			     boolean *res_attach_before);
+			     fribidi_boolean * res_cursor_dir_is_rtl,
+			     fribidi_boolean * res_attach_before);
 
 /*======================================================================
  *  fribidi_runs_log2vis takes a list of logical runs and returns a
@@ -240,7 +254,7 @@ extern "C"
 			      FriBidiList **visual_runs);
 
 
-#ifdef __cplusplus
+#ifdef	__cplusplus
 }
 #endif
 

@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod.
+ * Copyright (C) 2001,2002 Behdad Esfahbod.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public  
@@ -253,16 +253,18 @@ fribidi_char_set_desc_cap_rtl (void)
   return s;
 }
 
-boolean
+fribidi_boolean
 fribidi_char_set_enter_cap_rtl (void)
 {
   if (!caprtl_to_unicode)
     {
-      int request[FRIBIDI_TYPES_COUNT + 1] = { };
+      int request[FRIBIDI_TYPES_COUNT + 1];
       int i, count;
 
       caprtl_to_unicode =
 	(FriBidiChar *) malloc (CAPRTL_CHARS * sizeof caprtl_to_unicode[0]);
+      for (i = 0; i < FRIBIDI_TYPES_COUNT; i++)
+	request[i] = 0;
       for (i = 0; i < CAPRTL_CHARS; i++)
 	if (fribidi_get_mirror_char (i, NULL))
 	  caprtl_to_unicode[i] = i;
@@ -293,13 +295,13 @@ fribidi_char_set_enter_cap_rtl (void)
 	  }
     }
 
-  return TRUE;
+  return FRIBIDI_TRUE;
 }
 
-boolean
+fribidi_boolean
 fribidi_char_set_leave_cap_rtl (void)
 {
-  return TRUE;
+  return FRIBIDI_TRUE;
 }
 
 #endif

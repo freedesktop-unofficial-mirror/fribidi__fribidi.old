@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -80,16 +80,22 @@ fribidi_unicode_to_utf8 (FriBidiChar *us, int length, char *s)
 	}
       else if (mychar <= 0x7FF)	/* 11 sig bits */
 	{
-	  *t++ = 0xC0 | (uint8) ((mychar >> 6) & 0x1F);	/* upper 5 bits */
-	  *t++ = 0x80 | (uint8) (mychar & 0x3F);	/* lower 6 bits */
+	  *t++ = 0xC0 | (unsigned char) ((mychar >> 6) & 0x1F);	/* upper 5 bits */
+	  *t++ = 0x80 | (unsigned char) (mychar & 0x3F);	/* lower 6 bits */
 	}
       else if (mychar <= 0xFFFF)
 	{			/* 16 sig bits */
-	  *t++ = 0xE0 | (uint8) ((mychar >> 12) & 0x0F);	/* upper 4 bits */
-	  *t++ = 0x80 | (uint8) ((mychar >> 6) & 0x3F);	/* next 6 bits */
-	  *t++ = 0x80 | (uint8) (mychar & 0x3F);	/* lowest 6 bits */
+	  *t++ = 0xE0 | (unsigned char) ((mychar >> 12) & 0x0F);	/* upper 4 bits */
+	  *t++ = 0x80 | (unsigned char) ((mychar >> 6) & 0x3F);	/* next 6 bits */
+	  *t++ = 0x80 | (unsigned char) (mychar & 0x3F);	/* lowest 6 bits */
 	}
-      /* TODO */
+      else if (mychar < FRIBIDI_UNICODE_CHARS)
+	{			/* 21 sig bits */
+	  *t++ = 0xF0 | (unsigned char) ((mychar >> 18) & 0x07);	/* upper 3 bits */
+	  *t++ = 0x80 | (unsigned char) ((mychar >> 12) & 0x3F);	/* next 6 bits */
+	  *t++ = 0x80 | (unsigned char) ((mychar >> 6) & 0x3F);	/* next 6 bits */
+	  *t++ = 0x80 | (unsigned char) (mychar & 0x3F);	/* lowest 6 bits */
+	}
     }
   *t = 0;
 

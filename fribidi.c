@@ -81,11 +81,11 @@ typedef struct
 LevelInfo;
 
 #ifdef DEBUG
-static boolean fribidi_debug = FALSE;
+static fribidi_boolean fribidi_debug = FRIBIDI_FALSE;
 #endif
 
-boolean
-fribidi_set_debug (boolean debug)
+fribidi_boolean
+fribidi_set_debug (fribidi_boolean debug)
 {
 #ifdef DEBUG
   return fribidi_debug = debug;
@@ -755,7 +755,7 @@ fribidi_analyse_string (	/* input */
   DBG ("Resolving weak types\n");
   {
     FriBidiCharType last_strong, prev_type_org;
-    boolean w4;
+    fribidi_boolean w4;
 
     last_strong = base_dir;
 
@@ -804,7 +804,7 @@ fribidi_analyse_string (	/* input */
     /* Resolving dependency of loops for rules W4 and W5, W5 may
        want to prevent W4 to take effect in the next turn, do this 
        through "w4". */
-    w4 = TRUE;
+    w4 = FRIBIDI_TRUE;
     /* Resolving dependency of loops for rules W4 and W5 with W7,
        W7 may change an EN to L but it sets the prev_type_org if needed,
        so W4 and W5 in next turn can still do their works. */
@@ -825,7 +825,7 @@ fribidi_analyse_string (	/* input */
 	if (this_type == FRIBIDI_TYPE_AL)
 	  {
 	    RL_TYPE (pp) = FRIBIDI_TYPE_RTL;
-	    w4 = TRUE;
+	    w4 = FRIBIDI_TRUE;
 	    prev_type_org = FRIBIDI_TYPE_ON;
 	    continue;
 	  }
@@ -842,7 +842,7 @@ fribidi_analyse_string (	/* input */
 	    RL_TYPE (pp) = prev_type;
 	    this_type = RL_TYPE (pp);
 	  }
-	w4 = TRUE;
+	w4 = FRIBIDI_TRUE;
 
 	/* W5. A sequence of European terminators adjacent to European
 	   numbers changes to All European numbers. */
@@ -851,7 +851,7 @@ fribidi_analyse_string (	/* input */
 		|| next_type == FRIBIDI_TYPE_EN))
 	  {
 	    RL_TYPE (pp) = FRIBIDI_TYPE_EN;
-	    w4 = FALSE;
+	    w4 = FRIBIDI_FALSE;
 	    this_type = RL_TYPE (pp);
 	  }
 
@@ -1069,30 +1069,30 @@ free_rl_list (TypeLink *type_rl_list)
   return;
 }
 
-static boolean mirroring = TRUE;
+static fribidi_boolean mirroring = FRIBIDI_TRUE;
 
-boolean
+fribidi_boolean
 fribidi_mirroring_status (void)
 {
   return mirroring;
 }
 
 void
-fribidi_set_mirroring (boolean mirror)
+fribidi_set_mirroring (fribidi_boolean mirror)
 {
   mirroring = mirror;
 }
 
-static boolean reorder_nsm = FALSE;
+static fribidi_boolean reorder_nsm = FRIBIDI_FALSE;
 
-boolean
+fribidi_boolean
 fribidi_reorder_nsm_status (void)
 {
   return reorder_nsm;
 }
 
 void
-fribidi_set_reorder_nsm (boolean reorder)
+fribidi_set_reorder_nsm (fribidi_boolean reorder)
 {
   reorder_nsm = reorder;
 }
@@ -1112,7 +1112,7 @@ fribidi_remove_bidi_marks (FriBidiChar *str, FriBidiStrIndex length,
 			   FriBidiLevel *embedding_level_list)
 {
   FriBidiStrIndex i, j;
-  boolean private_from_this = FALSE;
+  fribidi_boolean private_from_this = FRIBIDI_FALSE;
 
   DBG ("Entering fribidi_remove_bidi_marks()\n");
 
@@ -1120,7 +1120,7 @@ fribidi_remove_bidi_marks (FriBidiChar *str, FriBidiStrIndex length,
      not given by the caller, we have to make a private instance of it. */
   if (position_to_this_list && !position_from_this_list)
     {
-      private_from_this = TRUE;
+      private_from_this = FRIBIDI_TRUE;
       position_from_this_list =
 	(FriBidiStrIndex *) malloc (sizeof (FriBidiStrIndex) * length);
     }
@@ -1161,7 +1161,7 @@ fribidi_remove_bidi_marks (FriBidiChar *str, FriBidiStrIndex length,
  *  fribidi_log2vis() calls the function_analyse_string() and then
  *  does reordering and fills in the output strings.
  *----------------------------------------------------------------------*/
-boolean
+fribidi_boolean
 fribidi_log2vis (		/* input */
 		  FriBidiChar *str, FriBidiStrIndex len,
 		  FriBidiCharType *pbase_dir,
@@ -1173,21 +1173,21 @@ fribidi_log2vis (		/* input */
 {
   TypeLink *type_rl_list, *pp = NULL;
   FriBidiLevel max_level;
-  boolean private_V_to_L = FALSE;
+  fribidi_boolean private_V_to_L = FRIBIDI_FALSE;
 
   DBG ("Entering fribidi_log2vis()\n");
 
   if (len == 0)
     {
       DBG ("Leaving fribidi_log2vis()\n");
-      return TRUE;
+      return FRIBIDI_TRUE;
     }
 
   /* If l2v is to be calculated we must have v2l as well. If it is not
      given by the caller, we have to make a private instance of it. */
   if (position_L_to_V_list && !position_V_to_L_list)
     {
-      private_V_to_L = TRUE;
+      private_V_to_L = FRIBIDI_TRUE;
       position_V_to_L_list =
 	(FriBidiStrIndex *) malloc (sizeof (FriBidiStrIndex) * len);
     }
@@ -1198,7 +1198,7 @@ fribidi_log2vis (		/* input */
       fprintf (stderr, "%s: cannot handle strings > %ld characters\n",
 	       FRIBIDI_PACKAGE, (long) FRIBIDI_MAX_STRING_LENGTH);
 #endif
-      return FALSE;
+      return FRIBIDI_FALSE;
     }
   fribidi_analyse_string (str, len, pbase_dir,
 			  /* output */
@@ -1280,7 +1280,7 @@ fribidi_log2vis (		/* input */
 		if (pp->level & 1)
 		  {
 		    FriBidiStrIndex i;
-		    boolean is_nsm_seq, seq_end;
+		    fribidi_boolean is_nsm_seq, seq_end;
 
 		    is_nsm_seq = 0;
 		    for (i = RL_POS (pp) + RL_LEN (pp) - 1; i >= RL_POS (pp);
@@ -1363,7 +1363,7 @@ fribidi_log2vis (		/* input */
   free_rl_list (type_rl_list);
 
   DBG ("Leaving fribidi_log2vis()\n");
-  return TRUE;
+  return FRIBIDI_TRUE;
 
 }
 
@@ -1371,7 +1371,7 @@ fribidi_log2vis (		/* input */
  *  fribidi_log2vis_get_embedding_levels() is used in order to just get
  *  the embedding levels.
  *----------------------------------------------------------------------*/
-boolean
+fribidi_boolean
 fribidi_log2vis_get_embedding_levels (	/* input */
 				       FriBidiChar *str,
 				       FriBidiStrIndex len,
@@ -1387,7 +1387,7 @@ fribidi_log2vis_get_embedding_levels (	/* input */
   if (len == 0)
     {
       DBG ("Leaving fribidi_log2vis_get_embedding_levels()\n");
-      return TRUE;
+      return FRIBIDI_TRUE;
     }
 
   fribidi_analyse_string (str, len, pbase_dir,
@@ -1405,7 +1405,7 @@ fribidi_log2vis_get_embedding_levels (	/* input */
   free_rl_list (type_rl_list);
 
   DBG ("Leaving fribidi_log2vis_get_embedding_levels()\n");
-  return TRUE;
+  return FRIBIDI_TRUE;
 }
 
 

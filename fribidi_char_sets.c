@@ -1,6 +1,6 @@
 /* FriBidi - Library of BiDi algorithm
  * Copyright (C) 1999,2000 Dov Grobgeld, and
- * Copyright (C) 2001 Behdad Esfahbod. 
+ * Copyright (C) 2001,2002 Behdad Esfahbod. 
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -47,11 +47,11 @@ typedef struct
   char *(*desc) (void);
   /* Some charsets like CapRTL may need to change some fribidis tables, by
      calling this function, they can do this changes. */
-  boolean (*enter) (void);
+    fribidi_boolean (*enter) (void);
   /* Some charsets like CapRTL may need to change some fribidis tables, by
      calling this function, they can undo their changes, perhaps to enter
      another mode. */
-  boolean (*leave) (void);
+    fribidi_boolean (*leave) (void);
 }
 FriBidiCharSetHandler;
 
@@ -149,7 +149,7 @@ static FriBidiCharSet current_char_set = FRIBIDI_CHARSET_DEFAULT;
 
 /* Some charsets like CapRTL may need to change some fribidis tables, by
    calling this function, they can do this changes. */
-boolean
+fribidi_boolean
 fribidi_char_set_enter (FriBidiCharSet char_set)
 {
   if (char_set != current_char_set && fribidi_char_sets[char_set].enter)
@@ -159,44 +159,43 @@ fribidi_char_set_enter (FriBidiCharSet char_set)
       return (*fribidi_char_sets[char_set].enter) ();
     }
   else
-    return TRUE;
+    return FRIBIDI_TRUE;
 }
 
 /* Some charsets like CapRTL may need to change some fribidis tables, by
    calling this function, they can undo their changes, maybe to enter
    another mode. */
-boolean
+fribidi_boolean
 fribidi_char_set_leave (FriBidiCharSet char_set)
 {
   if (char_set == current_char_set && fribidi_char_sets[char_set].leave)
     return (*fribidi_char_sets[char_set].leave) ();
   else
-    return TRUE;
+    return FRIBIDI_TRUE;
 }
 
 
-/* 0.9.x interface, deprecated, just for compatibility. */
+/* Interface version 1, deprecated, just for compatibility. */
 int
-fribidi_charset_to_unicode_0_9 (FriBidiCharSet char_set, char *s,
-				/* output */
-				FriBidiChar *us)
+fribidi_charset_to_unicode_1 (FriBidiCharSet char_set, char *s,
+			      /* output */
+			      FriBidiChar *us)
 {
   return fribidi_charset_to_unicode (char_set, s, strlen (s), us);
 }
 
 /* Also old character sets. */
 
-#define FRIBIDI_0_9_TO_UNICODE_DEFINE(cs)	\
-	int fribidi_##cs##_to_unicode_0_9 (char *s, FriBidiChar *us)	\
+#define FRIBIDI_TO_UNICODE_DEFINE_1(cs)	\
+	int fribidi_##cs##_to_unicode_1 (char *s, FriBidiChar *us)	\
 	{	\
 	  return fribidi_##cs##_to_unicode (s, strlen(s), us);	\
 	}
-FRIBIDI_0_9_TO_UNICODE_DEFINE (utf8)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (cap_rtl)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (iso8859_6)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (iso8859_8)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (cp1255)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (cp1256)
-FRIBIDI_0_9_TO_UNICODE_DEFINE (isiri_3342)
-#undef FRIBIDI_0_9_TO_UNICODE_DEFINE
+FRIBIDI_TO_UNICODE_DEFINE_1 (utf8)
+FRIBIDI_TO_UNICODE_DEFINE_1 (cap_rtl)
+FRIBIDI_TO_UNICODE_DEFINE_1 (iso8859_6)
+FRIBIDI_TO_UNICODE_DEFINE_1 (iso8859_8)
+FRIBIDI_TO_UNICODE_DEFINE_1 (cp1255)
+FRIBIDI_TO_UNICODE_DEFINE_1 (cp1256) FRIBIDI_TO_UNICODE_DEFINE_1 (isiri_3342)
+#undef FRIBIDI_TO_UNICODE_DEFINE_1
 #endif

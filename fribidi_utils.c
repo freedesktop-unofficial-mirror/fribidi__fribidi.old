@@ -1,5 +1,5 @@
 /* FriBidi - Library of BiDi algorithm
- * Copyright (C) 1999,2000 Dov Grobgeld, and
+ * Copyright (C) 1999,2000 Dov Grobgeld
  * 
  * This library is free software; you can redistribute it and/or 
  * modify it under the terms of the GNU Lesser General Public 
@@ -53,7 +53,7 @@
  *     FriBidiStrIndex sel_span[2] = {10,45};
  *
  *     fribidi_map_range(sel_span,
- *                       TRUE,
+ *                       FRIBIDI_TRUE,
  *                       length,
  *                       vis2log_map,
  *                       embedding_levels,
@@ -62,14 +62,14 @@
  **----------------------------------------------------------------------*/
 void
 fribidi_map_range (FriBidiStrIndex in_span[2],	/* Start and end span */
-		   FriBidiStrIndex len, boolean is_v2l_map,	/* Needed for embedding_level */
+		   FriBidiStrIndex len, fribidi_boolean is_v2l_map,	/* Needed for embedding_level */
 		   FriBidiStrIndex *position_map,
 		   FriBidiLevel *embedding_level_list,
 		   /* output */
 		   int *num_mapped_spans, FriBidiStrIndex mapped_spans[63][2])
 {
   FriBidiStrIndex ch_idx;
-  boolean in_range = FALSE;
+  fribidi_boolean in_range = FRIBIDI_FALSE;
   FriBidiStrIndex start_idx = in_span[0];
   FriBidiStrIndex end_idx = in_span[1];
 
@@ -93,14 +93,14 @@ fribidi_map_range (FriBidiStrIndex in_span[2],	/* Start and end span */
 
       if (!in_range && mapped_pos >= start_idx && mapped_pos < end_idx)
 	{
-	  in_range = TRUE;
+	  in_range = FRIBIDI_TRUE;
 	  (*num_mapped_spans)++;
 	  mapped_spans[(*num_mapped_spans) - 1][0] = ch_idx;
 	}
       else if (in_range && (mapped_pos < start_idx || mapped_pos >= end_idx))
 	{
 	  mapped_spans[(*num_mapped_spans) - 1][1] = ch_idx;
-	  in_range = FALSE;
+	  in_range = FRIBIDI_FALSE;
 	}
     }
 }
@@ -197,8 +197,8 @@ fribidi_xpos_resolve (int x_pos, int x_offset, FriBidiStrIndex len,
 		      FriBidiStrIndex *res_log_pos,
 		      FriBidiStrIndex *res_vis_pos,
 		      int *res_cursor_x_pos,
-		      boolean *res_cursor_dir_is_rtl,
-		      boolean *res_attach_before)
+		      fribidi_boolean * res_cursor_dir_is_rtl,
+		      fribidi_boolean * res_attach_before)
 {
   int char_width_sum = 0;
   FriBidiStrIndex char_idx;
@@ -239,11 +239,11 @@ fribidi_xpos_resolve (int x_pos, int x_offset, FriBidiStrIndex len,
 		  if (*res_cursor_dir_is_rtl)
 		    {
 		      log_pos++;
-		      *res_attach_before = FALSE;
+		      *res_attach_before = FRIBIDI_FALSE;
 		    }
 		  /* LTR */
 		  else
-		    *res_attach_before = TRUE;
+		    *res_attach_before = FRIBIDI_TRUE;
 		  *res_cursor_x_pos = x_offset + char_width_sum;
 		}
 	      /* We are in the right hand side. */
@@ -253,11 +253,11 @@ fribidi_xpos_resolve (int x_pos, int x_offset, FriBidiStrIndex len,
 		  if (!*res_cursor_dir_is_rtl)
 		    {
 		      log_pos++;
-		      *res_attach_before = FALSE;
+		      *res_attach_before = FRIBIDI_FALSE;
 		    }
 		  /* RTL */
 		  else
-		    *res_attach_before = TRUE;
+		    *res_attach_before = FRIBIDI_TRUE;
 
 		  *res_cursor_x_pos = x_offset + char_width_sum + char_width;
 		  (*res_vis_pos)++;
@@ -281,7 +281,7 @@ fribidi_xpos_resolve (int x_pos, int x_offset, FriBidiStrIndex len,
 	    *res_log_pos = len;
 	  *res_cursor_x_pos = char_width_sum + x_offset;
 	  *res_vis_pos = len;
-	  *res_attach_before = TRUE;
+	  *res_attach_before = FRIBIDI_TRUE;
 	}
     }
 
@@ -294,7 +294,7 @@ fribidi_xpos_resolve (int x_pos, int x_offset, FriBidiStrIndex len,
  *  was resolved in the rtl direction. This simply involves asking
  *  if the embedding level for the character is odd.
  *----------------------------------------------------------------------*/
-boolean
+fribidi_boolean
 fribidi_is_char_rtl (FriBidiLevel *embedding_level_list,
 		     FriBidiCharType base_dir, FriBidiStrIndex idx)
 {

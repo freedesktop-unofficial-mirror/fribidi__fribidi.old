@@ -62,9 +62,9 @@ die (char *fmt, ...)
   exit (-1);
 }
 
-boolean do_break, do_pad, do_mirror, do_reorder_nsm, do_clean, show_input,
-  show_changes;
-boolean show_visual, show_basedir, show_ltov, show_vtol, show_levels;
+fribidi_boolean do_break, do_pad, do_mirror, do_reorder_nsm, do_clean,
+  show_input, show_changes;
+fribidi_boolean show_visual, show_basedir, show_ltov, show_vtol, show_levels;
 int text_width;
 char *char_set;
 char *bol_text, *eol_text;
@@ -162,23 +162,23 @@ int
 main (int argc, char *argv[])
 {
   int exit_val;
-  boolean file_found;
+  fribidi_boolean file_found;
   char *s;
   FILE *IN;
 
   text_width = 80;
-  do_break = TRUE;
-  do_pad = TRUE;
-  do_mirror = TRUE;
-  do_clean = FALSE;
-  do_reorder_nsm = FALSE;
-  show_input = FALSE;
-  show_visual = TRUE;
-  show_basedir = FALSE;
-  show_ltov = FALSE;
-  show_vtol = FALSE;
-  show_levels = FALSE;
-  show_changes = FALSE;
+  do_break = FRIBIDI_TRUE;
+  do_pad = FRIBIDI_TRUE;
+  do_mirror = FRIBIDI_TRUE;
+  do_clean = FRIBIDI_FALSE;
+  do_reorder_nsm = FRIBIDI_FALSE;
+  show_input = FRIBIDI_FALSE;
+  show_visual = FRIBIDI_TRUE;
+  show_basedir = FRIBIDI_FALSE;
+  show_ltov = FRIBIDI_FALSE;
+  show_vtol = FRIBIDI_FALSE;
+  show_levels = FRIBIDI_FALSE;
+  show_changes = FRIBIDI_FALSE;
   char_set = "UTF-8";
   bol_text = NULL;
   eol_text = NULL;
@@ -213,25 +213,25 @@ main (int argc, char *argv[])
 	{"charsetdesc", 1, 0, CHARSETDESC},
 	{"caprtl", 0, 0, CAPRTL},
 #endif
-	{"showinput", 0, &show_input, TRUE},
-	{"nopad", 0, &do_pad, FALSE},
-	{"nobreak", 0, &do_break, FALSE},
+	{"showinput", 0, &show_input, FRIBIDI_TRUE},
+	{"nopad", 0, &do_pad, FRIBIDI_FALSE},
+	{"nobreak", 0, &do_break, FRIBIDI_FALSE},
 	{"width", 1, 0, 'w'},
 	{"bol", 1, 0, 'B'},
 	{"eol", 1, 0, 'E'},
-	{"nomirror", 0, &do_mirror, FALSE},
-	{"reordernsm", 0, &do_reorder_nsm, TRUE},
-	{"clean", 0, &do_clean, TRUE},
+	{"nomirror", 0, &do_mirror, FRIBIDI_FALSE},
+	{"reordernsm", 0, &do_reorder_nsm, FRIBIDI_TRUE},
+	{"clean", 0, &do_clean, FRIBIDI_TRUE},
 	{"ltr", 0, (int *) &input_base_direction, FRIBIDI_TYPE_L},
 	{"rtl", 0, (int *) &input_base_direction, FRIBIDI_TYPE_R},
 	{"wltr", 0, (int *) &input_base_direction, FRIBIDI_TYPE_WL},
 	{"wrtl", 0, (int *) &input_base_direction, FRIBIDI_TYPE_WR},
-	{"basedir", 0, &show_basedir, TRUE},
-	{"ltov", 0, &show_ltov, TRUE},
-	{"vtol", 0, &show_vtol, TRUE},
-	{"levels", 0, &show_levels, TRUE},
-	{"changes", 0, &show_changes, TRUE},
-	{"novisual", 0, &show_visual, FALSE},
+	{"basedir", 0, &show_basedir, FRIBIDI_TRUE},
+	{"ltov", 0, &show_ltov, FRIBIDI_TRUE},
+	{"vtol", 0, &show_vtol, FRIBIDI_TRUE},
+	{"levels", 0, &show_levels, FRIBIDI_TRUE},
+	{"changes", 0, &show_changes, FRIBIDI_TRUE},
+	{"novisual", 0, &show_visual, FRIBIDI_FALSE},
 	{0, 0, 0, 0}
       };
 
@@ -252,11 +252,11 @@ main (int argc, char *argv[])
 	  version ();
 	  break;
 	case 'v':
-	  show_basedir = TRUE;
-	  show_ltov = TRUE;
-	  show_vtol = TRUE;
-	  show_levels = TRUE;
-	  show_changes = TRUE;
+	  show_basedir = FRIBIDI_TRUE;
+	  show_ltov = FRIBIDI_TRUE;
+	  show_vtol = FRIBIDI_TRUE;
+	  show_levels = FRIBIDI_TRUE;
+	  show_changes = FRIBIDI_TRUE;
 	  break;
 	case 'w':
 	  text_width = atoi (optarg);
@@ -270,16 +270,16 @@ main (int argc, char *argv[])
 	  eol_text = optarg;
 	  break;
 	case 'd':
-	  if (!fribidi_set_debug (TRUE))
+	  if (!fribidi_set_debug (FRIBIDI_TRUE))
 	    die
 	      ("%s lib must be compiled with DEBUG option to enable\nturn debug info on.\n",
 	       FRIBIDI_PACKAGE);
 	  break;
 	case 't':
-	  do_clean = TRUE;
-	  show_input = TRUE;
-	  do_break = FALSE;
-	  do_reorder_nsm = TRUE;
+	  do_clean = FRIBIDI_TRUE;
+	  show_input = FRIBIDI_TRUE;
+	  do_break = FRIBIDI_FALSE;
+	  do_reorder_nsm = FRIBIDI_TRUE;
 	  break;
 	case 'c':
 	  char_set = strdup (optarg);
@@ -329,13 +329,13 @@ main (int argc, char *argv[])
   fribidi_set_mirroring (do_mirror);
   fribidi_set_reorder_nsm (do_reorder_nsm);
   exit_val = 0;
-  file_found = FALSE;
+  file_found = FRIBIDI_FALSE;
   while (optind < argc || !file_found)
     {
       char *S_;
 
       S_ = optind < argc ? argv[optind++] : "-";
-      file_found = TRUE;
+      file_found = FRIBIDI_TRUE;
 
       /* Open the infile for reading */
       if (S_[0] == '-' && !S_[1])
@@ -400,7 +400,7 @@ main (int argc, char *argv[])
 	      FriBidiStrIndex *ltov, *vtol;
 	      FriBidiLevel *levels;
 	      FriBidiStrIndex new_len;
-	      boolean log2vis;
+	      fribidi_boolean log2vis;
 
 	      visual = show_visual ? ALLOCATE (FriBidiChar, len + 1) : NULL;
 	      ltov = show_ltov ? ALLOCATE (FriBidiStrIndex, len + 1) : NULL;
