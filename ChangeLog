@@ -1,3 +1,7 @@
+2002-03-08  Behdad Esfahbod <behdad@bamdad.org>
+	* Makefile.am: Small cleanup.
+	* bootstrap: automake options removed, added in Makefile.am.
+
 2002-01-25  Behdad Esfahbod <behdad@bamdad.org>
 	* Makefile.am: Added fribidi.spec to distribution, to be able to make
 	RPMs from released distribution with 'rpm -tb'.

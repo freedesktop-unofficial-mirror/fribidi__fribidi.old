@@ -1,4 +1,6 @@
 
+AUTOMAKE_OPTIONS = gnu 
+
 noinst_PROGRAMS = fribidi_benchmark	\
 		fribidi_create_char_types	\
 		fribidi_create_mirroring
@@ -108,6 +110,7 @@ bin_PROGRAMS = fribidi
 fribidi_SOURCES = fribidi_main.c $(GETOPT_SRC)
 fribidi_LDADD = libfribidi.la
 
+
 fribidi_tab_mirroring.i: $(fribidi_create_mirroring_SOURCES)	\
 		unidata/BidiMirroring.txt
 	$(MAKE) fribidi_create_mirroring
@@ -166,6 +169,9 @@ test.reference:
 
 test: fribidi
 	"$(srcdir)/run.tests"
+
+.PHONY: test test.reference	\
+		fribidi_tab_char_type_small fribidi_tab_char_type_large
 
 TESTS = run.tests
 
