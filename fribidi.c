@@ -17,7 +17,6 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
-#define DEBUG
 #include "fribidi.h"
 #ifdef DEBUG
 #include <stdio.h>
@@ -44,6 +43,7 @@ typedef struct _TypeLink TypeLink;
 struct _TypeLink {
   TypeLink *prev;
   TypeLink *next;
+
   FriBidiCharType type;
   gint pos;
   gint len;
@@ -131,12 +131,12 @@ static TypeLink *new_type_link(void)
       static GMemChunk *mem_chunk = NULL;
 
       if (!mem_chunk)
-       mem_chunk = g_mem_chunk_new ("TypeLinkList",
-                                    sizeof (TypeLink),
-                                    sizeof (TypeLink) * 128,
-                                    G_ALLOC_ONLY);
+       mem_chunk = g_mem_chunk_new("TypeLinkList",
+                                   sizeof(TypeLink),
+                                   sizeof(TypeLink) * 128,
+                                   G_ALLOC_ONLY);
 
-      link = g_chunk_new (TypeLink, mem_chunk);
+      link = g_chunk_new(TypeLink, mem_chunk);
     }
 #endif
   
@@ -158,11 +158,11 @@ static void free_type_link(TypeLink *link)
 #endif
 }
 
-static TypeLink *run_length_encode_types(gint *char_type, gint type_len)
+static TypeLink *run_length_encode_types(FriBidiCharType *char_type, gint type_len)
 {
-  TypeLink *list = NULL;
-  TypeLink *last;
-  TypeLink *link;
+  TypeLink *list = NULL, *last, *link;
+  TypeLink current;
+  
   FriBidiCharType type;
   gint len, pos, i;
 
@@ -175,30 +175,30 @@ static TypeLink *run_length_encode_types(gint *char_type, gint type_len)
   last = list;
 
   /* Sweep over the string_types */
-  type = FRIBIDI_LEVEL_START;
-  len = 0;
-  pos = -1;
+  current.type = FRIBIDI_LEVEL_START;
+  current.len = 0;
+  current.pos = -1;
   for (i=0; i<=type_len; i++)
     { 
-      if (i==type_len || char_type[i] != type)
+      if (char_type[i] != current.type || i==type_len)
         {
-          if (pos>=0)
+          if (current.pos>=0)
             {
               link = new_type_link();
-              link->type = type;
-              link->pos  = pos;
-              link->len  = len;
+              link->type = current.type;
+              link->pos  = current.pos;
+              link->len  = current.len;
               last->next = link;
               link->prev = last;
               last = last->next;
             }
           if (i==type_len)
             break;
-          len = 0;
-          pos = i;
+          current.len = 0;
+          current.pos = i;
         }
-      type = char_type[i];
-      len++;
+      current.type = char_type[i];
+      current.len++;
     }
 
   /* Add the ending link */
@@ -273,7 +273,7 @@ void move_element_before (TypeLink *p, TypeLink *list)
 
    TBD: use some explanatory names instead of p, q, ...
 */
-void override_list (TypeLink *base, TypeLink *over)
+void override_list(TypeLink *base, TypeLink *over)
 {
   TypeLink *p = base, *q, *r, *s, *t;
   gint pos = 0, pos2;
@@ -302,56 +302,45 @@ void override_list (TypeLink *base, TypeLink *over)
         /* split p into at most 3 interval, and insert q in the place of
            the second interval, set r to be the third part. */
         /* third part needed? */
-        if (p->next && p->next->pos == pos2) {
-          if (r->next)
-            r = r->next;
-          else {
-            r = new_type_link();
-            *r = *p;
-            r->len = 0;
-            r->pos = pos2;
-          }
-        } else {
+        if (p->next && p->next->pos == pos2)
+          r = r->next;
+        else {
           r = new_type_link();
           *r = *p;
-          if (r->next)
+          if (r->next) {
             r->next->prev = r;
-          r->len -= pos2 - r->pos;
+            r->len = r->next->pos - pos2;
+          } else
+            r->len -= pos - p->pos;
           r->pos = pos2;
         }
         /* first part needed? */
-        if (p->pos == pos) {
-          if (p->prev) {
-            t = p;
-            p = p->prev;
-            free_type_link(t);
-          } else
-           p->len = 0;
-        } else {
+        if (p->prev && p->pos == pos) {
+          t = p;
+          p = p->prev;
+          free_type_link(t);
+        } else
           p->len = pos - p->pos;
-        }
       } else {
         /* cut the end of p. */
         p->len = pos - p->pos;
         /* if all of p is cut, remove it. */
         if (!p->len && p->prev)
           p = p->prev;
-        /* remove the elements between p and r. */
-        if (p != r)
-          for (s = p->next; s != r;) {
-            t = s;
-            s = s->next;
-            free_type_link(t);
-          }
+
         /* cut the begining of r. */
         r->pos = pos2;
         if (r->next)
           r->len = r->next->pos - pos2; 
         /* if all of r is cut, remove it. */
-        if (!r->len && r->next) {
-          t = r;
+        if (!r->len && r->next)
           r = r->next;
-          free_type_link(t);    
+
+        /* remove the elements between p and r. */
+        for (s = p->next; s != r;) {
+          t = s;
+          s = s->next;
+          free_type_link(t);
         }
       }
       /* before updating the next and prev links to point to the inserted q,
@@ -375,23 +364,48 @@ void override_list (TypeLink *base, TypeLink *over)
 
 static void compact_list(TypeLink *list)
 {
-  while(list)
-    {
-      if (list->prev &&
-          RL_TYPE(list->prev) == RL_TYPE(list) &&
-          RL_LEVEL(list->prev) == RL_LEVEL(list) &&
-          RL_POS(list->prev) + RL_LEN(list->prev) == RL_POS(list))
-        {
-          TypeLink *next = list->next;
-          list->prev->next = list->next;
-          list->next->prev = list->prev;
-          RL_LEN(list->prev) = RL_LEN(list->prev) + RL_LEN(list);
-          free_type_link(list);
-          list = next;
+  if (list->next) {
+    list = list->next;
+    while(list)
+      {
+        if (RL_TYPE(list->prev) == RL_TYPE(list) &&
+            RL_LEVEL(list->prev) == RL_LEVEL(list))
+          {
+            TypeLink *next = list->next;
+            list->prev->next = list->next;
+            list->next->prev = list->prev;
+            RL_LEN(list->prev) += RL_LEN(list);
+            free_type_link(list);
+            list = next;
+        }
+        else
+          list = list->next;
       }
-      else
-        list = list->next;
-    }
+  }
+}
+
+static void compact_neutrals(TypeLink *list)
+{
+  if (list->next) {
+    list = list->next;
+    while(list)
+      {
+        if (RL_LEVEL(list->prev) == RL_LEVEL(list) &&
+            (RL_TYPE(list->prev) == RL_TYPE(list) ||
+             IS_NEUTRAL(RL_TYPE(list->prev)) && IS_NEUTRAL(RL_TYPE(list))
+           ))
+          {
+            TypeLink *next = list->next;
+            list->prev->next = list->next;
+            list->next->prev = list->prev;
+            RL_LEN(list->prev) += RL_LEN(list);
+            free_type_link(list);
+            list = next;
+        }
+        else
+          list = list->next;
+      }
+  }
 }
 
 /*=======================================================
@@ -466,17 +480,17 @@ static void compact_list(TypeLink *list)
 
 /* Return the type of previous char or the sor, if already at the start of
    a run level. */
-#define PREV_TYPE_OR_SOR \
-    (RL_LEVEL(ppprev)==RL_LEVEL(pp) ? RL_TYPE(ppprev) : LEVEL_TO_DIR( \
-      (RL_LEVEL(ppprev)>RL_LEVEL(pp) ? RL_LEVEL(ppprev) : RL_LEVEL(pp)) \
+#define PREV_TYPE_OR_SOR(pp) \
+    (RL_LEVEL(pp->prev)==RL_LEVEL(pp) ? RL_TYPE(pp->prev) : LEVEL_TO_DIR( \
+      (RL_LEVEL(pp->prev)>RL_LEVEL(pp) ? RL_LEVEL(pp->prev) : RL_LEVEL(pp)) \
     ))
 
 /* Return the type of next char or the eor, if already at the end of
    a run level. */
-#define NEXT_TYPE_OR_EOR \
-    (!ppnext ? LEVEL_TO_DIR(RL_LEVEL(pp)) : \
-    (RL_LEVEL(ppnext)==RL_LEVEL(pp) ? RL_TYPE(ppnext) : LEVEL_TO_DIR( \
-      (RL_LEVEL(ppnext)>RL_LEVEL(pp) ? RL_LEVEL(ppnext) : RL_LEVEL(pp)) \
+#define NEXT_TYPE_OR_EOR(pp) \
+    (!pp->next ? LEVEL_TO_DIR(RL_LEVEL(pp)) : \
+    (RL_LEVEL(pp->next)==RL_LEVEL(pp) ? RL_TYPE(pp->next) : LEVEL_TO_DIR( \
+      (RL_LEVEL(pp->next)>RL_LEVEL(pp) ? RL_LEVEL(pp->next) : RL_LEVEL(pp)) \
     )))
 
 
@@ -490,7 +504,7 @@ static void compact_list(TypeLink *list)
 //  levels.
 //----------------------------------------------------------------------*/
 
-static char char_from_level[] = {
+static char char_from_level_array[] = {
   'e', /* FRIBIDI_LEVEL_REMOVED, internal error, this level shouldn't be viewed.  */
   '_', /* FRIBIDI_LEVEL_START or _END, indicating start of string and end of string. */
   /* 0-9,A-F are the only valid levels in debug mode and before resolving
@@ -501,16 +515,22 @@ static char char_from_level[] = {
   'o', 'o', 'o' /* overflows, this levels and higher levels show a bug!. */
 };
 
+static char char_from_level(int level)
+{
+  return char_from_level_array[level + 2];
+}
+
 static void print_types_re(TypeLink *pp)
 {
   fprintf(stderr, "Run types  : ");
   while(pp)
     {
-      fprintf(stderr, "%d:%d(%d)[%c] ", 
-        RL_POS(pp), 
-	RL_TYPE(pp),
-	RL_LEN(pp), 
-	char_from_level[RL_LEVEL(pp) + 2]);
+      fprintf(stderr, "%d:l%d(%s)[%d] ",
+        pp->pos, 
+        pp->len,
+	type_name(pp->type),
+	pp->level
+      );
       pp = pp->next;
     }
   fprintf(stderr, "\n");
@@ -523,7 +543,7 @@ static void print_resolved_levels(TypeLink *pp)
     {
       gint i;
       for (i=0; i<RL_LEN(pp); i++)
-        fprintf(stderr, "%c", char_from_level[RL_LEVEL(pp) + 2]);
+        fprintf(stderr, "%c", char_from_level(RL_LEVEL(pp)));
       pp = pp->next;
     }
   fprintf(stderr, "\n");
@@ -535,7 +555,7 @@ static void print_resolved_types(TypeLink *pp)
   while(pp) {
     gint i;
     for (i=0; i<RL_LEN(pp); i++)
-      fprintf(stderr, "%c", char_from_type[pp->type]);
+      fprintf(stderr, "%c", char_from_type(pp->type));
     pp = pp->next;
   }
   fprintf(stderr, "\n");
@@ -546,7 +566,7 @@ static void print_bidi_string(FriBidiChar *str)
   gint i;
   fprintf(stderr, "Org. types : ");
   for (i=0; i<bidi_string_strlen(str); i++)
-    fprintf(stderr, "%c", char_from_type[fribidi_get_type(str[i])]);
+    fprintf(stderr, "%c", char_from_type(fribidi_get_type(str[i])));
   fprintf(stderr, "\n");
 }
 #endif
@@ -566,13 +586,13 @@ fribidi_analyse_string(/* input */
   gint base_level, base_dir;
   gint max_level;
   gint i;
-  gint *char_type;
   gint prev_last_strong, last_strong;
+  FriBidiCharType *char_type;
   TypeLink *type_rl_list, *explicits_list, *explicits_list_end,
            *pp, *ppprev, *ppnext;
 
   /* Determinate character types */
-  char_type = g_new(gint, len);
+  char_type = g_new(FriBidiCharType, len);
   for (i=0; i<len; i++)
     char_type[i] = fribidi_get_type(str[i]);
 
@@ -585,8 +605,8 @@ fribidi_analyse_string(/* input */
   /* Find the base level */
   if (IS_STRONG(*pbase_dir))
       base_level = DIR_TO_LEVEL(*pbase_dir);
-  /* P2. Search for first strong character and use its direction as base
-     direction */
+  /* P2. P3. Search for first strong character and use its direction as
+     base direction */
   else
     {
       base_level = 0; /* Default */
@@ -599,12 +619,19 @@ fribidi_analyse_string(/* input */
 	  }
     
       /* If no strong base_dir was found, resort to the weak direction
-       * that was passed on input.
-       */
+         that was passed on input. */
       if (IS_NEUTRAL(base_dir))
         base_level = DIR_TO_LEVEL(*pbase_dir);
     }
   base_dir = LEVEL_TO_DIR(base_level);
+
+#ifdef DEBUG
+  if (fribidi_debug) {
+    fprintf(stderr, "Base level : %c\n", char_from_level(base_level));
+    fprintf(stderr, "Base dir   : %c\n", char_from_type(base_dir));
+    print_types_re(type_rl_list);
+  }
+#endif
 
   /* Explicit Levels and Directions */
   DBG("Explicit Levels and Directions.\n");
@@ -612,8 +639,7 @@ fribidi_analyse_string(/* input */
     /* X1. Begin by setting the current embedding level to the paragraph
        embedding level. Set the directional override status to neutral.
        Process each character iteratively, applying rules X2 through X9.
-       Only embedding levels from 0 to 61 are valid in this phase.
-    */
+       Only embedding levels from 0 to 61 are valid in this phase. */
     gint level = base_level;
     gint override = FRIBIDI_TYPE_ON;
     gint new_level, new_override;
@@ -637,11 +663,12 @@ fribidi_analyse_string(/* input */
           /* 2. Explicit Overrides */
             /* X4. With each RLO, compute the least greater odd embedding level. */
             /* X5. With each LRO, compute the least greater even embedding level. */
-	    new_level = ((level + DIR_TO_LEVEL(this_type) + 2) & ~1)
-	                - DIR_TO_LEVEL(this_type);
             new_override = EXPLICIT_TO_OVERRIDE_DIR(this_type);
-            for (i = 0; i < RL_LEN(pp); i++)
+            for (i = 0; i < RL_LEN(pp); i++) {
+              new_level = ((level + DIR_TO_LEVEL(this_type) + 2) & ~1)
+	                  - DIR_TO_LEVEL(this_type);
               PUSH_STATUS;
+            }
 	  } else if (this_type == FRIBIDI_TYPE_PDF) { 
           /* 3. Terminating Embeddings and overrides */
             /* X7. With each PDF, determine the matching embedding or
@@ -649,21 +676,19 @@ fribidi_analyse_string(/* input */
             for (i = 0; i < RL_LEN(pp); i++)
               POP_STATUS;
 	  }
-          /* X9. Remove all RLE, LRE, RLO, LRO, PDF, and BN codes. */
+          /* X9. Remove all RLE, LRE, RLO, LRO, PDF, and BN codes. */          
           /* Remove element and add it to explicits_list */
           temp_link->next = pp->next;
           pp->level = FRIBIDI_LEVEL_REMOVED;
           move_element_before(pp, explicits_list_end);
-          pp = temp_link;            
-	}
-        /* X6. For all typed besides RLE, LRE, RLO, LRO, and PDF:
-           a. Set the level of the current character to the current
-           embedding level.
-           b. Whenever the directional override status is not neutral,
-           reset the current character type to the directional override
-           status.
-        */
-        else {
+          pp = temp_link;
+	} else {
+          /* X6. For all typed besides RLE, LRE, RLO, LRO, and PDF:
+             a. Set the level of the current character to the current
+             embedding level.
+             b. Whenever the directional override status is not neutral,
+             reset the current character type to the directional override
+             status. */
           RL_LEVEL(pp) = level;
           if (!IS_NEUTRAL(override))
             RL_TYPE(pp) = override;
@@ -680,6 +705,7 @@ fribidi_analyse_string(/* input */
     override = FRIBIDI_TYPE_ON;
     status_stack -= stack_size;
     stack_size = 0;
+    over_pushed = 0;
 
     free_type_link(temp_link);
     g_free(status_stack);
@@ -690,16 +716,15 @@ fribidi_analyse_string(/* input */
      higher of the two levels on either side of the boundary (at the start
      or end of the paragraph, the level of the 'other' run is the base
      embedding level). If the higher level is odd, the type is R, otherwise
-     it is L.
-  */
+     it is L. */
   /* Resolving Implicit Levels can be done out of X10 loop, so only change
-     of Resolving Weak Types and Resolving Neutral Types is needed.
-  */
+     of Resolving Weak Types and Resolving Neutral Types is needed. */
 
   compact_list(type_rl_list);
 
 #ifdef DEBUG
   if (fribidi_debug) {
+    print_types_re(type_rl_list);
     print_bidi_string(str);
     print_resolved_levels(type_rl_list);
     print_resolved_types(type_rl_list);
@@ -709,136 +734,104 @@ fribidi_analyse_string(/* input */
   /* 4. Resolving weak types */
   DBG("Resolving weak types.\n");
   {
-    gint last_strong = base_dir;
-    /* prev_type after running the loop on ppprev */
-    gint prev_type_new;
-    /* prev_type before running the loop on pprev */
-    gint prev_type_old = base_dir;
+    gint last_strong;
+    gint prev_type_org;
+    gint w4;
 
-    ppprev = type_rl_list;
-    pp = ppprev->next;
-    ppnext = pp->next;
-    while (ppnext != NULL) {
-      /* When we are at the start of a level run, prev_type is sor. */ 
-      gint prev_type;
+    last_strong = base_dir;
+    for (pp = type_rl_list->next; pp->next; pp = pp->next) {
+      gint prev_type = PREV_TYPE_OR_SOR(pp);
       gint this_type = RL_TYPE(pp);
-      /* When we are at the end of a level run, prev_type is eor. */ 
-      gint next_type = NEXT_TYPE_OR_EOR;
+      gint next_type = NEXT_TYPE_OR_EOR(pp);
       
-      prev_type_new = RL_TYPE(ppprev);
-      RL_TYPE(ppprev) = prev_type_old;
-      prev_type_old = this_type;
-      prev_type = PREV_TYPE_OR_SOR;
-
-      /* Remember the last strong character
-         It's very important to do it here, not at the end of the loop
-	 because the types may change, it affects rule 3.
-      */
-      if (RL_LEVEL(ppprev) != RL_LEVEL(pp))
-        last_strong = prev_type/*==sor*/;
-      else
-        if (IS_STRONG(prev_type))
-          last_strong = prev_type;
+      if (IS_STRONG(prev_type))
+        last_strong = prev_type;
 
       /* W1. NSM
-         Examine each non-spacing mark (NSM) in the level run, and change
-         the type of the NSM to the type of the previous character. If the
-         NSM is at the start of the level run, it will get the type of sor.
-      */
-      if (this_type == FRIBIDI_TYPE_NSM)
-          RL_TYPE(pp) = prev_type;
+         Examine each non-spacing mark (NSM) in the level run, and change the
+         type of the NSM to the type of the previous character. If the NSM
+         is at the start of the level run, it will get the type of sor. */
+      if (this_type == FRIBIDI_TYPE_NSM) {
+        RL_TYPE(pp) = prev_type;
+        continue;
+      }
 
-      /* W2: European numbers.
-       */
-      if (this_type == FRIBIDI_TYPE_EN && last_strong == FRIBIDI_TYPE_AL)
+      /* W2: European numbers. */
+      if (this_type == FRIBIDI_TYPE_EN && last_strong == FRIBIDI_TYPE_AL) {
         RL_TYPE(pp) = FRIBIDI_TYPE_AN;
 
-      /* W3: Change ALs to R.
-      */
-      if (this_type == FRIBIDI_TYPE_AL)
-        RL_TYPE(pp) = FRIBIDI_TYPE_RTL;
-
-      RL_TYPE(ppprev) = prev_type_new;
-
-      ppprev = pp;
-      pp = ppnext;
-      ppnext = ppnext->next;
+        /* Resolving dependency of loops for rules W1 and W2, so we
+           can merge them in one loop. */
+        if (next_type == FRIBIDI_TYPE_NSM)
+          RL_TYPE(pp->next) == FRIBIDI_TYPE_AN;
+      }
     }
 
-    ppprev = type_rl_list;
-    pp = ppprev->next;
-    ppnext = pp->next;
-    while (ppnext != NULL) {
-      /* When we are at the start of a level run, prev_type is sor. */ 
-      gint prev_type = PREV_TYPE_OR_SOR;
+    last_strong = base_dir;
+    /* Resolving dependency of loops for rules W4 and W5, W5 may
+       want to prevent W4 to take effect in the next turn, do this 
+       through "w4". */
+    w4 = 1;
+    /* Resolving dependency of loops for rules W4 and W5 with W7,
+       W7 may change an EN to L but it sets the prev_type_org if needed,
+       so W4 and W5 in next turn can still do their works. */
+    prev_type_org = FRIBIDI_TYPE_ON;
+    for (pp = type_rl_list->next; pp->next; pp = pp->next) {
+      gint prev_type = PREV_TYPE_OR_SOR(pp);
       gint this_type = RL_TYPE(pp);
-      /* When we are at the end of a level run, prev_type is eor. */ 
-      gint next_type = NEXT_TYPE_OR_EOR;
+      gint next_type = NEXT_TYPE_OR_EOR(pp);
+
+      if (IS_STRONG(prev_type))
+        last_strong = prev_type;
+
+      /* W3: Change ALs to R. */
+      if (this_type == FRIBIDI_TYPE_AL) {
+        RL_TYPE(pp) = FRIBIDI_TYPE_RTL;
+        w4 = 1;
+        prev_type_org = FRIBIDI_TYPE_ON;
+        continue;
+      }
 
       /* W4. A single european separator changes to a european number.
          A single common separator between two numbers of the same type
-         changes to that type.
-      */
-      if (RL_LEN(pp) == 1 && IS_ES_OR_CS(this_type) &&
-          IS_NUMBER(prev_type) && prev_type == next_type &&
-	  (prev_type == FRIBIDI_TYPE_EN || this_type == FRIBIDI_TYPE_CS))
+         changes to that type. */
+      if (w4 &&
+         RL_LEN(pp) == 1 && IS_ES_OR_CS(this_type) &&
+         IS_NUMBER(prev_type_org) && prev_type_org == next_type &&
+         (prev_type_org == FRIBIDI_TYPE_EN || this_type == FRIBIDI_TYPE_CS)) {
         RL_TYPE(pp) = prev_type;
-
-      ppprev = pp;
-      pp = ppnext;
-      ppnext = ppnext->next;
-    }
-
-    ppprev = type_rl_list;
-    pp = ppprev->next;
-    ppnext = pp->next;
-    while (ppnext != NULL) {
-      /* When we are at the start of a level run, prev_type is sor. */ 
-      gint prev_type = PREV_TYPE_OR_SOR;
-      gint this_type = RL_TYPE(pp);
-      /* When we are at the end of a level run, prev_type is eor. */ 
-      gint next_type = NEXT_TYPE_OR_EOR;
+        this_type = RL_TYPE(pp);
+      }
+      w4 = 1;
       
-      /* Remember the last strong character
-         It's very important to do it here, not at the end of the loop
-	 because the types may change, it affects rule 3.
-      */
-      if (RL_LEVEL(ppprev) != RL_LEVEL(pp))
-        last_strong = prev_type/*==sor*/;
-      else
-        if (IS_STRONG(prev_type))
-          last_strong = prev_type;
       /* W5. A sequence of European terminators adjacent to European
-         numbers changes to All European numbers.
-      */
-      if (this_type == FRIBIDI_TYPE_ET &&
-         (prev_type == FRIBIDI_TYPE_EN || next_type == FRIBIDI_TYPE_EN))
-        RL_TYPE(pp) = FRIBIDI_TYPE_EN;
+         numbers changes to All European numbers. */
 
-      /* This type may have been overriden. */
-      this_type = RL_TYPE(pp);
-      
-      /* W6. Otherwise change separators and terminators to other neutral.
-      */
+      if (this_type == FRIBIDI_TYPE_ET &&
+         (prev_type_org == FRIBIDI_TYPE_EN || next_type == FRIBIDI_TYPE_EN)) {
+        RL_TYPE(pp) = FRIBIDI_TYPE_EN;
+        w4 = 0;
+        this_type = RL_TYPE(pp);
+      }
+
+      /* W6. Otherwise change separators and terminators to other neutral. */
       if (IS_NUMBER_SEPARATOR_OR_TERMINATOR(this_type))
         RL_TYPE(pp) = FRIBIDI_TYPE_ON;
 
-      /* W7. Change european numbers to L. 
-      */
-      if (this_type == FRIBIDI_TYPE_EN && last_strong == FRIBIDI_TYPE_LTR)
+      /* W7. Change european numbers to L. */
+      if (this_type == FRIBIDI_TYPE_EN && last_strong == FRIBIDI_TYPE_LTR) {
         RL_TYPE(pp) = FRIBIDI_TYPE_LTR;
-
-      ppprev = pp;
-      pp = ppnext;
-      ppnext = ppnext->next;
+        prev_type_org = (RL_LEVEL(pp) == RL_LEVEL(pp->next) ?
+                         FRIBIDI_TYPE_EN : FRIBIDI_TYPE_ON);
+      } else 
+        prev_type_org = PREV_TYPE_OR_SOR(pp->next);
     }
   }
 
-  compact_list(type_rl_list);
+  compact_neutrals(type_rl_list);
   
 #ifdef DEBUG
   if (fribidi_debug) {
-    print_types_re(type_rl_list);
     print_resolved_levels(type_rl_list);
     print_resolved_types(type_rl_list);
   }  
@@ -847,47 +840,30 @@ fribidi_analyse_string(/* input */
   /* 5. Resolving Neutral Types */
   DBG("Resolving neutral types.\n");
   {
-  TypeLink *ppprev, *ppnext/* prev and next non neutral */;
   gint prev_type, next_type;
   
   /* N1. and N2.
      For each neutral, resolve it.
   */ 
-  for (ppnext=pp=(ppprev=type_rl_list)->next; pp->next; pp=pp->next)
+  for (pp = type_rl_list->next; pp->next; pp = pp->next)
     {
       /* "European and arabic numbers are treated as though they were R" */
       /* CHANGE_NUMBER_TO_RTL does this. */
 
       gint this_type = CHANGE_NUMBER_TO_RTL(RL_TYPE(pp));
-      /* Find prev_type from ppprev. */
-      prev_type = CHANGE_NUMBER_TO_RTL(PREV_TYPE_OR_SOR);
-
-      /* Update ppnext if needed. */
-      if (RL_LEVEL(pp) == RL_LEVEL(ppnext)) {
-        /* Find next non-neutral. */
-        for (ppnext = pp->next; 
-             IS_NEUTRAL(RL_TYPE(ppnext)) &&
-             RL_LEVEL(ppnext) == RL_LEVEL(ppnext->prev); ppnext = ppnext->next)
-          /* Nothing! */;
-        next_type = CHANGE_NUMBER_TO_RTL(NEXT_TYPE_OR_EOR);
-      }
+      prev_type = CHANGE_NUMBER_TO_RTL(PREV_TYPE_OR_SOR(pp));
+      next_type = CHANGE_NUMBER_TO_RTL(NEXT_TYPE_OR_EOR(pp));
 
       if (IS_NEUTRAL(this_type))
         RL_TYPE(pp) = (prev_type == next_type) ?
                       /* N1. */ prev_type :
                       /* N2. */ EMBEDDING_DIRECTION(pp);
-		      
-      /* Update ppprev if needed. */
-      if (!IS_NEUTRAL(this_type) ||
-          RL_LEVEL(pp) != RL_LEVEL(pp->next))
-        ppprev = pp;
     }
   }
   
   compact_list(type_rl_list);
 #ifdef DEBUG
   if (fribidi_debug) {
-    print_types_re(type_rl_list);
     print_resolved_levels(type_rl_list);
     print_resolved_types(type_rl_list);
   }
@@ -1032,8 +1008,8 @@ void fribidi_log2vis(/* input */
     gint i, j, k, state, pos;
     TypeLink *p, *q, *list, *list_end;
 
-    /* L1. Reset the embedding levels of some chars.
-    */
+    DBG("Reset the embedding levels.\n");
+    /* L1. Reset the embedding levels of some chars. */
     init_list(&list, &list_end);
     q = list_end;
     state = 1;
@@ -1063,7 +1039,6 @@ void fribidi_log2vis(/* input */
 
 #ifdef DEBUG
   if (fribidi_debug) {
-    DBG("Reset the embedding levels.\n");
     print_types_re(type_rl_list);
     print_resolved_levels(type_rl_list);
     print_resolved_types(type_rl_list);

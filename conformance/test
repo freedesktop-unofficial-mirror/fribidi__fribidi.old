@@ -5,13 +5,18 @@
 
 path=`dirname $(which $0)`
 
-if ! test -f "$path/reference/bidiref"; then
-  gcc -o $path/reference/bidiref $path/reference/bidiref.cpp
-fi
-
 if ! test -f "$path/../fribidi"; then
   echo "You must make fribidi first."
   exit 1
+fi
+
+if ! test -f "$path/reference/bidiref"; then
+  if test -z "`echo -n | $path/../fribidi -debug 2>&1`"; then
+    debug="-DDEBUGGING"
+  else
+    debug=""
+  fi
+  gcc $debug -o $path/reference/bidiref $path/reference/bidiref.cpp
 fi
 
 convertsub () {
@@ -25,13 +30,16 @@ while [ -n "$1" ]; do
   elif test "$1" = "-clean"; then
     p1=$p1" -clean"
     p2=$p2" -clean"
+  else
+    par=$par" $1"
   fi
   shift
 done
 
-echo -n > $path/test.out
-echo -n > $path/test.ref
+ > $path/test.out
+ > $path/test.ref
 
+cat $par | 
 while read line; do
   echo "$line" | $path/../fribidi $p1 -nopad >> $path/test.out
 #  echo "$line" | $path/reference/bidiref $p2 >> $path/test.ref
@@ -50,6 +58,4 @@ while read line; do
   echo "$refline" >> $path/test.ref
 done
 
-#if test -z `diff $path/test.out $path/test.ref`; then
-#  rm -f $path/test.in $path/test.out $path/test.ref
-#fi
+diff $path/test.out $path/test.ref

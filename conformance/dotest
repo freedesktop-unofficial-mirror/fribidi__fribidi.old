@@ -1,14 +1,16 @@
 #!/bin/sh
 # Generate and test a single test data.
 
+generator="test_gen_rand"
+
 path=`dirname $(which $0)`
 
 trap 'rm -f $path/test.{in,out,ref} &> /dev/null ; exit' INT
 
-if ! test -f "$path/test_gen_rand"; then
-  gcc -o $path/test_gen_rand $path/test_gen_rand.c
+if ! test -f "$path/$generator"; then
+  gcc -o $path/$generator $path/$generator.c
 fi
 
-$path/test_gen_rand $1 > $path/test.in
+$path/$generator $1 | sed 's|\\\\||g' > $path/test.in
 shift
 cat $path/test.in | $path/test -clean $@

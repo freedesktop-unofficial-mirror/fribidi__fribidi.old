@@ -221,7 +221,7 @@ int NTypes[] = {
     LRO,    // LRO
     LRE,    // LRE
     PDF,    // PDF
-	ON,		// LS
+    ON,     // LS
 };
 
 int ClassFromChN(TCHAR ch)

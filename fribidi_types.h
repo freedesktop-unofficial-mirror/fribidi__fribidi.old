@@ -135,10 +135,9 @@ typedef enum
   FRIBIDI_TYPE_R   = FRIBIDI_TYPE_RTL,
   FRIBIDI_TYPE_N   = FRIBIDI_TYPE_ON,
   FRIBIDI_TYPE_WL  = /* Weak left to right */
-    FRIBIDI_MASK_WEAK + FRIBIDI_MASK_LETTER,    
+    FRIBIDI_MASK_WEAK,    
   FRIBIDI_TYPE_WR  = /* Weak right to left */
-    FRIBIDI_MASK_WEAK + FRIBIDI_MASK_LETTER +
-    FRIBIDI_MASK_RTL,
+    FRIBIDI_MASK_WEAK + FRIBIDI_MASK_RTL,
 
   /* The following are only used internally */
   FRIBIDI_TYPE_SOT = /* Start of text */
@@ -222,14 +221,71 @@ typedef enum
 
 /* Override status of an explicit mark: LRO->LTR, RLO->RTL, otherwise->ON. */
 #define EXPLICIT_TO_OVERRIDE_DIR(p) \
-    (IS_EXPLICIT(p) ? LEVEL_TO_DIR(DIR_TO_LEVEL(p)) : FRIBIDI_TYPE_ON)
+    (IS_OVERRIDE(p) ? LEVEL_TO_DIR(DIR_TO_LEVEL(p)) : FRIBIDI_TYPE_ON)
 
 
 #ifdef DEBUG
-char char_from_type[] = {
-  'L', 'R', 'l', 'r', '1', 'w', 'w', '9', 'w', 'P', 'S', '_', 'A',
-  '.', '+', '+', '+', '+', '-', 'n', '?',
-  'b', '?', '>', '<', 'n', 'e', '?', '?'
+char char_from_type (FriBidiCharType c) {
+  switch (c) {
+    case FRIBIDI_TYPE_LTR: return 'L';
+    case FRIBIDI_TYPE_RTL: return 'R';
+    case FRIBIDI_TYPE_AL : return 'A';
+
+    case FRIBIDI_TYPE_EN : return '1';
+    case FRIBIDI_TYPE_AN : return '9';
+    case FRIBIDI_TYPE_ES : return 'w';
+    case FRIBIDI_TYPE_ET : return 'w';
+    case FRIBIDI_TYPE_CS : return 'w';
+    case FRIBIDI_TYPE_NSM: return '`';
+    case FRIBIDI_TYPE_BN : return 'b';
+
+    case FRIBIDI_TYPE_BS : return 'B';
+    case FRIBIDI_TYPE_SS : return 'S';
+    case FRIBIDI_TYPE_WS : return '_';
+    case FRIBIDI_TYPE_ON : return 'n';
+
+    case FRIBIDI_TYPE_LRE: return '+';
+    case FRIBIDI_TYPE_RLE: return '+';
+    case FRIBIDI_TYPE_LRO: return '+';
+    case FRIBIDI_TYPE_RLO: return '+';
+    case FRIBIDI_TYPE_PDF: return '-';
+    
+    default: return '?';
+  }
+};
+
+#define CASE(type) case FRIBIDI_TYPE_##type: return #type
+
+char *type_name (FriBidiCharType c) {
+  switch (c) {
+    CASE(LTR);
+    CASE(RTL);
+    CASE(AL);
+
+    CASE(EN);
+    CASE(AN);
+    CASE(ES);
+    CASE(ET);
+    CASE(CS);
+    CASE(NSM);
+    CASE(BN);
+
+    CASE(BS);
+    CASE(SS);
+    CASE(WS);
+    CASE(ON);
+    
+    CASE(LRE);
+    CASE(RLE);
+    CASE(LRO);
+    CASE(RLO);
+    CASE(PDF);
+
+    CASE(SOT);
+    CASE(EOT);
+        
+    default: return "?";
+  }
 };
 #endif
 

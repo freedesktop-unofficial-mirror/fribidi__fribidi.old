@@ -1,3 +1,8 @@
+2001-03-22  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi.c, fribidi_types.h : Some bugs introduced in the last
+	changes removed, "Resolving weak types" rewritten and now works!,
+	no known bugs now.
+
 2001-03-09  Dov Grobgeld  <dov@orbotech.orbotech.co.il>
 
 	* fribidi_mini_glib.c, fribidi_mini_glib.h : Applied patch
