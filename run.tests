@@ -21,6 +21,9 @@
 # For licensing issues, contact <dov@imagic.weizmann.ac.il> and
 # <fwpg@sharif.edu>.
 
+COLUMNS=80
+export COLUMNS
+
 if test -z "$srcdir"; then
   srcdir=.
   test "${VERBOSE+set}" != "set" && VERBOSE=yes

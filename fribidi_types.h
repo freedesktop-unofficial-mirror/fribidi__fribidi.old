@@ -163,7 +163,7 @@ extern "C"
 /* European number terminator */
 #define FRIBIDI_TYPE_ET		( FRIBIDI_MASK_WEAK + FRIBIDI_MASK_NUMSEPTER \
 				+ FRIBIDI_MASK_ET )
-/* Common Separator */
+/* Common separator */
 #define FRIBIDI_TYPE_CS		( FRIBIDI_MASK_WEAK + FRIBIDI_MASK_NUMSEPTER \
 				+ FRIBIDI_MASK_CS )
 /* Non spacing mark */

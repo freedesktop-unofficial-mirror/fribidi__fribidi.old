@@ -19,6 +19,7 @@ libfribidi_charsets_extra =	\
 
 libfribidi_charsets_h =	\
 	fribidi_char_sets.h	\
+	fribidi_char_sets.i	\
 	fribidi_char_sets_utf8.h
 
 libfribidi_charsets_extra_h =	\
@@ -29,8 +30,7 @@ libfribidi_charsets_extra_h =	\
 	fribidi_char_sets_iso8859_6.h	\
 	fribidi_char_sets_iso8859_8.h
 
-libfribidi_extra_h =	\
-	fribidi_mem.h
+libfribidi_extra_h =	
 
 lib_LTLIBRARIES = libfribidi.la
 
@@ -53,10 +53,12 @@ libfribidiincdir = $(includedir)/fribidi
 libfribidiinc_HEADERS =	\
 	fribidi.h	\
 	fribidi_types.h	\
+	fribidi_types.i	\
 	fribidi_env.h	\
 	fribidi_unicode.h	\
 	$(libfribidi_charsets_h)	\
 	$(libfribidi_charsets_extra_h)	\
+	fribidi_mem.h	\
 	fribidi_config.h
 
 GETOPT_SRC =	\
@@ -77,8 +79,6 @@ TEST_FILES =	\
 	tests/test_UTF-8_persian.reference
 
 TABLE_FILES =	\
-	fribidi_types.i	\
-	fribidi_char_sets.i	\
 	fribidi_tab_mirroring.i	\
 	fribidi_tab_char_type_2.i	\
 	fribidi_tab_char_type_9.i

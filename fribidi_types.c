@@ -76,7 +76,7 @@ fribidi_char_from_type (FriBidiCharType c)
     default:
       return '?';
     }
-};
+}
 
 #endif
 

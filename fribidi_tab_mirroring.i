@@ -352,7 +352,7 @@ FriBidiMirroredChars[] =
 
 /* *INDENT-ON* */
 
-const int nFriBidiMirroredChars = 318;
+static const int nFriBidiMirroredChars = 318;
 
 
 #endif /* FRIBIDI_TAB_MIRRORING_I */
