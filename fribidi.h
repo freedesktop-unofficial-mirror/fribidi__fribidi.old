@@ -154,7 +154,7 @@ extern "C"
  *     FriBidiStrIndex sel_span[2] = {10,45};
  *
  *     fribidi_map_range(sel_span,
- *                       FRIBIDI_TRUE,
+ *                       TRUE,
  *                       length,
  *                       vis2log_map,
  *                       embedding_levels,

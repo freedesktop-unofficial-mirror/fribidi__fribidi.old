@@ -51,6 +51,13 @@ extern "C"
 #define FRIBIDI_TRUE	1
 #define FRIBIDI_FALSE	0
 
+#ifndef TRUE
+#define TRUE FRIBIDI_TRUE
+#endif
+#ifndef FALSE
+#define FALSE FRIBIDI_FALSE
+#endif
+
   typedef struct _FriBidiList FriBidiList;
   struct _FriBidiList
   {
