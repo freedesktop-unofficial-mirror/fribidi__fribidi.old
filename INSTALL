@@ -9,13 +9,16 @@ Simple install procedure
   [ Become root if necessary ]
   % make install                              # install FriBidi
 
+
 Building without glib
 =====================
+
 It is possible to build fribidi without glib, though that still isn't
 automatic.  The compilation to a static library may be done through the
 makefile "Makefile.noglib". Installation must be manually. Volunteer
 contribution of how to automatically use fribidi_mini_glib if glib is not
 found is happily received.
+
 
 The Nitty-Gritty
 ================
@@ -57,3 +60,10 @@ Installation directories
 
 The location of the installed files is determined by the --prefix
 and --exec-prefix options given to configure. 
+
+Building from CVS
+=================
+
+To make fribidi from CVS, you should run the 'bootstrap' script first, to
+generate the 'configure' script. Then you can continue with the installation
+procedures mentioned above.

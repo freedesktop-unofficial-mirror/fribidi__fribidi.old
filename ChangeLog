@@ -1,8 +1,15 @@
-2001-08-23  Behdad Esfahbod <behdad@sharif.edu>
+2001-12-10  Roozbeh Pournader <roozbeh@sharif.edu>
+	* fribidi.c: fixed a memory boundary bug (fix by Hidetoshi Tajima
+	<hidetoshi.tajima@sun.com>).
+	* INSTALL: added a comment for how to install from CVS (suggested by
+	Omer Zak); cleaned up some vertical spacing.
+	* ChangeLog: changed Behdad's address to 'bamdad.org'.
+
+2001-08-23  Behdad Esfahbod <behdad@bamdad.org>
 	* acinclude.m4, ltmain.sh, ltmain.in, ltconfig: Updated with
 	libtool-1.4 to configure under latest cygwin.
 
-2001-05-29  Behdad Esfahbod <behdad@sharif.edu>
+2001-05-29  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi_get_type.c: Updated to use new 'fribidi_tables.i'.
 	* fribidi_utils.c: very small code cleanup.
 
@@ -14,7 +21,7 @@
 	* unidata/PropList.txt: removed.
 	* unidata/UnicodeData.txt: added.
 
-2001-05-22  Behdad Esfahbod <behdad@sharif.edu>
+2001-05-22  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi_char_sets_utf8.c: Fixed a little bug in utf-8 -> unicode
 	converter.
 
@@ -57,7 +64,7 @@
 2001-04-07  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi_main.c, fribidi_benchmark.c: Check for HAVE_CONFIG_H flag.
 
-2001-04-03  Behdad Esfahbod <behdad@sharif.edu>
+2001-04-03  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi_mini_glib.h, fribidi_mini_glib.c: Added functions
 	for working with MemChunks, some more definitions of glib added.
 
