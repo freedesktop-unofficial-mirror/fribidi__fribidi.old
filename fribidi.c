@@ -60,6 +60,7 @@ struct _TypeLink
 #define FRIBIDI_LEVEL_END     -1
 #define FRIBIDI_LEVEL_REMOVED -2
 
+
 typedef struct
 {
   FriBidiChar key;
@@ -87,6 +88,7 @@ gboolean fribidi_set_debug (gboolean debug)
 #endif
 }
 
+/* Where is this used? --RP */
 static gint
 bidi_string_strlen (FriBidiChar * str)
 {
@@ -177,8 +179,7 @@ run_length_encode_types (FriBidiCharType * char_type, gint type_len)
   TypeLink *list = NULL, *last, *link;
   TypeLink current;
 
-  FriBidiCharType type;
-  gint len, pos, i;
+  gint i;
 
   /* Add the starting link */
   list = new_type_link ();
@@ -230,6 +231,7 @@ run_length_encode_types (FriBidiCharType * char_type, gint type_len)
 /* explicits_list is a list like type_rl_list, that holds the explicit
    codes that are removed from rl_list, to reinsert them later by calling
    the override_list.
+   (return something or change to 'void' --RP)
 */
 static void *
 init_list (TypeLink ** start, TypeLink ** end)
@@ -428,8 +430,8 @@ compact_neutrals (TypeLink * list)
 	      &&
 	      ((RL_TYPE
 		(list->prev) == RL_TYPE (list)
-		|| FRIBIDI_IS_NEUTRAL (RL_TYPE (list->prev))
-		&& FRIBIDI_IS_NEUTRAL (RL_TYPE (list)))))
+		|| (FRIBIDI_IS_NEUTRAL (RL_TYPE (list->prev))
+		&& FRIBIDI_IS_NEUTRAL (RL_TYPE (list))))))
 	    {
 	      TypeLink *next = list->next;
 	      list->prev->next = list->next;
@@ -619,7 +621,7 @@ fribidi_analyse_string (	/* input */
   gint base_level, base_dir;
   gint max_level;
   gint i;
-  gint prev_last_strong, last_strong;
+  gint prev_last_strong, last_strong; /* first one is not used, second one is defined also some lines later! --RP */
   FriBidiCharType *char_type;
   TypeLink *type_rl_list, *explicits_list, *explicits_list_end, *pp;
 
@@ -812,6 +814,7 @@ fribidi_analyse_string (	/* input */
 	    /* Resolving dependency of loops for rules W1 and W2, so we
 	       can merge them in one loop. */
 	    if (next_type == FRIBIDI_TYPE_NSM)
+	    /* What is this? "==" or "="? --RP */
 	      RL_TYPE (pp->next) == FRIBIDI_TYPE_AN;
 	  }
       }
@@ -901,6 +904,7 @@ fribidi_analyse_string (	/* input */
   /* 5. Resolving Neutral Types */
   DBG ("Resolving neutral types.\n");
   {
+    /* These are also defined two lines later! --RP */
     gint prev_type, next_type;
 
     /* N1. and N2.
@@ -1053,8 +1057,8 @@ void
 free_rl_list (TypeLink * type_rl_list)
 {
 
-  TypeLink *p, *pp;
-  if (!pp)
+  TypeLink *p, *pp; /* 'p' is not used if !USE_SIMPLE_MALLOC. --RP */
+  if (!pp) /* uninitialzied! --RP */
     return;
 #ifdef USE_SIMPLE_MALLOC
   for (pp = type_rl_list; pp; pp = pp->next)
@@ -1124,7 +1128,7 @@ fribidi_log2vis (		/* input */
   gboolean private_V_to_L = FALSE;
 
   if (len == 0)
-    return;
+    return; /* should return a gboolean. --RP */
 
   /* If l2v is to be calculated we must have l2v as well. If it is not
      given by the caller, we have to make a private instance of it. */
@@ -1150,7 +1154,7 @@ fribidi_log2vis (		/* input */
   DBG ("Reordering resolved levels.\n");
   {
     gint level_idx;
-    gint i, j;
+    gint i;
 
     /* TBD: L3 */
 
@@ -1252,7 +1256,7 @@ fribidi_log2vis_get_embedding_levels (
   TypeLink *type_rl_list, *pp;
   gint max_level;
 
-  if (len = 0)
+  if (len = 0) /* '=' or '=='? --RP */
     return;
 
   fribidi_analyse_string (str, len, pbase_dir,

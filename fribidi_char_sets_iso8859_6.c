@@ -21,6 +21,7 @@
  * <fwpg@sharif.edu>. 
  */
 
+#include <string.h>
 #include "fribidi.h"
 
 #define ISO_HAMZA 0xc1

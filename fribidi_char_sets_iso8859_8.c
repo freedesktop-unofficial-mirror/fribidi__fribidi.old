@@ -21,6 +21,7 @@
  * <fwpg@sharif.edu>.
  */
 
+#include <string.h>
 #include "fribidi.h"
 
 /* The following are proposed extensions to iso-8859-8. */

@@ -135,8 +135,6 @@ benchmark (guchar * S_, FriBidiCharSet char_set, gint niter)
 int
 main (int argc, char *argv[])
 {
-  int argp;
-
   niter = 1000;
 
   /* Parse the command line */

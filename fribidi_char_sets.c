@@ -22,6 +22,7 @@
  */
  
 #include "fribidi_char_sets.h"
+#include <string.h>
 
 typedef struct
 {

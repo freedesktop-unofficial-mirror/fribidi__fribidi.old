@@ -21,6 +21,7 @@
  * <fwpg@sharif.edu>. 
  */
 
+#include <string.h>
 #include "fribidi.h"
 
 FriBidiChar fribidi_isiri_3342_to_unicode_tab[] = {	/* 0xA0-0xFF */

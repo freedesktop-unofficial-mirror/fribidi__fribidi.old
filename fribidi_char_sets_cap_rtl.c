@@ -21,6 +21,7 @@
  * <fwpg@sharif.edu>.
  */
 
+#include <string.h>
 #include "fribidi.h"
 
 extern FriBidiCharType FriBidiPropertyBlock0000[256];
@@ -43,7 +44,7 @@ fribidi_unicode_to_cap_rtl_c (FriBidiChar uch)
 
 gint fribidi_cap_rtl_to_unicode (guchar * s, FriBidiChar * us)
 {
-  gint i, j, length, len;
+  gint i, j, len;
 
   len = strlen (s);
   j = 0;
@@ -275,11 +276,13 @@ FriBidiPropCharType FriBidiPropertyBlockCapRTL[256] = {
 #undef PDF
 #undef EN
 
+/* does not return anything --RP */
 gboolean fribidi_char_set_enter_cap_rtl (void)
 {
   FriBidiPropertyBlocks[0] = FriBidiPropertyBlockCapRTL;
 }
 
+/* does not return anything --RP */
 gboolean fribidi_char_set_leave_cap_rtl (void)
 {
   FriBidiPropertyBlocks[0] = FriBidiPropertyBlock0000;

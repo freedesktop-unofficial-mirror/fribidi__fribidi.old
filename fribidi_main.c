@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <getopt.h>
+#include <string.h>
 #include "fribidi.h"
 #include "config.h"
 

@@ -95,4 +95,8 @@ gboolean fribidi_char_set_enter (FriBidiCharSet char_set);
    another mode. */
 gboolean fribidi_char_set_leave (FriBidiCharSet char_set);
 
+/* Return the charset which name is "s". */
+FriBidiCharSet
+fribidi_parse_charset (guchar * s);
+
 #endif /* FRIBIDI_CHAR_SETS_H */
