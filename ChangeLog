@@ -1,15 +1,14 @@
 2001-03-22  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c, fribidi_types.h: Some bugs introduced in the last
-	changes removed, "Resolving weak types" rewritten and now works!,
-	no known bugs now.
-	Macros defined for external use, changed their name to have
-	a prefix of FRIBIDI_.
+	changes removed, "Resolving weak types" rewritten, no known
+	conformance bugs. Macros defined for external use, changed their
+	name to have a prefix of FRIBIDI_.
 	
 	* fribidi.c, fribidi.h: Function fribidi_remove_explicits() added
 	to remove the explicit marks from a fribidi string.
 
-	* fribidi.c: A bug that caused position_l_to_v and position_v_to_l
-	not to calculated correctly, fixed.
+	* fribidi.c: Fixed a bug that caused position_l_to_v and
+	position_v_to_l not to calculated correctly.
 	
 	* fribidi.h: Define symbols PACKAGE and VERSION manually, autoconf
 	should set them, but I don't know how to.
