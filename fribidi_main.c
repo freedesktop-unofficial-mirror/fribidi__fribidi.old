@@ -43,6 +43,15 @@ void die(gchar *fmt, ...)
 #define UNI_ALEF 0x05D0
 #define UNI_TAV 0x05EA
 
+/* defining explicit bidi marks */
+#define UNI_LRM 0x200E
+#define UNI_RLM 0x200F
+#define UNI_LRE 0x202a
+#define UNI_RLE 0x202b
+#define UNI_PDF 0x202c
+#define UNI_LRO 0x202d
+#define UNI_RLO 0x202e
+
 void charset_to_unicode(gint char_set,
 			guchar *s,
 			/* output */
@@ -50,20 +59,47 @@ void charset_to_unicode(gint char_set,
 			int *length
 			)
 {
-  int i;
+  int i, j;
   int len = strlen(s);
 
   if (char_set == 0)
     {
       /* Convert A-Z into hebrew characters */
+      j = 0;
       for (i=0; i<len+1; i++)
 	{
 	  guchar ch = s[i];
 
-	  if (ch >= 'A' && ch <= 'Z')
-	    us[i] = ch - 'A' + UNI_ALEF;
+	  /* we use '_' for explicit marks. The list is:
+	   *
+	   * _>  LRM
+	   * _<  RLM
+	   * _l  LRE
+	   * _r  RLE
+	   * _p  PDF
+	   * _L  LRO
+	   * _R  RLO
+	   * __  underscore itself
+	   *
+	   */
+	  
+	  if (ch == '_') {
+            (*length)--;
+	    switch (ch = s[++i]) {
+	      case '>': us[j++] = UNI_LRM; break;
+	      case '<': us[j++] = UNI_RLM; break;
+	      case 'l': us[j++] = UNI_LRE; break;
+	      case 'r': us[j++] = UNI_RLE; break;
+	      case 'p': us[j++] = UNI_PDF; break;
+	      case 'L': us[j++] = UNI_LRO; break;
+	      case 'R': us[j++] = UNI_RLO; break;	    
+	      case '_': us[j++] = '_'; break;	    
+	      default: i--; break;
+	    }	    	  
+	  } else if (ch >= 'A' && ch <= 'Z')
+	    us[j++] = ch - 'A' + UNI_ALEF;
 	  else
-	    us[i] = s[i];
+	    us[j++] = s[i];
 	}
     }
   else if (char_set == FRIBIDI_CHARSET_8859_6)
@@ -93,20 +129,31 @@ void unicode_to_charset(gint char_set,
   if (char_set == 0)
     {
       /* Convert hebrew characters into A-Z */
-      int i = 0;
-      
-      while(us[i])
+      int i, j = 0;
+      for (i=0, j=0; i<length; i++) 
 	{
 	  FriBidiChar ch = us[i];
-	  if (ch >= UNI_ALEF && ch <= UNI_TAV)
-	    s[i] = ch-UNI_ALEF+'A';
-	  else if (us[i] < 256)
-	    s[i] = us[i];
-	  else
-	    s[i] = '¿';
-	  i++;
+	  /*{-BE start*/
+	  switch (ch)
+	    {
+	      case UNI_LRM: s[j++] = '_'; s[j++] = '>'; break;
+	      case UNI_RLM: s[j++] = '_'; s[j++] = '<'; break;
+	      case UNI_LRE: s[j++] = '_'; s[j++] = 'l'; break;
+	      case UNI_RLE: s[j++] = '_'; s[j++] = 'r'; break;
+	      case UNI_PDF: s[j++] = '_'; s[j++] = 'o'; break;
+	      case UNI_LRO: s[j++] = '_'; s[j++] = 'L'; break;
+	      case UNI_RLO: s[j++] = '_'; s[j++] = 'R'; break;
+	      case '_'    : s[j++] = '_'; s[j++] = '_'; break;
+	      default:
+	        if (ch >= UNI_ALEF && ch <= UNI_TAV)
+	          s[j++] = ch-UNI_ALEF+'A';
+	        else if (ch < 256)
+	          s[j++] = ch;
+	        else
+	          s[j++] = '¿';
+	    }
 	}
-      s[i] = 0;
+      s[j] = 0;
     }
   else if (char_set == FRIBIDI_CHARSET_8859_6)
     fribidi_unicode_to_iso8859_6(us, length, s); 
@@ -155,6 +202,7 @@ int main(int argc, char *argv[])
 		 "    -bol bol     Start lines with the string given by bol.\n"
 		 "    -rtl         Force base direction to RTL.\n"
 		 "    -ltr         Force base direction to LTR.\n"
+		 "    -debug       Print debug information.\n"
 		 "    -charset cs  Specify charset. Default is CapRTL. Available options are:\n"
 		 "                     * 8859-8 (Hebrew)\n"
 		 "                     * 8859-6 (Arabic)\n"
@@ -173,7 +221,8 @@ int main(int argc, char *argv[])
       CASE("-bol")   { bol_text = argv[argp++]; continue; }
       CASE("-rtl")   { input_base_direction = FRIBIDI_TYPE_R; continue; }
       CASE("-ltr")   { input_base_direction = FRIBIDI_TYPE_L; continue; }
-      CASE("-fill")  { do_fill = TRUE; continue; };
+      CASE("-fill")  { do_fill = TRUE; continue; }
+      CASE("-debug") { fribidi_set_debug(1); continue; }
       CASE("-charset")
 	{
 	  gchar *S_ = argv[argp++];
@@ -244,10 +293,11 @@ int main(int argc, char *argv[])
 	  printf("%s", bol_text);
 	
 	if (base == FRIBIDI_TYPE_R && do_pad)
-	  for (i=0; i<text_width-len; i++)
+	  for (i=0; i<text_width-strlen(outstring); i++) /* debugged ;) */
 	    printf(" ");
 
 	printf("%s", outstring);
+	
 	if (eol_text)
 	  printf("%s", eol_text);
 	printf("\n");

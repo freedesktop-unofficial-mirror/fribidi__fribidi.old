@@ -406,7 +406,8 @@ fribidi_analyse_string(/* input */
       base_dir = FRIBIDI_TYPE_N;
       for (pp = type_rl_list; pp; pp = pp->next)
 	{
-	  if (RL_TYPE(pp) == FRIBIDI_TYPE_R)
+	  if (RL_TYPE(pp) == FRIBIDI_TYPE_R ||
+	      RL_TYPE(pp) == FRIBIDI_TYPE_AL) /* had been dropped */
 	    {
 	      base_level = 1;
 	      base_dir = FRIBIDI_TYPE_R;
@@ -446,8 +447,16 @@ fribidi_analyse_string(/* input */
   
   /* 3. Terminating Embeddings and overrides. TBD! */
   compact_list(type_rl_list);
+
+  if (fribidi_debug)
+    {
+      print_bidi_string(str);
+      print_resolved_levels(type_rl_list);
+      print_resolved_types(type_rl_list);
+    }
   
   /* 4. Resolving weak types */
+  DBG("Resolving weak types.\n");
   last_strong = base_dir;
   for (pp = type_rl_list->next; pp->next; pp = pp->next)
     {
@@ -471,7 +480,7 @@ fribidi_analyse_string(/* input */
 	}
 
       /* W2: European numbers */
-      if (this_type == FRIBIDI_TYPE_N
+      if (this_type == FRIBIDI_TYPE_EN /* another typo */
 	  && last_strong == FRIBIDI_TYPE_AL)
 	RL_TYPE(pp) = FRIBIDI_TYPE_AN;
 
@@ -527,6 +536,13 @@ fribidi_analyse_string(/* input */
     RL_TYPE(pp->prev) = FRIBIDI_TYPE_L;
 
   compact_list(type_rl_list);
+
+  if (fribidi_debug)
+    {
+      print_bidi_string(str);
+      print_resolved_levels(type_rl_list);
+      print_resolved_types(type_rl_list);
+    }
   
   /* 5. Resolving Neutral Types */
   DBG("Resolving neutral types.\n");
@@ -579,6 +595,12 @@ fribidi_analyse_string(/* input */
 #ifndef NO_STDIO
   if (fribidi_debug)
       print_types_re(type_rl_list);
+  if (fribidi_debug)
+    {
+      print_bidi_string(str);
+      print_resolved_levels(type_rl_list);
+      print_resolved_types(type_rl_list);
+    }
 #endif
   
   /* 6. Resolving Implicit levels */
