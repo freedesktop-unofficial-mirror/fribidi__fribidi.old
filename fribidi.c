@@ -382,28 +382,25 @@ override_list (TypeLink *base, TypeLink *over)
 #define RL_POS(list) (list)->pos
 #define RL_LEVEL(list) (list)->level
 
+static TypeLink *
+merge_with_prev (TypeLink *second)
+{
+  TypeLink *first = second->prev;
+  first->next = second->next;
+  first->next->prev = first;
+  RL_LEN (first) += RL_LEN (second);
+  free_type_link (second);
+  return first;
+}
+
 static void
 compact_list (TypeLink *list)
 {
   if (list->next)
-    {
-      list = list->next;
-      while (list)
-	{
+      for (list = list->next; list; list = list->next)
 	  if (RL_TYPE (list->prev) == RL_TYPE (list)
 	      && RL_LEVEL (list->prev) == RL_LEVEL (list))
-	    {
-	      TypeLink *next = list->next;
-	      list->prev->next = list->next;
-	      list->next->prev = list->prev;
-	      RL_LEN (list->prev) += RL_LEN (list);
-	      free_type_link (list);
-	      list = next;
-	    }
-	  else
-	    list = list->next;
-	}
-    }
+	    list = merge_with_prev (list);
 }
 
 static void
@@ -411,8 +408,7 @@ compact_neutrals (TypeLink *list)
 {
   if (list->next)
     {
-      list = list->next;
-      while (list)
+      for (list = list->next; list; list = list->next)
 	{
 	  if (RL_LEVEL (list->prev) == RL_LEVEL (list)
 	      &&
@@ -420,16 +416,7 @@ compact_neutrals (TypeLink *list)
 		(list->prev) == RL_TYPE (list)
 		|| (FRIBIDI_IS_NEUTRAL (RL_TYPE (list->prev))
 		    && FRIBIDI_IS_NEUTRAL (RL_TYPE (list))))))
-	    {
-	      TypeLink *next = list->next;
-	      list->prev->next = list->next;
-	      list->next->prev = list->prev;
-	      RL_LEN (list->prev) += RL_LEN (list);
-	      free_type_link (list);
-	      list = next;
-	    }
-	  else
-	    list = list->next;
+	    list = merge_with_prev (list);
 	}
     }
 }
@@ -795,10 +782,17 @@ fribidi_analyse_string (	/* input */
 	   Examine each non-spacing mark (NSM) in the level run, and change the
 	   type of the NSM to the type of the previous character. If the NSM
 	   is at the start of the level run, it will get the type of sor. */
+	/* Implementation note: it is important that if the previous character
+	   is not sor, then we should merge this run with the previous,
+	   because of rules like W5, that we assume all of a sequence of
+	   adjacent ETs are in one TypeLink. */
 	if (this_type == FRIBIDI_TYPE_NSM)
 	  {
-	    RL_TYPE (pp) = prev_type;
-	    continue;
+	    if (RL_LEVEL (pp->prev) == RL_LEVEL (pp))
+	      pp = merge_with_prev (pp);
+	    else
+	      RL_TYPE (pp) = prev_type;
+	    continue; /* As we know the next condition cannot be true. */
 	  }
 
 	/* W2: European numbers. */

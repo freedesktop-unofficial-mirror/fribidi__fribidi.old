@@ -15,7 +15,7 @@ if ! test -f "$path/reference/bidiref"; then
   else
     debug=""
   fi
-  gcc $debug -o $path/reference/bidiref $path/reference/bidiref.cpp
+  g++ $debug -o $path/reference/bidiref $path/reference/bidiref.cpp
 fi
 
 convertsub () {
