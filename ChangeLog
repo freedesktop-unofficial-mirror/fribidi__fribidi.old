@@ -1,3 +1,22 @@
+2001-04-01  Behdad Esfahbod <behdad@bamdad.org>
+	* Makefile.noglib: fribidi_types.c added to sources.
+	
+	* fribidi.c: Fixed a bug in free_rl_list() when USE_SIMPLE_MALLOC
+	was set, that caused core dumps.
+	
+	* fribidi_main.c: Option --nomirror added.
+	
+	* fribidi_mini_glib.h: Fixed a bug that caused core dumps, the bug
+	was in macro definition #define g_new(T, n) malloc(n * sizeof(T)),
+	that caused g_new(X, n + 1) allocate (n + (1 * sizeof(X))) instead
+	of ((n + 1) * sizeof(X))!, that should be
+	#define g_new(T, n) malloc((n) * sizeof(T)).
+	
+	* fribidi_mini_glib.h: Does not set USE_SIMPLE_ALLOC anymore.
+	
+	* fribidi.c: Use g_malloc when FRIBIDI_USE_MINI_GLIB is set, but
+	still use the free_type_link_list, for efficiency.
+
 2001-03-31  Behdad Esfahbod <behdad@bamdad.org>
         * fribidi_benchmark.c: #included <stdarg.h>, to compile under cygwin.
 

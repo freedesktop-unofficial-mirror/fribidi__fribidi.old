@@ -87,7 +87,7 @@ fribidi_get_mirror_char (	/* Input */
 			  FriBidiChar *mirrored_ch)
 {
   int pos, step;
-  gboolean found = FALSE;
+  gboolean found;
 
   pos = step = (nFriBidiMirroredChars / 2) + 1;
 
@@ -116,5 +116,10 @@ fribidi_get_mirror_char (	/* Input */
       *mirrored_ch = FriBidiMirroredChars[pos].mirrored_ch;
       found = TRUE;
     }
+  else
+    {
+      *mirrored_ch = ch;
+      found = FALSE;
+    }    
   return found;
 }

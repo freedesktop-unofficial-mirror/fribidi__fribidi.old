@@ -32,9 +32,8 @@ typedef unsigned int guint32;
 #define TRUE 1
 #define FALSE 0
 
-#define USE_SIMPLE_MALLOC 1
 #define g_malloc(n) malloc(n)
-#define g_new(T, n) malloc(n*sizeof(T))
+#define g_new(T, n) malloc((n)*sizeof(T))
 #define g_free(P) free(P)
 
 typedef struct _GList GList;

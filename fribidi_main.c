@@ -55,7 +55,7 @@ die (gchar *fmt, ...)
   exit (-1);
 }
 
-gboolean do_pad, do_fill, do_clean, show_input, show_visual;
+gboolean do_pad, do_fill, do_mirror, do_clean, show_input, show_visual;
 gboolean show_basedir, show_ltov, show_vtol, show_levels, show_changes;
 gint char_set, text_width;
 guchar *bol_text, *eol_text;
@@ -94,6 +94,7 @@ help (void)
      "      --wrtl            Set base direction to RTL if no strong character found\n"
      "      --wltr            Set base direction to LTR if no strong character found \\\n"
      "                        (default)\n"
+     "      --nomirror        Turn mirroring off, to do it later\n"
      "      --clean           Remove explicit format codes in visual string \\\n"
      "                        output, currently does not affect other outputs\n"
      "      --basedir         Output Base Direction\n"
@@ -138,6 +139,7 @@ main (int argc, char *argv[])
   text_width = 80;
   do_pad = TRUE;
   do_fill = FALSE;
+  do_mirror = TRUE;
   do_clean = FALSE;
   show_input = FALSE;
   show_visual = TRUE;
@@ -184,6 +186,7 @@ main (int argc, char *argv[])
 	{"width", 1, 0, 'w'},
 	{"bol", 1, 0, 'B'},
 	{"eol", 1, 0, 'E'},
+	{"nomirror", 0, &do_mirror, FALSE},
 	{"clean", 0, &do_clean, TRUE},
 	{"ltr", 0, (int *) &input_base_direction, FRIBIDI_TYPE_L},
 	{"rtl", 0, (int *) &input_base_direction, FRIBIDI_TYPE_R},
@@ -270,6 +273,7 @@ main (int argc, char *argv[])
 	}
     }
 
+  fribidi_set_mirroring (do_mirror);
   exit_val = 0;
   file_found = FALSE;
   while (optind < argc || !file_found)
@@ -312,7 +316,6 @@ main (int argc, char *argv[])
 	    FriBidiChar logical[FRIBIDI_MAX_STRING_LENGTH];
 	    guchar outstring[MAX_STR_LEN];
 	    FriBidiCharType base;
-	    gboolean log2vis;
 	    int len, i, j, k;
 
 	    nl_found = "";
@@ -326,9 +329,7 @@ main (int argc, char *argv[])
 		new_line = "\n";
 	      }
 	    else
-	      {
-		new_line = "";
-	      }
+	      new_line = "";
 
 	    len = fribidi_charset_to_unicode (char_set, S_, logical);
 
@@ -337,24 +338,12 @@ main (int argc, char *argv[])
 	      FriBidiStrIndex *ltov, *vtol;
 	      guint8 *levels;
 	      gint new_len;
+	      gboolean log2vis;
 
-	      if (show_visual)
-		visual = g_new (FriBidiChar, len + 1);
-	      else
-		visual = NULL;
-	      if (show_ltov)
-		ltov = g_new (FriBidiStrIndex, len + 1);
-	      else
-		ltov = NULL;
-	      if (show_vtol)
-		vtol = g_new (FriBidiStrIndex, len + 1);
-	      else
-		vtol = NULL;
-	      if (show_levels)
-		levels = g_new (guint8, len + 1);
-	      else
-		levels = NULL;
-
+	      visual = show_visual ? g_new (FriBidiChar, len + 1) : NULL;
+	      ltov = show_ltov ? g_new (FriBidiStrIndex, len + 1) : NULL;
+	      vtol = show_vtol ? g_new (FriBidiStrIndex, len + 1) : NULL;
+	      levels = show_levels ? g_new (guint8, len + 1) : NULL;
 
 	      /* Create a bidi string. */
 	      base = input_base_direction;
@@ -365,9 +354,7 @@ main (int argc, char *argv[])
 		{
 
 		  if (show_input)
-		    {
-		      printf ("%-*s => ", padding_width, S_);
-		    }
+		    printf ("%-*s => ", padding_width, S_);
 
 		  new_len = len;
 
