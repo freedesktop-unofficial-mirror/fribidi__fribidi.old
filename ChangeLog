@@ -1,4 +1,8 @@
 2002-03-15  Behdad Esfahbod <behdad@bamdad.org>
+	* 0.10.2 released.
+	* configure.in: Changed version to 0.10.2.
+
+2002-03-15  Behdad Esfahbod <behdad@bamdad.org>
 	* packtab.c: Updated the output generating routine, to generate much fewer
 	symbols, to reduce the relocation time (suggested by Owen Taylor).
 
