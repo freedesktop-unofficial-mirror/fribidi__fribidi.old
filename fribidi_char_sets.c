@@ -60,8 +60,8 @@ FriBidiCharSetHandler;
 
 #define _FRIBIDI_ADD_CHAR_SET(char_set) \
   { \
-    fribidi_##char_set##_to_unicode, \
-    fribidi_unicode_to_##char_set, \
+    fribidix_##char_set##_to_unicode, \
+    fribidix_unicode_to_##char_set, \
     fribidi_char_set_name_##char_set, \
     fribidi_char_set_title_##char_set, \
     fribidi_char_set_desc_##char_set, \
@@ -87,7 +87,6 @@ FriBidiCharSet
 fribidi_parse_charset (char *s)
 {
   int i;
-
   for (i = FRIBIDI_CHAR_SETS_NUM; i; i--)
     if (fribidi_strcasecmp (s, fribidi_char_sets[i].name) == 0)
       return i;
@@ -99,9 +98,9 @@ fribidi_parse_charset (char *s)
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
 int
-fribidi_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
-			    /* output */
-			    FriBidiChar *us)
+fribidix_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
+			     /* output */
+			     FriBidiChar *us)
 {
   fribidi_char_set_enter (char_set);
   return fribidi_char_sets[char_set].charset_to_unicode == NULL ? 0 :
@@ -111,10 +110,10 @@ fribidi_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
 /* Convert the unicode string "us" with length "length" to character
    string "s" in charset "char_set" and return it's length. */
 int
-fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
-			    int length,
-			    /* output */
-			    char *s)
+fribidix_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
+			     int length,
+			     /* output */
+			     char *s)
 {
   fribidi_char_set_enter (char_set);
   return fribidi_char_sets[char_set].unicode_to_charset == NULL ? 0 :

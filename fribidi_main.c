@@ -389,7 +389,8 @@ main (int argc, char *argv[])
 	      len = (FriBidiChar *) ust - logical;
 	    }
 #else
-	    len = fribidi_charset_to_unicode (char_set_num, S_, len, logical);
+	    len =
+	      fribidix_charset_to_unicode (char_set_num, S_, len, logical);
 #endif
 
 	    {
@@ -467,9 +468,9 @@ main (int argc, char *argv[])
 			    }
 #else
 			    new_len =
-			      fribidi_unicode_to_charset (char_set_num,
-							  visual + st, inlen,
-							  outstring);
+			      fribidix_unicode_to_charset (char_set_num,
+							   visual + st, inlen,
+							   outstring);
 #endif
 			    if (FRIBIDI_IS_RTL (base))
 			      printf ("%*s",

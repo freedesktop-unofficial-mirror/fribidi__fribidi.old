@@ -36,13 +36,21 @@
 #define fribidi_char_set_leave_cp1256 NULL
 
 FriBidiChar fribidi_cp1256_to_unicode_c (char ch);
-int fribidi_cp1256_to_unicode (char *s, int length,
-			       /* Output */
-			       FriBidiChar *us);
+int fribidix_cp1256_to_unicode (char *s, int length,
+				/* Output */
+				FriBidiChar *us);
 char fribidi_unicode_to_cp1256_c (FriBidiChar uch);
-int fribidi_unicode_to_cp1256 (FriBidiChar *us, int length,
-			       /* Output */
-			       char *s);
+int fribidix_unicode_to_cp1256 (FriBidiChar *us, int length,
+				/* Output */
+				char *s);
+
+/* Old style, just for compatibility.  do not use these. */
+
+#define fribidi_cp1256_to_unicode(s, us)	\
+	fribidix_cp1256_to_unicode(s, strlen(s), us)
+
+#define fribidi_unicode_to_cp1256(us, length, s)	\
+	fribidix_unicode_to_cp1256(us, length, s)
 
 #endif /* FRIBIDI_CHAR_SETS_CP1256_H */
 

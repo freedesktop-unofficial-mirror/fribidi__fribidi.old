@@ -35,16 +35,24 @@
 #define fribidi_char_set_enter_utf8 NULL
 #define fribidi_char_set_leave_utf8 NULL
 
-int fribidi_unicode_to_utf8 (FriBidiChar *us, int length,
-			     /* Output */
-			     char *s);
+int fribidix_unicode_to_utf8 (FriBidiChar *us, int length,
+			      /* Output */
+			      char *s);
 
 /* warning: the length of output string may exceed the length of the input */
 /* the length of the string is returned */
-int fribidi_utf8_to_unicode (char *s, int length,
-			     /* Output */
-			     FriBidiChar *us);
+int fribidix_utf8_to_unicode (char *s, int length,
+			      /* Output */
+			      FriBidiChar *us);
 
-#endif
+/* Old style, just for compatibility.  do not use these. */
+
+#define fribidi_utf8_to_unicode(s, us)	\
+	fribidix_utf8_to_unicode(s, strlen(s), us)
+
+#define fribidi_unicode_to_utf8(us, length, s)	\
+	fribidix_unicode_to_utf8(us, length, s)
+
+#endif /* FRIBIDI_CHAR_SETS_UTF8_H */
 
 #endif

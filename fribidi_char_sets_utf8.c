@@ -29,7 +29,7 @@
 /* the following added by Raphael Finkel <raphael@cs.uky.edu> 12/1999 */
 
 int
-fribidi_utf8_to_unicode (char *s, int len, FriBidiChar *us)
+fribidix_utf8_to_unicode (char *s, int len, FriBidiChar *us)
 /* warning: the length of input string may exceed the length of the output */
 {
   int length;
@@ -64,7 +64,7 @@ fribidi_utf8_to_unicode (char *s, int len, FriBidiChar *us)
 }
 
 int
-fribidi_unicode_to_utf8 (FriBidiChar *us, int length, char *s)
+fribidix_unicode_to_utf8 (FriBidiChar *us, int length, char *s)
 /* warning: the length of output string may exceed the length of the input */
 {
   int i;

@@ -36,13 +36,21 @@
 #define fribidi_char_set_leave_iso8859_8 NULL
 
 FriBidiChar fribidi_iso8859_8_to_unicode_c (char ch);
-int fribidi_iso8859_8_to_unicode (char *s, int length,
-				  /* Output */
-				  FriBidiChar *us);
+int fribidix_iso8859_8_to_unicode (char *s, int length,
+				   /* Output */
+				   FriBidiChar *us);
 char fribidi_unicode_to_iso8859_8_c (FriBidiChar uch);
-int fribidi_unicode_to_iso8859_8 (FriBidiChar *us, int length,
-				  /* Output */
-				  char *s);
+int fribidix_unicode_to_iso8859_8 (FriBidiChar *us, int length,
+				   /* Output */
+				   char *s);
+
+/* Old style, just for compatibility.  do not use these. */
+
+#define fribidi_iso8859_8_to_unicode(s, us)	\
+	fribidix_iso8859_8_to_unicode(s, strlen(s), us)
+
+#define fribidi_unicode_to_iso8859_8(us, length, s)	\
+	fribidix_unicode_to_iso8859_8(us, length, s)
 
 #endif /* FRIBIDI_CHAR_SETS_ISO8859_8_H */
 

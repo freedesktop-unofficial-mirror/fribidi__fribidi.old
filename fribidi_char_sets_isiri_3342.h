@@ -36,13 +36,21 @@
 #define fribidi_char_set_leave_isiri_3342 NULL
 
 FriBidiChar fribidi_isiri_3342_to_unicode_c (char ch);
-int fribidi_isiri_3342_to_unicode (char *s, int length,
-				   /* Output */
-				   FriBidiChar *us);
+int fribidix_isiri_3342_to_unicode (char *s, int length,
+				    /* Output */
+				    FriBidiChar *us);
 char fribidi_unicode_to_isiri_3342_c (FriBidiChar uch);
-int fribidi_unicode_to_isiri_3342 (FriBidiChar *us, int length,
-				   /* Output */
-				   char *s);
+int fribidix_unicode_to_isiri_3342 (FriBidiChar *us, int length,
+				    /* Output */
+				    char *s);
+
+/* Old style, just for compatibility.  do not use these. */
+
+#define fribidi_isiri_3342_to_unicode(s, us)	\
+	fribidix_isiri_3342_to_unicode(s, strlen(s), us)
+
+#define fribidi_unicode_to_isiri_3342(us, length, s)	\
+	fribidix_unicode_to_isiri_3342(us, length, s)
 
 #endif /* FRIBIDI_CHAR_SETS_ISIRI_3342_H */
 

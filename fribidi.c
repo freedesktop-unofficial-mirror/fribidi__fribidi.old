@@ -1327,8 +1327,8 @@ fribidi_log2vis_get_embedding_levels (	/* input */
 }
 
 char *fribidi_version_info =
-  FRIBIDI_PACKAGE " " FRIBIDI_VERSION " (interface version "
-  FRIBIDI_INTERFACE_VERSION ")\n"
+  FRIBIDI_PACKAGE " " FRIBIDI_VERSION " (interface version"
+  FRIBIDI_INTERFACE_VERSION_STR ")\n"
   "Copyright (C) 2001 FriBidi Project (http://fribidi.sf.net/).\n" "\n"
   FRIBIDI_PACKAGE " comes with NO WARRANTY, to the extent permitted by law.\n"
   "You may redistribute copies of " FRIBIDI_PACKAGE " under the terms of\n"

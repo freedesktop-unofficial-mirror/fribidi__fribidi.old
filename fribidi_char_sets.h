@@ -53,24 +53,26 @@ typedef enum
   FRIBIDI_CHARSET_CP1256,
   FRIBIDI_CHARSET_ISIRI_3342,
 
+  FRIBIDI_CHAR_SETS_NUM_PLUS_ONE,
+
   FRIBIDI_CHARSET_DEFAULT = FRIBIDI_CHARSET_UTF8
 }
 FriBidiCharSet;
 
-#define FRIBIDI_CHAR_SETS_NUM 7
+#define FRIBIDI_CHAR_SETS_NUM (FRIBIDI_CHAR_SETS_NUM_PLUS_ONE - 1)
 
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
-int fribidi_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
-				/* output */
-				FriBidiChar *us);
+int fribidix_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
+				 /* output */
+				 FriBidiChar *us);
 
 /* Convert the unicode string "us" with length "length" to character
    string "s" in charset "char_set" and return it's length. */
-int fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
-				int length,
-				/* output */
-				char *s);
+int fribidix_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
+				 int length,
+				 /* output */
+				 char *s);
 
 /* Return the string containing the name of the charset. */
 char *fribidi_char_set_name (FriBidiCharSet char_set);
@@ -93,6 +95,15 @@ boolean fribidi_char_set_leave (FriBidiCharSet char_set);
 
 /* Return the charset which name is "s". */
 FriBidiCharSet fribidi_parse_charset (char *s);
+
+
+/* Old style, just for compatibility.  do not use these. */
+
+#define fribidi_charset_to_unicode(char_set, s, us)	\
+	fribidix_charset_to_unicode(char_set, s, strlen(s), us)
+
+#define fribidi_unicode_to_charset(char_set, us, length, s)	\
+	fribidix_unicode_to_charset(char_set, us, length, s)
 
 #endif /* FRIBIDI_CHAR_SETS_H */
 

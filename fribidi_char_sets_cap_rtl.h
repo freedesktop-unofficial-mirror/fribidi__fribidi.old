@@ -35,12 +35,20 @@ char *fribidi_char_set_desc_cap_rtl (void);
 boolean fribidi_char_set_enter_cap_rtl (void);
 boolean fribidi_char_set_leave_cap_rtl (void);
 
-int fribidi_cap_rtl_to_unicode (char *s, int length,
-				/* Output */
-				FriBidiChar *us);
-int fribidi_unicode_to_cap_rtl (FriBidiChar *us, int length,
-				/* Output */
-				char *s);
+int fribidix_cap_rtl_to_unicode (char *s, int length,
+				 /* Output */
+				 FriBidiChar *us);
+int fribidix_unicode_to_cap_rtl (FriBidiChar *us, int length,
+				 /* Output */
+				 char *s);
+
+/* Old style, just for compatibility.  do not use these. */
+
+#define fribidi_cap_rtl_to_unicode(s, us)	\
+	fribidix_cap_rtl_to_unicode(s, strlen(s), us)
+
+#define fribidi_unicode_to_cap_rtl(us, length, s)	\
+	fribidix_unicode_to_cap_rtl(us, length, s)
 
 #endif /* FRIBIDI_CHAR_SETS_CAP_RTL_H */
 

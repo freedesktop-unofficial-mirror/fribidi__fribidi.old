@@ -202,7 +202,8 @@ write_char_type (char *file, int max_depth)
 	   "}\n"
 	   "\n",
 	   function_name, char_type_name, function_name, char_name,
-	   FRIBIDI_UNICODE_CHARS, prop_to_type_name, macro_name, default_type);
+	   FRIBIDI_UNICODE_CHARS, prop_to_type_name, macro_name,
+	   default_type);
 
   fclose (f);
 }

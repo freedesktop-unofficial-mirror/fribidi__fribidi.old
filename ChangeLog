@@ -1,3 +1,7 @@
+2002-01-01  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi_char_set_*.[ch]: Old interface is back, new interface
+	starts with fribidix instead of fribidi.
+
 2001-12-31  Behdad Esfahbod <behdad@bamdad.org>
 	* configure.in: Check for sed added.
 	* Makefile.am: Scripts fixed to work with sh (not bash).
