@@ -38,15 +38,17 @@ fribidi_utf8_to_unicode (gchar *s, FriBidiChar *us)
 	{
 	  *us++ = *s++;		/* expand with 0s */
 	}
-      else if (*(guchar *) s <= 0x7ff)	/* 2 chars, such as Hebrew */
+      else if (*(guchar *) s <= 0x7ff)	/* 2 byte */
 	{
-	  *us++ = ((*(guchar *) s & 037) << 6) + (*(guchar *) (s + 1) & 077);
+	  *us++ =
+	    ((*(guchar *) s & 037) << 6) + ((*(guchar *) (s + 1)) & 077);
 	  s += 2;
 	}
-      else			/* 3 chars */
+      else			/* 3 byte */
 	{
-	  *us++ = ((*s & 017) << 12) + ((*(s + 1) & 077) << 6) +
-	    (*(guchar *) (s + 2) & 077);
+	  *us++ =
+	    ((*(guchar *) s & 017) << 12) +
+	    ((*(guchar *) (s + 1) & 077) << 6) + (*(guchar *) (s + 2) & 077);
 	  s += 3;
 	}
       length += 1;
@@ -65,22 +67,23 @@ fribidi_unicode_to_utf8 (FriBidiChar *us, int length, gchar *s)
   t = s;
   for (i = 0; i < length; i++)
     {
-      FriBidiChar mychar = (guchar) us[i];
+      FriBidiChar mychar = us[i];
       if (mychar <= 0x7F)
-	{			/* 7 sig bits; plain 7-bit ASCII */
+	{			/* 7 sig bits */
 	  *t++ = mychar;
 	}
       else if (mychar <= 0x7FF)	/* 11 sig bits */
 	{
-	  *t++ = 0300 | (guint8) ((mychar >> 6) & 037);
-	  *t++ = 0200 | (guint8) (mychar & 077);	/* lower 6 bits */
+	  *t++ = 0xC0 | (guint8) ((mychar >> 6) & 0x1F);	/* upper 5 bits */
+	  *t++ = 0x80 | (guint8) (mychar & 0x3F);	/* lower 6 bits */
 	}
       else if (mychar <= 0xFFFF)
 	{			/* 16 sig bits */
-	  *t++ = 0340 | (guint8) ((mychar >> 12) & 017);	/* upper 4 bits */
-	  *t++ = 0200 | (guint8) ((mychar >> 6) & 077);	/* next 6 bits */
-	  *t++ = 0200 | (guint8) (mychar & 077);	/* lowest 6 bits */
+	  *t++ = 0xE0 | (guint8) ((mychar >> 12) & 0x0F);	/* upper 4 bits */
+	  *t++ = 0x80 | (guint8) ((mychar >> 6) & 0x3F);	/* next 6 bits */
+	  *t++ = 0x80 | (guint8) (mychar & 0x3F);	/* lowest 6 bits */
 	}
+      /* TODO */
     }
   *t = 0;
 

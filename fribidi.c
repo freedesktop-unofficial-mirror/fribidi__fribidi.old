@@ -397,10 +397,10 @@ static void
 compact_list (TypeLink *list)
 {
   if (list->next)
-      for (list = list->next; list; list = list->next)
-	  if (RL_TYPE (list->prev) == RL_TYPE (list)
-	      && RL_LEVEL (list->prev) == RL_LEVEL (list))
-	    list = merge_with_prev (list);
+    for (list = list->next; list; list = list->next)
+      if (RL_TYPE (list->prev) == RL_TYPE (list)
+	  && RL_LEVEL (list->prev) == RL_LEVEL (list))
+	list = merge_with_prev (list);
 }
 
 static void
@@ -626,7 +626,9 @@ fribidi_analyse_string (	/* input */
      base direction */
   else
     {
-      base_level = 0;		/* Default */
+      /* If no strong base_dir was found, resort to the weak direction
+         that was passed on input. */
+      base_level = FRIBIDI_DIR_TO_LEVEL (*pbase_dir);
       base_dir = FRIBIDI_TYPE_ON;
       for (pp = type_rl_list; pp; pp = pp->next)
 	if (FRIBIDI_IS_LETTER (RL_TYPE (pp)))
@@ -635,11 +637,6 @@ fribidi_analyse_string (	/* input */
 	    base_dir = FRIBIDI_LEVEL_TO_DIR (base_level);
 	    break;
 	  }
-
-      /* If no strong base_dir was found, resort to the weak direction
-         that was passed on input. */
-      if (FRIBIDI_IS_NEUTRAL (base_dir))
-	base_level = FRIBIDI_DIR_TO_LEVEL (*pbase_dir);
     }
   base_dir = FRIBIDI_LEVEL_TO_DIR (base_level);
   DBG2 ("  Base level : %c\n", fribidi_char_from_level (base_level));
@@ -792,7 +789,7 @@ fribidi_analyse_string (	/* input */
 	      pp = merge_with_prev (pp);
 	    else
 	      RL_TYPE (pp) = prev_type;
-	    continue; /* As we know the next condition cannot be true. */
+	    continue;		/* As we know the next condition cannot be true. */
 	  }
 
 	/* W2: European numbers. */
@@ -1151,7 +1148,7 @@ fribidi_log2vis (		/* input */
   if (len > FRIBIDI_MAX_STRING_LENGTH && position_V_to_L_list)
     {
 #ifdef DEBUG
-      fprintf (stderr, "%s: cannot handle strings > %d characters\n",
+      fprintf (stderr, "%s: cannot handle strings > %ld characters\n",
 	       PACKAGE, FRIBIDI_MAX_STRING_LENGTH);
 #endif
       return FALSE;

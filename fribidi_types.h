@@ -50,7 +50,7 @@ FriBidiRunType;
 /* TBD: The following should be configuration parameters, once we can
    figure out how to make configure set them... */
 #ifndef FRIBIDI_MAX_STRING_LENGTH
-#define FRIBIDI_MAX_STRING_LENGTH (sizeof (FriBidiStrIndex) == 2 ? 0xFFF0 : 0xFFFFFFF0L)
+#define FRIBIDI_MAX_STRING_LENGTH (sizeof (FriBidiStrIndex) == 2 ? 0xFFF0L : 0xFFFFFFF0L)
 #endif
 
 

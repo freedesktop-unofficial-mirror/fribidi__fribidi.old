@@ -1,3 +1,7 @@
+2001-05-22  Behdad Esfahbod <behdad@sharif.edu>
+	* fribidi_char_sets_utf8.c: Fixed a little bug in utf-8 -> unicode
+	converter.
+
 2001-05-16  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c: Fixed a bug in rule W1, that caused W5 not to work
 	properly when adjacent to a NSM.
