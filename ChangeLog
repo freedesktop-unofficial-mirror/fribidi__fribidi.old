@@ -1,3 +1,7 @@
+2002-05-19  Behdad Esfahbod <fribidi@behdad.org>
+	* Fribidi 0.10.4 released.
+	* configure.in: Changed version information.
+
 2002-05-18  Behdad Esfahbod <fribidi@behdad.org>
 	* packtab.c: Updated the search and output generating routines,
 	to use select among int8, int16 and int32 types, this helps to
