@@ -1,4 +1,3 @@
-#define DEBUGGING
 // Bidi.cpp - version 24
 
 // Reference implementation for Unicode Bidirectional Algorithm

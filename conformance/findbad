@@ -1,5 +1,9 @@
 #!/bin/sh
-# Find a single nonconforming test
+# Find a single nonconforming test.
+# First command line parameter is the lenght of test in bytes, default is 10.
 
-while ! test "`./dotest $1`"; do echo -n .; done
-cat test.in | ./test -clean
+path=`dirname $0`
+
+while ! test "`$path/dotest $1`"; do echo -n .; done
+shift
+cat $path/test.in | $path/test -clean $@

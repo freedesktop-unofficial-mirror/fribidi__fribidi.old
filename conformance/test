@@ -1,5 +1,18 @@
 #!/bin/sh
-# Test ../fribidi with reference/bidiref, using stdin and diff the outputs
+# Test ../fribidi with reference/bidiref, using stdin, and diff the outputs.
+# use -debug switch to see the debug info into stderr.
+# use -clean to remove explicit marks before doing diff.
+
+path=`dirname $0`
+
+if ! test -f "$path/reference/bidiref"; then
+  gcc -o $path/reference/bidiref $path/reference/bidiref.cpp
+fi
+
+if ! test -f "$path/../fribidi"; then
+  echo "You must make fribidi first."
+  exit 1
+fi
 
 convertsub () {
   refline="`echo \"$refline\" | sed s/$1/$2/g`"
@@ -16,25 +29,27 @@ while [ -n "$1" ]; do
   shift
 done
 
-echo -n > test.out
-echo -n > test.ref
+echo -n > $path/test.out
+echo -n > $path/test.ref
 
 while read line; do
-  echo "$line" | ../fribidi $p1 -nopad >> test.out
-#  echo "$line" | reference/bidiref $p2 >> test.ref
+  echo "$line" | $path/../fribidi $p1 -nopad >> $path/test.out
+#  echo "$line" | $path/reference/bidiref $p2 >> $path/test.ref
   refline="$line"
   convertsub "_R" "`echo -e \"\\16\"`"
   convertsub "_r" "`echo -e \"\\17\"`"
   convertsub "_L" "`echo -e \"\\20\"`"
   convertsub "_l" "`echo -e \"\\21\"`"
   convertsub "_o" "`echo -e \"\\22\"`"
-  refline=`echo "$refline" | reference/bidiref $p2`
+  refline=`echo "$refline" | $path/reference/bidiref $p2`
   convertsub "`echo -e \"\\16\"`" "_R"
   convertsub "`echo -e \"\\17\"`" "_r"
   convertsub "`echo -e \"\\20\"`" "_L"
   convertsub "`echo -e \"\\21\"`" "_l"
   convertsub "`echo -e \"\\22\"`" "_o"
-  echo "$refline" >> test.ref
+  echo "$refline" >> $path/test.ref
 done
 
-diff test.out test.ref
+#if test -z `diff $path/test.out $path/test.ref`; then
+#  rm -f $path/test.in $path/test.out $path/test.ref
+#fi

@@ -1,11 +1,14 @@
 #!/bin/sh
 # Generate and test single tests, and archive the nonconforming ones.
+# First command line parameter is the lenght of test in bytes, default is 10.
+
+path=`dirname $0`
 
 while true; do
-  ./findbad $@
+  $path/findbad $@
   echo -e "bad test found!!!\7"
-  if ! test -d badtests; then
-    mkdir badtests
+  if ! test -d $path/badtests; then
+    mkdir $path/badtests
   fi
-  cp test.in badtests/$RANDOM.in
+  cp $path/test.in $path/badtests/$RANDOM.in
 done

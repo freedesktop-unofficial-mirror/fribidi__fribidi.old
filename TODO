@@ -1,5 +1,7 @@
 BiDi algorithms issues:
 
+* Resolve some bugs related to resolving Weak Arabic types
+
 * Handle the L3 rule of the BiDi algorithm
 
 General issues:

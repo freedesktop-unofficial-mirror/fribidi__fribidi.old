@@ -1,4 +1,5 @@
 /* Generate random test data for explicit bidi tests. */
+/* First command line parameter is the lenght of test in bytes, default is 10.*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
