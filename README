@@ -83,7 +83,7 @@ where
      str                    is the Unicode input string
      len                    is the length of the unicode string
      pbase_dir              is the input and output base direction. If 
-                            base == FRIBIDI_TYPE_N then fribidi_log2vis 
+                            base == FRIBIDI_TYPE_ON then fribidi_log2vis 
                             calculates the base direction on its own
                             according to the BiDi algorithm.
      visual_str             The reordered output unicode string.

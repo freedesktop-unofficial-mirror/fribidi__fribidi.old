@@ -1,3 +1,19 @@
+2001-03-07  Behdad Esfahbod <behdad@bamdad.org>
+
+	* fribidi.c: Removed dead codes, many parts rewritten more efficient,
+	including Resolving Neutrals, Resolving Implicit Levels and ....
+	
+	* fribidi_types.h: Almost redefined, to use bitfields for char types,
+	and many macros defined for efficient querying about char types.
+	some unused char types removed, also char types L, R, N converted
+	to LTR, RTL and ON everywhere.
+	
+	* CreateGetType.pl: Changed to define tables as arrays of 
+	FriBidiCharType instead of guchar.
+	
+	* conformance/: Updated some scripts for automatic testing with
+	reference implementation.
+
 2001-02-19  Behdad Esfahbod <behdad@bamdad.org>
 
 	* fribidi.c: Added support for all explicit marks (embeddings and
@@ -39,6 +55,8 @@
 	of UnicodeData.txt.
 
 2000-11-12  Dov Grobgeld  <dov@imagic.weizmann.ac.il>
+
+	* Released fribidi-0.1.15.
 
 	* fribidi.c: [OZ] Applied Owen Taylor's patch from 2000-07-19 to
 	fribidi.c.  The patch affects pp->prev rules for the last element

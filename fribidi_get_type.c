@@ -27,22 +27,22 @@
 FriBidiCharType fribidi_get_type(FriBidiChar uch)
 {
   int i = uch % 256, j = uch / 256;
-  guchar *block = FriBidiPropertyBlocks[j];
+  FriBidiCharType *block = FriBidiPropertyBlocks[j];
   if (block)
     return block[i];
   else {
     switch (j) {
-      case 0x05: if (i >= 0x90) return FRIBIDI_TYPE_R; else break;
+      case 0x05: if (i >= 0x90) return FRIBIDI_TYPE_RTL; else break;
 
       case 0xFB: if (i >= 0x50) return FRIBIDI_TYPE_AL; else
-                 if (i >= 0x1D) return FRIBIDI_TYPE_R; else break;
+                 if (i >= 0x1D) return FRIBIDI_TYPE_RTL; else break;
       case 0x06: 
       case 0xFC: 
       case 0xFD: return FRIBIDI_TYPE_AL;
       case 0x07: if (i <= 0xBF) return FRIBIDI_TYPE_AL; else break;
       case 0xFE: if (i >= 0x70) return FRIBIDI_TYPE_AL; else break;
     }    
-    return FRIBIDI_TYPE_L;      
+    return FRIBIDI_TYPE_LTR;
   }
 }
 

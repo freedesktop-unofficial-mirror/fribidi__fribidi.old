@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 
   for (i=0; i<niter; i++) {
     /* Create a bidi string */
-    base = FRIBIDI_TYPE_N;
+    base = FRIBIDI_TYPE_ON;
     fribidi_log2vis(us, len, &base, 
 		    /* output */
 		    out_us,

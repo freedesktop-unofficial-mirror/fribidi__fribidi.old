@@ -1,8 +1,10 @@
 #!/bin/sh
 # Find a single nonconforming test.
-# First command line parameter is the lenght of test in bytes, default is 10.
+# First command line parameter is the length of test in bytes, default is 10.
 
-path=`dirname $0`
+path=`dirname $(which $0)`
+
+trap 'echo; rm -f $path/test.{in,out,ref} &> /dev/null ; exit' INT
 
 while ! test "`$path/dotest $1`"; do echo -n .; done
 shift

@@ -72,7 +72,7 @@ void die(gchar *fmt, ...)
 #define PDF FRIBIDI_TYPE_PDF
 #define EN FRIBIDI_TYPE_EN
 
-guchar FriBidiPropertyBlockSmallCaps[] = {
+FriBidiCharType FriBidiPropertyBlockSmallCaps[] = {
 //0   1   2   3   4   5   6   7   8   9   a   b   c   d   e   f
   ON ,ON ,ON ,ON ,LTR,RTL,ON ,ON ,ON ,ON ,ON ,ON ,ON ,BS ,RLO,RLE,/*00-0f*/
   LRO,LRE,PDF,WS ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,ON ,/*10-1f*/
@@ -238,7 +238,7 @@ int main(int argc, char *argv[])
   gboolean do_fill = FALSE;
   gint char_set = 0;
   guchar *bol_text = NULL, *eol_text = NULL;
-  FriBidiCharType input_base_direction = FRIBIDI_TYPE_N;
+  FriBidiCharType input_base_direction = FRIBIDI_TYPE_ON;
   
 
   /* Parse the command line */
@@ -278,8 +278,8 @@ int main(int argc, char *argv[])
       CASE("-width") { text_width = atoi(argv[argp++]); continue; }
       CASE("-eol")   { eol_text = argv[argp++]; continue; }
       CASE("-bol")   { bol_text = argv[argp++]; continue; }
-      CASE("-rtl")   { input_base_direction = FRIBIDI_TYPE_R; continue; }
-      CASE("-ltr")   { input_base_direction = FRIBIDI_TYPE_L; continue; }
+      CASE("-rtl")   { input_base_direction = FRIBIDI_TYPE_RTL; continue; }
+      CASE("-ltr")   { input_base_direction = FRIBIDI_TYPE_LTR; continue; }
       CASE("-fill")  { do_fill = TRUE; continue; }
       CASE("-debug")
         {
@@ -358,7 +358,7 @@ int main(int argc, char *argv[])
 	if (bol_text)
 	  printf("%s", bol_text);
 	
-	if (base == FRIBIDI_TYPE_R && do_pad && *outstring) {
+	if (base == FRIBIDI_TYPE_RTL && do_pad && *outstring) {
 	  j = strlen(outstring);
 	  k = (j-1) % text_width + 1;
 	  for (i=(j-1)/text_width-1; i>=0; i--)

@@ -207,7 +207,7 @@ sub split_entity {
 sub create_block {
     my ($block,$name, $ranges) = @_;
     my($title) = <<__;
-guchar ${name}\[256\] = {
+FriBidiCharType ${name}\[256\] = {
 __
     my $result;
     my $last_type=$ranges->[0]->[2];
@@ -264,7 +264,7 @@ __
     
     my $i = 0;
     my $block_array = <<__;
-guchar *FriBidiPropertyBlocks[256] = {
+FriBidiCharType *FriBidiPropertyBlocks[256] = {
 __
 
     my %seen_blocks;

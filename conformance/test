@@ -3,7 +3,7 @@
 # use -debug switch to see the debug info into stderr.
 # use -clean to remove explicit marks before doing diff.
 
-path=`dirname $0`
+path=`dirname $(which $0)`
 
 if ! test -f "$path/reference/bidiref"; then
   gcc -o $path/reference/bidiref $path/reference/bidiref.cpp

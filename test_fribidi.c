@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
       fribidi_iso8859_8_to_unicode(S_, us);
 
       /* Create a bidi string */
-      base = FRIBIDI_TYPE_N;
+      base = FRIBIDI_TYPE_ON;
       fribidi_log2vis(us, len, &base, 
 		      /* output */
 		      out_us,
@@ -158,7 +158,7 @@ int main(int argc, char *argv[])
 	  if (outstring[i]>=0xE0 && outstring[i]<=0xFA)
 	    outstring[i]-= 0xE0 - 'A';  /* Map to capital letters */
       
-      if (base == FRIBIDI_TYPE_R && !do_no_pad)
+      if (base == FRIBIDI_TYPE_RTL && !do_no_pad)
 	for (i=0; i<pad_width-len; i++)
 	  printf(" ");
       
@@ -181,7 +181,7 @@ int main(int argc, char *argv[])
 	  printf("%s", outstring);
 	}
 
-      if (base == FRIBIDI_TYPE_L && !do_no_pad)
+      if (base == FRIBIDI_TYPE_LTR && !do_no_pad)
 	for (i=0; i<pad_width-len; i++)
 	  printf(" ");
 
