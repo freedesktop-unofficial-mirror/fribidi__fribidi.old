@@ -21,12 +21,11 @@
  * <fwpg@sharif.edu>.
  */
 
-#include <stdlib.h>
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 #include "fribidi.h"
+#include "fribidi_mem.h"
 #ifdef DEBUG
 #include <stdio.h>
 #endif

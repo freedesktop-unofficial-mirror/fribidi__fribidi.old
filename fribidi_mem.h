@@ -23,46 +23,12 @@
 #define FRIBIDI_MEM_H
 
 #include "fribidi_config.h"
-/* #include "fribidi_env.h" */
+#include "fribidi_types.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-
-#define FRIBIDI_INT8	char
-#define FRIBIDI_INT16	short
-#define FRIBIDI_INT32	long
-#define FRIBIDI_INT	int
-
-  typedef int fribidi_boolean;
-
-  typedef signed FRIBIDI_INT8 fribidi_int8;
-  typedef unsigned FRIBIDI_INT8 fribidi_uint8;
-  typedef signed FRIBIDI_INT16 fribidi_int16;
-  typedef unsigned FRIBIDI_INT16 fribidi_uint16;
-  typedef signed FRIBIDI_INT32 fribidi_int32;
-  typedef unsigned FRIBIDI_INT32 fribidi_uint32;
-  typedef signed FRIBIDI_INT fribidi_int;
-  typedef unsigned FRIBIDI_INT fribidi_uint;
-
-#define FRIBIDI_TRUE	1
-#define FRIBIDI_FALSE	0
-
-#ifndef TRUE
-#define TRUE FRIBIDI_TRUE
-#endif
-#ifndef FALSE
-#define FALSE FRIBIDI_FALSE
-#endif
-
-  typedef struct _FriBidiList FriBidiList;
-  struct _FriBidiList
-  {
-    void *data;
-    FriBidiList *next;
-    FriBidiList *prev;
-  };
 
   typedef struct _FriBidiEnv FriBidiEnv;
 
@@ -100,9 +66,6 @@ extern "C"
 #define fribidi_chunk_new(fbenv, type, chunk)        ( \
   (type *) fribidi_mem_chunk_alloc (fbenv, chunk) \
 )
-
-  int fribidi_strcasecmp (const char *s1,
-			  const char *s2);
 
 #ifdef	__cplusplus
 }

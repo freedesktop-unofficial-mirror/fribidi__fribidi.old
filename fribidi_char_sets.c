@@ -25,7 +25,6 @@
 #ifndef FRIBIDI_NO_CHARSETS
 
 #include "fribidi_char_sets.h"
-#include <string.h>
 
 typedef struct
 {
@@ -77,6 +76,24 @@ FriBidiCharSetHandler fribidi_char_sets[FRIBIDI_CHAR_SETS_NUM + 1] = {
 };
 
 #undef _FRIBIDI_ADD_CHAR_SET
+
+static char
+toupper (char c)
+{
+  return c < 'a' || c > 'z' ? c : c + 'A' - 'a';
+}
+
+int
+fribidi_strcasecmp (const char *s1,
+		    const char *s2)
+{
+  while (*s1 && toupper (*s1) == toupper (*s2))
+    {
+      s1++;
+      s2++;
+    }
+  return *s1 - *s2;
+}
 
 /* Return the charset which name is "s". */
 FRIBIDI_API FriBidiCharSet
@@ -175,6 +192,9 @@ fribidi_char_set_leave (FriBidiCharSet char_set)
 
 
 /* Interface version 1, deprecated, just for compatibility. */
+
+#include <string.h>
+
 FRIBIDI_API int
 fribidi_charset_to_unicode_1 (FriBidiCharSet char_set,
 			      char *s,

@@ -30,7 +30,6 @@
 
 #include "fribidi_config.h"
 #include "fribidi_unicode.h"
-#include "fribidi_mem.h"
 #include "fribidi_types.h"
 #include "fribidi_env.h"
 

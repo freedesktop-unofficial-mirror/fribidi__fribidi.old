@@ -22,6 +22,7 @@
 #ifndef FRIBIDI_UNICODE_H
 #define FRIBIDI_UNICODE_H
 
+#include "fribidi_config.h"
 #include "fribidi_types.h"
 
 #ifdef __cplusplus
