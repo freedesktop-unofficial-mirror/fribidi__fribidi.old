@@ -1,7 +1,7 @@
 #include "fribidi_mini_glib.h"
 
 GList *
-g_list_append (GList * list, gpointer data)
+g_list_append (GList *list, gpointer data)
 {
   GList *node, *last;
 

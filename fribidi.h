@@ -32,29 +32,29 @@ FriBidiCharType fribidi_get_type (FriBidiChar uch);
 gboolean fribidi_get_mirror_char (	/* Input */
 				   FriBidiChar ch,
 				   /* Output */
-				   FriBidiChar * mirrored_ch);
+				   FriBidiChar *mirrored_ch);
 
-gboolean fribidi_log2vis (		/* input */
-		       FriBidiChar * str,
-		       gint len, FriBidiCharType * pbase_dir,
-		       /* output */
-		       FriBidiChar * visual_str,
-		       FriBidiStrIndex * position_L_to_V_list,
-		       FriBidiStrIndex * position_V_to_L_list,
-		       guint8 * embedding_level_list);
+gboolean fribidi_log2vis (	/* input */
+			   FriBidiChar *str,
+			   gint len, FriBidiCharType *pbase_dir,
+			   /* output */
+			   FriBidiChar *visual_str,
+			   FriBidiStrIndex *position_L_to_V_list,
+			   FriBidiStrIndex *position_V_to_L_list,
+			   guint8 *embedding_level_list);
 
-void fribidi_log2vis_get_embedding_levels (	/* input */
-					    FriBidiChar * str,
-					    int len,
-					    FriBidiCharType * pbase_dir,
-					    /* output */
-					    guint8 * embedding_level_list);
+gboolean fribidi_log2vis_get_embedding_levels (	/* input */
+						FriBidiChar *str,
+						int len,
+						FriBidiCharType *pbase_dir,
+						/* output */
+						guint8 *embedding_level_list);
 
 /*======================================================================
  *  fribidi_remove_explicits() removes explicit marks, and returns the
  *  new length.
  *----------------------------------------------------------------------*/
-gint fribidi_remove_explicits (FriBidiChar * str, gint length);
+gint fribidi_remove_explicits (FriBidiChar *str, gint length);
 
 /*======================================================================
  *  fribidi_mirroring_status() returns whether mirroring is on or off,
@@ -77,9 +77,9 @@ gboolean fribidi_set_debug (gboolean debug);
  *  length of the section in the new string that needs redrawing.
  *----------------------------------------------------------------------*/
 void fribidi_find_string_changes (	/* input */
-				   FriBidiChar * old_str,
+				   FriBidiChar *old_str,
 				   int old_len,
-				   FriBidiChar * new_str, int new_len,
+				   FriBidiChar *new_str, int new_len,
 				   /* output */
 				   int *change_start, int *change_len);
 
@@ -119,8 +119,8 @@ void
 fribidi_map_range (gint span[2],
 		   int len,
 		   gboolean is_v2l_map,
-		   FriBidiStrIndex * position_map,
-		   guint8 * embedding_level_list,
+		   FriBidiStrIndex *position_map,
+		   guint8 *embedding_level_list,
 		   /* output */
 		   int *num_mapped_spans, int spans[3][2]);
 
@@ -130,7 +130,7 @@ fribidi_map_range (gint span[2],
  *  if the embedding level for the character is odd.
  *----------------------------------------------------------------------*/
 gboolean
-fribidi_is_char_rtl (guint8 * embedding_level_list,
+fribidi_is_char_rtl (guint8 *embedding_level_list,
 		     FriBidiCharType base_dir, int idx);
 
 /*======================================================================
@@ -185,13 +185,26 @@ fribidi_is_char_rtl (guint8 * embedding_level_list,
 void fribidi_xpos_resolve (gint x_pos,
 			   gint x_offset,
 			   gint len,
-			   guint8 * embedding_level_list,
+			   guint8 *embedding_level_list,
 			   FriBidiCharType base_dir,
-			   FriBidiStrIndex * vis2log, gint16 * char_widths,
+			   FriBidiStrIndex *vis2log, gint16 *char_widths,
 			   /* output */
-			   gint * res_log_pos,
-			   gint * res_vis_pos,
-			   gint * res_cursor_x_pos,
-			   gboolean * res_cursor_dir_is_rtl,
-			   gboolean * res_attach_before);
+			   gint *res_log_pos,
+			   gint *res_vis_pos,
+			   gint *res_cursor_x_pos,
+			   gboolean *res_cursor_dir_is_rtl,
+			   gboolean *res_attach_before);
+
+/*======================================================================
+ *  fribidi_runs_log2vis takes a list of logical runs and returns a
+ *  a list of visual runs. A run is defined as a sequence that has
+ *  the same attributes.
+ *----------------------------------------------------------------------*/
+void fribidi_runs_log2vis (	/* input */
+			    GList *logical_runs,	/* List of FriBidiRunType */
+			    gint len, FriBidiStrIndex *log2vis,
+			    FriBidiCharType base_dir,
+			    /* output */
+			    GList **visual_runs);
+
 #endif /* FRIBIDI_H */

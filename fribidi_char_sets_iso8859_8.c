@@ -38,7 +38,8 @@
 #define UNI_ALEF 0x05D0
 #define UNI_TAV 0x05EA
 
-FriBidiChar fribidi_iso8859_8_to_unicode_c (guchar ch)
+FriBidiChar
+fribidi_iso8859_8_to_unicode_c (guchar ch)
 {
   /* optimization */
   if (ch < ISO_8859_8_LRO)
@@ -66,7 +67,8 @@ FriBidiChar fribidi_iso8859_8_to_unicode_c (guchar ch)
     }
 }
 
-gint fribidi_iso8859_8_to_unicode (guchar * s, FriBidiChar * us)
+gint
+fribidi_iso8859_8_to_unicode (guchar *s, FriBidiChar *us)
 {
   gint i;
   gint len = strlen (s);
@@ -77,7 +79,8 @@ gint fribidi_iso8859_8_to_unicode (guchar * s, FriBidiChar * us)
   return len;
 }
 
-guchar fribidi_unicode_to_iso8859_8_c (FriBidiChar uch)
+guchar
+fribidi_unicode_to_iso8859_8_c (FriBidiChar uch)
 {
   if (uch < 128)
     return uch;
@@ -103,7 +106,8 @@ guchar fribidi_unicode_to_iso8859_8_c (FriBidiChar uch)
   return '¿';
 }
 
-gint fribidi_unicode_to_iso8859_8 (FriBidiChar * us, int length, guchar * s)
+gint
+fribidi_unicode_to_iso8859_8 (FriBidiChar *us, int length, guchar *s)
 {
   gint i;
 

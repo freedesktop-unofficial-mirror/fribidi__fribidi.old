@@ -31,48 +31,52 @@
 #define fribidi_char_set_enter_utf8 NULL
 #define fribidi_char_set_leave_utf8 NULL
 
-gint fribidi_unicode_to_utf8 (FriBidiChar * us, gint length,
+gint fribidi_unicode_to_utf8 (FriBidiChar *us, gint length,
 			      /* Output */
-			      guchar * s);
-/* warning: the length of output string may exceed the length of the input */
+			      guchar *s);
 
-gint fribidi_utf8_to_unicode (guchar * s,
-			      /* Output */
-			      FriBidiChar * us);
+/* warning: the length of output string may exceed the length of the input */
 /* the length of the string is returned */
+gint fribidi_utf8_to_unicode (guchar *s,
+			      /* Output */
+			      FriBidiChar *us);
 
 /* the following added by Omer Zak <omerz@actcom.co.il> Sept 2000.
    The following functions do the same thing, but have better-defined
    interfaces. */
 
-gboolean			/* Returns TRUE if the outputs are valid, even if the entire
-				   Unicode string was not converted. */
-  fribidi_unicode_to_utf8_p (FriBidiChar * in_unicode_str,	/* Unicode string */
-			     guint in_unicode_length,	/* Unicode string length in
-							   Unicode characters */
-			     guchar * utf8_buffer,	/* Buffer for UTF8 translation */
-			     guint utf8_buffer_length,	/* Length of UTF8 buffer */
-			     /* Outputs */
-			     guint * out_uni_consumed_length_p,
-			     /* Actual number of Unicode
-			        characters translated */
-			     guint * out_actual_utf8_buffer_length_p);
-							/* Actual number of bytes
-							   used in the UTF8 buffer. */
+/* Returns TRUE if the entire UTF8 string was converted without errors. */
+gboolean fribidi_utf8_to_unicode_p (	/* Input */
+				     /* UTF8 string */
+				     guchar *in_utf8_str,
+				     /* Length of UTF8 string in octets */
+				     guint in_utf8_length,
+				     /* Buffer for Unicode translation */
+				     FriBidiChar *unicode_buffer,
+				     /* Length of Unicode buffer in Unicode characters */
+				     guint unicode_buffer_length,
+				     /* Outputs */
+				     /* Actual number of UTF8 octets translated */
+				     guint *out_utf8_consumed_length_p,
+				     /* Actual number of Unicode characters used in the Unicode buffer. */
+				     guint
+				     *out_actual_unicode_buffer_length_p);
 
-gboolean			/* Returns TRUE if the entire UTF8 string was converted without errors. */
-  fribidi_utf8_to_unicode_p (guchar * in_utf8_str,	/* UTF8 string */
-			     guint in_utf8_length,	/* Length of UTF8 string in octets */
-			     FriBidiChar * unicode_buffer,	/* Buffer for Unicode translation */
-			     guint unicode_buffer_length,	/* Length of Unicode buffer in
-								   Unicode characters */
-			     /* Outputs */
-			     guint * out_utf8_consumed_length_p,
-			     /* Actual number of UTF8
-			        octets translated */
-			     guint * out_actual_unicode_buffer_length_p);
-							/* Actual number of Unicode
-							   characters used in the
-							   Unicode buffer. */
+/* Returns TRUE if the outputs are valid, even if the entire Unicode string
+ * was not converted. */
+gboolean fribidi_unicode_to_utf8_p (	/* Input */
+				     /* Unicode string */
+				     FriBidiChar *in_unicode_str,
+				     /* Unicode string length in Unicode characters */
+				     guint in_unicode_length,
+				     /* Buffer for UTF8 translation */
+				     guchar *utf8_buffer,
+				     /* Length of UTF8 buffer */
+				     guint utf8_buffer_length,
+				     /* Outputs */
+				     /* Actual number of Unicode characters translated */
+				     guint *out_uni_consumed_length_p,
+				     /* Actual number of bytes used in the UTF8 buffer */
+				     guint *out_actual_utf8_buffer_length_p);
 
 #endif /* FRIBIDI_CHAR_SETS_UTF8_H */

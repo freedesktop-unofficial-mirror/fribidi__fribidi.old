@@ -11,7 +11,7 @@ if test -z "$VERBOSE"; then
    exec > /dev/null 2>&1
 fi
 
-path=`dirname $(which $0)`
+path=`dirname $0`
 
 if ! test -f "./fribidi"; then
   echo "run.tests: you must make fribidi first"
@@ -22,7 +22,7 @@ TEST () {
   test="$1"
   charset="$2"
   echo "=== Running test $test"
-  ./fribidi --showinput --clean --fill --charset "$charset" \
+  ./fribidi --test --charset "$charset" \
     "$path/tests/$test" > "$test.output"
 
   if diff "$test.output" "$path/tests/$test.reference"; then

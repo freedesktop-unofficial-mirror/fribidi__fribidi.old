@@ -32,12 +32,12 @@
 #define fribidi_char_set_leave_cp1256 NULL
 
 FriBidiChar fribidi_cp1256_to_unicode_c (guchar ch);
-gint fribidi_cp1256_to_unicode (guchar * s,
+gint fribidi_cp1256_to_unicode (guchar *s,
 				/* Output */
-				FriBidiChar * us);
+				FriBidiChar *us);
 guchar fribidi_unicode_to_cp1256_c (FriBidiChar uch);
-gint fribidi_unicode_to_cp1256 (FriBidiChar * us, gint length,
+gint fribidi_unicode_to_cp1256 (FriBidiChar *us, gint length,
 				/* Output */
-				guchar * s);
+				guchar *s);
 
 #endif /* FRIBIDI_CHAR_SETS_CP1256_H */

@@ -32,12 +32,12 @@
 #define fribidi_char_set_leave_isiri_3342 NULL
 
 FriBidiChar fribidi_isiri_3342_to_unicode_c (guchar ch);
-gint fribidi_isiri_3342_to_unicode (guchar * s,
+gint fribidi_isiri_3342_to_unicode (guchar *s,
 				    /* Output */
-				    FriBidiChar * us);
+				    FriBidiChar *us);
 guchar fribidi_unicode_to_isiri_3342_c (FriBidiChar uch);
-gint fribidi_unicode_to_isiri_3342 (FriBidiChar * us, gint length,
+gint fribidi_unicode_to_isiri_3342 (FriBidiChar *us, gint length,
 				    /* Output */
-				    guchar * s);
+				    guchar *s);
 
 #endif /* FRIBIDI_CHAR_SETS_ISIRI_3342_H */

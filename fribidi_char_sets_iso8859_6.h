@@ -32,12 +32,12 @@
 #define fribidi_char_set_leave_iso8859_6 NULL
 
 FriBidiChar fribidi_iso8859_6_to_unicode_c (guchar ch);
-gint fribidi_iso8859_6_to_unicode (guchar * s,
+gint fribidi_iso8859_6_to_unicode (guchar *s,
 				   /* Output */
-				   FriBidiChar * us);
+				   FriBidiChar *us);
 guchar fribidi_unicode_to_iso8859_6_c (FriBidiChar uch);
-gint fribidi_unicode_to_iso8859_6 (FriBidiChar * us, gint length,
+gint fribidi_unicode_to_iso8859_6 (FriBidiChar *us, gint length,
 				   /* Output */
-				   guchar * s);
+				   guchar *s);
 
 #endif /* FRIBIDI_CHAR_SETS_ISO8859_6_H */

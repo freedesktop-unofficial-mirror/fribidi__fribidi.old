@@ -20,7 +20,7 @@
  * For licensing issues, contact <dov@imagic.weizmann.ac.il> and 
  * <fwpg@sharif.edu>. 
  */
- 
+
 #include "fribidi_char_sets.h"
 #include <string.h>
 
@@ -28,14 +28,14 @@ typedef struct
 {
   /* Convert the character string "s" to unicode string "us" and
      return it's length. */
-  gint (*charset_to_unicode) (guchar * s,
+  gint (*charset_to_unicode) (guchar *s,
 			      /* output */
-			      FriBidiChar * us);
+			      FriBidiChar *us);
   /* Convert the unicode string "us" with length "length" to character
      string "s" and return it's length. */
-  gint (*unicode_to_charset) (FriBidiChar * us, gint length,
+  gint (*unicode_to_charset) (FriBidiChar *us, gint length,
 			      /* output */
-			      guchar * s);
+			      guchar *s);
   /* Charset's name. */
   guchar *name;
   /* Charset's title. */
@@ -44,11 +44,11 @@ typedef struct
   guchar *(*desc) (void);
   /* Some charsets like CapRTL may need to change some fribidis tables, by
      calling this function, they can do this changes. */
-    gboolean (*enter) (void);
+  gboolean (*enter) (void);
   /* Some charsets like CapRTL may need to change some fribidis tables, by
      calling this function, they can undo their changes, perhaps to enter
      another mode. */
-    gboolean (*leave) (void);
+  gboolean (*leave) (void);
 }
 FriBidiCharSetHandler;
 
@@ -81,7 +81,7 @@ FriBidiCharSetHandler fribidi_char_sets[FRIBIDI_CHAR_SETS_NUM + 1] = {
 
 /* Return the charset which name is "s". */
 FriBidiCharSet
-fribidi_parse_charset (guchar * s)
+fribidi_parse_charset (guchar *s)
 {
   gint i;
 
@@ -98,9 +98,9 @@ fribidi_parse_charset (guchar * s)
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
 gint
-fribidi_charset_to_unicode (FriBidiCharSet char_set, guchar * s,
+fribidi_charset_to_unicode (FriBidiCharSet char_set, guchar *s,
 			    /* output */
-			    FriBidiChar * us)
+			    FriBidiChar *us)
 {
   fribidi_char_set_enter (char_set);
   return fribidi_char_sets[char_set].charset_to_unicode == NULL ? 0 :
@@ -110,10 +110,10 @@ fribidi_charset_to_unicode (FriBidiCharSet char_set, guchar * s,
 /* Convert the unicode string "us" with length "length" to character
    string "s" in charset "char_set" and return it's length. */
 gint
-fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar * us,
+fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
 			    gint length,
 			    /* output */
-			    gchar * s)
+			    gchar *s)
 {
   fribidi_char_set_enter (char_set);
   return fribidi_char_sets[char_set].unicode_to_charset == NULL ? 0 :

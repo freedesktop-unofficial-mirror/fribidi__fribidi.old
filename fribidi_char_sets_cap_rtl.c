@@ -42,7 +42,8 @@ fribidi_unicode_to_cap_rtl_c (FriBidiChar uch)
     return (guchar) "¿";
 }
 
-gint fribidi_cap_rtl_to_unicode (guchar * s, FriBidiChar * us)
+gint
+fribidi_cap_rtl_to_unicode (guchar *s, FriBidiChar *us)
 {
   gint i, j, len;
 
@@ -94,7 +95,8 @@ gint fribidi_cap_rtl_to_unicode (guchar * s, FriBidiChar * us)
   return j;
 }
 
-gint fribidi_unicode_to_cap_rtl (FriBidiChar * us, gint length, guchar * s)
+gint
+fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length, guchar *s)
 {
   gint i, j;
 
@@ -276,14 +278,16 @@ FriBidiPropCharType FriBidiPropertyBlockCapRTL[256] = {
 #undef PDF
 #undef EN
 
-/* does not return anything --RP */
-gboolean fribidi_char_set_enter_cap_rtl (void)
+gboolean
+fribidi_char_set_enter_cap_rtl (void)
 {
   FriBidiPropertyBlocks[0] = FriBidiPropertyBlockCapRTL;
+  return TRUE;
 }
 
-/* does not return anything --RP */
-gboolean fribidi_char_set_leave_cap_rtl (void)
+gboolean
+fribidi_char_set_leave_cap_rtl (void)
 {
   FriBidiPropertyBlocks[0] = FriBidiPropertyBlock0000;
+  return TRUE;
 }

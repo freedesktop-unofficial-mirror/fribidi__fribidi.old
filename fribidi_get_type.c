@@ -80,10 +80,11 @@ fribidi_get_type (FriBidiChar uch)
     }
 }
 
-gboolean fribidi_get_mirror_char (	/* Input */
-				   FriBidiChar ch,
-				   /* Output */
-				   FriBidiChar * mirrored_ch)
+gboolean
+fribidi_get_mirror_char (	/* Input */
+			  FriBidiChar ch,
+			  /* Output */
+			  FriBidiChar *mirrored_ch)
 {
   int pos, step;
   gboolean found = FALSE;

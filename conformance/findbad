@@ -2,7 +2,7 @@
 # Find a single nonconforming test.
 # First command line parameter is the length of test in bytes, default is 10.
 
-path=`dirname $(which $0)`
+path=`dirname $0`
 
 trap 'echo; rm -f $path/test.{in,out,ref} &> /dev/null ; exit' INT
 

@@ -32,12 +32,12 @@ gboolean fribidi_char_set_enter_cap_rtl (void);
 gboolean fribidi_char_set_leave_cap_rtl (void);
 
 FriBidiChar fribidi_cap_rtl_to_unicode_c (guchar ch);
-gint fribidi_cap_rtl_to_unicode (guchar * s,
+gint fribidi_cap_rtl_to_unicode (guchar *s,
 				 /* Output */
-				 FriBidiChar * us);
+				 FriBidiChar *us);
 guchar fribidi_unicode_to_cap_rtl_c (FriBidiChar uch);
-gint fribidi_unicode_to_cap_rtl (FriBidiChar * us, gint length,
+gint fribidi_unicode_to_cap_rtl (FriBidiChar *us, gint length,
 				 /* Output */
-				 guchar * s);
+				 guchar *s);
 
 #endif /* FRIBIDI_CHAR_SETS_CAP_RTL_H */

@@ -2,7 +2,7 @@
 # Generate and test single tests, and archive the nonconforming ones.
 # First command line parameter is the lenght of test in bytes, default is 10.
 
-path=`dirname $(which $0)`
+path=`dirname $0`
 
 trap 'rm -f $path/test.{in,out,ref} &> /dev/null ; exit' INT
 

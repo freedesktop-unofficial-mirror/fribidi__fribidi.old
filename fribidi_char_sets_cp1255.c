@@ -66,7 +66,7 @@ fribidi_cp1255_to_unicode_c (guchar ch)
 }
 
 gint
-fribidi_cp1255_to_unicode (guchar * s, FriBidiChar * us)
+fribidi_cp1255_to_unicode (guchar *s, FriBidiChar *us)
 {
   gint i;
   gint len = strlen (s);
@@ -94,7 +94,7 @@ fribidi_unicode_to_cp1255_c (FriBidiChar uch)
 }
 
 gint
-fribidi_unicode_to_cp1255 (FriBidiChar * us, int length, guchar * s)
+fribidi_unicode_to_cp1255 (FriBidiChar *us, int length, guchar *s)
 {
   gint i;
 

@@ -2,7 +2,7 @@
 # Test ../fribidi with reference/bidiref, using stdin, and diff the outputs.
 # use --debug switch to see the debug info into stderr.
 
-path=`dirname $(which $0)`
+path=`dirname $0`
 
 if ! test -f "$path/../fribidi"; then
   echo "test: you must make fribidi first"

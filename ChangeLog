@@ -1,18 +1,40 @@
+2001-03-31  Behdad Esfahbod <behdad@bamdad.org>
+        * fribidi_benchmark.c: #included <stdarg.h>, to compile under cygwin.
+
+	* fribidi.c, fribidi.h: Changed fribidi_log2vis_get_embedding_levels()
+	to return TRUE if successful and FALSE otherwise.
+
+	* fribidi.c: Function bidi_string_strlen() removed, because we
+	have not assumed that a fribidi string is ended with char 0.
+	Fixed all the bugs that roozbeh found and some more. Some more
+	debug information added. All internal functions defined as static.
+
+	* fribidi_main.c: Set to do not allocate visual array, if --novisual
+	options set.
+
+	* .indent.par: Added, it helps program "indent" to change the
+	appearance of sources to GNU style, each typedef should be added
+	to this file too.	
+
 2001-03-31  Roozbeh Pournader <roozbeh@sharif.edu>
 	* fribidi.c, fribidi_benchmark.c, fribidi_char_set_cap_rtl.c:
 	removed some unused variables.
+
 	* fribidi_char_sets*.c, fribidi_main.c: #included <string.h>. 
+
 	* fribidi.c, fribidi_char_sets_cap_rtl.c: added some comment lines
 	to places that bugs probably exist. find with searching for "--RP".
 
 	* COPYING.LIB: renamed to COPYING (based on a recent suggestion on
 	GNU web site).
+
 	* bootstrap: removed lines that suppressed warnings about missing
 	COPYING.
 
 2001-03-30  Roozbeh Pournader <roozbeh@sharif.edu>
 	* Makefile.noglib: replaced by a new version from Dan Kenigsberg
 	<danken@cs.technion.ac.il>.
+
 	* AUTHORS: added Dan Kenigsberg.
 
 	* '*.c', '*.h': changed all "//" comments to "/* */" pairs.

@@ -40,7 +40,7 @@ fribidi_iso8859_6_to_unicode_c (guchar ch)
 }
 
 gint
-fribidi_iso8859_6_to_unicode (guchar * s, FriBidiChar * us)
+fribidi_iso8859_6_to_unicode (guchar *s, FriBidiChar *us)
 {
   gint i;
   gint len = strlen (s);
@@ -70,7 +70,7 @@ fribidi_unicode_to_iso8859_6_c (FriBidiChar uch)
 }
 
 gint
-fribidi_unicode_to_iso8859_6 (FriBidiChar * us, int length, guchar * s)
+fribidi_unicode_to_iso8859_6 (FriBidiChar *us, int length, guchar *s)
 {
   gint i;
 

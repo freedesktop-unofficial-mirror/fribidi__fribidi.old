@@ -23,6 +23,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <getopt.h>
 #include <sys/times.h>
 #include "fribidi.h"
@@ -35,8 +36,8 @@ extern guchar *fribidi_version_info;
 
 #define MAX_STR_LEN 1000
 
-void
-die (gchar * fmt, ...)
+static void
+die (gchar *fmt, ...)
 {
   va_list ap;
   va_start (ap, fmt);
@@ -65,7 +66,7 @@ die (gchar * fmt, ...)
 
 gint niter;
 
-void
+static void
 help (void)
 {
   printf
@@ -75,19 +76,19 @@ help (void)
      "  -h, --help            Display this information and exit\n"
      "  -V, --version         Display version information and exit\n"
      "  -n, --niter N         Number of iterations. Default is %d.\n"
-     "\nReport bugs online at <http://fribidi.sourceforge.net/bugs.php>.\n"
-     , niter);
+     "\nReport bugs online at <http://fribidi.sourceforge.net/bugs.php>.\n",
+     niter);
   exit (0);
 }
 
-void
+static void
 version (void)
 {
   printf (appname " " appversion "\n%s", fribidi_version_info);
   exit (0);
 }
 
-double
+static double
 utime (void)
 {
   struct tms tb;
@@ -95,8 +96,8 @@ utime (void)
   return 0.01 * tb.tms_utime;
 }
 
-void
-benchmark (guchar * S_, FriBidiCharSet char_set, gint niter)
+static void
+benchmark (guchar *S_, FriBidiCharSet char_set, gint niter)
 {
   gint len, i;
   FriBidiChar us[MAX_STR_LEN], out_us[MAX_STR_LEN];
@@ -149,8 +150,7 @@ main (int argc, char *argv[])
 	{0, 0, 0, 0}
       };
 
-      c = getopt_long (argc, argv, "hVvdtc:w:B:E:", long_options,
-		     &option_index);
+      c = getopt_long (argc, argv, "hVn:", long_options, &option_index);
       if (c == -1)
 	break;
 

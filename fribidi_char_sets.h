@@ -65,16 +65,16 @@ FriBidiCharSet;
 
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
-gint fribidi_charset_to_unicode (FriBidiCharSet char_set, guchar * s,
+gint fribidi_charset_to_unicode (FriBidiCharSet char_set, guchar *s,
 				 /* output */
-				 FriBidiChar * us);
+				 FriBidiChar *us);
 
 /* Convert the unicode string "us" with length "length" to character
    string "s" in charset "char_set" and return it's length. */
-gint fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar * us,
+gint fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
 				 gint length,
 				 /* output */
-				 gchar * s);
+				 gchar *s);
 
 /* Return the string containing the name of the charset. */
 guchar *fribidi_char_set_name (FriBidiCharSet char_set);
@@ -96,7 +96,6 @@ gboolean fribidi_char_set_enter (FriBidiCharSet char_set);
 gboolean fribidi_char_set_leave (FriBidiCharSet char_set);
 
 /* Return the charset which name is "s". */
-FriBidiCharSet
-fribidi_parse_charset (guchar * s);
+FriBidiCharSet fribidi_parse_charset (guchar *s);
 
 #endif /* FRIBIDI_CHAR_SETS_H */

@@ -40,8 +40,8 @@ extern guchar *fribidi_version_info;
 
 #define MAX_STR_LEN 65000
 
-void
-die (gchar * fmt, ...)
+static void
+die (gchar *fmt, ...)
 {
   va_list ap;
   va_start (ap, fmt);
@@ -61,7 +61,7 @@ gint char_set, text_width;
 guchar *bol_text, *eol_text;
 FriBidiCharType input_base_direction;
 
-void
+static void
 help (void)
 {
   gint i;
@@ -76,7 +76,8 @@ help (void)
      "  -v, --verbose         Verbose mode, same as --basedir --ltov --vtol \\\n"
      "                        --levels --changes\n"
      "  -d, --debug           Output debug information\n"
-     "  -t, --test            Test " PACKAGE ", same as --clean --fill --showinput\n"
+     "  -t, --test            Test " PACKAGE
+     ", same as --clean --fill --showinput\n"
      "  -c, --charset CS      Specify character set, default is %s\n"
      "  -C, --charsetdesc CS  Show descriptions for character set CS and exit\n"
      "      --caprtl          Old style: set character set to CapRTL\n"
@@ -103,14 +104,12 @@ help (void)
      "                        logical and visual string (start, length)\n"
      "      --novisual        Do not output the visual string, to be used with \\\n"
      "                        --basedir, --ltov, --vtol, --levels, --changes\n"
-     "  All string indexes are zero based\n"
-     "\n"
-     "Output:\n"
+     "  All string indexes are zero based\n" "\n" "Output:\n"
      "  For each line of input, output something like this:\n"
      "    [input-str` => '][BOL][[padding space]visual-str][EOL]\n"
      "    [\\n base-dir][\\n ltov-map][\\n vtol-map][\\n levels][\\n changes]\n"
-     "\n"
-     "Available character sets:\n", fribidi_char_set_name (char_set), text_width);
+     "\n" "Available character sets:\n", fribidi_char_set_name (char_set),
+     text_width);
   for (i = 1; i <= FRIBIDI_CHAR_SETS_NUM; i++)
     printf ("  * %-10s: %-25s%1s\n",
 	    fribidi_char_set_name (i), fribidi_char_set_title (i),
@@ -121,7 +120,7 @@ help (void)
   exit (0);
 }
 
-void
+static void
 version (void)
 {
   printf (appname " " appversion "\n%s", fribidi_version_info);
@@ -133,8 +132,8 @@ main (int argc, char *argv[])
 {
   int exit_val;
   gboolean file_found;
-  char * s;
-  FILE * IN;
+  char *s;
+  FILE *IN;
 
   text_width = 80;
   do_pad = TRUE;
@@ -311,7 +310,6 @@ main (int argc, char *argv[])
 	  {
 	    char *new_line, *nl_found;
 	    FriBidiChar logical[FRIBIDI_MAX_STRING_LENGTH];
-	    FriBidiChar visual[FRIBIDI_MAX_STRING_LENGTH];
 	    guchar outstring[MAX_STR_LEN];
 	    FriBidiCharType base;
 	    gboolean log2vis;
@@ -335,10 +333,15 @@ main (int argc, char *argv[])
 	    len = fribidi_charset_to_unicode (char_set, S_, logical);
 
 	    {
+	      FriBidiChar *visual;
 	      FriBidiStrIndex *ltov, *vtol;
 	      guint8 *levels;
 	      gint new_len;
 
+	      if (show_visual)
+		visual = g_new (FriBidiChar, len + 1);
+	      else
+		visual = NULL;
 	      if (show_ltov)
 		ltov = g_new (FriBidiStrIndex, len + 1);
 	      else
@@ -460,6 +463,9 @@ main (int argc, char *argv[])
 		{
 		  exit_val = 2;
 		}
+
+	      if (show_visual)
+		g_free (visual);
 	      if (show_ltov)
 		g_free (ltov);
 	      if (show_vtol)

@@ -45,6 +45,6 @@ struct _GList
   GList *prev;
 };
 
-GList *g_list_append (GList * list, gpointer data);
+GList *g_list_append (GList *list, gpointer data);
 
 #endif /* _FRIBIDI_MINI_GLIB_H */
