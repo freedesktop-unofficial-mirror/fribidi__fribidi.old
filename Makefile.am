@@ -43,7 +43,6 @@ libfribidi_la_LIBADD =
 
 libfribidiincdir = $(includedir)/fribidi
 
-libfribidiincdir = $(includedir)/fribidi
 libfribidiinc_HEADERS =	\
 	fribidi.h	\
 	fribidi_types.h	\
