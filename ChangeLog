@@ -1,3 +1,7 @@
+2001-08-23  Behdad Esfahbod <behdad@sharif.edu>
+	* acinclude.m4, ltmain.sh, ltmain.in, ltconfig: Updated with
+	libtool-1.4 to configure under latest cygwin.
+
 2001-05-29  Behdad Esfahbod <behdad@sharif.edu>
 	* fribidi_get_type.c: Updated to use new 'fribidi_tables.i'.
 	* fribidi_utils.c: very small code cleanup.
