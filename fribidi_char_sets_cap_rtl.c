@@ -29,6 +29,8 @@
 #include <stdio.h>
 #include "fribidi.h"
 
+FRIBIDI_API FriBidiCharType fribidi_get_type_internal (FriBidiChar uch);
+
 #define WS FRIBIDI_PROP_TYPE_WS
 #define BS FRIBIDI_PROP_TYPE_BS
 #define EO FRIBIDI_PROP_TYPE_EO

@@ -27,10 +27,16 @@
 /*======================================================================
  *  fribidi_get_type() returns the bidi type of a character.
  *----------------------------------------------------------------------*/
-FriBidiCharType fribidi_get_type_internal (FriBidiChar uch);
+FRIBIDI_API FriBidiCharType fribidi_get_type_internal (FriBidiChar uch);
 
-void
-fribidi_get_types (FriBidiEnv *fribidienv,
+FRIBIDI_API FriBidiCharType
+fribidi_get_type (FriBidiEnv *env, FriBidiChar uch)
+{
+  return fribidi_get_type_internal (uch);
+}
+
+FRIBIDI_API void
+fribidi_get_types (FriBidiEnv *env,
 		   /* input */
 		   const FriBidiChar *str, FriBidiStrIndex len,
 		   /* output */
@@ -39,7 +45,7 @@ fribidi_get_types (FriBidiEnv *fribidienv,
   FriBidiStrIndex i;
 
   for (i = 0; i < len; i++)
-    type[i] = fribidi_get_type_internal (str[i]);
+    type[i] = fribidi_get_type (env, str[i]);
 }
 
 #ifdef MEM_OPTIMIZED

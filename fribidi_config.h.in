@@ -4,7 +4,6 @@
 #define FRIBIDI_VERSION "@FRIBIDI_VERSION@"
 #define FRIBIDI_MAJOR_VERSION @FRIBIDI_MAJOR_VERSION@
 #define FRIBIDI_MINOR_VERSION @FRIBIDI_MINOR_VERSION@
-#define FRIBIDI_MICRO_VERSION_STR "@FRIBIDI_MICRO_VERSION@"
 #define FRIBIDI_INTERFACE_VERSION @FRIBIDI_INTERFACE_VERSION@
 
 #if @FRIBIDI_NO_CHARSETS@
@@ -14,3 +13,13 @@
 #endif
 
 #define TOSTR(x) #x
+
+#ifdef WIN32
+#ifdef FRIBIDI_EXPORTS
+#define FRIBIDI_API __declspec(dllexport)
+#else
+#define FRIBIDI_API __declspec(dllimport)
+#endif
+#else
+#define FRIBIDI_API
+#endif

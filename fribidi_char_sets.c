@@ -58,7 +58,7 @@ FriBidiCharSetHandler;
 /* Each charset must define the functions and strings named below
    (in _FRIBIDI_ADD_CHAR_SET) or define them as NULL, if not any. */
 
-#define _FRIBIDI_ADD_CHAR_SET(char_set) \
+#define _FRIBIDI_ADD_CHAR_SET(CHAR_SET, char_set) \
   { \
     fribidi_##char_set##_to_unicode, \
     fribidi_unicode_to_##char_set, \
@@ -67,23 +67,17 @@ FriBidiCharSetHandler;
     fribidi_char_set_desc_##char_set, \
     fribidi_char_set_enter_##char_set, \
     fribidi_char_set_leave_##char_set, \
-  }
+  },
 
 FriBidiCharSetHandler fribidi_char_sets[FRIBIDI_CHAR_SETS_NUM + 1] = {
   {NULL, NULL, "Not Implemented", NULL, NULL, NULL},
-  _FRIBIDI_ADD_CHAR_SET (utf8),
-  _FRIBIDI_ADD_CHAR_SET (cap_rtl),
-  _FRIBIDI_ADD_CHAR_SET (iso8859_6),
-  _FRIBIDI_ADD_CHAR_SET (iso8859_8),
-  _FRIBIDI_ADD_CHAR_SET (cp1255),
-  _FRIBIDI_ADD_CHAR_SET (cp1256),
-  _FRIBIDI_ADD_CHAR_SET (isiri_3342),
+#include "fribidi_char_sets.i"
 };
 
 #undef _FRIBIDI_ADD_CHAR_SET
 
 /* Return the charset which name is "s". */
-FriBidiCharSet
+FRIBIDI_API FriBidiCharSet
 fribidi_parse_charset (char *s)
 {
   int i;
@@ -92,13 +86,13 @@ fribidi_parse_charset (char *s)
     if (fribidi_strcasecmp (s, fribidi_char_sets[i].name) == 0)
       return i;
 
-  return FRIBIDI_CHARSET_NOT_FOUND;
+  return FRIBIDI_CHAR_SET_NOT_FOUND;
 }
 
 
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
-int
+FRIBIDI_API int
 fribidi_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
 			    /* output */
 			    FriBidiChar *us)
@@ -110,7 +104,7 @@ fribidi_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
 
 /* Convert the unicode string "us" with length "length" to character
    string "s" in charset "char_set" and return it's length. */
-int
+FRIBIDI_API int
 fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
 			    int length,
 			    /* output */
@@ -122,7 +116,7 @@ fribidi_unicode_to_charset (FriBidiCharSet char_set, FriBidiChar *us,
 }
 
 /* Return the string containing the name of the charset. */
-char *
+FRIBIDI_API char *
 fribidi_char_set_name (FriBidiCharSet char_set)
 {
   return fribidi_char_sets[char_set].name == NULL ? (char *) "" :
@@ -130,7 +124,7 @@ fribidi_char_set_name (FriBidiCharSet char_set)
 }
 
 /* Return the string containing the title of the charset. */
-char *
+FRIBIDI_API char *
 fribidi_char_set_title (FriBidiCharSet char_set)
 {
   return fribidi_char_sets[char_set].title == NULL ?
@@ -138,18 +132,18 @@ fribidi_char_set_title (FriBidiCharSet char_set)
 }
 
 /* Return the string containing the comments about the charset, if any. */
-char *
+FRIBIDI_API char *
 fribidi_char_set_desc (FriBidiCharSet char_set)
 {
   return fribidi_char_sets[char_set].desc == NULL ?
     NULL : fribidi_char_sets[char_set].desc ();
 }
 
-static FriBidiCharSet current_char_set = FRIBIDI_CHARSET_DEFAULT;
+static FriBidiCharSet current_char_set = FRIBIDI_CHAR_SET_DEFAULT;
 
 /* Some charsets like CapRTL may need to change some fribidis tables, by
    calling this function, they can do this changes. */
-fribidi_boolean
+FRIBIDI_API fribidi_boolean
 fribidi_char_set_enter (FriBidiCharSet char_set)
 {
   if (char_set != current_char_set && fribidi_char_sets[char_set].enter)
@@ -165,7 +159,7 @@ fribidi_char_set_enter (FriBidiCharSet char_set)
 /* Some charsets like CapRTL may need to change some fribidis tables, by
    calling this function, they can undo their changes, maybe to enter
    another mode. */
-fribidi_boolean
+FRIBIDI_API fribidi_boolean
 fribidi_char_set_leave (FriBidiCharSet char_set)
 {
   if (char_set == current_char_set && fribidi_char_sets[char_set].leave)
@@ -176,7 +170,7 @@ fribidi_char_set_leave (FriBidiCharSet char_set)
 
 
 /* Interface version 1, deprecated, just for compatibility. */
-int
+FRIBIDI_API int
 fribidi_charset_to_unicode_1 (FriBidiCharSet char_set, char *s,
 			      /* output */
 			      FriBidiChar *us)

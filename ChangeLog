@@ -1,3 +1,10 @@
+2002-08-01  Behdad Esfahbod <fribidi@behdad.org>
+	* *.c, *.h, fribidi_config.h.in, configure.in, acconfig.h: Applied
+	and completed the patch from Tomas Frydrych, to add FRIBIDI_EXPORT
+	and FRIBIDI_API symbols.  These symbols are needed for ports of
+	fribidi to Windows and other platforms.
+	* fribidi_char_sets.i, fribidi_types.i: Added.
+
 2002-06-17  Behdad Esfahbod <fribidi@behdad.org>
 	* fribidi_unicode.h: Set Unicode chars based on sizeof FriBidiChar.
 	Now if one changes FriBidiChar to 16bit, and regenerate char_type

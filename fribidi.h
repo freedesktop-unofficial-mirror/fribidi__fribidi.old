@@ -43,72 +43,87 @@ extern "C"
 {
 #endif
 
-  fribidi_boolean fribidi_log2vis (FriBidiEnv *fribidienv,
-				   /* input */
-				   const FriBidiChar *str,
-				   FriBidiStrIndex len,
-				   FriBidiCharType *pbase_dirs,
-				   /* output */
-				   FriBidiChar *visual_str,
-				   FriBidiStrIndex *position_L_to_V_list,
-				   FriBidiStrIndex *position_V_to_L_list,
-				   FriBidiLevel *embedding_level_list);
+  FRIBIDI_API fribidi_boolean fribidi_log2vis (FriBidiEnv *fribidienv,
+					       /* input */
+					       const FriBidiChar *str,
+					       FriBidiStrIndex len,
+					       FriBidiCharType *pbase_dirs,
+					       /* output */
+					       FriBidiChar *visual_str,
+					       FriBidiStrIndex
+					       *position_L_to_V_list,
+					       FriBidiStrIndex
+					       *position_V_to_L_list,
+					       FriBidiLevel
+					       *embedding_level_list);
 
-  fribidi_boolean fribidi_log2vis_get_embedding_levels (FriBidiEnv
-							*fribidienv,
-							/* input */
-							const FriBidiChar
-							*str,
-							FriBidiStrIndex len,
-							FriBidiCharType
-							*pbase_dir,
-							/* output */
-							FriBidiLevel
-							*embedding_level_list);
+  FRIBIDI_API fribidi_boolean fribidi_log2vis_get_embedding_levels (FriBidiEnv
+								    *fribidienv,
+								    /* input */
+								    const
+								    FriBidiChar
+								    *str,
+								    FriBidiStrIndex
+								    len,
+								    FriBidiCharType
+								    *pbase_dir,
+								    /* output */
+								    FriBidiLevel
+								    *embedding_level_list);
 
 /*======================================================================
  *  fribidi_remove_bidi_marks() removes bidirectional marks, and returns
  *  the new length, also updates each of other inputs if not NULL.
  *----------------------------------------------------------------------*/
-  FriBidiStrIndex fribidi_remove_bidi_marks (FriBidiEnv *fribidienv,
-					     FriBidiChar *str,
-					     FriBidiStrIndex length,
-					     FriBidiStrIndex
-					     *position_to_this_list,
-					     FriBidiStrIndex
-					     *position_from_this_list,
-					     FriBidiLevel
-					     *embedding_level_list);
+  FRIBIDI_API FriBidiStrIndex fribidi_remove_bidi_marks (FriBidiEnv
+							 *fribidienv,
+							 FriBidiChar *str,
+							 FriBidiStrIndex
+							 length,
+							 FriBidiStrIndex
+							 *position_to_this_list,
+							 FriBidiStrIndex
+							 *position_from_this_list,
+							 FriBidiLevel
+							 *embedding_level_list);
 
 /*======================================================================
  *  fribidi_get_type() returns bidi type of a character.
  *----------------------------------------------------------------------*/
-  FriBidiCharType fribidi_get_type_internal (FriBidiChar uch);
-
-  /* At present, the fribidienv parameter is not actually used
-   * by this procedure.
-   */
-#define fribidi_get_type(fribidienv,uch) fribidi_get_type_internal(uch)
+  FRIBIDI_API FriBidiCharType fribidi_get_type (FriBidiEnv *fribidienv,
+						FriBidiChar uch);
 
 /*======================================================================
  *  fribidi_get_types() returns bidi type of a string.
  *----------------------------------------------------------------------*/
-  void fribidi_get_types (FriBidiEnv *fribidienv,
-			  /* input */
-			  const FriBidiChar *str, FriBidiStrIndex len,
-			  /* output */
-			  FriBidiCharType *type);
+  FRIBIDI_API void fribidi_get_types (FriBidiEnv *fribidienv,
+				      /* input */
+				      const FriBidiChar *str,
+				      FriBidiStrIndex len,
+				      /* output */
+				      FriBidiCharType *type);
+
+/*======================================================================
+ *  fribidi_get_mirror_char() returns the mirrored character, if any.
+ *----------------------------------------------------------------------*/
+  FRIBIDI_API fribidi_boolean fribidi_get_mirror_char (FriBidiEnv *fribidienv,
+						       /* Input */
+						       FriBidiChar ch,
+						       /* Output */
+						       FriBidiChar
+						       *mirrored_ch);
 
 /*======================================================================
  *  fribidi_get_mirror_char() returns the mirrored character, if input
  *  character has a mirror, or the input itself.
  *  if mirrored_ch is NULL, just returns if character has a mirror or not.
  *----------------------------------------------------------------------*/
-  fribidi_boolean fribidi_get_mirror_char (FriBidiEnv *fribidienv,
-					   /* Input */
-					   FriBidiChar ch,
-					   /* Output */
-					   FriBidiChar *mirrored_ch);
+  FRIBIDI_API fribidi_boolean fribidi_get_mirror_char (FriBidiEnv *fribidienv,
+						       /* Input */
+						       FriBidiChar ch,
+						       /* Output */
+						       FriBidiChar
+						       *mirrored_ch);
 /*======================================================================
  *  The following functions were moved to fribidi_env:
  *  - fribidi_mirroring_status()
@@ -125,15 +140,15 @@ extern "C"
  *  of characters that need redrawing. It returns the start and the
  *  length of the section in the new string that needs redrawing.
  *----------------------------------------------------------------------*/
-  void fribidi_find_string_changes (FriBidiEnv *fribidienv,
-				    /* input */
-				    const FriBidiChar *old_str,
-				    FriBidiStrIndex old_len,
-				    const FriBidiChar *new_str,
-				    FriBidiStrIndex new_len,
-				    /* output */
-				    FriBidiStrIndex *change_start,
-				    FriBidiStrIndex *change_len);
+  FRIBIDI_API void fribidi_find_string_changes (FriBidiEnv *fribidienv,
+						/* input */
+						const FriBidiChar *old_str,
+						FriBidiStrIndex old_len,
+						const FriBidiChar *new_str,
+						FriBidiStrIndex new_len,
+						/* output */
+						FriBidiStrIndex *change_start,
+						FriBidiStrIndex *change_len);
 
 
 /*======================================================================
@@ -165,26 +180,28 @@ extern "C"
  *                       // output
  *                       &num_vis_ranges, *vis_ranges);
  **----------------------------------------------------------------------*/
-  void fribidi_map_range (FriBidiEnv *fribidienv,
-			  /* input */
-			  FriBidiStrIndex span[2],
-			  FriBidiStrIndex len,
-			  fribidi_boolean is_v2l_map,
-			  const FriBidiStrIndex *position_map,
-			  const FriBidiLevel *embedding_level_list,
-			  /* output */
-			  int *num_mapped_spans, FriBidiStrIndex spans[3][2]);
+  FRIBIDI_API void fribidi_map_range (FriBidiEnv *fribidienv,
+				      /* input */
+				      FriBidiStrIndex span[2],
+				      FriBidiStrIndex len,
+				      fribidi_boolean is_v2l_map,
+				      const FriBidiStrIndex *position_map,
+				      const FriBidiLevel
+				      *embedding_level_list,
+				      /* output */
+				      int *num_mapped_spans,
+				      FriBidiStrIndex spans[3][2]);
 
 /*======================================================================
  *  fribidi_is_char_rtl() answers the question whether a character
  *  was resolved in the rtl direction. This simply involves asking
  *  if the embedding level for the character is odd.
  *----------------------------------------------------------------------*/
-  fribidi_boolean fribidi_is_char_rtl (FriBidiEnv *fribidienv,
-				       const FriBidiLevel
-				       *embedding_level_list,
-				       FriBidiCharType base_dir,
-				       FriBidiStrIndex idx);
+  FRIBIDI_API fribidi_boolean fribidi_is_char_rtl (FriBidiEnv *fribidienv,
+						   const FriBidiLevel
+						   *embedding_level_list,
+						   FriBidiCharType base_dir,
+						   FriBidiStrIndex idx);
 
 /*======================================================================
  *  fribidi_xpos_resolve() does the complicated translation of
@@ -234,34 +251,36 @@ extern "C"
  *                  beyond the end of the line, res_attach_before is true.
  *
  *----------------------------------------------------------------------*/
-  void fribidi_xpos_resolve (FriBidiEnv *fribidienv,
-			     /* input */
-			     int x_pos, int x_offset,
-			     FriBidiStrIndex len,
-			     const FriBidiLevel *embedding_level_list,
-			     FriBidiCharType base_dir,
-			     const FriBidiStrIndex *vis2log,
-			     const int *char_widths,
-			     /* output */
-			     FriBidiStrIndex *res_log_pos,
-			     FriBidiStrIndex *res_vis_pos,
-			     int *res_cursor_x_pos,
-			     fribidi_boolean *res_cursor_dir_is_rtl,
-			     fribidi_boolean *res_attach_before);
+  FRIBIDI_API void fribidi_xpos_resolve (FriBidiEnv *fribidienv,
+					 /* input */
+					 int x_pos, int x_offset,
+					 FriBidiStrIndex len,
+					 const FriBidiLevel
+					 *embedding_level_list,
+					 FriBidiCharType base_dir,
+					 const FriBidiStrIndex *vis2log,
+					 const int *char_widths,
+					 /* output */
+					 FriBidiStrIndex *res_log_pos,
+					 FriBidiStrIndex *res_vis_pos,
+					 int *res_cursor_x_pos,
+					 fribidi_boolean
+					 *res_cursor_dir_is_rtl,
+					 fribidi_boolean *res_attach_before);
 
 /*======================================================================
  *  fribidi_runs_log2vis takes a list of logical runs and returns a
  *  a list of visual runs. A run is defined as a sequence that has
  *  the same attributes.
  *----------------------------------------------------------------------*/
-  void fribidi_runs_log2vis (FriBidiEnv *fribidienv,
-			     /* input */
-			     const FriBidiList *logical_runs,	/* List of FriBidiRunType */
-			     FriBidiStrIndex len,
-			     const FriBidiStrIndex *log2vis,
-			     FriBidiCharType base_dir,
-			     /* output */
-			     FriBidiList **visual_runs);
+  FRIBIDI_API void fribidi_runs_log2vis (FriBidiEnv *fribidienv,
+					 /* input */
+					 const FriBidiList *logical_runs,	/* List of FriBidiRunType */
+					 FriBidiStrIndex len,
+					 const FriBidiStrIndex *log2vis,
+					 FriBidiCharType base_dir,
+					 /* output */
+					 FriBidiList **visual_runs);
 
 
 #ifdef	__cplusplus

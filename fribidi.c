@@ -1071,7 +1071,7 @@ free_rl_list (FriBidiEnv *fribidienv, TypeLink *type_rl_list)
  *  fribidi_remove_bidi_marks() removes bidirectional marks, and returns
  *  the new length, updates each of other inputs if not NULL.
  *----------------------------------------------------------------------*/
-FriBidiStrIndex
+FRIBIDI_API FriBidiStrIndex
 fribidi_remove_bidi_marks (FriBidiEnv *fribidienv,
 			   FriBidiChar *str, FriBidiStrIndex length,
 			   FriBidiStrIndex *position_to_this_list,
@@ -1130,7 +1130,7 @@ fribidi_remove_bidi_marks (FriBidiEnv *fribidienv,
  *  fribidi_log2vis() calls the function_analyse_string() and then
  *  does reordering and fills in the output strings.
  *----------------------------------------------------------------------*/
-fribidi_boolean
+FRIBIDI_API fribidi_boolean
 fribidi_log2vis (FriBidiEnv *fribidienv,
 		 /* input */
 		 const FriBidiChar *str, FriBidiStrIndex len,
@@ -1342,7 +1342,7 @@ fribidi_log2vis (FriBidiEnv *fribidienv,
  *  fribidi_log2vis_get_embedding_levels() is used in order to just get
  *  the embedding levels.
  *----------------------------------------------------------------------*/
-fribidi_boolean
+FRIBIDI_API fribidi_boolean
 fribidi_log2vis_get_embedding_levels (FriBidiEnv *fribidienv,
 				      /* input */
 				      const FriBidiChar *str,
@@ -1383,8 +1383,9 @@ fribidi_log2vis_get_embedding_levels (FriBidiEnv *fribidienv,
 
 
 const char *fribidi_version_info =
-  FRIBIDI_PACKAGE " " FRIBIDI_VERSION "\n"
-  "interface version " TOSTR (FRIBIDI_INTERFACE_VERSION) "\n"
+  FRIBIDI_PACKAGE " " FRIBIDI_VERSION "\n" "interface version "
+  TOSTR (FRIBIDI_INTERFACE_VERSION)
+  "\n"
   "Unicode version " FRIBIDI_UNICODE_VERSION "\n"
   "\n"
   "Copyright (C) 2002 FriBidi Project (http://fribidi.sf.net/).\n"
@@ -1405,4 +1406,4 @@ const char *fribidi_version_info =
 #ifdef FRIBIDI_NO_CHARSETS
   "--without-charsts\n"
 #endif
- ;
+;

@@ -33,8 +33,8 @@ lib_LTLIBRARIES = libfribidi.la
 libfribidi_la_SOURCES =	\
 	fribidi.c	\
 	fribidi_types.c		\
-	fribidi_mem.c	\
 	fribidi_env.c	\
+	fribidi_mem.c	\
 	fribidi_mirroring.c	\
 	fribidi_char_type.c	\
 	fribidi_wcwidth.c	\
@@ -49,8 +49,8 @@ libfribidiincdir = $(includedir)/fribidi
 libfribidiinc_HEADERS =	\
 	fribidi.h	\
 	fribidi_types.h	\
-	fribidi_mem.h	\
 	fribidi_env.h	\
+	fribidi_mem.h	\
 	fribidi_unicode.h	\
 	$(libfribidi_charsets_h)	\
 	$(libfribidi_charsets_extra_h)	\
@@ -117,7 +117,7 @@ fribidi_SOURCES = fribidi_main.c $(GETOPT_SRC)
 fribidi_LDADD = libfribidi.la
 
 
-fribidi_tab_mirroring.i: $(fribidi_create_mirroring_SOURCES)	\
+fribidi_tab_mirroring.i: $(fribidi_create_mirroring_SOURCES) fribidi_types.h	\
 		unidata/BidiMirroring.txt
 	$(MAKE) fribidi_create_mirroring
 	if test -d unidata; then UNIDATA=unidata;	\
@@ -129,13 +129,10 @@ fribidi_tab_mirroring.i: $(fribidi_create_mirroring_SOURCES)	\
 $(srcdir)/fribidi_mirroring.c: fribidi_tab_mirroring.i
 	touch "$@" || $(MAKE) clean
 
-fribidi_tab_char_type_small:
-	$(MAKE) fribidi_tab_char_type_9.i
+fribidi_tab_mirroring:	fribidi_tab_mirroring.i
 
-fribidi_tab_char_type_large:
-	$(MAKE) fribidi_tab_char_type_2.i
 
-fribidi_tab_char_type_%.i: $(fribidi_create_char_types_SOURCES)	fribidi_types.h \
+fribidi_tab_char_type_%.i: $(fribidi_create_char_types_SOURCES)	\
 		unidata/UnicodeData.txt
 	$(MAKE) fribidi_create_char_types
 	if test -d unidata; then UNIDATA=unidata;	\
@@ -150,8 +147,16 @@ fribidi_tab_char_type_stamp:
 	touch "$(srcdir)/fribidi_char_type.c" || $(MAKE) clean
 	touch "$@"
 
-fribidi_tabs: fribidi_tab_mirroring.i	\
-		fribidi_tab_char_type_2.i fribidi_tab_char_type_9.i
+fribidi_tab_char_type_small:
+	$(MAKE) fribidi_tab_char_type_9.i
+
+fribidi_tab_char_type_large:
+	$(MAKE) fribidi_tab_char_type_2.i
+
+fribidi_tab tab:	fribidi_tab_char_type_small	\
+			fribidi_tab_char_type_large	\
+			fribidi_tab_mirroring
+
 
 config.h: fribidi_tab_char_type_stamp
 	./config.status --recheck
@@ -179,9 +184,9 @@ test.reference:
 test: fribidi
 	"$(srcdir)/run.tests"
 
-.PHONY: test test.reference	\
+.PHONY:		test test.reference	\
 		fribidi_tab_char_type_small fribidi_tab_char_type_large	\
-		fribidi_tabs
+		fribidi_tab_mirroring fribidi_tab tab
 
 TESTS = run.tests
 

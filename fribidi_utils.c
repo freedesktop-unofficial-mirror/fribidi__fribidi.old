@@ -60,7 +60,7 @@
  *                       // output
  *                       &num_vis_ranges, *vis_ranges);
  **----------------------------------------------------------------------*/
-void
+FRIBIDI_API void
 fribidi_map_range (FriBidiEnv *fribidienv,
 		   /* input */
 		   FriBidiStrIndex in_span[2],	/* Start and end span */
@@ -112,7 +112,7 @@ fribidi_map_range (FriBidiEnv *fribidienv,
  *  of characters that need redrawing. It returns the start and the
  *  length of the section in the new string that needs redrawing.
  *----------------------------------------------------------------------*/
-void
+FRIBIDI_API void
 fribidi_find_string_changes (FriBidiEnv *fribidienv,
 			     /* input */
 			     const FriBidiChar *old_str,
@@ -192,7 +192,7 @@ fribidi_find_string_changes (FriBidiEnv *fribidienv,
  *                  beyond the end of the line, res_attach_before is true.
  *
  *----------------------------------------------------------------------*/
-void
+FRIBIDI_API void
 fribidi_xpos_resolve (FriBidiEnv *fribidienv,
 		      /* input */
 		      int x_pos, int x_offset, FriBidiStrIndex len,
@@ -301,7 +301,7 @@ fribidi_xpos_resolve (FriBidiEnv *fribidienv,
  *  was resolved in the rtl direction. This simply involves asking
  *  if the embedding level for the character is odd.
  *----------------------------------------------------------------------*/
-fribidi_boolean
+FRIBIDI_API fribidi_boolean
 fribidi_is_char_rtl (FriBidiEnv *fribidienv,
 		     const FriBidiLevel *embedding_level_list,
 		     FriBidiCharType base_dir, FriBidiStrIndex idx)
@@ -318,7 +318,7 @@ fribidi_is_char_rtl (FriBidiEnv *fribidienv,
  *  a list of visual runs. A run is defined as a sequence that has
  *  the same attributes.
  *----------------------------------------------------------------------*/
-void
+FRIBIDI_API void
 fribidi_runs_log2vis (FriBidiEnv *fribidienv,
 		      /* input */
 		      const FriBidiList *logical_runs,	/* List of FriBidiRunType */
