@@ -97,12 +97,24 @@ extern "C"
   boolean fribidi_mirroring_status (void);
 
 /*======================================================================
- *  fribidi_set_mirroring() sets mirroring on or off,
+ *  fribidi_set_mirroring() sets mirroring on or off.
  *----------------------------------------------------------------------*/
   void fribidi_set_mirroring (boolean mirror);
 
 /*======================================================================
- *  fribidi_set_debug() turn on or off debugging, default is off.
+ *  fribidi_reorder_nsm_status() returns whether reordering of NSM
+ *  sequences is on or off, default is off.
+ *----------------------------------------------------------------------*/
+  boolean fribidi_reorder_nsm_status (void);
+
+/*======================================================================
+ *  fribidi_set_reorder_nsm() sets reordering of NSM characters on or off.
+ *----------------------------------------------------------------------*/
+  void fribidi_set_reorder_nsm (boolean);
+
+/*======================================================================
+ *  fribidi_set_debug() turn on or off debugging, default is off, return
+ *  false is fribidi is not compiled with debug enabled.
  *----------------------------------------------------------------------*/
   boolean fribidi_set_debug (boolean debug);
 

@@ -1083,6 +1083,20 @@ fribidi_set_mirroring (boolean mirror)
   mirroring = mirror;
 }
 
+static boolean reorder_nsm = FALSE;
+
+boolean
+fribidi_reorder_nsm_status (void)
+{
+  return reorder_nsm;
+}
+
+void
+fribidi_set_reorder_nsm (boolean reorder)
+{
+  reorder_nsm = reorder;
+}
+
 /*======================================================================
  *  Here starts the exposed front end functions.
  *----------------------------------------------------------------------*/
@@ -1169,7 +1183,7 @@ fribidi_log2vis (		/* input */
       return TRUE;
     }
 
-  /* If l2v is to be calculated we must have l2v as well. If it is not
+  /* If l2v is to be calculated we must have v2l as well. If it is not
      given by the caller, we have to make a private instance of it. */
   if (position_L_to_V_list && !position_V_to_L_list)
     {
@@ -1182,7 +1196,7 @@ fribidi_log2vis (		/* input */
     {
 #ifdef DEBUG
       fprintf (stderr, "%s: cannot handle strings > %ld characters\n",
-	       FRIBIDI_PACKAGE, FRIBIDI_MAX_STRING_LENGTH);
+	       FRIBIDI_PACKAGE, (long) FRIBIDI_MAX_STRING_LENGTH);
 #endif
       return FALSE;
     }
@@ -1195,8 +1209,6 @@ fribidi_log2vis (		/* input */
   {
     FriBidiLevel level_idx;
     FriBidiStrIndex i;
-
-    /* TBD: L3 */
 
     /* Set up the ordering array to sorted order */
     if (position_V_to_L_list)
@@ -1256,6 +1268,54 @@ fribidi_log2vis (		/* input */
 		  }
 	      }
 	    DBG ("  Mirroring, Done\n");
+	  }
+
+	if (reorder_nsm)
+	  {
+	    /* L3. Reorder NSMs. */
+	    DBG ("  Reordering NSM sequences\n");
+	    /* We apply this rule before L2, so go backward in odd levels. */
+	    for (pp = type_rl_list->next; pp->next; pp = pp->next)
+	      {
+		if (pp->level & 1)
+		  {
+		    FriBidiStrIndex i;
+		    boolean is_nsm_seq, seq_end;
+
+		    is_nsm_seq = 0;
+		    for (i = RL_POS (pp) + RL_LEN (pp) - 1; i >= RL_POS (pp); i--)
+		      {
+			FriBidiCharType this_type;
+
+			this_type = fribidi_get_type (visual_str[i]);
+			if (is_nsm_seq && this_type != FRIBIDI_TYPE_NSM)
+			  {
+			    if (visual_str)
+			      {
+				bidi_string_reverse (visual_str + i,
+						     seq_end - i + 1);
+			      }
+			    if (position_V_to_L_list)
+			      {
+				index_array_reverse (position_V_to_L_list + i,
+						     seq_end - i + 1);
+			      }
+			    is_nsm_seq = 0;
+			  }
+			else if (!is_nsm_seq && this_type == FRIBIDI_TYPE_NSM)
+			  {
+			    seq_end = i;
+			    is_nsm_seq = 1;
+			  }
+		      }
+		    if (is_nsm_seq)
+		      {
+			DBG
+			  ("Warning: NSMs at the beggining of run level.\n");
+		      }
+		  }
+	      }
+	    DBG ("  Reordering NSM sequences, Done\n");
 	  }
 
 	/* L2. Reorder. */

@@ -34,3 +34,5 @@ Markus Kuhn <Markus.Kuhn@cl.cam.ac.uk>
 Abel Cheung <maddog@linux.org.hk>
 	* Implemented pkgconfig support.
 
+Dominique Unruh <dominique@unruh.de>
+	* Contributed a patch for reordering NSMs (rule L3).

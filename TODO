@@ -23,7 +23,7 @@ Implementation issues:
 * Fix iconv problem: Check for old iconvs (without wchar_t, without
   byteorder UTF-32 or UCS-4 types).
 
-* When there is no glibc, libiconvs should be linked when --without-charset
+* When there is no glibc, libiconv should be linked when --without-charset
   is enabled.
 
 * Design better apis to do reorder based on available levels, remove
@@ -37,7 +37,7 @@ Implementation issues:
 
 BiDi algorithms issues:
 
-* Handle the L3 rule.
+* 
 
 General issues:
 

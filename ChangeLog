@@ -1,3 +1,16 @@
+2002-03-15  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi.c, fribidi.h: Applied the patch from
+	Dominique Unruh <dominique@unruh.de> to reorder the NSM character
+	to follow their base character (rule L3), fribidi_reorder_nsm_status(),
+	fribidi_set_reorder_nsm() added.
+	* fribidi_main.c: Option --reordernsm added, also --test sets
+	--reordernsm.
+	* TODO: Done task for rule L3 removed.
+	* AUTHORS: Dominique Unruh <dominique@unruh.de> added.
+	* tests/test_UTF-8_nsmreorder.input,
+	tests/test_UTF-8_nsmreorder.reference: Added.
+	* NEWS: Updated, will be used to reflect each release News.
+
 2002-03-12  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.spec.in: Small cleanup.
 
