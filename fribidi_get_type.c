@@ -31,8 +31,8 @@ extern FriBidiCharType prop_to_type[];
 #endif
 
 /*======================================================================
-//  fribidi_get_type() returns the bidi type of a character.
-//----------------------------------------------------------------------*/
+ *  fribidi_get_type() returns the bidi type of a character.
+ *----------------------------------------------------------------------*/
 FriBidiCharType
 fribidi_get_type (FriBidiChar uch)
 {

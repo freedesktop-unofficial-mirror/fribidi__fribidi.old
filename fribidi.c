@@ -34,15 +34,15 @@
 #endif
 
 #ifdef DEBUG
-// for easier test with the reference code only.
+/* for easier test with the reference code only. */
 #define MAX_LEVEL 15
 #else
-// default value.
+/* default value */
 #define MAX_LEVEL 61
 #endif
 /*======================================================================
-// Typedef for the run-length list.
-//----------------------------------------------------------------------*/
+ * Typedef for the run-length list.
+ *----------------------------------------------------------------------*/
 typedef struct _TypeLink TypeLink;
 
 struct _TypeLink
@@ -445,8 +445,8 @@ compact_neutrals (TypeLink * list)
 }
 
 /*=======================================================
-// define macros for push and pop the status in to / out of the stack
-//-------------------------------------------------------*/
+ * define macros for push and pop the status in to / out of the stack
+ *-------------------------------------------------------*/
 
 /* There's some little points in pushing and poping into the status stack:
    1. when the embedding level is not valid (more than MAX_LEVEL=61),
@@ -510,9 +510,9 @@ compact_neutrals (TypeLink * list)
     }
 
 /*==========================================================================
-// There was no support for sor and eor in the absence of Explicit Embedding
-// Levels, so define macros, to support them, with as less change as needed.
-//--------------------------------------------------------------------------*/
+ * There was no support for sor and eor in the absence of Explicit Embedding
+ * Levels, so define macros, to support them, with as less change as needed.
+ *--------------------------------------------------------------------------*/
 
 /* Return the type of previous char or the sor, if already at the start of
    a run level. */
@@ -536,9 +536,9 @@ compact_neutrals (TypeLink * list)
 
 #ifdef DEBUG
 /*======================================================================
-//  For debugging, define some functions for printing the types and the
-//  levels.
-//----------------------------------------------------------------------*/
+ *  For debugging, define some functions for printing the types and the
+ *  levels.
+ *----------------------------------------------------------------------*/
 
 static guchar char_from_level_array[] = {
   'e',				/* FRIBIDI_LEVEL_REMOVED, internal error, this level shouldn't be viewed.  */
@@ -607,8 +607,8 @@ print_bidi_string (FriBidiChar * str)
 #endif
 
 /*======================================================================
-//  This function should follow the Unicode specification closely!
-//----------------------------------------------------------------------*/
+ *  This function should follow the Unicode specification closely!
+ *----------------------------------------------------------------------*/
 static void
 fribidi_analyse_string (	/* input */
 			 FriBidiChar * str,
@@ -1046,9 +1046,9 @@ fribidi_analyse_string (	/* input */
 }
 
 /*======================================================================
-//  Frees up the rl_list, must be called after each call to
-//  fribidi_analyse_string(), after the list is not needed anymore.
-//----------------------------------------------------------------------*/
+ *  Frees up the rl_list, must be called after each call to
+ *  fribidi_analyse_string(), after the list is not needed anymore.
+ *----------------------------------------------------------------------*/
 void
 free_rl_list (TypeLink * type_rl_list)
 {
@@ -1085,13 +1085,13 @@ fribidi_set_mirroring (gboolean mirror)
 }
 
 /*======================================================================
-//  Here starts the exposed front end functions.
-//----------------------------------------------------------------------*/
+ *  Here starts the exposed front end functions.
+ *----------------------------------------------------------------------*/
 
 /*======================================================================
-//  fribidi_remove_explicits() removes explicit marks, and returns the
-//  new length.
-//----------------------------------------------------------------------*/
+ *  fribidi_remove_explicits() removes explicit marks, and returns the
+ *  new length.
+ *----------------------------------------------------------------------*/
 gint
 fribidi_remove_explicits (FriBidiChar * str, gint length)
 {
@@ -1107,9 +1107,9 @@ fribidi_remove_explicits (FriBidiChar * str, gint length)
 }
 
 /*======================================================================
-//  fribidi_log2vis() calls the function_analyse_string() and then
-//  does reordering and fills in the output strings.
-//----------------------------------------------------------------------*/
+ *  fribidi_log2vis() calls the function_analyse_string() and then
+ *  does reordering and fills in the output strings.
+ *----------------------------------------------------------------------*/
 gboolean
 fribidi_log2vis (		/* input */
 		  FriBidiChar * str, gint len, FriBidiCharType * pbase_dir,
@@ -1238,9 +1238,9 @@ fribidi_log2vis (		/* input */
 }
 
 /*======================================================================
-//  fribidi_embedding_levels() is used in order to just get the
-//  embedding levels.
-//----------------------------------------------------------------------*/
+ *  fribidi_embedding_levels() is used in order to just get the
+ *  embedding levels.
+ *----------------------------------------------------------------------*/
 void
 fribidi_log2vis_get_embedding_levels (
 				       /* input */

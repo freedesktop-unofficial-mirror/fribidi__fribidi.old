@@ -3,6 +3,8 @@
 	<danken@cs.technion.ac.il>.
 	* AUTHORS: added Dan Kenigsberg.
 
+	* *.c, *.h: Changed all "//" comments to "/* */" pairs.
+
 2001-03-30  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c, fribidi.h: Changed fribidi_log2vis() to return TRUE
 	if successful and FALSE otherwise.
