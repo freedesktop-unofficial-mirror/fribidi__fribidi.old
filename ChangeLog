@@ -2,6 +2,8 @@
 	* AUTHORS: Added Tomas Frydrych <tomas@frydrych.uklinux.net>.
 	* READMY: Moved AbiWord to applications that use fribidi.
 	* fribidi.h: Removed #include "fribidi_mem.h".
+	* fribidi_config.h: Added to CVS, to make MSVC builds from CVS
+	possible.
 
 2002-08-01  Behdad Esfahbod <fribidi@behdad.org>
 	* *.c, *.h, fribidi_config.h.in, configure.in, acconfig.h: Applied
