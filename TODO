@@ -1,8 +1,5 @@
 Implementation issues:
 
-* FriBidiEnv type should be defined that is to hold all global variables
-  and should be passed as environment to all fribidi functions.
-
 * Add const keywords all over the source.
 
 * with --without-charsets, fribidi char set converters use iconv internally.
