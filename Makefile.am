@@ -20,8 +20,7 @@ libfribidi_la_SOURCES =	\
 	fribidi_char_sets_iso8859_8.c	\
 	fribidi_char_sets_cp1255.c	\
 	fribidi_char_sets_cp1256.c	\
-	fribidi_char_sets_isiri_3342.c	\
-	@NO_GLIB_SOURCES@
+	fribidi_char_sets_isiri_3342.c
 
 libfribidi_la_LIBADD = $(GLIB_LIBS)
 
