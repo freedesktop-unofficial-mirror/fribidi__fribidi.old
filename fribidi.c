@@ -41,9 +41,11 @@
 #endif
 
 #ifdef DEBUG
-#define DBG(s...) do { if (fribidi_debug_status(fribidienv)) { fprintf(stderr, s); } } while (0)
+#define DBG(s) do { if (fribidi_debug_status(fribidienv)) { fprintf(stderr, s); } } while (0)
+#define DBG2(s, t) do { if (fribidi_debug_status(fribidienv)) { fprintf(stderr, s, t); } } while (0)
 #else
-#define DBG(s...)
+#define DBG(s)
+#define DBG2(s, t)
 #endif
 
 #ifdef DEBUG
@@ -620,8 +622,8 @@ fribidi_analyse_string (FriBidiEnv *fribidienv,
 	  }
     }
   base_dir = FRIBIDI_LEVEL_TO_DIR (base_level);
-  DBG ("  Base level : %c\n", fribidi_char_from_level (base_level));
-  DBG ("  Base dir   : %c\n", fribidi_char_from_type (base_dir));
+  DBG2 ("  Base level : %c\n", fribidi_char_from_level (base_level));
+  DBG2 ("  Base dir   : %c\n", fribidi_char_from_type (base_dir));
   DBG ("  Finding the base level, Done\n");
 
 #ifdef DEBUG
@@ -1382,7 +1384,7 @@ fribidi_log2vis_get_embedding_levels (FriBidiEnv *fribidienv,
 
 const char *fribidi_version_info =
   FRIBIDI_PACKAGE " " FRIBIDI_VERSION "\n"
-  "interface version " TOSTR(FRIBIDI_INTERFACE_VERSION) "\n"
+  "interface version " TOSTR (FRIBIDI_INTERFACE_VERSION) "\n"
   "Unicode version " FRIBIDI_UNICODE_VERSION "\n"
   "\n"
   "Copyright (C) 2002 FriBidi Project (http://fribidi.sf.net/).\n"

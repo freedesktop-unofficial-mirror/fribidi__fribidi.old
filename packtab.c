@@ -214,8 +214,8 @@ write_array (int max_key)
       i = ii;
 
   key_type = !lev ? key_type_name :
-    max_key <= 0xff ? "fribidi_uint8" :
-    max_key <= 0xffff ? "fribidi_uint16" : "fribidi_uint32";
+    max_key <= 0xff ? "PACKTAB_UINT8" :
+    max_key <= 0xffff ? "PACKTAB_UINT16" : "PACKTAB_UINT32";
   fprintf (f, "static const %s %sLevel%d[%d*%d] = {", key_type, table_name,
 	   best_lev - lev - 1, cluster, k);
   ofs = 0;
@@ -270,7 +270,7 @@ write_source (void)
   s = 0;
   nn = n;
   t[0] = N;
-  fprintf (f, "\n*/\n\n" "/* *INDENT-OFF* */\n\n");
+  fprintf (f, "\n" "/* *INDENT-OFF* */\n\n");
   write_array (0);
   fprintf (f, "/* *INDENT-ON* */\n\n");
 
@@ -308,6 +308,7 @@ write_out ()
   fprintf (f, "\n" "  different table entries:");
   for (i = best_lev - 1; i >= 0; i--)
     fprintf (f, " %d", best_c[i]);
+  fprintf (f, "\n*/\n");
   write_source ();
 }
 
