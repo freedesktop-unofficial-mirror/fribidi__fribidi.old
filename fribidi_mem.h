@@ -22,8 +22,6 @@
 #ifndef FRIBIDI_MEM_H
 #define FRIBIDI_MEM_H
 
-#include <stdlib.h>
-
 #include "fribidi_config.h"
 /* #include "fribidi_env.h" */
 

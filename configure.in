@@ -72,6 +72,10 @@ if test "x$GCC" = "xyes"; then
   *[\ \	]-Wall[\ \	]*) ;;
   *) CFLAGS="$CFLAGS -Wall " ;;
   esac
+  case " $CFLAGS " in
+  *[\ \	]-pedantic[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -pedantic " ;;
+  esac
 fi
 changequote([,])dnl
 

@@ -6,7 +6,7 @@
 #	Runtime material: Shared library and command line tool
 #			lib@PACKAGE@N-version-release-arch.rpm
 #	Development material: Static library and header files
-#		(requires lib@PACKAGE@)
+#		(requires lib@PACKAGE@N)
 #			lib@PACKAGE@N-devel-version-release-arch.rpm
 #	Where N is the major version number.
 

@@ -163,7 +163,7 @@ extern "C"
  * This function may throw an Out-Of-Memory exception in
  * environments, which support exceptions.
  *----------------------------------------------------------------------*/
-  void *fribidi_malloc (FriBidiEnv *fribidienv, size_t size);
+  void *fribidi_malloc (FriBidiEnv *fribidienv, int size);
 
 
 /*======================================================================

@@ -24,6 +24,10 @@
 #ifndef FRIBIDI_H
 #define FRIBIDI_H
 
+#ifndef NULL
+#define NULL 0
+#endif
+
 #include "fribidi_config.h"
 #include "fribidi_unicode.h"
 #include "fribidi_mem.h"

@@ -86,10 +86,11 @@ help (void)
 	  "  -h, --help            Display this information and exit\n"
 	  "  -V, --version         Display version information and exit\n"
 	  "  -v, --verbose         Verbose mode, same as --basedir --ltov --vtol \\\n"
-	  "                        --levels --changes\n"
-	  "  -d, --debug           Output debug information\n"
-	  "  -t, --test            Test %s, same as --clean --nobreak --showinput \\\n"
-	  "                        --reordernsm\n", FRIBIDI_PACKAGE);
+	  "                        --levels --changes\n");
+  printf ("  -d, --debug           Output debug information\n"
+	  "  -t, --test            Test " FRIBIDI_PACKAGE
+	  ", same as --clean --nobreak --showinput \\\n"
+	  "                        --reordernsm\n");
 #ifdef FRIBIDI_NO_CHARSETS
   printf ("  -c, --charset CS      Specify character set, default is %s \\\n"
 	  "                        CS should be a valid iconv character set name\n",

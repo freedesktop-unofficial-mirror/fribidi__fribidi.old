@@ -43,10 +43,7 @@
  * argument.
  *----------------------------------------------------------------------*/
 
-/* For standard malloc() and free(). */
 #include <stdlib.h>
-
-#include <assert.h>
 
 #include "fribidi_env.h"
 
@@ -97,7 +94,7 @@ destroy_fribidienv (FriBidiEnv *fribidienv)
  * environments, which support exceptions.
  *----------------------------------------------------------------------*/
 void *
-fribidi_malloc (FriBidiEnv *fribidienv, size_t size)
+fribidi_malloc (FriBidiEnv *fribidienv, int size)
 {
   FriBidiMemChunkPrefix *lChunk_ptr;
   FriBidiMemChunkPrefix *lNextChunk_ptr;
@@ -165,7 +162,7 @@ fribidi_free (FriBidiEnv *fribidienv, void *ptr)
   lNextChunk_ptr = (FriBidiMemChunkPrefix *) (lChunk_ptr->iNext);
   lPrevChunk_ptr = (FriBidiMemChunkPrefix *) (lChunk_ptr->iPrev);
 
-  assert (NULL != lPrevChunk_ptr);
+  /* assert (NULL != lPrevChunk_ptr); */
 
   /* Remove the current memory chunk from the doubly-linked list. */
   lPrevChunk_ptr->iNext = lNextChunk_ptr;
