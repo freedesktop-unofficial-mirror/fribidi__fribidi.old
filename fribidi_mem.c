@@ -19,10 +19,9 @@
  * For licensing issues, contact <fwpg@sharif.edu>.
  */
 
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
 #include "fribidi_mem.h"
+
+#include <stdlib.h>
 
 struct _FriBidiMemChunk
 {
@@ -110,16 +109,4 @@ fribidi_mem_chunk_free (FriBidiMemChunk *mem_chunk,
   if (mem_chunk->type == FRIBIDI_ALLOC_AND_FREE)
     free (mem);
   return;
-}
-
-int
-fribidi_strcasecmp (const char *s1,
-		    const char *s2)
-{
-  while (*s1 && toupper (*s1) == toupper (*s2))
-    {
-      s1++;
-      s2++;
-    }
-  return *s1 - *s2;
 }

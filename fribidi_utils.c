@@ -28,6 +28,7 @@
 
 #include <stdlib.h>
 #include "fribidi.h"
+#include "fribidi_mem.h"
 
 /*======================================================================
  *  The find_visual_ranges() function is used to convert between a
