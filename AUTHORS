@@ -19,7 +19,10 @@ Omer Zak <omerz@actcom.co.il>
 
 Behdad Esfahbod <behdad@bamdad.org>
    * Added explicit bidi support, fixed all conformance bugs, changed the
-     library to use bitmasks.
+     library to use bitmasks, rewrote many things.
 
 Roozbeh Pournader <roozbeh@sharif.edu>
-   * fixed small things here and there.
+   * Fixed small things here and there.
+
+Dan Kenigsberg <danken@cs.technion.ac.il>
+   * Contributed a patch to make Fribidi work without Glib.

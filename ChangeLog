@@ -1,3 +1,8 @@
+2001-03-30  Roozbeh Pournader <roozbeh@bamdad.org>
+	* Makefile.noglib: replaced by a new version from Dan Kenigsberg
+	<danken@cs.technion.ac.il>.
+	* AUTHORS: added Dan Kenigsberg.
+
 2001-03-30  Behdad Esfahbod <behdad@bamdad.org>
 	* fribidi.c, fribidi.h: Changed fribidi_log2vis() to return TRUE
 	if successful and FALSE otherwise.
