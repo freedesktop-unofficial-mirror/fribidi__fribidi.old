@@ -52,7 +52,7 @@
 	* acinclude.m4: glib material removed.
 	* configure.in: VERISON update, INTERFACE_VERSION added. glib
 	material removed, fribidi_tab_char_types_N.i configuration added,
-	option --without-charsets added.
+	option --without-charsets added.  Also creates fribidi_config.h.
 	* fribidi-config.in: A small bug fixed, to set the --cflags output
 	correctly, glib material removed.
 	* fribidi.h: Preprocessor material added for easier link with c++

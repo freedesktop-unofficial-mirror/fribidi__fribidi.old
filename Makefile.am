@@ -49,7 +49,8 @@ libfribidiinc_HEADERS =	\
 	fribidi_mem.h	\
 	fribidi_unicode.h	\
 	$(libfribidi_charsets_h)	\
-	$(libfribidi_charsets_extra_h)
+	$(libfribidi_charsets_extra_h)	\
+	fribidi_config.h
 
 GETOPT_SRC =	\
 	getopt.c	\
