@@ -86,7 +86,7 @@ type_names[] =
 
 static char *names[type_names_count];
 
-static char unidata_file[200];
+static char *unidata_file;
 
 static char
 get_type (char *s)
@@ -229,11 +229,12 @@ int
 main (int argc, char **argv)
 {
   int max_depth;
-  char file[50];
+  char file[50], *p;
   if (argc < 2)
     err ("usage: fribidi_create_char_types max_depth [UnicodeData.txt path]");
-  snprintf (unidata_file, sizeof unidata_file,
-	    "%s/UnicodeData.txt", (argc >= 3) ? argv[2] : "unidata");
+  p = (argc >= 3) ? argv[2] : "unidata";
+  unidata_file = malloc (50 + strlen (p));
+  sprintf (unidata_file, "%s/UnicodeData.txt", p);
   max_depth = atoi (argv[1]);
   if (!max_depth)
     err ("invalid depth");

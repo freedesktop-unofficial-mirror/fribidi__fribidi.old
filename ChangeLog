@@ -1,3 +1,7 @@
+2002-01-23  Behdad Esfahbod <behdad@bamdad.org>
+	* fribidi_create_char_types.c, fribidi_create_mirroring.c: Changed
+	to use sprintf() instead of snprintf().
+
 2002-01-04  Roozbeh Pournader <roozbeh@sharif.edu>
 	* FriBidi 0.10.1 released.
 	* configure.in: Changed the version to 0.10.1.

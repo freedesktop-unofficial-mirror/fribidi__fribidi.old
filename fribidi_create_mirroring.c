@@ -34,7 +34,7 @@ err2 (char *fmt, char *p)
 
 static int table[0x110000];
 static char *bidi_mirroring_version;
-static char bidi_mirroring_file[200];
+static char *bidi_mirroring_file;
 
 static int mirroring_count;
 
@@ -127,8 +127,11 @@ write_mirror (char *file)
 int
 main (int argc, char **argv)
 {
-  snprintf (bidi_mirroring_file, sizeof bidi_mirroring_file,
-	    "%s/BidiMirroring.txt", (argc >= 2) ? argv[1] : "unidata");
+  char *p;
+  
+  p = (argc >= 2) ? argv[1] : "unidata";
+  bidi_mirroring_file = malloc (50 + strlen (p));
+  sprintf (bidi_mirroring_file, "%s/BidiMirroring.txt", p);
   read_bidi_mirroring ();
   write_mirror ("fribidi_tab_mirroring.i");
   return 0;
