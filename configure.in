@@ -18,6 +18,15 @@ AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 
+changequote(,)dnl
+if test "x$GCC" = "xyes"; then
+  case " $CFLAGS " in
+  *[\ \        ]-Wall[\ \      ]*) ;;
+  *) CFLAGS="$CFLAGS -Wall" ;;
+  esac
+fi
+changequote([,])dnl
+
 dnl Cygwin does not set srcdir to ".".
 if test x$srcdir = x; then
   xsrcdir=.

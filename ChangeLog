@@ -1,5 +1,9 @@
+2001-04-13  Roozbeh Pournader <roozbeh@sharif.edu>
+	* configure.in: added Owen Taylor's patch to make warnings on
+	  by default.
+
 2001-04-12  Behdad Esfahbod <behdad@bamdad.org>
-	* configure.in, Makefile.am: Chaned to use getopt.* if no glibc.
+	* configure.in, Makefile.am: Changed to use getopt.* if no glibc.
 
 	* getopt.c, getopt.h, getopt1.c: Added to be used if no glibc.
 
