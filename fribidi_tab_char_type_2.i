@@ -5213,7 +5213,7 @@ static const PACKTAB_UINT16 FriBidiPropertyBlockLevel0[4352*1] = {
 /*======================================================================
  *  fribidi_get_type_internal() returns the bidi type of a character.
  *----------------------------------------------------------------------*/
-FriBidiCharType
+FRIBIDI_API FriBidiCharType
 fribidi_get_type_internal (FriBidiChar uch)
 {
   if (uch < 0x110000)

@@ -29,7 +29,7 @@
 
 #include "fribidi_tab_mirroring.i"
 
-fribidi_boolean
+FRIBIDI_API fribidi_boolean
 fribidi_get_mirror_char (	/* Input */
 			  FriBidiChar ch,
 			  /* Output */

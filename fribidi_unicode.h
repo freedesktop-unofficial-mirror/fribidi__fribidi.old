@@ -60,9 +60,12 @@ extern "C"
 #define UNI_FARSI_ZERO	0x06F0
 
 /* wcwidth functions */
-  int fribidi_wcwidth (FriBidiChar ch);
-  int fribidi_wcswidth (const FriBidiChar *str, FriBidiStrIndex len);
-  int fribidi_wcswidth_cjk (const FriBidiChar *str, FriBidiStrIndex len);
+  FRIBIDI_API int fribidi_wcwidth (FriBidiChar ch);
+  FRIBIDI_API int fribidi_wcswidth (const FriBidiChar *str,
+				    FriBidiStrIndex len);
+  FRIBIDI_API int fribidi_wcwidth_cjk (FriBidiChar ch);
+  FRIBIDI_API int fribidi_wcswidth_cjk (const FriBidiChar *str,
+					FriBidiStrIndex len);
 
 #ifdef	__cplusplus
 }

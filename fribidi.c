@@ -1071,13 +1071,13 @@ free_rl_list (TypeLink *type_rl_list)
 
 static fribidi_boolean mirroring = FRIBIDI_TRUE;
 
-fribidi_boolean
+FRIBIDI_API fribidi_boolean
 fribidi_mirroring_status (void)
 {
   return mirroring;
 }
 
-void
+FRIBIDI_API void
 fribidi_set_mirroring (fribidi_boolean mirror)
 {
   mirroring = mirror;
@@ -1091,7 +1091,7 @@ fribidi_reorder_nsm_status (void)
   return reorder_nsm;
 }
 
-void
+FRIBIDI_API void
 fribidi_set_reorder_nsm (fribidi_boolean reorder)
 {
   reorder_nsm = reorder;
@@ -1105,7 +1105,7 @@ fribidi_set_reorder_nsm (fribidi_boolean reorder)
  *  fribidi_remove_bidi_marks() removes bidirectional marks, and returns
  *  the new length, updates each of other inputs if not NULL.
  *----------------------------------------------------------------------*/
-FriBidiStrIndex
+FRIBIDI_API FriBidiStrIndex
 fribidi_remove_bidi_marks (FriBidiChar *str, FriBidiStrIndex length,
 			   FriBidiStrIndex *position_to_this_list,
 			   FriBidiStrIndex *position_from_this_list,
@@ -1161,7 +1161,7 @@ fribidi_remove_bidi_marks (FriBidiChar *str, FriBidiStrIndex length,
  *  fribidi_log2vis() calls the function_analyse_string() and then
  *  does reordering and fills in the output strings.
  *----------------------------------------------------------------------*/
-fribidi_boolean
+FRIBIDI_API fribidi_boolean
 fribidi_log2vis (		/* input */
 		  FriBidiChar *str, FriBidiStrIndex len,
 		  FriBidiCharType *pbase_dir,
@@ -1371,7 +1371,7 @@ fribidi_log2vis (		/* input */
  *  fribidi_log2vis_get_embedding_levels() is used in order to just get
  *  the embedding levels.
  *----------------------------------------------------------------------*/
-fribidi_boolean
+FRIBIDI_API fribidi_boolean
 fribidi_log2vis_get_embedding_levels (	/* input */
 				       FriBidiChar *str,
 				       FriBidiStrIndex len,
@@ -1411,8 +1411,9 @@ fribidi_log2vis_get_embedding_levels (	/* input */
 
 
 const char *fribidi_version_info =
-  FRIBIDI_PACKAGE " " FRIBIDI_VERSION "\n"
-  "interface version " TOSTR (FRIBIDI_INTERFACE_VERSION) "\n"
+  FRIBIDI_PACKAGE " " FRIBIDI_VERSION "\n" "interface version "
+  TOSTR (FRIBIDI_INTERFACE_VERSION)
+  "\n"
   "Unicode version " FRIBIDI_UNICODE_VERSION "\n"
   "\n"
   "Copyright (C) 2002 FriBidi Project (http://fribidi.sf.net/).\n"
@@ -1433,4 +1434,4 @@ const char *fribidi_version_info =
 #ifdef FRIBIDI_NO_CHARSETS
   "--without-charsts\n"
 #endif
- ;
+;

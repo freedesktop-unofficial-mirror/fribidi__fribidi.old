@@ -104,6 +104,7 @@ get_type (char *s)
 #define char_name "FriBidiChar"
 #define prop_to_type_name "fribidi_prop_to_type"
 #define default_type "LTR"
+#define export_api "FRIBIDI_API"
 
 static int table[FRIBIDI_UNICODE_CHARS];
 
@@ -193,7 +194,7 @@ write_char_type (char *file, int max_depth)
   fprintf (f, "#define PACKTAB_UINT8 fribidi_uint8\n");
   fprintf (f, "#define PACKTAB_UINT16 fribidi_uint16\n");
   fprintf (f, "#define PACKTAB_UINT32 fribidi_uint32\n");
-  
+
   if (!pack_table
       (table, FRIBIDI_UNICODE_CHARS, SIZEOF_CHAR, max_depth, 3, names,
        key_type_name, table_name, macro_name, f))
@@ -207,7 +208,7 @@ write_char_type (char *file, int max_depth)
 	   "/*======================================================================\n"
 	   " *  %s() returns the bidi type of a character.\n"
 	   " *----------------------------------------------------------------------*/\n"
-	   "%s\n"
+	   "%s %s\n"
 	   "%s (%s uch)\n"
 	   "{\n"
 	   "  if (uch < 0x%x)\n"
@@ -217,8 +218,8 @@ write_char_type (char *file, int max_depth)
 	   "  /* Non-Unicode chars */\n"
 	   "}\n"
 	   "\n",
-	   function_name, char_type_name, function_name, char_name,
-	   FRIBIDI_UNICODE_CHARS, prop_to_type_name, macro_name,
+	   function_name, export_api, char_type_name, function_name,
+	   char_name, FRIBIDI_UNICODE_CHARS, prop_to_type_name, macro_name,
 	   default_type);
   fprintf (f, "\n#endif /* %s */\n", FILENAME);
 

@@ -146,6 +146,8 @@ else
 fi
 AC_SUBST(FRIBIDI_NO_CHARSETS)
 
+AC_DEFINE(FRIBIDI_EXPORT)
+
 AC_OUTPUT([
 Makefile
 fribidi_config.h

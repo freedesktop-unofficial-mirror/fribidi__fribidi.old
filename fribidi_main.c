@@ -444,7 +444,7 @@ main (int argc, char *argv[])
 			    wid = break_width;
 			    st = idx;
 #ifndef FRIBIDI_NO_CHARSETS
-			    if (char_set_num != FRIBIDI_CHARSET_CAP_RTL)
+			    if (char_set_num != FRIBIDI_CHAR_SET_CAP_RTL)
 #endif
 			      while (wid > 0 && idx < len)
 				wid -= fribidi_wcwidth (visual[idx++]);

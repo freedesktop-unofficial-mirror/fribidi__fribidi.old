@@ -275,27 +275,9 @@ extern "C"
 
   enum FriBidiPropEnum
   {
-    FRIBIDI_PROP_TYPE_LTR,	/* Strong left to right */
-    FRIBIDI_PROP_TYPE_RTL,	/* Right to left characters */
-    FRIBIDI_PROP_TYPE_AL,	/* Arabic characters */
-    FRIBIDI_PROP_TYPE_LRE,	/* Left-To-Right embedding */
-    FRIBIDI_PROP_TYPE_RLE,	/* Right-To-Left embedding */
-    FRIBIDI_PROP_TYPE_LRO,	/* Left-To-Right override */
-    FRIBIDI_PROP_TYPE_RLO,	/* Right-To-Left override */
-    FRIBIDI_PROP_TYPE_PDF,	/* Pop directional override */
-    FRIBIDI_PROP_TYPE_EN,	/* European digit */
-    FRIBIDI_PROP_TYPE_AN,	/* Arabic digit */
-    FRIBIDI_PROP_TYPE_ES,	/* European number separator */
-    FRIBIDI_PROP_TYPE_ET,	/* European number terminator */
-    FRIBIDI_PROP_TYPE_CS,	/* Common Separator */
-    FRIBIDI_PROP_TYPE_NSM,	/* Non spacing mark */
-    FRIBIDI_PROP_TYPE_BN,	/* Boundary neutral */
-    FRIBIDI_PROP_TYPE_BS,	/* Block separator */
-    FRIBIDI_PROP_TYPE_SS,	/* Segment separator */
-    FRIBIDI_PROP_TYPE_WS,	/* Whitespace */
-    FRIBIDI_PROP_TYPE_ON,	/* Other Neutral */
-    FRIBIDI_PROP_TYPE_WL,	/* Weak left to right */
-    FRIBIDI_PROP_TYPE_WR,	/* Weak right to left */
+#define _FRIBIDI_ADD_TYPE(TYPE) FRIBIDI_PROP_TYPE_##TYPE,
+#include "fribidi_types.i"
+#undef _FRIBIDI_ADD_TYPE
     FRIBIDI_TYPES_COUNT		/* Number of different character types */
   };
 

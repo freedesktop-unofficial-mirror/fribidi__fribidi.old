@@ -61,7 +61,7 @@
  *                       // output
  *                       &num_vis_ranges, *vis_ranges);
  **----------------------------------------------------------------------*/
-void
+FRIBIDI_API void
 fribidi_map_range (FriBidiStrIndex in_span[2],	/* Start and end span */
 		   FriBidiStrIndex len, fribidi_boolean is_v2l_map,	/* Needed for embedding_level */
 		   FriBidiStrIndex *position_map,
@@ -111,7 +111,7 @@ fribidi_map_range (FriBidiStrIndex in_span[2],	/* Start and end span */
  *  of characters that need redrawing. It returns the start and the
  *  length of the section in the new string that needs redrawing.
  *----------------------------------------------------------------------*/
-void
+FRIBIDI_API void
 fribidi_find_string_changes (	/* input */
 			      FriBidiChar *old_str,
 			      FriBidiStrIndex old_len, FriBidiChar *new_str,
@@ -189,7 +189,7 @@ fribidi_find_string_changes (	/* input */
  *                  beyond the end of the line, res_attach_before is true.
  *
  *----------------------------------------------------------------------*/
-void
+FRIBIDI_API void
 fribidi_xpos_resolve (int x_pos, int x_offset, FriBidiStrIndex len,
 		      FriBidiLevel *embedding_level_list,
 		      FriBidiCharType base_dir,
@@ -295,7 +295,7 @@ fribidi_xpos_resolve (int x_pos, int x_offset, FriBidiStrIndex len,
  *  was resolved in the rtl direction. This simply involves asking
  *  if the embedding level for the character is odd.
  *----------------------------------------------------------------------*/
-fribidi_boolean
+FRIBIDI_API fribidi_boolean
 fribidi_is_char_rtl (FriBidiLevel *embedding_level_list,
 		     FriBidiCharType base_dir, FriBidiStrIndex idx)
 {
@@ -311,7 +311,7 @@ fribidi_is_char_rtl (FriBidiLevel *embedding_level_list,
  *  a list of visual runs. A run is defined as a sequence that has
  *  the same attributes.
  *----------------------------------------------------------------------*/
-void
+FRIBIDI_API void
 fribidi_runs_log2vis (		/* input */
 		       FriBidiList *logical_runs,	/* List of FriBidiRunType */
 		       FriBidiStrIndex len, FriBidiStrIndex *log2vis, FriBidiCharType base_dir,	/* TBD: remove it, not needed */
