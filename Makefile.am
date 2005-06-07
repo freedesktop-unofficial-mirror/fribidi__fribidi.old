@@ -67,6 +67,7 @@ GETOPT_SRC =	\
 
 GETOPT_HDR =	\
 	getopt.h	\
+	getopt_int.h	\
 	gettext.h
 
 TEST_FILES =	\
