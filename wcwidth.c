@@ -59,7 +59,7 @@
  * Latest version: http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
  */
 
-#include "fribidi_wcwidth.i"
+#include "wcwidth.i"
 
 struct interval {
   int first;
