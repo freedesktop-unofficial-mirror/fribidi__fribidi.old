@@ -66,7 +66,8 @@ GETOPT_SRC =	\
 	getopt1.c
 
 GETOPT_HDR =	\
-	getopt.h
+	getopt.h	\
+	gettext.h
 
 TEST_FILES =	\
 	tests/test_CapRTL_explicit.input	\
@@ -207,4 +208,26 @@ CLEANFILES =
 
 DISTCLEANFILES = fribidi_tab_char_type_stamp
 
-MAINTAINERCLEANFILES = Makefile.in configure aclocal.m4 config.h.in
+MAINTAINERCLEANFILES = \
+		$(srcdir)/INSTALL \
+		$(srcdir)/aclocal.m4 \
+		$(srcdir)/autoscan.log \
+		$(srcdir)/compile \
+		$(srcdir)/config.guess \
+		$(srcdir)/config.h.in \
+		$(srcdir)/config.sub \
+		$(srcdir)/configure.scan \
+		$(srcdir)/depcomp \
+		$(srcdir)/install-sh \
+		$(srcdir)/ltmain.sh \
+		$(srcdir)/missing \
+		`find "$(srcdir)" -type f -name Makefile.in -print` \
+		`find "$(srcdir)" -type f -name "*~" -print`
+
+# Indent all C source and header files, using indent(1):
+
+indent: $(srcdir)/.indent.pro
+	cd "$(srcdir)" && ./missing --run indent fribidi_*.[ch]
+
+.PHONY: indent
+

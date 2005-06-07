@@ -3,6 +3,7 @@ aclocal.m4
 autom4te.cache
 fribidi.pc
 fribidi.spec
+fribidi-config
 config.guess
 config.h
 config.h.in
@@ -16,3 +17,9 @@ libtool
 ltmain.sh
 missing
 stamp-h1
+fribidi
+fribidi_benchmark
+fribidi_bidi_types
+fribidi_create_char_types
+fribidi_create_mirroring
+frbidi_tab_char_type_stamp

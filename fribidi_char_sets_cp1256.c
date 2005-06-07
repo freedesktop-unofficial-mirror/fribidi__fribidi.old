@@ -58,7 +58,7 @@ FriBidiChar
 fribidi_cp1256_to_unicode_c (char sch)
 {
   unsigned char ch = (unsigned char) sch;
-  if (ch >= 0x80 && ch <= 0xff)
+  if (ch >= 0x80)
     return fribidi_cp1256_to_unicode_tab[ch - 0x80];
   else
     return ch;
