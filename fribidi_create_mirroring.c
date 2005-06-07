@@ -28,8 +28,7 @@
 #include "fribidi_unicode.h"
 
 static void
-err2 (char *fmt,
-      char *p)
+err2 (char *fmt, char *p)
 {
   fprintf (stderr, "fribidi_create_mirroring: error: ");
   fprintf (stderr, fmt, p);
@@ -129,8 +128,7 @@ write_mirror (char *file)
 }
 
 int
-main (int argc,
-      char **argv)
+main (int argc, char **argv)
 {
   char *p;
 

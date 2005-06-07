@@ -1,9 +1,11 @@
 
 AUTOMAKE_OPTIONS = gnu 
 
-noinst_PROGRAMS = fribidi_benchmark	\
-		fribidi_create_char_types	\
-		fribidi_create_mirroring
+noinst_PROGRAMS =	\
+	fribidi_benchmark	\
+	fribidi_create_char_types	\
+	fribidi_create_mirroring	\
+	fribidi_bidi_types
 
 libfribidi_charsets =	\
 	fribidi_char_sets.c	\
@@ -40,8 +42,8 @@ libfribidi_la_SOURCES =	\
 	fribidi_mem.c	\
 	fribidi_mirroring.c	\
 	fribidi_char_type.c	\
-	fribidi_wcwidth.c	\
 	fribidi_utils.c	\
+	wcwidth.c	\
 	$(libfribidi_charsets)	\
 	$(libfribidi_charsets_extra)
 
@@ -87,7 +89,7 @@ UNIDATA_FILES =	\
 	unidata/BidiMirroring.txt
 
 OTHER_FILES =	\
-	fribidi_wcwidth.i
+	wcwidth.i
 
 EXTRA_HEADERS =	\
 	packtab.h	\
@@ -111,6 +113,8 @@ EXTRA_DIST =	\
 
 fribidi_benchmark_SOURCES = fribidi_benchmark.c $(GETOPT_SRC)
 fribidi_benchmark_LDADD = libfribidi.la
+
+fribidi_bidi_types_LDADD = libfribidi.la
 
 fribidi_create_char_types_SOURCES = fribidi_create_char_types.c packtab.c
 

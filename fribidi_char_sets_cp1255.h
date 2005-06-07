@@ -41,13 +41,11 @@ extern "C"
 #define fribidi_char_set_leave_cp1255 NULL
 
   FriBidiChar fribidi_cp1255_to_unicode_c (char ch);
-  int fribidi_cp1255_to_unicode (char *s,
-				 int length,
+  int fribidi_cp1255_to_unicode (char *s, int length,
 				 /* Output */
 				 FriBidiChar *us);
   char fribidi_unicode_to_cp1255_c (FriBidiChar uch);
-  int fribidi_unicode_to_cp1255 (FriBidiChar *us,
-				 int length,
+  int fribidi_unicode_to_cp1255 (FriBidiChar *us, int length,
 				 /* Output */
 				 char *s);
 

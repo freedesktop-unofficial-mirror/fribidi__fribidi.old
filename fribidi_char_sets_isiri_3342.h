@@ -41,13 +41,11 @@ extern "C"
 #define fribidi_char_set_leave_isiri_3342 NULL
 
   FriBidiChar fribidi_isiri_3342_to_unicode_c (char ch);
-  int fribidi_isiri_3342_to_unicode (char *s,
-				     int length,
+  int fribidi_isiri_3342_to_unicode (char *s, int length,
 				     /* Output */
 				     FriBidiChar *us);
   char fribidi_unicode_to_isiri_3342_c (FriBidiChar uch);
-  int fribidi_unicode_to_isiri_3342 (FriBidiChar *us,
-				     int length,
+  int fribidi_unicode_to_isiri_3342 (FriBidiChar *us, int length,
 				     /* Output */
 				     char *s);
 

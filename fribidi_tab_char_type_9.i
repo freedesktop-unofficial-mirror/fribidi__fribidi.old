@@ -1,5 +1,5 @@
 /*
-  This file was automatically created from UnicodeData.txt version 3.2.0
+  This file was automatically created from UnicodeData.txt version 4.1.0
   by fribidi_create_char_types
 */
 
@@ -37,15 +37,15 @@
   just use FRIBIDI_GET_TYPE(key)
 
   assumed sizeof(FriBidiPropCharType) == 1
-  required memory: 2111
+  required memory: 2575
   lookups: 9
   partition shape: FriBidiPropertyBlock[17][8][4][8][4][2][8][2][2]
-  different table entries: 1 4 7 12 41 104 131 101 54
+  different table entries: 1 4 10 18 60 126 158 110 57
 */
 
 /* *INDENT-OFF* */
 
-static const FriBidiPropCharType FriBidiPropertyBlockLevel8[2*54] = {
+static const FriBidiPropCharType FriBidiPropertyBlockLevel8[2*57] = {
 
 #define FriBidiPropertyBlockLevel8_0000 0x0
 
@@ -83,121 +83,121 @@ static const FriBidiPropCharType FriBidiPropertyBlockLevel8[2*54] = {
 
    ON, ON,
 
-#define FriBidiPropertyBlockLevel8_002C 0x12
+#define FriBidiPropertyBlockLevel8_002A 0x12
 
-   CS, ET,
+   ON, ES,
 
-#define FriBidiPropertyBlockLevel8_002E 0x14
+#define FriBidiPropertyBlockLevel8_002C 0x14
 
    CS, ES,
 
-#define FriBidiPropertyBlockLevel8_0030 0x16
+#define FriBidiPropertyBlockLevel8_002E 0x16
+
+   CS, CS,
+
+#define FriBidiPropertyBlockLevel8_0030 0x18
 
    EN, EN,
 
-#define FriBidiPropertyBlockLevel8_003A 0x18
+#define FriBidiPropertyBlockLevel8_003A 0x1A
 
    CS, ON,
 
-#define FriBidiPropertyBlockLevel8_0040 0x1A
+#define FriBidiPropertyBlockLevel8_0040 0x1C
 
    ON,LTR,
 
-#define FriBidiPropertyBlockLevel8_0042 0x1C
+#define FriBidiPropertyBlockLevel8_0042 0x1E
 
   LTR,LTR,
 
-#define FriBidiPropertyBlockLevel8_005A 0x1E
+#define FriBidiPropertyBlockLevel8_005A 0x20
 
   LTR, ON,
 
-#define FriBidiPropertyBlockLevel8_007E 0x20
+#define FriBidiPropertyBlockLevel8_007E 0x22
 
    ON, BN,
 
-#define FriBidiPropertyBlockLevel8_0084 0x22
+#define FriBidiPropertyBlockLevel8_0084 0x24
 
    BN, BS,
 
-#define FriBidiPropertyBlockLevel8_00B8 0x24
+#define FriBidiPropertyBlockLevel8_00B8 0x26
 
    ON, EN,
 
-#define FriBidiPropertyBlockLevel8_0300 0x26
+#define FriBidiPropertyBlockLevel8_0300 0x28
 
   NSM,NSM,
 
-#define FriBidiPropertyBlockLevel8_0482 0x28
+#define FriBidiPropertyBlockLevel8_0482 0x2A
 
   LTR,NSM,
 
-#define FriBidiPropertyBlockLevel8_0486 0x2A
+#define FriBidiPropertyBlockLevel8_0486 0x2C
 
   NSM,LTR,
 
-#define FriBidiPropertyBlockLevel8_0590 0x2C
+#define FriBidiPropertyBlockLevel8_0590 0x2E
 
   RTL,NSM,
 
-#define FriBidiPropertyBlockLevel8_05C2 0x2E
+#define FriBidiPropertyBlockLevel8_05C2 0x30
 
   NSM,RTL,
 
-#define FriBidiPropertyBlockLevel8_05C6 0x30
+#define FriBidiPropertyBlockLevel8_05C8 0x32
 
   RTL,RTL,
 
-#define FriBidiPropertyBlockLevel8_0600 0x32
+#define FriBidiPropertyBlockLevel8_0600 0x34
 
    AL, AL,
 
-#define FriBidiPropertyBlockLevel8_060C 0x34
+#define FriBidiPropertyBlockLevel8_060C 0x36
 
    CS, AL,
 
-#define FriBidiPropertyBlockLevel8_064A 0x36
+#define FriBidiPropertyBlockLevel8_064A 0x38
 
    AL,NSM,
 
-#define FriBidiPropertyBlockLevel8_0660 0x38
-
-   AN, AN,
-
-#define FriBidiPropertyBlockLevel8_066A 0x3A
-
-   ET, AN,
-
-#define FriBidiPropertyBlockLevel8_066C 0x3C
-
-   AN, AL,
-
-#define FriBidiPropertyBlockLevel8_0670 0x3E
+#define FriBidiPropertyBlockLevel8_065E 0x3A
 
   NSM, AL,
 
-#define FriBidiPropertyBlockLevel8_06E8 0x40
+#define FriBidiPropertyBlockLevel8_0660 0x3C
+
+   AN, AN,
+
+#define FriBidiPropertyBlockLevel8_066A 0x3E
+
+   ET, AN,
+
+#define FriBidiPropertyBlockLevel8_066C 0x40
+
+   AN, AL,
+
+#define FriBidiPropertyBlockLevel8_06E8 0x42
 
   NSM, ON,
 
-#define FriBidiPropertyBlockLevel8_070E 0x42
+#define FriBidiPropertyBlockLevel8_070E 0x44
 
    AL, BN,
 
-#define FriBidiPropertyBlockLevel8_0E3E 0x44
+#define FriBidiPropertyBlockLevel8_0AF0 0x46
 
   LTR, ET,
 
-#define FriBidiPropertyBlockLevel8_1680 0x46
+#define FriBidiPropertyBlockLevel8_1680 0x48
 
    WS,LTR,
 
-#define FriBidiPropertyBlockLevel8_180A 0x48
+#define FriBidiPropertyBlockLevel8_180A 0x4A
 
    ON,NSM,
-
-#define FriBidiPropertyBlockLevel8_180E 0x4A
-
-   BN,LTR,
 
 #define FriBidiPropertyBlockLevel8_2000 0x4C
 
@@ -221,7 +221,7 @@ static const FriBidiPropCharType FriBidiPropertyBlockLevel8[2*54] = {
 
 #define FriBidiPropertyBlockLevel8_202E 0x56
 
-  RLO, WS,
+  RLO, CS,
 
 #define FriBidiPropertyBlockLevel8_2034 0x58
 
@@ -229,42 +229,54 @@ static const FriBidiPropCharType FriBidiPropertyBlockLevel8[2*54] = {
 
 #define FriBidiPropertyBlockLevel8_205E 0x5A
 
-  LTR, WS,
+   ON, WS,
 
 #define FriBidiPropertyBlockLevel8_2070 0x5C
 
    EN,LTR,
 
-#define FriBidiPropertyBlockLevel8_212E 0x5E
+#define FriBidiPropertyBlockLevel8_207A 0x5E
+
+   ES, ES,
+
+#define FriBidiPropertyBlockLevel8_212E 0x60
 
    ET,LTR,
 
-#define FriBidiPropertyBlockLevel8_24EA 0x60
+#define FriBidiPropertyBlockLevel8_2212 0x62
 
-   EN, ON,
+   ES, ET,
 
-#define FriBidiPropertyBlockLevel8_FB28 0x62
+#define FriBidiPropertyBlockLevel8_FB28 0x64
 
-  RTL, ET,
+  RTL, ES,
 
-#define FriBidiPropertyBlockLevel8_FE52 0x64
+#define FriBidiPropertyBlockLevel8_FDFC 0x66
+
+   AL, ON,
+
+#define FriBidiPropertyBlockLevel8_FE52 0x68
 
    CS,LTR,
 
-#define FriBidiPropertyBlockLevel8_FE54 0x66
+#define FriBidiPropertyBlockLevel8_FE54 0x6A
 
    ON, CS,
 
-#define FriBidiPropertyBlockLevel8_FFF8 0x68
+#define FriBidiPropertyBlockLevel8_FFF8 0x6C
+
+   BN, ON,
+
+#define FriBidiPropertyBlockLevel8_1D172 0x6E
 
   LTR, BN,
 
-#define FriBidiPropertyBlockLevel8_1D17A 0x6A
+#define FriBidiPropertyBlockLevel8_1D17A 0x70
 
    BN,NSM,
 };
 
-static const PACKTAB_UINT8 FriBidiPropertyBlockLevel7[2*101] = {
+static const PACKTAB_UINT8 FriBidiPropertyBlockLevel7[2*110] = {
 
 #define FriBidiPropertyBlockLevel7_0000 0x0
 
@@ -299,7 +311,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel7[2*101] = {
 #define FriBidiPropertyBlockLevel7_0028 0xC
 
   FriBidiPropertyBlockLevel8_0026,  /* 0028..0029 */
-  FriBidiPropertyBlockLevel8_0022,  /* 002A..002B */
+  FriBidiPropertyBlockLevel8_002A,  /* 002A..002B */
 
 #define FriBidiPropertyBlockLevel7_002C 0xE
 
@@ -356,90 +368,90 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel7[2*101] = {
   FriBidiPropertyBlockLevel8_0026,  /* 00A8..00A9 */
   FriBidiPropertyBlockLevel8_005A,  /* 00AA..00AB */
 
-#define FriBidiPropertyBlockLevel7_00B0 0x24
+#define FriBidiPropertyBlockLevel7_00AC 0x24
+
+  FriBidiPropertyBlockLevel8_007E,  /* 00AC..00AD */
+  FriBidiPropertyBlockLevel8_0026,  /* 00AE..00AF */
+
+#define FriBidiPropertyBlockLevel7_00B0 0x26
 
   FriBidiPropertyBlockLevel8_0024,  /* 00B0..00B1 */
   FriBidiPropertyBlockLevel8_0030,  /* 00B2..00B3 */
 
-#define FriBidiPropertyBlockLevel7_00B4 0x26
+#define FriBidiPropertyBlockLevel7_00B4 0x28
 
   FriBidiPropertyBlockLevel8_0040,  /* 00B4..00B5 */
   FriBidiPropertyBlockLevel8_0026,  /* 00B6..00B7 */
 
-#define FriBidiPropertyBlockLevel7_00B8 0x28
+#define FriBidiPropertyBlockLevel7_00B8 0x2A
 
   FriBidiPropertyBlockLevel8_00B8,  /* 00B8..00B9 */
   FriBidiPropertyBlockLevel8_005A,  /* 00BA..00BB */
 
-#define FriBidiPropertyBlockLevel7_02B8 0x2A
+#define FriBidiPropertyBlockLevel7_02B8 0x2C
 
   FriBidiPropertyBlockLevel8_005A,  /* 02B8..02B9 */
   FriBidiPropertyBlockLevel8_0040,  /* 02BA..02BB */
 
-#define FriBidiPropertyBlockLevel7_02C0 0x2C
+#define FriBidiPropertyBlockLevel7_02C0 0x2E
 
   FriBidiPropertyBlockLevel8_0042,  /* 02C0..02C1 */
   FriBidiPropertyBlockLevel8_0026,  /* 02C2..02C3 */
 
-#define FriBidiPropertyBlockLevel7_02E4 0x2E
+#define FriBidiPropertyBlockLevel7_02E4 0x30
 
   FriBidiPropertyBlockLevel8_005A,  /* 02E4..02E5 */
   FriBidiPropertyBlockLevel8_0026,  /* 02E6..02E7 */
-
-#define FriBidiPropertyBlockLevel7_02EC 0x30
-
-  FriBidiPropertyBlockLevel8_0026,  /* 02EC..02ED */
-  FriBidiPropertyBlockLevel8_0042,  /* 02EE..02EF */
 
 #define FriBidiPropertyBlockLevel7_0300 0x32
 
   FriBidiPropertyBlockLevel8_0300,  /* 0300..0301 */
   FriBidiPropertyBlockLevel8_0300,  /* 0302..0303 */
 
-#define FriBidiPropertyBlockLevel7_037C 0x34
+#define FriBidiPropertyBlockLevel7_0374 0x34
+
+  FriBidiPropertyBlockLevel8_0026,  /* 0374..0375 */
+  FriBidiPropertyBlockLevel8_0042,  /* 0376..0377 */
+
+#define FriBidiPropertyBlockLevel7_037C 0x36
 
   FriBidiPropertyBlockLevel8_0042,  /* 037C..037D */
   FriBidiPropertyBlockLevel8_0040,  /* 037E..037F */
 
-#define FriBidiPropertyBlockLevel7_0480 0x36
+#define FriBidiPropertyBlockLevel7_0480 0x38
 
   FriBidiPropertyBlockLevel8_0042,  /* 0480..0481 */
   FriBidiPropertyBlockLevel8_0482,  /* 0482..0483 */
 
-#define FriBidiPropertyBlockLevel7_0484 0x38
+#define FriBidiPropertyBlockLevel7_0484 0x3A
 
   FriBidiPropertyBlockLevel8_0300,  /* 0484..0485 */
   FriBidiPropertyBlockLevel8_0486,  /* 0486..0487 */
 
-#define FriBidiPropertyBlockLevel7_0488 0x3A
+#define FriBidiPropertyBlockLevel7_0488 0x3C
 
   FriBidiPropertyBlockLevel8_0300,  /* 0488..0489 */
   FriBidiPropertyBlockLevel8_0042,  /* 048A..048B */
 
-#define FriBidiPropertyBlockLevel7_0590 0x3C
+#define FriBidiPropertyBlockLevel7_0590 0x3E
 
   FriBidiPropertyBlockLevel8_0590,  /* 0590..0591 */
   FriBidiPropertyBlockLevel8_0300,  /* 0592..0593 */
 
-#define FriBidiPropertyBlockLevel7_05A0 0x3E
+#define FriBidiPropertyBlockLevel7_05B8 0x40
 
-  FriBidiPropertyBlockLevel8_0300,  /* 05A0..05A1 */
-  FriBidiPropertyBlockLevel8_0590,  /* 05A2..05A3 */
+  FriBidiPropertyBlockLevel8_0300,  /* 05B8..05B9 */
+  FriBidiPropertyBlockLevel8_0590,  /* 05BA..05BB */
 
-#define FriBidiPropertyBlockLevel7_05C0 0x40
+#define FriBidiPropertyBlockLevel7_05C0 0x42
 
   FriBidiPropertyBlockLevel8_0590,  /* 05C0..05C1 */
   FriBidiPropertyBlockLevel8_05C2,  /* 05C2..05C3 */
 
-#define FriBidiPropertyBlockLevel7_05C4 0x42
-
-  FriBidiPropertyBlockLevel8_05C2,  /* 05C4..05C5 */
-  FriBidiPropertyBlockLevel8_05C6,  /* 05C6..05C7 */
-
 #define FriBidiPropertyBlockLevel7_05C8 0x44
 
-  FriBidiPropertyBlockLevel8_05C6,  /* 05C8..05C9 */
-  FriBidiPropertyBlockLevel8_05C6,  /* 05CA..05CB */
+  FriBidiPropertyBlockLevel8_05C8,  /* 05C8..05C9 */
+  FriBidiPropertyBlockLevel8_05C8,  /* 05CA..05CB */
 
 #define FriBidiPropertyBlockLevel7_0600 0x46
 
@@ -449,77 +461,77 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel7[2*101] = {
 #define FriBidiPropertyBlockLevel7_060C 0x48
 
   FriBidiPropertyBlockLevel8_060C,  /* 060C..060D */
-  FriBidiPropertyBlockLevel8_0600,  /* 060E..060F */
+  FriBidiPropertyBlockLevel8_0026,  /* 060E..060F */
 
-#define FriBidiPropertyBlockLevel7_0648 0x4A
+#define FriBidiPropertyBlockLevel7_0614 0x4A
+
+  FriBidiPropertyBlockLevel8_0300,  /* 0614..0615 */
+  FriBidiPropertyBlockLevel8_0600,  /* 0616..0617 */
+
+#define FriBidiPropertyBlockLevel7_0648 0x4C
 
   FriBidiPropertyBlockLevel8_0600,  /* 0648..0649 */
   FriBidiPropertyBlockLevel8_064A,  /* 064A..064B */
 
-#define FriBidiPropertyBlockLevel7_0654 0x4C
+#define FriBidiPropertyBlockLevel7_065C 0x4E
 
-  FriBidiPropertyBlockLevel8_0300,  /* 0654..0655 */
-  FriBidiPropertyBlockLevel8_0600,  /* 0656..0657 */
+  FriBidiPropertyBlockLevel8_0300,  /* 065C..065D */
+  FriBidiPropertyBlockLevel8_065E,  /* 065E..065F */
 
-#define FriBidiPropertyBlockLevel7_0660 0x4E
+#define FriBidiPropertyBlockLevel7_0660 0x50
 
   FriBidiPropertyBlockLevel8_0660,  /* 0660..0661 */
   FriBidiPropertyBlockLevel8_0660,  /* 0662..0663 */
 
-#define FriBidiPropertyBlockLevel7_0668 0x50
+#define FriBidiPropertyBlockLevel7_0668 0x52
 
   FriBidiPropertyBlockLevel8_0660,  /* 0668..0669 */
   FriBidiPropertyBlockLevel8_066A,  /* 066A..066B */
 
-#define FriBidiPropertyBlockLevel7_066C 0x52
+#define FriBidiPropertyBlockLevel7_066C 0x54
 
   FriBidiPropertyBlockLevel8_066C,  /* 066C..066D */
   FriBidiPropertyBlockLevel8_0600,  /* 066E..066F */
 
-#define FriBidiPropertyBlockLevel7_0670 0x54
+#define FriBidiPropertyBlockLevel7_0670 0x56
 
-  FriBidiPropertyBlockLevel8_0670,  /* 0670..0671 */
+  FriBidiPropertyBlockLevel8_065E,  /* 0670..0671 */
   FriBidiPropertyBlockLevel8_0600,  /* 0672..0673 */
 
-#define FriBidiPropertyBlockLevel7_06D4 0x56
+#define FriBidiPropertyBlockLevel7_06D4 0x58
 
   FriBidiPropertyBlockLevel8_0600,  /* 06D4..06D5 */
   FriBidiPropertyBlockLevel8_0300,  /* 06D6..06D7 */
 
-#define FriBidiPropertyBlockLevel7_06DC 0x58
+#define FriBidiPropertyBlockLevel7_06DC 0x5A
 
-  FriBidiPropertyBlockLevel8_0670,  /* 06DC..06DD */
+  FriBidiPropertyBlockLevel8_065E,  /* 06DC..06DD */
   FriBidiPropertyBlockLevel8_0300,  /* 06DE..06DF */
 
-#define FriBidiPropertyBlockLevel7_06E4 0x5A
+#define FriBidiPropertyBlockLevel7_06E4 0x5C
 
-  FriBidiPropertyBlockLevel8_0670,  /* 06E4..06E5 */
+  FriBidiPropertyBlockLevel8_065E,  /* 06E4..06E5 */
   FriBidiPropertyBlockLevel8_064A,  /* 06E6..06E7 */
 
-#define FriBidiPropertyBlockLevel7_06E8 0x5C
+#define FriBidiPropertyBlockLevel7_06E8 0x5E
 
   FriBidiPropertyBlockLevel8_06E8,  /* 06E8..06E9 */
   FriBidiPropertyBlockLevel8_0300,  /* 06EA..06EB */
 
-#define FriBidiPropertyBlockLevel7_06F8 0x5E
+#define FriBidiPropertyBlockLevel7_06F8 0x60
 
   FriBidiPropertyBlockLevel8_0030,  /* 06F8..06F9 */
   FriBidiPropertyBlockLevel8_0600,  /* 06FA..06FB */
 
-#define FriBidiPropertyBlockLevel7_070C 0x60
+#define FriBidiPropertyBlockLevel7_070C 0x62
 
   FriBidiPropertyBlockLevel8_0600,  /* 070C..070D */
   FriBidiPropertyBlockLevel8_070E,  /* 070E..070F */
 
-#define FriBidiPropertyBlockLevel7_0710 0x62
+#define FriBidiPropertyBlockLevel7_0710 0x64
 
   FriBidiPropertyBlockLevel8_064A,  /* 0710..0711 */
   FriBidiPropertyBlockLevel8_0600,  /* 0712..0713 */
-
-#define FriBidiPropertyBlockLevel7_0748 0x64
-
-  FriBidiPropertyBlockLevel8_0300,  /* 0748..0749 */
-  FriBidiPropertyBlockLevel8_0670,  /* 074A..074B */
 
 #define FriBidiPropertyBlockLevel7_0900 0x66
 
@@ -551,228 +563,273 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel7[2*101] = {
   FriBidiPropertyBlockLevel8_0042,  /* 09F0..09F1 */
   FriBidiPropertyBlockLevel8_0024,  /* 09F2..09F3 */
 
-#define FriBidiPropertyBlockLevel7_0A00 0x72
-
-  FriBidiPropertyBlockLevel8_0042,  /* 0A00..0A01 */
-  FriBidiPropertyBlockLevel8_0486,  /* 0A02..0A03 */
-
-#define FriBidiPropertyBlockLevel7_0A48 0x74
+#define FriBidiPropertyBlockLevel7_0A48 0x72
 
   FriBidiPropertyBlockLevel8_0486,  /* 0A48..0A49 */
   FriBidiPropertyBlockLevel8_0482,  /* 0A4A..0A4B */
 
-#define FriBidiPropertyBlockLevel7_0AC4 0x76
+#define FriBidiPropertyBlockLevel7_0AC4 0x74
 
   FriBidiPropertyBlockLevel8_0300,  /* 0AC4..0AC5 */
   FriBidiPropertyBlockLevel8_0482,  /* 0AC6..0AC7 */
 
-#define FriBidiPropertyBlockLevel7_0C48 0x78
+#define FriBidiPropertyBlockLevel7_0AF0 0x76
+
+  FriBidiPropertyBlockLevel8_0AF0,  /* 0AF0..0AF1 */
+  FriBidiPropertyBlockLevel8_0042,  /* 0AF2..0AF3 */
+
+#define FriBidiPropertyBlockLevel7_0B54 0x78
+
+  FriBidiPropertyBlockLevel8_0042,  /* 0B54..0B55 */
+  FriBidiPropertyBlockLevel8_0486,  /* 0B56..0B57 */
+
+#define FriBidiPropertyBlockLevel7_0BF8 0x7A
+
+  FriBidiPropertyBlockLevel8_0022,  /* 0BF8..0BF9 */
+  FriBidiPropertyBlockLevel8_0040,  /* 0BFA..0BFB */
+
+#define FriBidiPropertyBlockLevel7_0C48 0x7C
 
   FriBidiPropertyBlockLevel8_0486,  /* 0C48..0C49 */
   FriBidiPropertyBlockLevel8_0300,  /* 0C4A..0C4B */
 
-#define FriBidiPropertyBlockLevel7_0DD4 0x7A
+#define FriBidiPropertyBlockLevel7_0DD4 0x7E
 
   FriBidiPropertyBlockLevel8_0486,  /* 0DD4..0DD5 */
   FriBidiPropertyBlockLevel8_0486,  /* 0DD6..0DD7 */
 
-#define FriBidiPropertyBlockLevel7_0E3C 0x7C
+#define FriBidiPropertyBlockLevel7_0E3C 0x80
 
   FriBidiPropertyBlockLevel8_0042,  /* 0E3C..0E3D */
-  FriBidiPropertyBlockLevel8_0E3E,  /* 0E3E..0E3F */
+  FriBidiPropertyBlockLevel8_0AF0,  /* 0E3E..0E3F */
 
-#define FriBidiPropertyBlockLevel7_0F34 0x7E
+#define FriBidiPropertyBlockLevel7_0F34 0x82
 
   FriBidiPropertyBlockLevel8_0482,  /* 0F34..0F35 */
   FriBidiPropertyBlockLevel8_0482,  /* 0F36..0F37 */
 
-#define FriBidiPropertyBlockLevel7_0F38 0x80
+#define FriBidiPropertyBlockLevel7_0F38 0x84
 
   FriBidiPropertyBlockLevel8_0482,  /* 0F38..0F39 */
   FriBidiPropertyBlockLevel8_0026,  /* 0F3A..0F3B */
 
-#define FriBidiPropertyBlockLevel7_1680 0x82
+#define FriBidiPropertyBlockLevel7_1680 0x86
 
   FriBidiPropertyBlockLevel8_1680,  /* 1680..1681 */
   FriBidiPropertyBlockLevel8_0042,  /* 1682..1683 */
 
-#define FriBidiPropertyBlockLevel7_1808 0x84
+#define FriBidiPropertyBlockLevel7_1808 0x88
 
   FriBidiPropertyBlockLevel8_0026,  /* 1808..1809 */
   FriBidiPropertyBlockLevel8_180A,  /* 180A..180B */
 
-#define FriBidiPropertyBlockLevel7_180C 0x86
+#define FriBidiPropertyBlockLevel7_180C 0x8A
 
   FriBidiPropertyBlockLevel8_0300,  /* 180C..180D */
-  FriBidiPropertyBlockLevel8_180E,  /* 180E..180F */
+  FriBidiPropertyBlockLevel8_1680,  /* 180E..180F */
 
-#define FriBidiPropertyBlockLevel7_1FBC 0x88
+#define FriBidiPropertyBlockLevel7_1FBC 0x8C
 
   FriBidiPropertyBlockLevel8_005A,  /* 1FBC..1FBD */
   FriBidiPropertyBlockLevel8_005A,  /* 1FBE..1FBF */
 
-#define FriBidiPropertyBlockLevel7_2000 0x8A
+#define FriBidiPropertyBlockLevel7_2000 0x8E
 
   FriBidiPropertyBlockLevel8_2000,  /* 2000..2001 */
   FriBidiPropertyBlockLevel8_2000,  /* 2002..2003 */
 
-#define FriBidiPropertyBlockLevel7_2008 0x8C
+#define FriBidiPropertyBlockLevel7_2008 0x90
 
   FriBidiPropertyBlockLevel8_2000,  /* 2008..2009 */
   FriBidiPropertyBlockLevel8_200A,  /* 200A..200B */
 
-#define FriBidiPropertyBlockLevel7_200C 0x8E
+#define FriBidiPropertyBlockLevel7_200C 0x92
 
   FriBidiPropertyBlockLevel8_0000,  /* 200C..200D */
   FriBidiPropertyBlockLevel8_200E,  /* 200E..200F */
 
-#define FriBidiPropertyBlockLevel7_2028 0x90
+#define FriBidiPropertyBlockLevel7_2028 0x94
 
   FriBidiPropertyBlockLevel8_000C,  /* 2028..2029 */
   FriBidiPropertyBlockLevel8_202A,  /* 202A..202B */
 
-#define FriBidiPropertyBlockLevel7_202C 0x92
+#define FriBidiPropertyBlockLevel7_202C 0x96
 
   FriBidiPropertyBlockLevel8_202C,  /* 202C..202D */
   FriBidiPropertyBlockLevel8_202E,  /* 202E..202F */
 
-#define FriBidiPropertyBlockLevel7_2030 0x94
+#define FriBidiPropertyBlockLevel7_2030 0x98
 
   FriBidiPropertyBlockLevel8_0024,  /* 2030..2031 */
   FriBidiPropertyBlockLevel8_0024,  /* 2032..2033 */
 
-#define FriBidiPropertyBlockLevel7_2034 0x96
+#define FriBidiPropertyBlockLevel7_2034 0x9A
 
   FriBidiPropertyBlockLevel8_2034,  /* 2034..2035 */
   FriBidiPropertyBlockLevel8_0026,  /* 2036..2037 */
 
-#define FriBidiPropertyBlockLevel7_2050 0x98
+#define FriBidiPropertyBlockLevel7_2044 0x9C
 
-  FriBidiPropertyBlockLevel8_0026,  /* 2050..2051 */
-  FriBidiPropertyBlockLevel8_0040,  /* 2052..2053 */
+  FriBidiPropertyBlockLevel8_003A,  /* 2044..2045 */
+  FriBidiPropertyBlockLevel8_0026,  /* 2046..2047 */
 
-#define FriBidiPropertyBlockLevel7_205C 0x9A
+#define FriBidiPropertyBlockLevel7_205C 0x9E
 
-  FriBidiPropertyBlockLevel8_0042,  /* 205C..205D */
+  FriBidiPropertyBlockLevel8_0026,  /* 205C..205D */
   FriBidiPropertyBlockLevel8_205E,  /* 205E..205F */
 
-#define FriBidiPropertyBlockLevel7_2068 0x9C
-
-  FriBidiPropertyBlockLevel8_0042,  /* 2068..2069 */
-  FriBidiPropertyBlockLevel8_0000,  /* 206A..206B */
-
-#define FriBidiPropertyBlockLevel7_2070 0x9E
+#define FriBidiPropertyBlockLevel7_2070 0xA0
 
   FriBidiPropertyBlockLevel8_2070,  /* 2070..2071 */
   FriBidiPropertyBlockLevel8_0042,  /* 2072..2073 */
 
-#define FriBidiPropertyBlockLevel7_2078 0xA0
+#define FriBidiPropertyBlockLevel7_2078 0xA2
 
   FriBidiPropertyBlockLevel8_0030,  /* 2078..2079 */
-  FriBidiPropertyBlockLevel8_0024,  /* 207A..207B */
+  FriBidiPropertyBlockLevel8_207A,  /* 207A..207B */
 
-#define FriBidiPropertyBlockLevel7_20B0 0xA2
+#define FriBidiPropertyBlockLevel7_207C 0xA4
 
-  FriBidiPropertyBlockLevel8_0024,  /* 20B0..20B1 */
-  FriBidiPropertyBlockLevel8_0042,  /* 20B2..20B3 */
+  FriBidiPropertyBlockLevel8_0026,  /* 207C..207D */
+  FriBidiPropertyBlockLevel8_0040,  /* 207E..207F */
 
-#define FriBidiPropertyBlockLevel7_2128 0xA4
+#define FriBidiPropertyBlockLevel7_20B4 0xA6
+
+  FriBidiPropertyBlockLevel8_0024,  /* 20B4..20B5 */
+  FriBidiPropertyBlockLevel8_0042,  /* 20B6..20B7 */
+
+#define FriBidiPropertyBlockLevel7_2128 0xA8
 
   FriBidiPropertyBlockLevel8_005A,  /* 2128..2129 */
   FriBidiPropertyBlockLevel8_0042,  /* 212A..212B */
 
-#define FriBidiPropertyBlockLevel7_212C 0xA6
+#define FriBidiPropertyBlockLevel7_212C 0xAA
 
   FriBidiPropertyBlockLevel8_0042,  /* 212C..212D */
   FriBidiPropertyBlockLevel8_212E,  /* 212E..212F */
 
-#define FriBidiPropertyBlockLevel7_2210 0xA8
+#define FriBidiPropertyBlockLevel7_2210 0xAC
 
   FriBidiPropertyBlockLevel8_0026,  /* 2210..2211 */
-  FriBidiPropertyBlockLevel8_0024,  /* 2212..2213 */
+  FriBidiPropertyBlockLevel8_2212,  /* 2212..2213 */
 
-#define FriBidiPropertyBlockLevel7_24E8 0xAA
-
-  FriBidiPropertyBlockLevel8_0042,  /* 24E8..24E9 */
-  FriBidiPropertyBlockLevel8_24EA,  /* 24EA..24EB */
-
-#define FriBidiPropertyBlockLevel7_3000 0xAC
+#define FriBidiPropertyBlockLevel7_3000 0xAE
 
   FriBidiPropertyBlockLevel8_0020,  /* 3000..3001 */
   FriBidiPropertyBlockLevel8_0026,  /* 3002..3003 */
 
-#define FriBidiPropertyBlockLevel7_3098 0xAE
+#define FriBidiPropertyBlockLevel7_3098 0xB0
 
   FriBidiPropertyBlockLevel8_0482,  /* 3098..3099 */
   FriBidiPropertyBlockLevel8_06E8,  /* 309A..309B */
 
-#define FriBidiPropertyBlockLevel7_FB1C 0xB0
+#define FriBidiPropertyBlockLevel7_FB1C 0xB2
 
   FriBidiPropertyBlockLevel8_200E,  /* FB1C..FB1D */
   FriBidiPropertyBlockLevel8_05C2,  /* FB1E..FB1F */
 
-#define FriBidiPropertyBlockLevel7_FB28 0xB2
+#define FriBidiPropertyBlockLevel7_FB28 0xB4
 
   FriBidiPropertyBlockLevel8_FB28,  /* FB28..FB29 */
-  FriBidiPropertyBlockLevel8_05C6,  /* FB2A..FB2B */
+  FriBidiPropertyBlockLevel8_05C8,  /* FB2A..FB2B */
 
-#define FriBidiPropertyBlockLevel7_FD3C 0xB4
+#define FriBidiPropertyBlockLevel7_FD3C 0xB6
 
   FriBidiPropertyBlockLevel8_0600,  /* FD3C..FD3D */
   FriBidiPropertyBlockLevel8_0026,  /* FD3E..FD3F */
 
-#define FriBidiPropertyBlockLevel7_FE50 0xB6
+#define FriBidiPropertyBlockLevel7_FDFC 0xB8
+
+  FriBidiPropertyBlockLevel8_FDFC,  /* FDFC..FDFD */
+  FriBidiPropertyBlockLevel8_0600,  /* FDFE..FDFF */
+
+#define FriBidiPropertyBlockLevel7_FE50 0xBA
 
   FriBidiPropertyBlockLevel8_003A,  /* FE50..FE51 */
   FriBidiPropertyBlockLevel8_FE52,  /* FE52..FE53 */
 
-#define FriBidiPropertyBlockLevel7_FE54 0xB8
+#define FriBidiPropertyBlockLevel7_FE54 0xBC
 
   FriBidiPropertyBlockLevel8_FE54,  /* FE54..FE55 */
   FriBidiPropertyBlockLevel8_0026,  /* FE56..FE57 */
 
-#define FriBidiPropertyBlockLevel7_FE68 0xBA
+#define FriBidiPropertyBlockLevel7_FE5C 0xBE
+
+  FriBidiPropertyBlockLevel8_0026,  /* FE5C..FE5D */
+  FriBidiPropertyBlockLevel8_0022,  /* FE5E..FE5F */
+
+#define FriBidiPropertyBlockLevel7_FE60 0xC0
+
+  FriBidiPropertyBlockLevel8_0026,  /* FE60..FE61 */
+  FriBidiPropertyBlockLevel8_207A,  /* FE62..FE63 */
+
+#define FriBidiPropertyBlockLevel7_FE68 0xC2
 
   FriBidiPropertyBlockLevel8_0022,  /* FE68..FE69 */
   FriBidiPropertyBlockLevel8_2034,  /* FE6A..FE6B */
 
-#define FriBidiPropertyBlockLevel7_FF00 0xBC
+#define FriBidiPropertyBlockLevel7_FF00 0xC4
 
   FriBidiPropertyBlockLevel8_005A,  /* FF00..FF01 */
   FriBidiPropertyBlockLevel8_0022,  /* FF02..FF03 */
 
-#define FriBidiPropertyBlockLevel7_FFE4 0xBE
+#define FriBidiPropertyBlockLevel7_FFE4 0xC6
 
   FriBidiPropertyBlockLevel8_0022,  /* FFE4..FFE5 */
   FriBidiPropertyBlockLevel8_212E,  /* FFE6..FFE7 */
 
-#define FriBidiPropertyBlockLevel7_FFF8 0xC0
+#define FriBidiPropertyBlockLevel7_FFF8 0xC8
 
   FriBidiPropertyBlockLevel8_FFF8,  /* FFF8..FFF9 */
-  FriBidiPropertyBlockLevel8_0000,  /* FFFA..FFFB */
+  FriBidiPropertyBlockLevel8_0026,  /* FFFA..FFFB */
 
-#define FriBidiPropertyBlockLevel7_1D170 0xC2
+#define FriBidiPropertyBlockLevel7_FFFC 0xCA
+
+  FriBidiPropertyBlockLevel8_0026,  /* FFFC..FFFD */
+  FriBidiPropertyBlockLevel8_0000,  /* FFFE..FFFF */
+
+#define FriBidiPropertyBlockLevel7_10A38 0xCC
+
+  FriBidiPropertyBlockLevel8_0300,  /* 10A38..10A39 */
+  FriBidiPropertyBlockLevel8_05C2,  /* 10A3A..10A3B */
+
+#define FriBidiPropertyBlockLevel7_10A3C 0xCE
+
+  FriBidiPropertyBlockLevel8_05C8,  /* 10A3C..10A3D */
+  FriBidiPropertyBlockLevel8_0590,  /* 10A3E..10A3F */
+
+#define FriBidiPropertyBlockLevel7_1D170 0xD0
 
   FriBidiPropertyBlockLevel8_0042,  /* 1D170..1D171 */
-  FriBidiPropertyBlockLevel8_FFF8,  /* 1D172..1D173 */
+  FriBidiPropertyBlockLevel8_1D172,  /* 1D172..1D173 */
 
-#define FriBidiPropertyBlockLevel7_1D178 0xC4
+#define FriBidiPropertyBlockLevel7_1D178 0xD2
 
   FriBidiPropertyBlockLevel8_0000,  /* 1D178..1D179 */
   FriBidiPropertyBlockLevel8_1D17A,  /* 1D17A..1D17B */
 
-#define FriBidiPropertyBlockLevel7_1D7CC 0xC6
+#define FriBidiPropertyBlockLevel7_1D240 0xD4
+
+  FriBidiPropertyBlockLevel8_0026,  /* 1D240..1D241 */
+  FriBidiPropertyBlockLevel8_0300,  /* 1D242..1D243 */
+
+#define FriBidiPropertyBlockLevel7_1D244 0xD6
+
+  FriBidiPropertyBlockLevel8_06E8,  /* 1D244..1D245 */
+  FriBidiPropertyBlockLevel8_0042,  /* 1D246..1D247 */
+
+#define FriBidiPropertyBlockLevel7_1D7CC 0xD8
 
   FriBidiPropertyBlockLevel8_0042,  /* 1D7CC..1D7CD */
   FriBidiPropertyBlockLevel8_0030,  /* 1D7CE..1D7CF */
 
-#define FriBidiPropertyBlockLevel7_E0000 0xC8
+#define FriBidiPropertyBlockLevel7_1FFFC 0xDA
 
-  FriBidiPropertyBlockLevel8_FFF8,  /* E0000..E0001 */
-  FriBidiPropertyBlockLevel8_0042,  /* E0002..E0003 */
+  FriBidiPropertyBlockLevel8_0042,  /* 1FFFC..1FFFD */
+  FriBidiPropertyBlockLevel8_0000,  /* 1FFFE..1FFFF */
 };
 
-static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
+static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*158] = {
 
 #define FriBidiPropertyBlockLevel6_0000 0x0
 
@@ -834,7 +891,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_00A0,  /* 00A0..00A3 */
   FriBidiPropertyBlockLevel7_0024,  /* 00A4..00A7 */
   FriBidiPropertyBlockLevel7_00A8,  /* 00A8..00AB */
-  FriBidiPropertyBlockLevel7_003C,  /* 00AC..00AF */
+  FriBidiPropertyBlockLevel7_00AC,  /* 00AC..00AF */
   FriBidiPropertyBlockLevel7_00B0,  /* 00B0..00B3 */
   FriBidiPropertyBlockLevel7_00B4,  /* 00B4..00B7 */
   FriBidiPropertyBlockLevel7_00B8,  /* 00B8..00BB */
@@ -889,11 +946,11 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 02E0..02E3 */
   FriBidiPropertyBlockLevel7_02E4,  /* 02E4..02E7 */
   FriBidiPropertyBlockLevel7_003C,  /* 02E8..02EB */
-  FriBidiPropertyBlockLevel7_02EC,  /* 02EC..02EF */
-  FriBidiPropertyBlockLevel7_0044,  /* 02F0..02F3 */
-  FriBidiPropertyBlockLevel7_0044,  /* 02F4..02F7 */
-  FriBidiPropertyBlockLevel7_0044,  /* 02F8..02FB */
-  FriBidiPropertyBlockLevel7_0044,  /* 02FC..02FF */
+  FriBidiPropertyBlockLevel7_00A8,  /* 02EC..02EF */
+  FriBidiPropertyBlockLevel7_003C,  /* 02F0..02F3 */
+  FriBidiPropertyBlockLevel7_003C,  /* 02F4..02F7 */
+  FriBidiPropertyBlockLevel7_003C,  /* 02F8..02FB */
+  FriBidiPropertyBlockLevel7_003C,  /* 02FC..02FF */
 
 #define FriBidiPropertyBlockLevel6_0300 0x58
 
@@ -906,29 +963,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0300,  /* 0318..031B */
   FriBidiPropertyBlockLevel7_0300,  /* 031C..031F */
 
-#define FriBidiPropertyBlockLevel6_0340 0x60
-
-  FriBidiPropertyBlockLevel7_0300,  /* 0340..0343 */
-  FriBidiPropertyBlockLevel7_0300,  /* 0344..0347 */
-  FriBidiPropertyBlockLevel7_0300,  /* 0348..034B */
-  FriBidiPropertyBlockLevel7_0300,  /* 034C..034F */
-  FriBidiPropertyBlockLevel7_0044,  /* 0350..0353 */
-  FriBidiPropertyBlockLevel7_0044,  /* 0354..0357 */
-  FriBidiPropertyBlockLevel7_0044,  /* 0358..035B */
-  FriBidiPropertyBlockLevel7_0044,  /* 035C..035F */
-
-#define FriBidiPropertyBlockLevel6_0360 0x68
+#define FriBidiPropertyBlockLevel6_0360 0x60
 
   FriBidiPropertyBlockLevel7_0300,  /* 0360..0363 */
   FriBidiPropertyBlockLevel7_0300,  /* 0364..0367 */
   FriBidiPropertyBlockLevel7_0300,  /* 0368..036B */
   FriBidiPropertyBlockLevel7_0300,  /* 036C..036F */
   FriBidiPropertyBlockLevel7_0044,  /* 0370..0373 */
-  FriBidiPropertyBlockLevel7_02EC,  /* 0374..0377 */
+  FriBidiPropertyBlockLevel7_0374,  /* 0374..0377 */
   FriBidiPropertyBlockLevel7_0044,  /* 0378..037B */
   FriBidiPropertyBlockLevel7_037C,  /* 037C..037F */
 
-#define FriBidiPropertyBlockLevel6_0380 0x70
+#define FriBidiPropertyBlockLevel6_0380 0x68
 
   FriBidiPropertyBlockLevel7_0044,  /* 0380..0383 */
   FriBidiPropertyBlockLevel7_00A8,  /* 0384..0387 */
@@ -939,7 +985,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0398..039B */
   FriBidiPropertyBlockLevel7_0044,  /* 039C..039F */
 
-#define FriBidiPropertyBlockLevel6_03E0 0x78
+#define FriBidiPropertyBlockLevel6_03E0 0x70
 
   FriBidiPropertyBlockLevel7_0044,  /* 03E0..03E3 */
   FriBidiPropertyBlockLevel7_0044,  /* 03E4..03E7 */
@@ -950,7 +996,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 03F8..03FB */
   FriBidiPropertyBlockLevel7_0044,  /* 03FC..03FF */
 
-#define FriBidiPropertyBlockLevel6_0480 0x80
+#define FriBidiPropertyBlockLevel6_0480 0x78
 
   FriBidiPropertyBlockLevel7_0480,  /* 0480..0483 */
   FriBidiPropertyBlockLevel7_0484,  /* 0484..0487 */
@@ -961,7 +1007,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0498..049B */
   FriBidiPropertyBlockLevel7_0044,  /* 049C..049F */
 
-#define FriBidiPropertyBlockLevel6_0580 0x88
+#define FriBidiPropertyBlockLevel6_0580 0x80
 
   FriBidiPropertyBlockLevel7_0044,  /* 0580..0583 */
   FriBidiPropertyBlockLevel7_0044,  /* 0584..0587 */
@@ -972,21 +1018,21 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0300,  /* 0598..059B */
   FriBidiPropertyBlockLevel7_0300,  /* 059C..059F */
 
-#define FriBidiPropertyBlockLevel6_05A0 0x90
+#define FriBidiPropertyBlockLevel6_05A0 0x88
 
-  FriBidiPropertyBlockLevel7_05A0,  /* 05A0..05A3 */
+  FriBidiPropertyBlockLevel7_0300,  /* 05A0..05A3 */
   FriBidiPropertyBlockLevel7_0300,  /* 05A4..05A7 */
   FriBidiPropertyBlockLevel7_0300,  /* 05A8..05AB */
   FriBidiPropertyBlockLevel7_0300,  /* 05AC..05AF */
   FriBidiPropertyBlockLevel7_0300,  /* 05B0..05B3 */
   FriBidiPropertyBlockLevel7_0300,  /* 05B4..05B7 */
-  FriBidiPropertyBlockLevel7_05A0,  /* 05B8..05BB */
-  FriBidiPropertyBlockLevel7_05A0,  /* 05BC..05BF */
+  FriBidiPropertyBlockLevel7_05B8,  /* 05B8..05BB */
+  FriBidiPropertyBlockLevel7_05B8,  /* 05BC..05BF */
 
-#define FriBidiPropertyBlockLevel6_05C0 0x98
+#define FriBidiPropertyBlockLevel6_05C0 0x90
 
   FriBidiPropertyBlockLevel7_05C0,  /* 05C0..05C3 */
-  FriBidiPropertyBlockLevel7_05C4,  /* 05C4..05C7 */
+  FriBidiPropertyBlockLevel7_05B8,  /* 05C4..05C7 */
   FriBidiPropertyBlockLevel7_05C8,  /* 05C8..05CB */
   FriBidiPropertyBlockLevel7_05C8,  /* 05CC..05CF */
   FriBidiPropertyBlockLevel7_05C8,  /* 05D0..05D3 */
@@ -994,7 +1040,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_05C8,  /* 05D8..05DB */
   FriBidiPropertyBlockLevel7_05C8,  /* 05DC..05DF */
 
-#define FriBidiPropertyBlockLevel6_05E0 0xA0
+#define FriBidiPropertyBlockLevel6_05E0 0x98
 
   FriBidiPropertyBlockLevel7_05C8,  /* 05E0..05E3 */
   FriBidiPropertyBlockLevel7_05C8,  /* 05E4..05E7 */
@@ -1005,18 +1051,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_05C8,  /* 05F8..05FB */
   FriBidiPropertyBlockLevel7_05C8,  /* 05FC..05FF */
 
-#define FriBidiPropertyBlockLevel6_0600 0xA8
+#define FriBidiPropertyBlockLevel6_0600 0xA0
 
   FriBidiPropertyBlockLevel7_0600,  /* 0600..0603 */
   FriBidiPropertyBlockLevel7_0600,  /* 0604..0607 */
   FriBidiPropertyBlockLevel7_0600,  /* 0608..060B */
   FriBidiPropertyBlockLevel7_060C,  /* 060C..060F */
-  FriBidiPropertyBlockLevel7_0600,  /* 0610..0613 */
-  FriBidiPropertyBlockLevel7_0600,  /* 0614..0617 */
+  FriBidiPropertyBlockLevel7_0300,  /* 0610..0613 */
+  FriBidiPropertyBlockLevel7_0614,  /* 0614..0617 */
   FriBidiPropertyBlockLevel7_0600,  /* 0618..061B */
   FriBidiPropertyBlockLevel7_0600,  /* 061C..061F */
 
-#define FriBidiPropertyBlockLevel6_0620 0xB0
+#define FriBidiPropertyBlockLevel6_0620 0xA8
 
   FriBidiPropertyBlockLevel7_0600,  /* 0620..0623 */
   FriBidiPropertyBlockLevel7_0600,  /* 0624..0627 */
@@ -1027,18 +1073,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0600,  /* 0638..063B */
   FriBidiPropertyBlockLevel7_0600,  /* 063C..063F */
 
-#define FriBidiPropertyBlockLevel6_0640 0xB8
+#define FriBidiPropertyBlockLevel6_0640 0xB0
 
   FriBidiPropertyBlockLevel7_0600,  /* 0640..0643 */
   FriBidiPropertyBlockLevel7_0600,  /* 0644..0647 */
   FriBidiPropertyBlockLevel7_0648,  /* 0648..064B */
   FriBidiPropertyBlockLevel7_0300,  /* 064C..064F */
   FriBidiPropertyBlockLevel7_0300,  /* 0650..0653 */
-  FriBidiPropertyBlockLevel7_0654,  /* 0654..0657 */
-  FriBidiPropertyBlockLevel7_0600,  /* 0658..065B */
-  FriBidiPropertyBlockLevel7_0600,  /* 065C..065F */
+  FriBidiPropertyBlockLevel7_0300,  /* 0654..0657 */
+  FriBidiPropertyBlockLevel7_0300,  /* 0658..065B */
+  FriBidiPropertyBlockLevel7_065C,  /* 065C..065F */
 
-#define FriBidiPropertyBlockLevel6_0660 0xC0
+#define FriBidiPropertyBlockLevel6_0660 0xB8
 
   FriBidiPropertyBlockLevel7_0660,  /* 0660..0663 */
   FriBidiPropertyBlockLevel7_0660,  /* 0664..0667 */
@@ -1049,7 +1095,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0600,  /* 0678..067B */
   FriBidiPropertyBlockLevel7_0600,  /* 067C..067F */
 
-#define FriBidiPropertyBlockLevel6_06C0 0xC8
+#define FriBidiPropertyBlockLevel6_06C0 0xC0
 
   FriBidiPropertyBlockLevel7_0600,  /* 06C0..06C3 */
   FriBidiPropertyBlockLevel7_0600,  /* 06C4..06C7 */
@@ -1060,18 +1106,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0300,  /* 06D8..06DB */
   FriBidiPropertyBlockLevel7_06DC,  /* 06DC..06DF */
 
-#define FriBidiPropertyBlockLevel6_06E0 0xD0
+#define FriBidiPropertyBlockLevel6_06E0 0xC8
 
   FriBidiPropertyBlockLevel7_0300,  /* 06E0..06E3 */
   FriBidiPropertyBlockLevel7_06E4,  /* 06E4..06E7 */
   FriBidiPropertyBlockLevel7_06E8,  /* 06E8..06EB */
-  FriBidiPropertyBlockLevel7_0654,  /* 06EC..06EF */
+  FriBidiPropertyBlockLevel7_0614,  /* 06EC..06EF */
   FriBidiPropertyBlockLevel7_0030,  /* 06F0..06F3 */
   FriBidiPropertyBlockLevel7_0030,  /* 06F4..06F7 */
   FriBidiPropertyBlockLevel7_06F8,  /* 06F8..06FB */
   FriBidiPropertyBlockLevel7_0600,  /* 06FC..06FF */
 
-#define FriBidiPropertyBlockLevel6_0700 0xD8
+#define FriBidiPropertyBlockLevel6_0700 0xD0
 
   FriBidiPropertyBlockLevel7_0600,  /* 0700..0703 */
   FriBidiPropertyBlockLevel7_0600,  /* 0704..0707 */
@@ -1082,7 +1128,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0600,  /* 0718..071B */
   FriBidiPropertyBlockLevel7_0600,  /* 071C..071F */
 
-#define FriBidiPropertyBlockLevel6_0720 0xE0
+#define FriBidiPropertyBlockLevel6_0720 0xD8
 
   FriBidiPropertyBlockLevel7_0600,  /* 0720..0723 */
   FriBidiPropertyBlockLevel7_0600,  /* 0724..0727 */
@@ -1093,18 +1139,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0300,  /* 0738..073B */
   FriBidiPropertyBlockLevel7_0300,  /* 073C..073F */
 
-#define FriBidiPropertyBlockLevel6_0740 0xE8
+#define FriBidiPropertyBlockLevel6_0740 0xE0
 
   FriBidiPropertyBlockLevel7_0300,  /* 0740..0743 */
   FriBidiPropertyBlockLevel7_0300,  /* 0744..0747 */
-  FriBidiPropertyBlockLevel7_0748,  /* 0748..074B */
+  FriBidiPropertyBlockLevel7_065C,  /* 0748..074B */
   FriBidiPropertyBlockLevel7_0600,  /* 074C..074F */
   FriBidiPropertyBlockLevel7_0600,  /* 0750..0753 */
   FriBidiPropertyBlockLevel7_0600,  /* 0754..0757 */
   FriBidiPropertyBlockLevel7_0600,  /* 0758..075B */
   FriBidiPropertyBlockLevel7_0600,  /* 075C..075F */
 
-#define FriBidiPropertyBlockLevel6_07A0 0xF0
+#define FriBidiPropertyBlockLevel6_07A0 0xE8
 
   FriBidiPropertyBlockLevel7_0600,  /* 07A0..07A3 */
   FriBidiPropertyBlockLevel7_06D4,  /* 07A4..07A7 */
@@ -1115,7 +1161,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0600,  /* 07B8..07BB */
   FriBidiPropertyBlockLevel7_0600,  /* 07BC..07BF */
 
-#define FriBidiPropertyBlockLevel6_0900 0xF8
+#define FriBidiPropertyBlockLevel6_0900 0xF0
 
   FriBidiPropertyBlockLevel7_0900,  /* 0900..0903 */
   FriBidiPropertyBlockLevel7_0044,  /* 0904..0907 */
@@ -1126,7 +1172,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0918..091B */
   FriBidiPropertyBlockLevel7_0044,  /* 091C..091F */
 
-#define FriBidiPropertyBlockLevel6_0920 0x100
+#define FriBidiPropertyBlockLevel6_0920 0xF8
 
   FriBidiPropertyBlockLevel7_0044,  /* 0920..0923 */
   FriBidiPropertyBlockLevel7_0044,  /* 0924..0927 */
@@ -1137,7 +1183,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0938..093B */
   FriBidiPropertyBlockLevel7_093C,  /* 093C..093F */
 
-#define FriBidiPropertyBlockLevel6_0940 0x108
+#define FriBidiPropertyBlockLevel6_0940 0x100
 
   FriBidiPropertyBlockLevel7_0940,  /* 0940..0943 */
   FriBidiPropertyBlockLevel7_0300,  /* 0944..0947 */
@@ -1148,7 +1194,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0958..095B */
   FriBidiPropertyBlockLevel7_0044,  /* 095C..095F */
 
-#define FriBidiPropertyBlockLevel6_0960 0x110
+#define FriBidiPropertyBlockLevel6_0960 0x108
 
   FriBidiPropertyBlockLevel7_0960,  /* 0960..0963 */
   FriBidiPropertyBlockLevel7_0044,  /* 0964..0967 */
@@ -1159,7 +1205,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0978..097B */
   FriBidiPropertyBlockLevel7_0044,  /* 097C..097F */
 
-#define FriBidiPropertyBlockLevel6_0980 0x118
+#define FriBidiPropertyBlockLevel6_0980 0x110
 
   FriBidiPropertyBlockLevel7_094C,  /* 0980..0983 */
   FriBidiPropertyBlockLevel7_0044,  /* 0984..0987 */
@@ -1170,7 +1216,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0998..099B */
   FriBidiPropertyBlockLevel7_0044,  /* 099C..099F */
 
-#define FriBidiPropertyBlockLevel6_09C0 0x120
+#define FriBidiPropertyBlockLevel6_09C0 0x118
 
   FriBidiPropertyBlockLevel7_0940,  /* 09C0..09C3 */
   FriBidiPropertyBlockLevel7_093C,  /* 09C4..09C7 */
@@ -1181,7 +1227,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 09D8..09DB */
   FriBidiPropertyBlockLevel7_0044,  /* 09DC..09DF */
 
-#define FriBidiPropertyBlockLevel6_09E0 0x128
+#define FriBidiPropertyBlockLevel6_09E0 0x120
 
   FriBidiPropertyBlockLevel7_0960,  /* 09E0..09E3 */
   FriBidiPropertyBlockLevel7_0044,  /* 09E4..09E7 */
@@ -1192,18 +1238,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 09F8..09FB */
   FriBidiPropertyBlockLevel7_0044,  /* 09FC..09FF */
 
-#define FriBidiPropertyBlockLevel6_0A00 0x130
-
-  FriBidiPropertyBlockLevel7_0A00,  /* 0A00..0A03 */
-  FriBidiPropertyBlockLevel7_0044,  /* 0A04..0A07 */
-  FriBidiPropertyBlockLevel7_0044,  /* 0A08..0A0B */
-  FriBidiPropertyBlockLevel7_0044,  /* 0A0C..0A0F */
-  FriBidiPropertyBlockLevel7_0044,  /* 0A10..0A13 */
-  FriBidiPropertyBlockLevel7_0044,  /* 0A14..0A17 */
-  FriBidiPropertyBlockLevel7_0044,  /* 0A18..0A1B */
-  FriBidiPropertyBlockLevel7_0044,  /* 0A1C..0A1F */
-
-#define FriBidiPropertyBlockLevel6_0A40 0x138
+#define FriBidiPropertyBlockLevel6_0A40 0x128
 
   FriBidiPropertyBlockLevel7_0900,  /* 0A40..0A43 */
   FriBidiPropertyBlockLevel7_0480,  /* 0A44..0A47 */
@@ -1214,7 +1249,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0A58..0A5B */
   FriBidiPropertyBlockLevel7_0044,  /* 0A5C..0A5F */
 
-#define FriBidiPropertyBlockLevel6_0A60 0x140
+#define FriBidiPropertyBlockLevel6_0A60 0x130
 
   FriBidiPropertyBlockLevel7_0044,  /* 0A60..0A63 */
   FriBidiPropertyBlockLevel7_0044,  /* 0A64..0A67 */
@@ -1225,7 +1260,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0A78..0A7B */
   FriBidiPropertyBlockLevel7_0044,  /* 0A7C..0A7F */
 
-#define FriBidiPropertyBlockLevel6_0AC0 0x148
+#define FriBidiPropertyBlockLevel6_0AC0 0x138
 
   FriBidiPropertyBlockLevel7_0940,  /* 0AC0..0AC3 */
   FriBidiPropertyBlockLevel7_0AC4,  /* 0AC4..0AC7 */
@@ -1236,7 +1271,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0AD8..0ADB */
   FriBidiPropertyBlockLevel7_0044,  /* 0ADC..0ADF */
 
-#define FriBidiPropertyBlockLevel6_0B20 0x150
+#define FriBidiPropertyBlockLevel6_0AE0 0x140
+
+  FriBidiPropertyBlockLevel7_0960,  /* 0AE0..0AE3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 0AE4..0AE7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 0AE8..0AEB */
+  FriBidiPropertyBlockLevel7_0044,  /* 0AEC..0AEF */
+  FriBidiPropertyBlockLevel7_0AF0,  /* 0AF0..0AF3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 0AF4..0AF7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 0AF8..0AFB */
+  FriBidiPropertyBlockLevel7_0044,  /* 0AFC..0AFF */
+
+#define FriBidiPropertyBlockLevel6_0B20 0x148
 
   FriBidiPropertyBlockLevel7_0044,  /* 0B20..0B23 */
   FriBidiPropertyBlockLevel7_0044,  /* 0B24..0B27 */
@@ -1247,16 +1293,27 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0B38..0B3B */
   FriBidiPropertyBlockLevel7_0A48,  /* 0B3C..0B3F */
 
-#define FriBidiPropertyBlockLevel6_0B40 0x158
+#define FriBidiPropertyBlockLevel6_0B40 0x150
 
   FriBidiPropertyBlockLevel7_0940,  /* 0B40..0B43 */
   FriBidiPropertyBlockLevel7_0044,  /* 0B44..0B47 */
   FriBidiPropertyBlockLevel7_0044,  /* 0B48..0B4B */
   FriBidiPropertyBlockLevel7_094C,  /* 0B4C..0B4F */
   FriBidiPropertyBlockLevel7_0044,  /* 0B50..0B53 */
-  FriBidiPropertyBlockLevel7_0A00,  /* 0B54..0B57 */
+  FriBidiPropertyBlockLevel7_0B54,  /* 0B54..0B57 */
   FriBidiPropertyBlockLevel7_0044,  /* 0B58..0B5B */
   FriBidiPropertyBlockLevel7_0044,  /* 0B5C..0B5F */
+
+#define FriBidiPropertyBlockLevel6_0B80 0x158
+
+  FriBidiPropertyBlockLevel7_0B54,  /* 0B80..0B83 */
+  FriBidiPropertyBlockLevel7_0044,  /* 0B84..0B87 */
+  FriBidiPropertyBlockLevel7_0044,  /* 0B88..0B8B */
+  FriBidiPropertyBlockLevel7_0044,  /* 0B8C..0B8F */
+  FriBidiPropertyBlockLevel7_0044,  /* 0B90..0B93 */
+  FriBidiPropertyBlockLevel7_0044,  /* 0B94..0B97 */
+  FriBidiPropertyBlockLevel7_0044,  /* 0B98..0B9B */
+  FriBidiPropertyBlockLevel7_0044,  /* 0B9C..0B9F */
 
 #define FriBidiPropertyBlockLevel6_0BC0 0x160
 
@@ -1269,7 +1326,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0BD8..0BDB */
   FriBidiPropertyBlockLevel7_0044,  /* 0BDC..0BDF */
 
-#define FriBidiPropertyBlockLevel6_0C20 0x168
+#define FriBidiPropertyBlockLevel6_0BE0 0x168
+
+  FriBidiPropertyBlockLevel7_0044,  /* 0BE0..0BE3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 0BE4..0BE7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 0BE8..0BEB */
+  FriBidiPropertyBlockLevel7_0044,  /* 0BEC..0BEF */
+  FriBidiPropertyBlockLevel7_0058,  /* 0BF0..0BF3 */
+  FriBidiPropertyBlockLevel7_003C,  /* 0BF4..0BF7 */
+  FriBidiPropertyBlockLevel7_0BF8,  /* 0BF8..0BFB */
+  FriBidiPropertyBlockLevel7_0044,  /* 0BFC..0BFF */
+
+#define FriBidiPropertyBlockLevel6_0C20 0x170
 
   FriBidiPropertyBlockLevel7_0044,  /* 0C20..0C23 */
   FriBidiPropertyBlockLevel7_0044,  /* 0C24..0C27 */
@@ -1280,7 +1348,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0C38..0C3B */
   FriBidiPropertyBlockLevel7_0960,  /* 0C3C..0C3F */
 
-#define FriBidiPropertyBlockLevel6_0C40 0x170
+#define FriBidiPropertyBlockLevel6_0C40 0x178
 
   FriBidiPropertyBlockLevel7_093C,  /* 0C40..0C43 */
   FriBidiPropertyBlockLevel7_0960,  /* 0C44..0C47 */
@@ -1291,21 +1359,10 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0C58..0C5B */
   FriBidiPropertyBlockLevel7_0044,  /* 0C5C..0C5F */
 
-#define FriBidiPropertyBlockLevel6_0CA0 0x178
-
-  FriBidiPropertyBlockLevel7_0044,  /* 0CA0..0CA3 */
-  FriBidiPropertyBlockLevel7_0044,  /* 0CA4..0CA7 */
-  FriBidiPropertyBlockLevel7_0044,  /* 0CA8..0CAB */
-  FriBidiPropertyBlockLevel7_0044,  /* 0CAC..0CAF */
-  FriBidiPropertyBlockLevel7_0044,  /* 0CB0..0CB3 */
-  FriBidiPropertyBlockLevel7_0044,  /* 0CB4..0CB7 */
-  FriBidiPropertyBlockLevel7_0044,  /* 0CB8..0CBB */
-  FriBidiPropertyBlockLevel7_0480,  /* 0CBC..0CBF */
-
 #define FriBidiPropertyBlockLevel6_0CC0 0x180
 
   FriBidiPropertyBlockLevel7_0044,  /* 0CC0..0CC3 */
-  FriBidiPropertyBlockLevel7_0A00,  /* 0CC4..0CC7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 0CC4..0CC7 */
   FriBidiPropertyBlockLevel7_0044,  /* 0CC8..0CCB */
   FriBidiPropertyBlockLevel7_0488,  /* 0CCC..0CCF */
   FriBidiPropertyBlockLevel7_0044,  /* 0CD0..0CD3 */
@@ -1328,7 +1385,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
 
   FriBidiPropertyBlockLevel7_0044,  /* 0DC0..0DC3 */
   FriBidiPropertyBlockLevel7_0044,  /* 0DC4..0DC7 */
-  FriBidiPropertyBlockLevel7_0A00,  /* 0DC8..0DCB */
+  FriBidiPropertyBlockLevel7_0B54,  /* 0DC8..0DCB */
   FriBidiPropertyBlockLevel7_0044,  /* 0DCC..0DCF */
   FriBidiPropertyBlockLevel7_0960,  /* 0DD0..0DD3 */
   FriBidiPropertyBlockLevel7_0DD4,  /* 0DD4..0DD7 */
@@ -1399,7 +1456,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 0F30..0F33 */
   FriBidiPropertyBlockLevel7_0F34,  /* 0F34..0F37 */
   FriBidiPropertyBlockLevel7_0F38,  /* 0F38..0F3B */
-  FriBidiPropertyBlockLevel7_02EC,  /* 0F3C..0F3F */
+  FriBidiPropertyBlockLevel7_0374,  /* 0F3C..0F3F */
 
 #define FriBidiPropertyBlockLevel6_0F60 0x1C8
 
@@ -1437,7 +1494,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
 #define FriBidiPropertyBlockLevel6_0FC0 0x1E0
 
   FriBidiPropertyBlockLevel7_0044,  /* 0FC0..0FC3 */
-  FriBidiPropertyBlockLevel7_0A00,  /* 0FC4..0FC7 */
+  FriBidiPropertyBlockLevel7_0B54,  /* 0FC4..0FC7 */
   FriBidiPropertyBlockLevel7_0044,  /* 0FC8..0FCB */
   FriBidiPropertyBlockLevel7_0044,  /* 0FCC..0FCF */
   FriBidiPropertyBlockLevel7_0044,  /* 0FD0..0FD3 */
@@ -1456,7 +1513,29 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_094C,  /* 1038..103B */
   FriBidiPropertyBlockLevel7_0044,  /* 103C..103F */
 
-#define FriBidiPropertyBlockLevel6_1680 0x1F0
+#define FriBidiPropertyBlockLevel6_1340 0x1F0
+
+  FriBidiPropertyBlockLevel7_0044,  /* 1340..1343 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1344..1347 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1348..134B */
+  FriBidiPropertyBlockLevel7_0044,  /* 134C..134F */
+  FriBidiPropertyBlockLevel7_0044,  /* 1350..1353 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1354..1357 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1358..135B */
+  FriBidiPropertyBlockLevel7_0480,  /* 135C..135F */
+
+#define FriBidiPropertyBlockLevel6_1380 0x1F8
+
+  FriBidiPropertyBlockLevel7_0044,  /* 1380..1383 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1384..1387 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1388..138B */
+  FriBidiPropertyBlockLevel7_0044,  /* 138C..138F */
+  FriBidiPropertyBlockLevel7_003C,  /* 1390..1393 */
+  FriBidiPropertyBlockLevel7_003C,  /* 1394..1397 */
+  FriBidiPropertyBlockLevel7_0374,  /* 1398..139B */
+  FriBidiPropertyBlockLevel7_0044,  /* 139C..139F */
+
+#define FriBidiPropertyBlockLevel6_1680 0x200
 
   FriBidiPropertyBlockLevel7_1680,  /* 1680..1683 */
   FriBidiPropertyBlockLevel7_0044,  /* 1684..1687 */
@@ -1467,7 +1546,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0058,  /* 1698..169B */
   FriBidiPropertyBlockLevel7_0040,  /* 169C..169F */
 
-#define FriBidiPropertyBlockLevel6_1700 0x1F8
+#define FriBidiPropertyBlockLevel6_1700 0x208
 
   FriBidiPropertyBlockLevel7_0044,  /* 1700..1703 */
   FriBidiPropertyBlockLevel7_0044,  /* 1704..1707 */
@@ -1478,7 +1557,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 1718..171B */
   FriBidiPropertyBlockLevel7_0044,  /* 171C..171F */
 
-#define FriBidiPropertyBlockLevel6_1740 0x200
+#define FriBidiPropertyBlockLevel6_1740 0x210
 
   FriBidiPropertyBlockLevel7_0044,  /* 1740..1743 */
   FriBidiPropertyBlockLevel7_0044,  /* 1744..1747 */
@@ -1489,7 +1568,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 1758..175B */
   FriBidiPropertyBlockLevel7_0044,  /* 175C..175F */
 
-#define FriBidiPropertyBlockLevel6_17A0 0x208
+#define FriBidiPropertyBlockLevel6_17A0 0x218
 
   FriBidiPropertyBlockLevel7_0044,  /* 17A0..17A3 */
   FriBidiPropertyBlockLevel7_0044,  /* 17A4..17A7 */
@@ -1500,18 +1579,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0300,  /* 17B8..17BB */
   FriBidiPropertyBlockLevel7_0488,  /* 17BC..17BF */
 
-#define FriBidiPropertyBlockLevel6_17C0 0x210
+#define FriBidiPropertyBlockLevel6_17C0 0x220
 
   FriBidiPropertyBlockLevel7_0044,  /* 17C0..17C3 */
-  FriBidiPropertyBlockLevel7_0A00,  /* 17C4..17C7 */
+  FriBidiPropertyBlockLevel7_0B54,  /* 17C4..17C7 */
   FriBidiPropertyBlockLevel7_0940,  /* 17C8..17CB */
   FriBidiPropertyBlockLevel7_0300,  /* 17CC..17CF */
   FriBidiPropertyBlockLevel7_0300,  /* 17D0..17D3 */
   FriBidiPropertyBlockLevel7_0044,  /* 17D4..17D7 */
   FriBidiPropertyBlockLevel7_0E3C,  /* 17D8..17DB */
-  FriBidiPropertyBlockLevel7_0044,  /* 17DC..17DF */
+  FriBidiPropertyBlockLevel7_094C,  /* 17DC..17DF */
 
-#define FriBidiPropertyBlockLevel6_1800 0x218
+#define FriBidiPropertyBlockLevel6_1800 0x228
 
   FriBidiPropertyBlockLevel7_003C,  /* 1800..1803 */
   FriBidiPropertyBlockLevel7_003C,  /* 1804..1807 */
@@ -1522,7 +1601,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 1818..181B */
   FriBidiPropertyBlockLevel7_0044,  /* 181C..181F */
 
-#define FriBidiPropertyBlockLevel6_18A0 0x220
+#define FriBidiPropertyBlockLevel6_18A0 0x230
 
   FriBidiPropertyBlockLevel7_0044,  /* 18A0..18A3 */
   FriBidiPropertyBlockLevel7_0044,  /* 18A4..18A7 */
@@ -1533,7 +1612,73 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 18B8..18BB */
   FriBidiPropertyBlockLevel7_0044,  /* 18BC..18BF */
 
-#define FriBidiPropertyBlockLevel6_1FA0 0x228
+#define FriBidiPropertyBlockLevel6_1920 0x238
+
+  FriBidiPropertyBlockLevel7_0484,  /* 1920..1923 */
+  FriBidiPropertyBlockLevel7_0480,  /* 1924..1927 */
+  FriBidiPropertyBlockLevel7_0300,  /* 1928..192B */
+  FriBidiPropertyBlockLevel7_0044,  /* 192C..192F */
+  FriBidiPropertyBlockLevel7_0B54,  /* 1930..1933 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1934..1937 */
+  FriBidiPropertyBlockLevel7_0940,  /* 1938..193B */
+  FriBidiPropertyBlockLevel7_0044,  /* 193C..193F */
+
+#define FriBidiPropertyBlockLevel6_1940 0x240
+
+  FriBidiPropertyBlockLevel7_0040,  /* 1940..1943 */
+  FriBidiPropertyBlockLevel7_0374,  /* 1944..1947 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1948..194B */
+  FriBidiPropertyBlockLevel7_0044,  /* 194C..194F */
+  FriBidiPropertyBlockLevel7_0044,  /* 1950..1953 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1954..1957 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1958..195B */
+  FriBidiPropertyBlockLevel7_0044,  /* 195C..195F */
+
+#define FriBidiPropertyBlockLevel6_19C0 0x248
+
+  FriBidiPropertyBlockLevel7_0044,  /* 19C0..19C3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 19C4..19C7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 19C8..19CB */
+  FriBidiPropertyBlockLevel7_0044,  /* 19CC..19CF */
+  FriBidiPropertyBlockLevel7_0044,  /* 19D0..19D3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 19D4..19D7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 19D8..19DB */
+  FriBidiPropertyBlockLevel7_02C0,  /* 19DC..19DF */
+
+#define FriBidiPropertyBlockLevel6_19E0 0x250
+
+  FriBidiPropertyBlockLevel7_003C,  /* 19E0..19E3 */
+  FriBidiPropertyBlockLevel7_003C,  /* 19E4..19E7 */
+  FriBidiPropertyBlockLevel7_003C,  /* 19E8..19EB */
+  FriBidiPropertyBlockLevel7_003C,  /* 19EC..19EF */
+  FriBidiPropertyBlockLevel7_003C,  /* 19F0..19F3 */
+  FriBidiPropertyBlockLevel7_003C,  /* 19F4..19F7 */
+  FriBidiPropertyBlockLevel7_003C,  /* 19F8..19FB */
+  FriBidiPropertyBlockLevel7_003C,  /* 19FC..19FF */
+
+#define FriBidiPropertyBlockLevel6_1A00 0x258
+
+  FriBidiPropertyBlockLevel7_0044,  /* 1A00..1A03 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1A04..1A07 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1A08..1A0B */
+  FriBidiPropertyBlockLevel7_0044,  /* 1A0C..1A0F */
+  FriBidiPropertyBlockLevel7_0044,  /* 1A10..1A13 */
+  FriBidiPropertyBlockLevel7_0480,  /* 1A14..1A17 */
+  FriBidiPropertyBlockLevel7_093C,  /* 1A18..1A1B */
+  FriBidiPropertyBlockLevel7_0044,  /* 1A1C..1A1F */
+
+#define FriBidiPropertyBlockLevel6_1DC0 0x260
+
+  FriBidiPropertyBlockLevel7_0300,  /* 1DC0..1DC3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1DC4..1DC7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1DC8..1DCB */
+  FriBidiPropertyBlockLevel7_0044,  /* 1DCC..1DCF */
+  FriBidiPropertyBlockLevel7_0044,  /* 1DD0..1DD3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1DD4..1DD7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1DD8..1DDB */
+  FriBidiPropertyBlockLevel7_0044,  /* 1DDC..1DDF */
+
+#define FriBidiPropertyBlockLevel6_1FA0 0x268
 
   FriBidiPropertyBlockLevel7_0044,  /* 1FA0..1FA3 */
   FriBidiPropertyBlockLevel7_0044,  /* 1FA4..1FA7 */
@@ -1544,9 +1689,9 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 1FB8..1FBB */
   FriBidiPropertyBlockLevel7_1FBC,  /* 1FBC..1FBF */
 
-#define FriBidiPropertyBlockLevel6_1FC0 0x230
+#define FriBidiPropertyBlockLevel6_1FC0 0x270
 
-  FriBidiPropertyBlockLevel7_02EC,  /* 1FC0..1FC3 */
+  FriBidiPropertyBlockLevel7_0374,  /* 1FC0..1FC3 */
   FriBidiPropertyBlockLevel7_0044,  /* 1FC4..1FC7 */
   FriBidiPropertyBlockLevel7_0044,  /* 1FC8..1FCB */
   FriBidiPropertyBlockLevel7_02E4,  /* 1FCC..1FCF */
@@ -1555,7 +1700,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 1FD8..1FDB */
   FriBidiPropertyBlockLevel7_02E4,  /* 1FDC..1FDF */
 
-#define FriBidiPropertyBlockLevel6_1FE0 0x238
+#define FriBidiPropertyBlockLevel6_1FE0 0x278
 
   FriBidiPropertyBlockLevel7_0044,  /* 1FE0..1FE3 */
   FriBidiPropertyBlockLevel7_0044,  /* 1FE4..1FE7 */
@@ -1566,7 +1711,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 1FF8..1FFB */
   FriBidiPropertyBlockLevel7_02B8,  /* 1FFC..1FFF */
 
-#define FriBidiPropertyBlockLevel6_2000 0x240
+#define FriBidiPropertyBlockLevel6_2000 0x280
 
   FriBidiPropertyBlockLevel7_2000,  /* 2000..2003 */
   FriBidiPropertyBlockLevel7_2000,  /* 2004..2007 */
@@ -1577,7 +1722,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* 2018..201B */
   FriBidiPropertyBlockLevel7_003C,  /* 201C..201F */
 
-#define FriBidiPropertyBlockLevel6_2020 0x248
+#define FriBidiPropertyBlockLevel6_2020 0x288
 
   FriBidiPropertyBlockLevel7_003C,  /* 2020..2023 */
   FriBidiPropertyBlockLevel7_003C,  /* 2024..2027 */
@@ -1588,51 +1733,51 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* 2038..203B */
   FriBidiPropertyBlockLevel7_003C,  /* 203C..203F */
 
-#define FriBidiPropertyBlockLevel6_2040 0x250
+#define FriBidiPropertyBlockLevel6_2040 0x290
 
   FriBidiPropertyBlockLevel7_003C,  /* 2040..2043 */
-  FriBidiPropertyBlockLevel7_003C,  /* 2044..2047 */
+  FriBidiPropertyBlockLevel7_2044,  /* 2044..2047 */
   FriBidiPropertyBlockLevel7_003C,  /* 2048..204B */
   FriBidiPropertyBlockLevel7_003C,  /* 204C..204F */
-  FriBidiPropertyBlockLevel7_2050,  /* 2050..2053 */
-  FriBidiPropertyBlockLevel7_0058,  /* 2054..2057 */
-  FriBidiPropertyBlockLevel7_0044,  /* 2058..205B */
+  FriBidiPropertyBlockLevel7_003C,  /* 2050..2053 */
+  FriBidiPropertyBlockLevel7_003C,  /* 2054..2057 */
+  FriBidiPropertyBlockLevel7_003C,  /* 2058..205B */
   FriBidiPropertyBlockLevel7_205C,  /* 205C..205F */
 
-#define FriBidiPropertyBlockLevel6_2060 0x258
+#define FriBidiPropertyBlockLevel6_2060 0x298
 
   FriBidiPropertyBlockLevel7_0000,  /* 2060..2063 */
-  FriBidiPropertyBlockLevel7_0044,  /* 2064..2067 */
-  FriBidiPropertyBlockLevel7_2068,  /* 2068..206B */
+  FriBidiPropertyBlockLevel7_0000,  /* 2064..2067 */
+  FriBidiPropertyBlockLevel7_0000,  /* 2068..206B */
   FriBidiPropertyBlockLevel7_0000,  /* 206C..206F */
   FriBidiPropertyBlockLevel7_2070,  /* 2070..2073 */
   FriBidiPropertyBlockLevel7_0030,  /* 2074..2077 */
   FriBidiPropertyBlockLevel7_2078,  /* 2078..207B */
-  FriBidiPropertyBlockLevel7_2050,  /* 207C..207F */
+  FriBidiPropertyBlockLevel7_207C,  /* 207C..207F */
 
-#define FriBidiPropertyBlockLevel6_2080 0x260
+#define FriBidiPropertyBlockLevel6_2080 0x2A0
 
   FriBidiPropertyBlockLevel7_0030,  /* 2080..2083 */
   FriBidiPropertyBlockLevel7_0030,  /* 2084..2087 */
   FriBidiPropertyBlockLevel7_2078,  /* 2088..208B */
-  FriBidiPropertyBlockLevel7_2050,  /* 208C..208F */
+  FriBidiPropertyBlockLevel7_207C,  /* 208C..208F */
   FriBidiPropertyBlockLevel7_0044,  /* 2090..2093 */
   FriBidiPropertyBlockLevel7_0044,  /* 2094..2097 */
   FriBidiPropertyBlockLevel7_0044,  /* 2098..209B */
   FriBidiPropertyBlockLevel7_0044,  /* 209C..209F */
 
-#define FriBidiPropertyBlockLevel6_20A0 0x268
+#define FriBidiPropertyBlockLevel6_20A0 0x2A8
 
   FriBidiPropertyBlockLevel7_2030,  /* 20A0..20A3 */
   FriBidiPropertyBlockLevel7_2030,  /* 20A4..20A7 */
   FriBidiPropertyBlockLevel7_2030,  /* 20A8..20AB */
   FriBidiPropertyBlockLevel7_2030,  /* 20AC..20AF */
-  FriBidiPropertyBlockLevel7_20B0,  /* 20B0..20B3 */
-  FriBidiPropertyBlockLevel7_0044,  /* 20B4..20B7 */
+  FriBidiPropertyBlockLevel7_2030,  /* 20B0..20B3 */
+  FriBidiPropertyBlockLevel7_20B4,  /* 20B4..20B7 */
   FriBidiPropertyBlockLevel7_0044,  /* 20B8..20BB */
   FriBidiPropertyBlockLevel7_0044,  /* 20BC..20BF */
 
-#define FriBidiPropertyBlockLevel6_20C0 0x270
+#define FriBidiPropertyBlockLevel6_20C0 0x2B0
 
   FriBidiPropertyBlockLevel7_0044,  /* 20C0..20C3 */
   FriBidiPropertyBlockLevel7_0044,  /* 20C4..20C7 */
@@ -1643,29 +1788,29 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0300,  /* 20D8..20DB */
   FriBidiPropertyBlockLevel7_0300,  /* 20DC..20DF */
 
-#define FriBidiPropertyBlockLevel6_20E0 0x278
+#define FriBidiPropertyBlockLevel6_20E0 0x2B8
 
   FriBidiPropertyBlockLevel7_0300,  /* 20E0..20E3 */
   FriBidiPropertyBlockLevel7_0300,  /* 20E4..20E7 */
-  FriBidiPropertyBlockLevel7_0484,  /* 20E8..20EB */
+  FriBidiPropertyBlockLevel7_0300,  /* 20E8..20EB */
   FriBidiPropertyBlockLevel7_0044,  /* 20EC..20EF */
   FriBidiPropertyBlockLevel7_0044,  /* 20F0..20F3 */
   FriBidiPropertyBlockLevel7_0044,  /* 20F4..20F7 */
   FriBidiPropertyBlockLevel7_0044,  /* 20F8..20FB */
   FriBidiPropertyBlockLevel7_0044,  /* 20FC..20FF */
 
-#define FriBidiPropertyBlockLevel6_2100 0x280
+#define FriBidiPropertyBlockLevel6_2100 0x2C0
 
   FriBidiPropertyBlockLevel7_00A8,  /* 2100..2103 */
-  FriBidiPropertyBlockLevel7_2050,  /* 2104..2107 */
-  FriBidiPropertyBlockLevel7_02EC,  /* 2108..210B */
+  FriBidiPropertyBlockLevel7_207C,  /* 2104..2107 */
+  FriBidiPropertyBlockLevel7_0374,  /* 2108..210B */
   FriBidiPropertyBlockLevel7_0044,  /* 210C..210F */
   FriBidiPropertyBlockLevel7_0044,  /* 2110..2113 */
   FriBidiPropertyBlockLevel7_00B4,  /* 2114..2117 */
   FriBidiPropertyBlockLevel7_0040,  /* 2118..211B */
   FriBidiPropertyBlockLevel7_02C0,  /* 211C..211F */
 
-#define FriBidiPropertyBlockLevel6_2120 0x288
+#define FriBidiPropertyBlockLevel6_2120 0x2C8
 
   FriBidiPropertyBlockLevel7_003C,  /* 2120..2123 */
   FriBidiPropertyBlockLevel7_1FBC,  /* 2124..2127 */
@@ -1673,21 +1818,21 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_212C,  /* 212C..212F */
   FriBidiPropertyBlockLevel7_037C,  /* 2130..2133 */
   FriBidiPropertyBlockLevel7_0044,  /* 2134..2137 */
-  FriBidiPropertyBlockLevel7_037C,  /* 2138..213B */
+  FriBidiPropertyBlockLevel7_02C0,  /* 2138..213B */
   FriBidiPropertyBlockLevel7_0044,  /* 213C..213F */
 
-#define FriBidiPropertyBlockLevel6_2140 0x290
+#define FriBidiPropertyBlockLevel6_2140 0x2D0
 
   FriBidiPropertyBlockLevel7_003C,  /* 2140..2143 */
   FriBidiPropertyBlockLevel7_0040,  /* 2144..2147 */
   FriBidiPropertyBlockLevel7_02C0,  /* 2148..214B */
-  FriBidiPropertyBlockLevel7_0044,  /* 214C..214F */
+  FriBidiPropertyBlockLevel7_0040,  /* 214C..214F */
   FriBidiPropertyBlockLevel7_0058,  /* 2150..2153 */
   FriBidiPropertyBlockLevel7_003C,  /* 2154..2157 */
   FriBidiPropertyBlockLevel7_003C,  /* 2158..215B */
   FriBidiPropertyBlockLevel7_003C,  /* 215C..215F */
 
-#define FriBidiPropertyBlockLevel6_2180 0x298
+#define FriBidiPropertyBlockLevel6_2180 0x2D8
 
   FriBidiPropertyBlockLevel7_0044,  /* 2180..2183 */
   FriBidiPropertyBlockLevel7_0044,  /* 2184..2187 */
@@ -1698,18 +1843,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* 2198..219B */
   FriBidiPropertyBlockLevel7_003C,  /* 219C..219F */
 
-#define FriBidiPropertyBlockLevel6_21A0 0x2A0
-
-  FriBidiPropertyBlockLevel7_003C,  /* 21A0..21A3 */
-  FriBidiPropertyBlockLevel7_003C,  /* 21A4..21A7 */
-  FriBidiPropertyBlockLevel7_003C,  /* 21A8..21AB */
-  FriBidiPropertyBlockLevel7_003C,  /* 21AC..21AF */
-  FriBidiPropertyBlockLevel7_003C,  /* 21B0..21B3 */
-  FriBidiPropertyBlockLevel7_003C,  /* 21B4..21B7 */
-  FriBidiPropertyBlockLevel7_003C,  /* 21B8..21BB */
-  FriBidiPropertyBlockLevel7_003C,  /* 21BC..21BF */
-
-#define FriBidiPropertyBlockLevel6_2200 0x2A8
+#define FriBidiPropertyBlockLevel6_2200 0x2E0
 
   FriBidiPropertyBlockLevel7_003C,  /* 2200..2203 */
   FriBidiPropertyBlockLevel7_003C,  /* 2204..2207 */
@@ -1720,18 +1854,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* 2218..221B */
   FriBidiPropertyBlockLevel7_003C,  /* 221C..221F */
 
-#define FriBidiPropertyBlockLevel6_2320 0x2B0
+#define FriBidiPropertyBlockLevel6_2320 0x2E8
 
   FriBidiPropertyBlockLevel7_003C,  /* 2320..2323 */
   FriBidiPropertyBlockLevel7_003C,  /* 2324..2327 */
   FriBidiPropertyBlockLevel7_003C,  /* 2328..232B */
   FriBidiPropertyBlockLevel7_003C,  /* 232C..232F */
   FriBidiPropertyBlockLevel7_003C,  /* 2330..2333 */
-  FriBidiPropertyBlockLevel7_02EC,  /* 2334..2337 */
+  FriBidiPropertyBlockLevel7_0374,  /* 2334..2337 */
   FriBidiPropertyBlockLevel7_0044,  /* 2338..233B */
   FriBidiPropertyBlockLevel7_0044,  /* 233C..233F */
 
-#define FriBidiPropertyBlockLevel6_2360 0x2B8
+#define FriBidiPropertyBlockLevel6_2360 0x2F0
 
   FriBidiPropertyBlockLevel7_0044,  /* 2360..2363 */
   FriBidiPropertyBlockLevel7_0044,  /* 2364..2367 */
@@ -1742,7 +1876,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0058,  /* 2378..237B */
   FriBidiPropertyBlockLevel7_003C,  /* 237C..237F */
 
-#define FriBidiPropertyBlockLevel6_2380 0x2C0
+#define FriBidiPropertyBlockLevel6_2380 0x2F8
 
   FriBidiPropertyBlockLevel7_003C,  /* 2380..2383 */
   FriBidiPropertyBlockLevel7_003C,  /* 2384..2387 */
@@ -1753,21 +1887,21 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* 2398..239B */
   FriBidiPropertyBlockLevel7_003C,  /* 239C..239F */
 
-#define FriBidiPropertyBlockLevel6_23C0 0x2C8
+#define FriBidiPropertyBlockLevel6_23C0 0x300
 
   FriBidiPropertyBlockLevel7_003C,  /* 23C0..23C3 */
   FriBidiPropertyBlockLevel7_003C,  /* 23C4..23C7 */
   FriBidiPropertyBlockLevel7_003C,  /* 23C8..23CB */
-  FriBidiPropertyBlockLevel7_2050,  /* 23CC..23CF */
-  FriBidiPropertyBlockLevel7_0044,  /* 23D0..23D3 */
-  FriBidiPropertyBlockLevel7_0044,  /* 23D4..23D7 */
-  FriBidiPropertyBlockLevel7_0044,  /* 23D8..23DB */
+  FriBidiPropertyBlockLevel7_003C,  /* 23CC..23CF */
+  FriBidiPropertyBlockLevel7_003C,  /* 23D0..23D3 */
+  FriBidiPropertyBlockLevel7_003C,  /* 23D4..23D7 */
+  FriBidiPropertyBlockLevel7_003C,  /* 23D8..23DB */
   FriBidiPropertyBlockLevel7_0044,  /* 23DC..23DF */
 
-#define FriBidiPropertyBlockLevel6_2420 0x2D0
+#define FriBidiPropertyBlockLevel6_2420 0x308
 
   FriBidiPropertyBlockLevel7_003C,  /* 2420..2423 */
-  FriBidiPropertyBlockLevel7_2050,  /* 2424..2427 */
+  FriBidiPropertyBlockLevel7_207C,  /* 2424..2427 */
   FriBidiPropertyBlockLevel7_0044,  /* 2428..242B */
   FriBidiPropertyBlockLevel7_0044,  /* 242C..242F */
   FriBidiPropertyBlockLevel7_0044,  /* 2430..2433 */
@@ -1775,32 +1909,21 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 2438..243B */
   FriBidiPropertyBlockLevel7_0044,  /* 243C..243F */
 
-#define FriBidiPropertyBlockLevel6_2440 0x2D8
+#define FriBidiPropertyBlockLevel6_2440 0x310
 
   FriBidiPropertyBlockLevel7_003C,  /* 2440..2443 */
   FriBidiPropertyBlockLevel7_003C,  /* 2444..2447 */
-  FriBidiPropertyBlockLevel7_2050,  /* 2448..244B */
+  FriBidiPropertyBlockLevel7_207C,  /* 2448..244B */
   FriBidiPropertyBlockLevel7_0044,  /* 244C..244F */
   FriBidiPropertyBlockLevel7_0044,  /* 2450..2453 */
   FriBidiPropertyBlockLevel7_0044,  /* 2454..2457 */
   FriBidiPropertyBlockLevel7_0044,  /* 2458..245B */
   FriBidiPropertyBlockLevel7_0044,  /* 245C..245F */
 
-#define FriBidiPropertyBlockLevel6_2460 0x2E0
+#define FriBidiPropertyBlockLevel6_2480 0x318
 
-  FriBidiPropertyBlockLevel7_0030,  /* 2460..2463 */
-  FriBidiPropertyBlockLevel7_0030,  /* 2464..2467 */
-  FriBidiPropertyBlockLevel7_0030,  /* 2468..246B */
-  FriBidiPropertyBlockLevel7_0030,  /* 246C..246F */
-  FriBidiPropertyBlockLevel7_0030,  /* 2470..2473 */
-  FriBidiPropertyBlockLevel7_0030,  /* 2474..2477 */
-  FriBidiPropertyBlockLevel7_0030,  /* 2478..247B */
-  FriBidiPropertyBlockLevel7_0030,  /* 247C..247F */
-
-#define FriBidiPropertyBlockLevel6_2480 0x2E8
-
-  FriBidiPropertyBlockLevel7_0030,  /* 2480..2483 */
-  FriBidiPropertyBlockLevel7_0030,  /* 2484..2487 */
+  FriBidiPropertyBlockLevel7_003C,  /* 2480..2483 */
+  FriBidiPropertyBlockLevel7_003C,  /* 2484..2487 */
   FriBidiPropertyBlockLevel7_0030,  /* 2488..248B */
   FriBidiPropertyBlockLevel7_0030,  /* 248C..248F */
   FriBidiPropertyBlockLevel7_0030,  /* 2490..2493 */
@@ -1808,62 +1931,51 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0030,  /* 2498..249B */
   FriBidiPropertyBlockLevel7_0044,  /* 249C..249F */
 
-#define FriBidiPropertyBlockLevel6_24E0 0x2F0
+#define FriBidiPropertyBlockLevel6_24E0 0x320
 
   FriBidiPropertyBlockLevel7_0044,  /* 24E0..24E3 */
   FriBidiPropertyBlockLevel7_0044,  /* 24E4..24E7 */
-  FriBidiPropertyBlockLevel7_24E8,  /* 24E8..24EB */
+  FriBidiPropertyBlockLevel7_02C0,  /* 24E8..24EB */
   FriBidiPropertyBlockLevel7_003C,  /* 24EC..24EF */
   FriBidiPropertyBlockLevel7_003C,  /* 24F0..24F3 */
   FriBidiPropertyBlockLevel7_003C,  /* 24F4..24F7 */
   FriBidiPropertyBlockLevel7_003C,  /* 24F8..24FB */
-  FriBidiPropertyBlockLevel7_2050,  /* 24FC..24FF */
+  FriBidiPropertyBlockLevel7_003C,  /* 24FC..24FF */
 
-#define FriBidiPropertyBlockLevel6_2600 0x2F8
-
-  FriBidiPropertyBlockLevel7_003C,  /* 2600..2603 */
-  FriBidiPropertyBlockLevel7_003C,  /* 2604..2607 */
-  FriBidiPropertyBlockLevel7_003C,  /* 2608..260B */
-  FriBidiPropertyBlockLevel7_003C,  /* 260C..260F */
-  FriBidiPropertyBlockLevel7_003C,  /* 2610..2613 */
-  FriBidiPropertyBlockLevel7_02C0,  /* 2614..2617 */
-  FriBidiPropertyBlockLevel7_02E4,  /* 2618..261B */
-  FriBidiPropertyBlockLevel7_003C,  /* 261C..261F */
-
-#define FriBidiPropertyBlockLevel6_2660 0x300
-
-  FriBidiPropertyBlockLevel7_003C,  /* 2660..2663 */
-  FriBidiPropertyBlockLevel7_003C,  /* 2664..2667 */
-  FriBidiPropertyBlockLevel7_003C,  /* 2668..266B */
-  FriBidiPropertyBlockLevel7_003C,  /* 266C..266F */
-  FriBidiPropertyBlockLevel7_003C,  /* 2670..2673 */
-  FriBidiPropertyBlockLevel7_003C,  /* 2674..2677 */
-  FriBidiPropertyBlockLevel7_003C,  /* 2678..267B */
-  FriBidiPropertyBlockLevel7_02EC,  /* 267C..267F */
-
-#define FriBidiPropertyBlockLevel6_2680 0x308
+#define FriBidiPropertyBlockLevel6_2680 0x328
 
   FriBidiPropertyBlockLevel7_003C,  /* 2680..2683 */
   FriBidiPropertyBlockLevel7_003C,  /* 2684..2687 */
-  FriBidiPropertyBlockLevel7_02EC,  /* 2688..268B */
-  FriBidiPropertyBlockLevel7_0044,  /* 268C..268F */
-  FriBidiPropertyBlockLevel7_0044,  /* 2690..2693 */
-  FriBidiPropertyBlockLevel7_0044,  /* 2694..2697 */
-  FriBidiPropertyBlockLevel7_0044,  /* 2698..269B */
-  FriBidiPropertyBlockLevel7_0044,  /* 269C..269F */
+  FriBidiPropertyBlockLevel7_003C,  /* 2688..268B */
+  FriBidiPropertyBlockLevel7_003C,  /* 268C..268F */
+  FriBidiPropertyBlockLevel7_003C,  /* 2690..2693 */
+  FriBidiPropertyBlockLevel7_003C,  /* 2694..2697 */
+  FriBidiPropertyBlockLevel7_003C,  /* 2698..269B */
+  FriBidiPropertyBlockLevel7_0040,  /* 269C..269F */
 
-#define FriBidiPropertyBlockLevel6_2700 0x310
+#define FriBidiPropertyBlockLevel6_26A0 0x330
+
+  FriBidiPropertyBlockLevel7_003C,  /* 26A0..26A3 */
+  FriBidiPropertyBlockLevel7_003C,  /* 26A4..26A7 */
+  FriBidiPropertyBlockLevel7_003C,  /* 26A8..26AB */
+  FriBidiPropertyBlockLevel7_02E4,  /* 26AC..26AF */
+  FriBidiPropertyBlockLevel7_0374,  /* 26B0..26B3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 26B4..26B7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 26B8..26BB */
+  FriBidiPropertyBlockLevel7_0044,  /* 26BC..26BF */
+
+#define FriBidiPropertyBlockLevel6_2700 0x338
 
   FriBidiPropertyBlockLevel7_02E4,  /* 2700..2703 */
   FriBidiPropertyBlockLevel7_00B4,  /* 2704..2707 */
-  FriBidiPropertyBlockLevel7_02EC,  /* 2708..270B */
+  FriBidiPropertyBlockLevel7_0374,  /* 2708..270B */
   FriBidiPropertyBlockLevel7_003C,  /* 270C..270F */
   FriBidiPropertyBlockLevel7_003C,  /* 2710..2713 */
   FriBidiPropertyBlockLevel7_003C,  /* 2714..2717 */
   FriBidiPropertyBlockLevel7_003C,  /* 2718..271B */
   FriBidiPropertyBlockLevel7_003C,  /* 271C..271F */
 
-#define FriBidiPropertyBlockLevel6_2720 0x318
+#define FriBidiPropertyBlockLevel6_2720 0x340
 
   FriBidiPropertyBlockLevel7_003C,  /* 2720..2723 */
   FriBidiPropertyBlockLevel7_003C,  /* 2724..2727 */
@@ -1874,18 +1986,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* 2738..273B */
   FriBidiPropertyBlockLevel7_003C,  /* 273C..273F */
 
-#define FriBidiPropertyBlockLevel6_2740 0x320
+#define FriBidiPropertyBlockLevel6_2740 0x348
 
   FriBidiPropertyBlockLevel7_003C,  /* 2740..2743 */
   FriBidiPropertyBlockLevel7_003C,  /* 2744..2747 */
   FriBidiPropertyBlockLevel7_003C,  /* 2748..274B */
   FriBidiPropertyBlockLevel7_1FBC,  /* 274C..274F */
-  FriBidiPropertyBlockLevel7_2050,  /* 2750..2753 */
+  FriBidiPropertyBlockLevel7_207C,  /* 2750..2753 */
   FriBidiPropertyBlockLevel7_037C,  /* 2754..2757 */
   FriBidiPropertyBlockLevel7_003C,  /* 2758..275B */
-  FriBidiPropertyBlockLevel7_2050,  /* 275C..275F */
+  FriBidiPropertyBlockLevel7_207C,  /* 275C..275F */
 
-#define FriBidiPropertyBlockLevel6_2760 0x328
+#define FriBidiPropertyBlockLevel6_2760 0x350
 
   FriBidiPropertyBlockLevel7_02E4,  /* 2760..2763 */
   FriBidiPropertyBlockLevel7_003C,  /* 2764..2767 */
@@ -1896,7 +2008,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* 2778..277B */
   FriBidiPropertyBlockLevel7_003C,  /* 277C..277F */
 
-#define FriBidiPropertyBlockLevel6_2780 0x330
+#define FriBidiPropertyBlockLevel6_2780 0x358
 
   FriBidiPropertyBlockLevel7_003C,  /* 2780..2783 */
   FriBidiPropertyBlockLevel7_003C,  /* 2784..2787 */
@@ -1907,7 +2019,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* 2798..279B */
   FriBidiPropertyBlockLevel7_003C,  /* 279C..279F */
 
-#define FriBidiPropertyBlockLevel6_27A0 0x338
+#define FriBidiPropertyBlockLevel6_27A0 0x360
 
   FriBidiPropertyBlockLevel7_003C,  /* 27A0..27A3 */
   FriBidiPropertyBlockLevel7_003C,  /* 27A4..27A7 */
@@ -1916,9 +2028,20 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_02E4,  /* 27B0..27B3 */
   FriBidiPropertyBlockLevel7_003C,  /* 27B4..27B7 */
   FriBidiPropertyBlockLevel7_003C,  /* 27B8..27BB */
-  FriBidiPropertyBlockLevel7_2050,  /* 27BC..27BF */
+  FriBidiPropertyBlockLevel7_207C,  /* 27BC..27BF */
 
-#define FriBidiPropertyBlockLevel6_27E0 0x340
+#define FriBidiPropertyBlockLevel6_27C0 0x368
+
+  FriBidiPropertyBlockLevel7_003C,  /* 27C0..27C3 */
+  FriBidiPropertyBlockLevel7_207C,  /* 27C4..27C7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 27C8..27CB */
+  FriBidiPropertyBlockLevel7_0044,  /* 27CC..27CF */
+  FriBidiPropertyBlockLevel7_003C,  /* 27D0..27D3 */
+  FriBidiPropertyBlockLevel7_003C,  /* 27D4..27D7 */
+  FriBidiPropertyBlockLevel7_003C,  /* 27D8..27DB */
+  FriBidiPropertyBlockLevel7_003C,  /* 27DC..27DF */
+
+#define FriBidiPropertyBlockLevel6_27E0 0x370
 
   FriBidiPropertyBlockLevel7_003C,  /* 27E0..27E3 */
   FriBidiPropertyBlockLevel7_003C,  /* 27E4..27E7 */
@@ -1929,7 +2052,40 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* 27F8..27FB */
   FriBidiPropertyBlockLevel7_003C,  /* 27FC..27FF */
 
-#define FriBidiPropertyBlockLevel6_2E80 0x348
+#define FriBidiPropertyBlockLevel6_2B00 0x378
+
+  FriBidiPropertyBlockLevel7_003C,  /* 2B00..2B03 */
+  FriBidiPropertyBlockLevel7_003C,  /* 2B04..2B07 */
+  FriBidiPropertyBlockLevel7_003C,  /* 2B08..2B0B */
+  FriBidiPropertyBlockLevel7_003C,  /* 2B0C..2B0F */
+  FriBidiPropertyBlockLevel7_003C,  /* 2B10..2B13 */
+  FriBidiPropertyBlockLevel7_0044,  /* 2B14..2B17 */
+  FriBidiPropertyBlockLevel7_0044,  /* 2B18..2B1B */
+  FriBidiPropertyBlockLevel7_0044,  /* 2B1C..2B1F */
+
+#define FriBidiPropertyBlockLevel6_2CE0 0x380
+
+  FriBidiPropertyBlockLevel7_0044,  /* 2CE0..2CE3 */
+  FriBidiPropertyBlockLevel7_02E4,  /* 2CE4..2CE7 */
+  FriBidiPropertyBlockLevel7_207C,  /* 2CE8..2CEB */
+  FriBidiPropertyBlockLevel7_0044,  /* 2CEC..2CEF */
+  FriBidiPropertyBlockLevel7_0044,  /* 2CF0..2CF3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 2CF4..2CF7 */
+  FriBidiPropertyBlockLevel7_02E4,  /* 2CF8..2CFB */
+  FriBidiPropertyBlockLevel7_003C,  /* 2CFC..2CFF */
+
+#define FriBidiPropertyBlockLevel6_2E00 0x388
+
+  FriBidiPropertyBlockLevel7_003C,  /* 2E00..2E03 */
+  FriBidiPropertyBlockLevel7_003C,  /* 2E04..2E07 */
+  FriBidiPropertyBlockLevel7_003C,  /* 2E08..2E0B */
+  FriBidiPropertyBlockLevel7_003C,  /* 2E0C..2E0F */
+  FriBidiPropertyBlockLevel7_003C,  /* 2E10..2E13 */
+  FriBidiPropertyBlockLevel7_003C,  /* 2E14..2E17 */
+  FriBidiPropertyBlockLevel7_0044,  /* 2E18..2E1B */
+  FriBidiPropertyBlockLevel7_0374,  /* 2E1C..2E1F */
+
+#define FriBidiPropertyBlockLevel6_2E80 0x390
 
   FriBidiPropertyBlockLevel7_003C,  /* 2E80..2E83 */
   FriBidiPropertyBlockLevel7_003C,  /* 2E84..2E87 */
@@ -1940,18 +2096,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_00A8,  /* 2E98..2E9B */
   FriBidiPropertyBlockLevel7_003C,  /* 2E9C..2E9F */
 
-#define FriBidiPropertyBlockLevel6_2EE0 0x350
-
-  FriBidiPropertyBlockLevel7_003C,  /* 2EE0..2EE3 */
-  FriBidiPropertyBlockLevel7_003C,  /* 2EE4..2EE7 */
-  FriBidiPropertyBlockLevel7_003C,  /* 2EE8..2EEB */
-  FriBidiPropertyBlockLevel7_003C,  /* 2EEC..2EEF */
-  FriBidiPropertyBlockLevel7_003C,  /* 2EF0..2EF3 */
-  FriBidiPropertyBlockLevel7_0044,  /* 2EF4..2EF7 */
-  FriBidiPropertyBlockLevel7_0044,  /* 2EF8..2EFB */
-  FriBidiPropertyBlockLevel7_0044,  /* 2EFC..2EFF */
-
-#define FriBidiPropertyBlockLevel6_2FE0 0x358
+#define FriBidiPropertyBlockLevel6_2FE0 0x398
 
   FriBidiPropertyBlockLevel7_0044,  /* 2FE0..2FE3 */
   FriBidiPropertyBlockLevel7_0044,  /* 2FE4..2FE7 */
@@ -1962,7 +2107,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* 2FF8..2FFB */
   FriBidiPropertyBlockLevel7_0044,  /* 2FFC..2FFF */
 
-#define FriBidiPropertyBlockLevel6_3000 0x360
+#define FriBidiPropertyBlockLevel6_3000 0x3A0
 
   FriBidiPropertyBlockLevel7_3000,  /* 3000..3003 */
   FriBidiPropertyBlockLevel7_0040,  /* 3004..3007 */
@@ -1973,7 +2118,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* 3018..301B */
   FriBidiPropertyBlockLevel7_003C,  /* 301C..301F */
 
-#define FriBidiPropertyBlockLevel6_3020 0x368
+#define FriBidiPropertyBlockLevel6_3020 0x3A8
 
   FriBidiPropertyBlockLevel7_0040,  /* 3020..3023 */
   FriBidiPropertyBlockLevel7_0044,  /* 3024..3027 */
@@ -1984,7 +2129,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 3038..303B */
   FriBidiPropertyBlockLevel7_02E4,  /* 303C..303F */
 
-#define FriBidiPropertyBlockLevel6_3080 0x370
+#define FriBidiPropertyBlockLevel6_3080 0x3B0
 
   FriBidiPropertyBlockLevel7_0044,  /* 3080..3083 */
   FriBidiPropertyBlockLevel7_0044,  /* 3084..3087 */
@@ -1995,7 +2140,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_3098,  /* 3098..309B */
   FriBidiPropertyBlockLevel7_0040,  /* 309C..309F */
 
-#define FriBidiPropertyBlockLevel6_30A0 0x378
+#define FriBidiPropertyBlockLevel6_30A0 0x3B8
 
   FriBidiPropertyBlockLevel7_0040,  /* 30A0..30A3 */
   FriBidiPropertyBlockLevel7_0044,  /* 30A4..30A7 */
@@ -2006,7 +2151,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 30B8..30BB */
   FriBidiPropertyBlockLevel7_0044,  /* 30BC..30BF */
 
-#define FriBidiPropertyBlockLevel6_30E0 0x380
+#define FriBidiPropertyBlockLevel6_30E0 0x3C0
 
   FriBidiPropertyBlockLevel7_0044,  /* 30E0..30E3 */
   FriBidiPropertyBlockLevel7_0044,  /* 30E4..30E7 */
@@ -2017,18 +2162,117 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0058,  /* 30F8..30FB */
   FriBidiPropertyBlockLevel7_0044,  /* 30FC..30FF */
 
-#define FriBidiPropertyBlockLevel6_3240 0x388
+#define FriBidiPropertyBlockLevel6_31C0 0x3C8
 
-  FriBidiPropertyBlockLevel7_0044,  /* 3240..3243 */
-  FriBidiPropertyBlockLevel7_0044,  /* 3244..3247 */
-  FriBidiPropertyBlockLevel7_0044,  /* 3248..324B */
-  FriBidiPropertyBlockLevel7_0044,  /* 324C..324F */
-  FriBidiPropertyBlockLevel7_02E4,  /* 3250..3253 */
-  FriBidiPropertyBlockLevel7_003C,  /* 3254..3257 */
-  FriBidiPropertyBlockLevel7_003C,  /* 3258..325B */
-  FriBidiPropertyBlockLevel7_003C,  /* 325C..325F */
+  FriBidiPropertyBlockLevel7_003C,  /* 31C0..31C3 */
+  FriBidiPropertyBlockLevel7_003C,  /* 31C4..31C7 */
+  FriBidiPropertyBlockLevel7_003C,  /* 31C8..31CB */
+  FriBidiPropertyBlockLevel7_003C,  /* 31CC..31CF */
+  FriBidiPropertyBlockLevel7_0044,  /* 31D0..31D3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 31D4..31D7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 31D8..31DB */
+  FriBidiPropertyBlockLevel7_0044,  /* 31DC..31DF */
 
-#define FriBidiPropertyBlockLevel6_FB00 0x390
+#define FriBidiPropertyBlockLevel6_3200 0x3D0
+
+  FriBidiPropertyBlockLevel7_0044,  /* 3200..3203 */
+  FriBidiPropertyBlockLevel7_0044,  /* 3204..3207 */
+  FriBidiPropertyBlockLevel7_0044,  /* 3208..320B */
+  FriBidiPropertyBlockLevel7_0044,  /* 320C..320F */
+  FriBidiPropertyBlockLevel7_0044,  /* 3210..3213 */
+  FriBidiPropertyBlockLevel7_0044,  /* 3214..3217 */
+  FriBidiPropertyBlockLevel7_0044,  /* 3218..321B */
+  FriBidiPropertyBlockLevel7_02B8,  /* 321C..321F */
+
+#define FriBidiPropertyBlockLevel6_3260 0x3D8
+
+  FriBidiPropertyBlockLevel7_0044,  /* 3260..3263 */
+  FriBidiPropertyBlockLevel7_0044,  /* 3264..3267 */
+  FriBidiPropertyBlockLevel7_0044,  /* 3268..326B */
+  FriBidiPropertyBlockLevel7_0044,  /* 326C..326F */
+  FriBidiPropertyBlockLevel7_0044,  /* 3270..3273 */
+  FriBidiPropertyBlockLevel7_0044,  /* 3274..3277 */
+  FriBidiPropertyBlockLevel7_0044,  /* 3278..327B */
+  FriBidiPropertyBlockLevel7_207C,  /* 327C..327F */
+
+#define FriBidiPropertyBlockLevel6_32A0 0x3E0
+
+  FriBidiPropertyBlockLevel7_0044,  /* 32A0..32A3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 32A4..32A7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 32A8..32AB */
+  FriBidiPropertyBlockLevel7_0044,  /* 32AC..32AF */
+  FriBidiPropertyBlockLevel7_02E4,  /* 32B0..32B3 */
+  FriBidiPropertyBlockLevel7_003C,  /* 32B4..32B7 */
+  FriBidiPropertyBlockLevel7_003C,  /* 32B8..32BB */
+  FriBidiPropertyBlockLevel7_003C,  /* 32BC..32BF */
+
+#define FriBidiPropertyBlockLevel6_32C0 0x3E8
+
+  FriBidiPropertyBlockLevel7_0044,  /* 32C0..32C3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 32C4..32C7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 32C8..32CB */
+  FriBidiPropertyBlockLevel7_003C,  /* 32CC..32CF */
+  FriBidiPropertyBlockLevel7_0044,  /* 32D0..32D3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 32D4..32D7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 32D8..32DB */
+  FriBidiPropertyBlockLevel7_0044,  /* 32DC..32DF */
+
+#define FriBidiPropertyBlockLevel6_3360 0x3F0
+
+  FriBidiPropertyBlockLevel7_0044,  /* 3360..3363 */
+  FriBidiPropertyBlockLevel7_0044,  /* 3364..3367 */
+  FriBidiPropertyBlockLevel7_0044,  /* 3368..336B */
+  FriBidiPropertyBlockLevel7_0044,  /* 336C..336F */
+  FriBidiPropertyBlockLevel7_0044,  /* 3370..3373 */
+  FriBidiPropertyBlockLevel7_0058,  /* 3374..3377 */
+  FriBidiPropertyBlockLevel7_207C,  /* 3378..337B */
+  FriBidiPropertyBlockLevel7_0044,  /* 337C..337F */
+
+#define FriBidiPropertyBlockLevel6_33E0 0x3F8
+
+  FriBidiPropertyBlockLevel7_0044,  /* 33E0..33E3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 33E4..33E7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 33E8..33EB */
+  FriBidiPropertyBlockLevel7_0044,  /* 33EC..33EF */
+  FriBidiPropertyBlockLevel7_0044,  /* 33F0..33F3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 33F4..33F7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 33F8..33FB */
+  FriBidiPropertyBlockLevel7_0058,  /* 33FC..33FF */
+
+#define FriBidiPropertyBlockLevel6_A700 0x400
+
+  FriBidiPropertyBlockLevel7_003C,  /* A700..A703 */
+  FriBidiPropertyBlockLevel7_003C,  /* A704..A707 */
+  FriBidiPropertyBlockLevel7_003C,  /* A708..A70B */
+  FriBidiPropertyBlockLevel7_003C,  /* A70C..A70F */
+  FriBidiPropertyBlockLevel7_003C,  /* A710..A713 */
+  FriBidiPropertyBlockLevel7_207C,  /* A714..A717 */
+  FriBidiPropertyBlockLevel7_0044,  /* A718..A71B */
+  FriBidiPropertyBlockLevel7_0044,  /* A71C..A71F */
+
+#define FriBidiPropertyBlockLevel6_A800 0x408
+
+  FriBidiPropertyBlockLevel7_0B54,  /* A800..A803 */
+  FriBidiPropertyBlockLevel7_0B54,  /* A804..A807 */
+  FriBidiPropertyBlockLevel7_0480,  /* A808..A80B */
+  FriBidiPropertyBlockLevel7_0044,  /* A80C..A80F */
+  FriBidiPropertyBlockLevel7_0044,  /* A810..A813 */
+  FriBidiPropertyBlockLevel7_0044,  /* A814..A817 */
+  FriBidiPropertyBlockLevel7_0044,  /* A818..A81B */
+  FriBidiPropertyBlockLevel7_0044,  /* A81C..A81F */
+
+#define FriBidiPropertyBlockLevel6_A820 0x410
+
+  FriBidiPropertyBlockLevel7_0044,  /* A820..A823 */
+  FriBidiPropertyBlockLevel7_0900,  /* A824..A827 */
+  FriBidiPropertyBlockLevel7_003C,  /* A828..A82B */
+  FriBidiPropertyBlockLevel7_0044,  /* A82C..A82F */
+  FriBidiPropertyBlockLevel7_0044,  /* A830..A833 */
+  FriBidiPropertyBlockLevel7_0044,  /* A834..A837 */
+  FriBidiPropertyBlockLevel7_0044,  /* A838..A83B */
+  FriBidiPropertyBlockLevel7_0044,  /* A83C..A83F */
+
+#define FriBidiPropertyBlockLevel6_FB00 0x418
 
   FriBidiPropertyBlockLevel7_0044,  /* FB00..FB03 */
   FriBidiPropertyBlockLevel7_0044,  /* FB04..FB07 */
@@ -2039,7 +2283,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* FB18..FB1B */
   FriBidiPropertyBlockLevel7_FB1C,  /* FB1C..FB1F */
 
-#define FriBidiPropertyBlockLevel6_FB20 0x398
+#define FriBidiPropertyBlockLevel6_FB20 0x420
 
   FriBidiPropertyBlockLevel7_05C8,  /* FB20..FB23 */
   FriBidiPropertyBlockLevel7_05C8,  /* FB24..FB27 */
@@ -2050,7 +2294,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_05C8,  /* FB38..FB3B */
   FriBidiPropertyBlockLevel7_05C8,  /* FB3C..FB3F */
 
-#define FriBidiPropertyBlockLevel6_FB40 0x3A0
+#define FriBidiPropertyBlockLevel6_FB40 0x428
 
   FriBidiPropertyBlockLevel7_05C8,  /* FB40..FB43 */
   FriBidiPropertyBlockLevel7_05C8,  /* FB44..FB47 */
@@ -2061,7 +2305,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0600,  /* FB58..FB5B */
   FriBidiPropertyBlockLevel7_0600,  /* FB5C..FB5F */
 
-#define FriBidiPropertyBlockLevel6_FD20 0x3A8
+#define FriBidiPropertyBlockLevel6_FD20 0x430
 
   FriBidiPropertyBlockLevel7_0600,  /* FD20..FD23 */
   FriBidiPropertyBlockLevel7_0600,  /* FD24..FD27 */
@@ -2072,7 +2316,40 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0600,  /* FD38..FD3B */
   FriBidiPropertyBlockLevel7_FD3C,  /* FD3C..FD3F */
 
-#define FriBidiPropertyBlockLevel6_FE20 0x3B0
+#define FriBidiPropertyBlockLevel6_FDC0 0x438
+
+  FriBidiPropertyBlockLevel7_0600,  /* FDC0..FDC3 */
+  FriBidiPropertyBlockLevel7_0600,  /* FDC4..FDC7 */
+  FriBidiPropertyBlockLevel7_0600,  /* FDC8..FDCB */
+  FriBidiPropertyBlockLevel7_0600,  /* FDCC..FDCF */
+  FriBidiPropertyBlockLevel7_0000,  /* FDD0..FDD3 */
+  FriBidiPropertyBlockLevel7_0000,  /* FDD4..FDD7 */
+  FriBidiPropertyBlockLevel7_0000,  /* FDD8..FDDB */
+  FriBidiPropertyBlockLevel7_0000,  /* FDDC..FDDF */
+
+#define FriBidiPropertyBlockLevel6_FDE0 0x440
+
+  FriBidiPropertyBlockLevel7_0000,  /* FDE0..FDE3 */
+  FriBidiPropertyBlockLevel7_0000,  /* FDE4..FDE7 */
+  FriBidiPropertyBlockLevel7_0000,  /* FDE8..FDEB */
+  FriBidiPropertyBlockLevel7_0000,  /* FDEC..FDEF */
+  FriBidiPropertyBlockLevel7_0600,  /* FDF0..FDF3 */
+  FriBidiPropertyBlockLevel7_0600,  /* FDF4..FDF7 */
+  FriBidiPropertyBlockLevel7_0600,  /* FDF8..FDFB */
+  FriBidiPropertyBlockLevel7_FDFC,  /* FDFC..FDFF */
+
+#define FriBidiPropertyBlockLevel6_FE00 0x448
+
+  FriBidiPropertyBlockLevel7_0300,  /* FE00..FE03 */
+  FriBidiPropertyBlockLevel7_0300,  /* FE04..FE07 */
+  FriBidiPropertyBlockLevel7_0300,  /* FE08..FE0B */
+  FriBidiPropertyBlockLevel7_0300,  /* FE0C..FE0F */
+  FriBidiPropertyBlockLevel7_003C,  /* FE10..FE13 */
+  FriBidiPropertyBlockLevel7_003C,  /* FE14..FE17 */
+  FriBidiPropertyBlockLevel7_0374,  /* FE18..FE1B */
+  FriBidiPropertyBlockLevel7_0044,  /* FE1C..FE1F */
+
+#define FriBidiPropertyBlockLevel6_FE20 0x450
 
   FriBidiPropertyBlockLevel7_0300,  /* FE20..FE23 */
   FriBidiPropertyBlockLevel7_0044,  /* FE24..FE27 */
@@ -2083,21 +2360,21 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_003C,  /* FE38..FE3B */
   FriBidiPropertyBlockLevel7_003C,  /* FE3C..FE3F */
 
-#define FriBidiPropertyBlockLevel6_FE40 0x3B8
+#define FriBidiPropertyBlockLevel6_FE40 0x458
 
   FriBidiPropertyBlockLevel7_003C,  /* FE40..FE43 */
-  FriBidiPropertyBlockLevel7_2050,  /* FE44..FE47 */
-  FriBidiPropertyBlockLevel7_02E4,  /* FE48..FE4B */
+  FriBidiPropertyBlockLevel7_003C,  /* FE44..FE47 */
+  FriBidiPropertyBlockLevel7_003C,  /* FE48..FE4B */
   FriBidiPropertyBlockLevel7_003C,  /* FE4C..FE4F */
   FriBidiPropertyBlockLevel7_FE50,  /* FE50..FE53 */
   FriBidiPropertyBlockLevel7_FE54,  /* FE54..FE57 */
   FriBidiPropertyBlockLevel7_003C,  /* FE58..FE5B */
-  FriBidiPropertyBlockLevel7_0028,  /* FE5C..FE5F */
+  FriBidiPropertyBlockLevel7_FE5C,  /* FE5C..FE5F */
 
-#define FriBidiPropertyBlockLevel6_FE60 0x3C0
+#define FriBidiPropertyBlockLevel6_FE60 0x460
 
-  FriBidiPropertyBlockLevel7_2210,  /* FE60..FE63 */
-  FriBidiPropertyBlockLevel7_2050,  /* FE64..FE67 */
+  FriBidiPropertyBlockLevel7_FE60,  /* FE60..FE63 */
+  FriBidiPropertyBlockLevel7_207C,  /* FE64..FE67 */
   FriBidiPropertyBlockLevel7_FE68,  /* FE68..FE6B */
   FriBidiPropertyBlockLevel7_0044,  /* FE6C..FE6F */
   FriBidiPropertyBlockLevel7_0600,  /* FE70..FE73 */
@@ -2105,7 +2382,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0600,  /* FE78..FE7B */
   FriBidiPropertyBlockLevel7_0600,  /* FE7C..FE7F */
 
-#define FriBidiPropertyBlockLevel6_FEE0 0x3C8
+#define FriBidiPropertyBlockLevel6_FEE0 0x468
 
   FriBidiPropertyBlockLevel7_0600,  /* FEE0..FEE3 */
   FriBidiPropertyBlockLevel7_0600,  /* FEE4..FEE7 */
@@ -2116,7 +2393,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0600,  /* FEF8..FEFB */
   FriBidiPropertyBlockLevel7_070C,  /* FEFC..FEFF */
 
-#define FriBidiPropertyBlockLevel6_FF00 0x3D0
+#define FriBidiPropertyBlockLevel6_FF00 0x470
 
   FriBidiPropertyBlockLevel7_FF00,  /* FF00..FF03 */
   FriBidiPropertyBlockLevel7_0024,  /* FF04..FF07 */
@@ -2127,10 +2404,10 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0038,  /* FF18..FF1B */
   FriBidiPropertyBlockLevel7_003C,  /* FF1C..FF1F */
 
-#define FriBidiPropertyBlockLevel6_FF60 0x3D8
+#define FriBidiPropertyBlockLevel6_FF60 0x478
 
   FriBidiPropertyBlockLevel7_003C,  /* FF60..FF63 */
-  FriBidiPropertyBlockLevel7_02EC,  /* FF64..FF67 */
+  FriBidiPropertyBlockLevel7_0374,  /* FF64..FF67 */
   FriBidiPropertyBlockLevel7_0044,  /* FF68..FF6B */
   FriBidiPropertyBlockLevel7_0044,  /* FF6C..FF6F */
   FriBidiPropertyBlockLevel7_0044,  /* FF70..FF73 */
@@ -2138,18 +2415,62 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* FF78..FF7B */
   FriBidiPropertyBlockLevel7_0044,  /* FF7C..FF7F */
 
-#define FriBidiPropertyBlockLevel6_FFE0 0x3E0
+#define FriBidiPropertyBlockLevel6_FFE0 0x480
 
   FriBidiPropertyBlockLevel7_0024,  /* FFE0..FFE3 */
   FriBidiPropertyBlockLevel7_FFE4,  /* FFE4..FFE7 */
   FriBidiPropertyBlockLevel7_003C,  /* FFE8..FFEB */
-  FriBidiPropertyBlockLevel7_2050,  /* FFEC..FFEF */
-  FriBidiPropertyBlockLevel7_0044,  /* FFF0..FFF3 */
-  FriBidiPropertyBlockLevel7_0044,  /* FFF4..FFF7 */
+  FriBidiPropertyBlockLevel7_207C,  /* FFEC..FFEF */
+  FriBidiPropertyBlockLevel7_0000,  /* FFF0..FFF3 */
+  FriBidiPropertyBlockLevel7_0000,  /* FFF4..FFF7 */
   FriBidiPropertyBlockLevel7_FFF8,  /* FFF8..FFFB */
-  FriBidiPropertyBlockLevel7_02EC,  /* FFFC..FFFF */
+  FriBidiPropertyBlockLevel7_FFFC,  /* FFFC..FFFF */
 
-#define FriBidiPropertyBlockLevel6_1D160 0x3E8
+#define FriBidiPropertyBlockLevel6_10100 0x488
+
+  FriBidiPropertyBlockLevel7_2128,  /* 10100..10103 */
+  FriBidiPropertyBlockLevel7_0044,  /* 10104..10107 */
+  FriBidiPropertyBlockLevel7_0044,  /* 10108..1010B */
+  FriBidiPropertyBlockLevel7_0044,  /* 1010C..1010F */
+  FriBidiPropertyBlockLevel7_0044,  /* 10110..10113 */
+  FriBidiPropertyBlockLevel7_0044,  /* 10114..10117 */
+  FriBidiPropertyBlockLevel7_0044,  /* 10118..1011B */
+  FriBidiPropertyBlockLevel7_0044,  /* 1011C..1011F */
+
+#define FriBidiPropertyBlockLevel6_103C0 0x490
+
+  FriBidiPropertyBlockLevel7_0044,  /* 103C0..103C3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 103C4..103C7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 103C8..103CB */
+  FriBidiPropertyBlockLevel7_0044,  /* 103CC..103CF */
+  FriBidiPropertyBlockLevel7_02E4,  /* 103D0..103D3 */
+  FriBidiPropertyBlockLevel7_0374,  /* 103D4..103D7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 103D8..103DB */
+  FriBidiPropertyBlockLevel7_0044,  /* 103DC..103DF */
+
+#define FriBidiPropertyBlockLevel6_10A00 0x498
+
+  FriBidiPropertyBlockLevel7_0590,  /* 10A00..10A03 */
+  FriBidiPropertyBlockLevel7_05C0,  /* 10A04..10A07 */
+  FriBidiPropertyBlockLevel7_05C8,  /* 10A08..10A0B */
+  FriBidiPropertyBlockLevel7_0300,  /* 10A0C..10A0F */
+  FriBidiPropertyBlockLevel7_05C8,  /* 10A10..10A13 */
+  FriBidiPropertyBlockLevel7_05C8,  /* 10A14..10A17 */
+  FriBidiPropertyBlockLevel7_05C8,  /* 10A18..10A1B */
+  FriBidiPropertyBlockLevel7_05C8,  /* 10A1C..10A1F */
+
+#define FriBidiPropertyBlockLevel6_10A20 0x4A0
+
+  FriBidiPropertyBlockLevel7_05C8,  /* 10A20..10A23 */
+  FriBidiPropertyBlockLevel7_05C8,  /* 10A24..10A27 */
+  FriBidiPropertyBlockLevel7_05C8,  /* 10A28..10A2B */
+  FriBidiPropertyBlockLevel7_05C8,  /* 10A2C..10A2F */
+  FriBidiPropertyBlockLevel7_05C8,  /* 10A30..10A33 */
+  FriBidiPropertyBlockLevel7_05C8,  /* 10A34..10A37 */
+  FriBidiPropertyBlockLevel7_10A38,  /* 10A38..10A3B */
+  FriBidiPropertyBlockLevel7_10A3C,  /* 10A3C..10A3F */
+
+#define FriBidiPropertyBlockLevel6_1D160 0x4A8
 
   FriBidiPropertyBlockLevel7_0044,  /* 1D160..1D163 */
   FriBidiPropertyBlockLevel7_0480,  /* 1D164..1D167 */
@@ -2160,7 +2481,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_1D178,  /* 1D178..1D17B */
   FriBidiPropertyBlockLevel7_0300,  /* 1D17C..1D17F */
 
-#define FriBidiPropertyBlockLevel6_1D180 0x3F0
+#define FriBidiPropertyBlockLevel6_1D180 0x4B0
 
   FriBidiPropertyBlockLevel7_0484,  /* 1D180..1D183 */
   FriBidiPropertyBlockLevel7_0940,  /* 1D184..1D187 */
@@ -2171,7 +2492,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 1D198..1D19B */
   FriBidiPropertyBlockLevel7_0044,  /* 1D19C..1D19F */
 
-#define FriBidiPropertyBlockLevel6_1D1A0 0x3F8
+#define FriBidiPropertyBlockLevel6_1D1A0 0x4B8
 
   FriBidiPropertyBlockLevel7_0044,  /* 1D1A0..1D1A3 */
   FriBidiPropertyBlockLevel7_0044,  /* 1D1A4..1D1A7 */
@@ -2182,7 +2503,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0044,  /* 1D1B8..1D1BB */
   FriBidiPropertyBlockLevel7_0044,  /* 1D1BC..1D1BF */
 
-#define FriBidiPropertyBlockLevel6_1D7C0 0x400
+#define FriBidiPropertyBlockLevel6_1D240 0x4C0
+
+  FriBidiPropertyBlockLevel7_1D240,  /* 1D240..1D243 */
+  FriBidiPropertyBlockLevel7_1D244,  /* 1D244..1D247 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1D248..1D24B */
+  FriBidiPropertyBlockLevel7_0044,  /* 1D24C..1D24F */
+  FriBidiPropertyBlockLevel7_0044,  /* 1D250..1D253 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1D254..1D257 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1D258..1D25B */
+  FriBidiPropertyBlockLevel7_0044,  /* 1D25C..1D25F */
+
+#define FriBidiPropertyBlockLevel6_1D7C0 0x4C8
 
   FriBidiPropertyBlockLevel7_0044,  /* 1D7C0..1D7C3 */
   FriBidiPropertyBlockLevel7_0044,  /* 1D7C4..1D7C7 */
@@ -2193,30 +2525,52 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel6[8*131] = {
   FriBidiPropertyBlockLevel7_0030,  /* 1D7D8..1D7DB */
   FriBidiPropertyBlockLevel7_0030,  /* 1D7DC..1D7DF */
 
-#define FriBidiPropertyBlockLevel6_E0000 0x408
+#define FriBidiPropertyBlockLevel6_1D7E0 0x4D0
 
-  FriBidiPropertyBlockLevel7_E0000,  /* E0000..E0003 */
-  FriBidiPropertyBlockLevel7_0044,  /* E0004..E0007 */
-  FriBidiPropertyBlockLevel7_0044,  /* E0008..E000B */
-  FriBidiPropertyBlockLevel7_0044,  /* E000C..E000F */
-  FriBidiPropertyBlockLevel7_0044,  /* E0010..E0013 */
-  FriBidiPropertyBlockLevel7_0044,  /* E0014..E0017 */
-  FriBidiPropertyBlockLevel7_0044,  /* E0018..E001B */
-  FriBidiPropertyBlockLevel7_0044,  /* E001C..E001F */
+  FriBidiPropertyBlockLevel7_0030,  /* 1D7E0..1D7E3 */
+  FriBidiPropertyBlockLevel7_0030,  /* 1D7E4..1D7E7 */
+  FriBidiPropertyBlockLevel7_0030,  /* 1D7E8..1D7EB */
+  FriBidiPropertyBlockLevel7_0030,  /* 1D7EC..1D7EF */
+  FriBidiPropertyBlockLevel7_0030,  /* 1D7F0..1D7F3 */
+  FriBidiPropertyBlockLevel7_0030,  /* 1D7F4..1D7F7 */
+  FriBidiPropertyBlockLevel7_0030,  /* 1D7F8..1D7FB */
+  FriBidiPropertyBlockLevel7_0030,  /* 1D7FC..1D7FF */
 
-#define FriBidiPropertyBlockLevel6_E0020 0x410
+#define FriBidiPropertyBlockLevel6_1FFE0 0x4D8
 
-  FriBidiPropertyBlockLevel7_0000,  /* E0020..E0023 */
-  FriBidiPropertyBlockLevel7_0000,  /* E0024..E0027 */
-  FriBidiPropertyBlockLevel7_0000,  /* E0028..E002B */
-  FriBidiPropertyBlockLevel7_0000,  /* E002C..E002F */
-  FriBidiPropertyBlockLevel7_0000,  /* E0030..E0033 */
-  FriBidiPropertyBlockLevel7_0000,  /* E0034..E0037 */
-  FriBidiPropertyBlockLevel7_0000,  /* E0038..E003B */
-  FriBidiPropertyBlockLevel7_0000,  /* E003C..E003F */
+  FriBidiPropertyBlockLevel7_0044,  /* 1FFE0..1FFE3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1FFE4..1FFE7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1FFE8..1FFEB */
+  FriBidiPropertyBlockLevel7_0044,  /* 1FFEC..1FFEF */
+  FriBidiPropertyBlockLevel7_0044,  /* 1FFF0..1FFF3 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1FFF4..1FFF7 */
+  FriBidiPropertyBlockLevel7_0044,  /* 1FFF8..1FFFB */
+  FriBidiPropertyBlockLevel7_1FFFC,  /* 1FFFC..1FFFF */
+
+#define FriBidiPropertyBlockLevel6_E0000 0x4E0
+
+  FriBidiPropertyBlockLevel7_0000,  /* E0000..E0003 */
+  FriBidiPropertyBlockLevel7_0000,  /* E0004..E0007 */
+  FriBidiPropertyBlockLevel7_0000,  /* E0008..E000B */
+  FriBidiPropertyBlockLevel7_0000,  /* E000C..E000F */
+  FriBidiPropertyBlockLevel7_0000,  /* E0010..E0013 */
+  FriBidiPropertyBlockLevel7_0000,  /* E0014..E0017 */
+  FriBidiPropertyBlockLevel7_0000,  /* E0018..E001B */
+  FriBidiPropertyBlockLevel7_0000,  /* E001C..E001F */
+
+#define FriBidiPropertyBlockLevel6_E01E0 0x4E8
+
+  FriBidiPropertyBlockLevel7_0300,  /* E01E0..E01E3 */
+  FriBidiPropertyBlockLevel7_0300,  /* E01E4..E01E7 */
+  FriBidiPropertyBlockLevel7_0300,  /* E01E8..E01EB */
+  FriBidiPropertyBlockLevel7_0300,  /* E01EC..E01EF */
+  FriBidiPropertyBlockLevel7_0000,  /* E01F0..E01F3 */
+  FriBidiPropertyBlockLevel7_0000,  /* E01F4..E01F7 */
+  FriBidiPropertyBlockLevel7_0000,  /* E01F8..E01FB */
+  FriBidiPropertyBlockLevel7_0000,  /* E01FC..E01FF */
 };
 
-static const PACKTAB_UINT16 FriBidiPropertyBlockLevel5[2*104] = {
+static const PACKTAB_UINT16 FriBidiPropertyBlockLevel5[2*126] = {
 
 #define FriBidiPropertyBlockLevel5_0000 0x0
 
@@ -2260,7 +2614,7 @@ static const PACKTAB_UINT16 FriBidiPropertyBlockLevel5[2*104] = {
 
 #define FriBidiPropertyBlockLevel5_0340 0x10
 
-  FriBidiPropertyBlockLevel6_0340,  /* 0340..035F */
+  FriBidiPropertyBlockLevel6_0300,  /* 0340..035F */
   FriBidiPropertyBlockLevel6_0360,  /* 0360..037F */
 
 #define FriBidiPropertyBlockLevel5_0380 0x12
@@ -2323,30 +2677,30 @@ static const PACKTAB_UINT16 FriBidiPropertyBlockLevel5[2*104] = {
   FriBidiPropertyBlockLevel6_0620,  /* 0780..079F */
   FriBidiPropertyBlockLevel6_07A0,  /* 07A0..07BF */
 
-#define FriBidiPropertyBlockLevel5_0900 0x2A
+#define FriBidiPropertyBlockLevel5_07C0 0x2A
+
+  FriBidiPropertyBlockLevel6_05E0,  /* 07C0..07DF */
+  FriBidiPropertyBlockLevel6_05E0,  /* 07E0..07FF */
+
+#define FriBidiPropertyBlockLevel5_0900 0x2C
 
   FriBidiPropertyBlockLevel6_0900,  /* 0900..091F */
   FriBidiPropertyBlockLevel6_0920,  /* 0920..093F */
 
-#define FriBidiPropertyBlockLevel5_0940 0x2C
+#define FriBidiPropertyBlockLevel5_0940 0x2E
 
   FriBidiPropertyBlockLevel6_0940,  /* 0940..095F */
   FriBidiPropertyBlockLevel6_0960,  /* 0960..097F */
 
-#define FriBidiPropertyBlockLevel5_0980 0x2E
+#define FriBidiPropertyBlockLevel5_0980 0x30
 
   FriBidiPropertyBlockLevel6_0980,  /* 0980..099F */
   FriBidiPropertyBlockLevel6_0920,  /* 09A0..09BF */
 
-#define FriBidiPropertyBlockLevel5_09C0 0x30
+#define FriBidiPropertyBlockLevel5_09C0 0x32
 
   FriBidiPropertyBlockLevel6_09C0,  /* 09C0..09DF */
   FriBidiPropertyBlockLevel6_09E0,  /* 09E0..09FF */
-
-#define FriBidiPropertyBlockLevel5_0A00 0x32
-
-  FriBidiPropertyBlockLevel6_0A00,  /* 0A00..0A1F */
-  FriBidiPropertyBlockLevel6_0920,  /* 0A20..0A3F */
 
 #define FriBidiPropertyBlockLevel5_0A40 0x34
 
@@ -2356,7 +2710,7 @@ static const PACKTAB_UINT16 FriBidiPropertyBlockLevel5[2*104] = {
 #define FriBidiPropertyBlockLevel5_0AC0 0x36
 
   FriBidiPropertyBlockLevel6_0AC0,  /* 0AC0..0ADF */
-  FriBidiPropertyBlockLevel6_0100,  /* 0AE0..0AFF */
+  FriBidiPropertyBlockLevel6_0AE0,  /* 0AE0..0AFF */
 
 #define FriBidiPropertyBlockLevel5_0B00 0x38
 
@@ -2370,13 +2724,13 @@ static const PACKTAB_UINT16 FriBidiPropertyBlockLevel5[2*104] = {
 
 #define FriBidiPropertyBlockLevel5_0B80 0x3C
 
-  FriBidiPropertyBlockLevel6_0A00,  /* 0B80..0B9F */
+  FriBidiPropertyBlockLevel6_0B80,  /* 0B80..0B9F */
   FriBidiPropertyBlockLevel6_0100,  /* 0BA0..0BBF */
 
 #define FriBidiPropertyBlockLevel5_0BC0 0x3E
 
   FriBidiPropertyBlockLevel6_0BC0,  /* 0BC0..0BDF */
-  FriBidiPropertyBlockLevel6_0100,  /* 0BE0..0BFF */
+  FriBidiPropertyBlockLevel6_0BE0,  /* 0BE0..0BFF */
 
 #define FriBidiPropertyBlockLevel5_0C00 0x40
 
@@ -2391,7 +2745,7 @@ static const PACKTAB_UINT16 FriBidiPropertyBlockLevel5[2*104] = {
 #define FriBidiPropertyBlockLevel5_0C80 0x44
 
   FriBidiPropertyBlockLevel6_0100,  /* 0C80..0C9F */
-  FriBidiPropertyBlockLevel6_0CA0,  /* 0CA0..0CBF */
+  FriBidiPropertyBlockLevel6_0920,  /* 0CA0..0CBF */
 
 #define FriBidiPropertyBlockLevel5_0CC0 0x46
 
@@ -2458,288 +2812,398 @@ static const PACKTAB_UINT16 FriBidiPropertyBlockLevel5[2*104] = {
   FriBidiPropertyBlockLevel6_0F00,  /* 1040..105F */
   FriBidiPropertyBlockLevel6_0100,  /* 1060..107F */
 
-#define FriBidiPropertyBlockLevel5_1680 0x60
+#define FriBidiPropertyBlockLevel5_1340 0x60
+
+  FriBidiPropertyBlockLevel6_1340,  /* 1340..135F */
+  FriBidiPropertyBlockLevel6_0100,  /* 1360..137F */
+
+#define FriBidiPropertyBlockLevel5_1380 0x62
+
+  FriBidiPropertyBlockLevel6_1380,  /* 1380..139F */
+  FriBidiPropertyBlockLevel6_0100,  /* 13A0..13BF */
+
+#define FriBidiPropertyBlockLevel5_1680 0x64
 
   FriBidiPropertyBlockLevel6_1680,  /* 1680..169F */
   FriBidiPropertyBlockLevel6_0100,  /* 16A0..16BF */
 
-#define FriBidiPropertyBlockLevel5_1700 0x62
+#define FriBidiPropertyBlockLevel5_1700 0x66
 
   FriBidiPropertyBlockLevel6_1700,  /* 1700..171F */
   FriBidiPropertyBlockLevel6_1700,  /* 1720..173F */
 
-#define FriBidiPropertyBlockLevel5_1740 0x64
+#define FriBidiPropertyBlockLevel5_1740 0x68
 
   FriBidiPropertyBlockLevel6_1740,  /* 1740..175F */
   FriBidiPropertyBlockLevel6_1740,  /* 1760..177F */
 
-#define FriBidiPropertyBlockLevel5_1780 0x66
+#define FriBidiPropertyBlockLevel5_1780 0x6A
 
   FriBidiPropertyBlockLevel6_0100,  /* 1780..179F */
   FriBidiPropertyBlockLevel6_17A0,  /* 17A0..17BF */
 
-#define FriBidiPropertyBlockLevel5_17C0 0x68
+#define FriBidiPropertyBlockLevel5_17C0 0x6C
 
   FriBidiPropertyBlockLevel6_17C0,  /* 17C0..17DF */
-  FriBidiPropertyBlockLevel6_0100,  /* 17E0..17FF */
+  FriBidiPropertyBlockLevel6_1380,  /* 17E0..17FF */
 
-#define FriBidiPropertyBlockLevel5_1800 0x6A
+#define FriBidiPropertyBlockLevel5_1800 0x6E
 
   FriBidiPropertyBlockLevel6_1800,  /* 1800..181F */
   FriBidiPropertyBlockLevel6_0100,  /* 1820..183F */
 
-#define FriBidiPropertyBlockLevel5_1880 0x6C
+#define FriBidiPropertyBlockLevel5_1880 0x70
 
   FriBidiPropertyBlockLevel6_0100,  /* 1880..189F */
   FriBidiPropertyBlockLevel6_18A0,  /* 18A0..18BF */
 
-#define FriBidiPropertyBlockLevel5_1F80 0x6E
+#define FriBidiPropertyBlockLevel5_1900 0x72
+
+  FriBidiPropertyBlockLevel6_0100,  /* 1900..191F */
+  FriBidiPropertyBlockLevel6_1920,  /* 1920..193F */
+
+#define FriBidiPropertyBlockLevel5_1940 0x74
+
+  FriBidiPropertyBlockLevel6_1940,  /* 1940..195F */
+  FriBidiPropertyBlockLevel6_0100,  /* 1960..197F */
+
+#define FriBidiPropertyBlockLevel5_19C0 0x76
+
+  FriBidiPropertyBlockLevel6_19C0,  /* 19C0..19DF */
+  FriBidiPropertyBlockLevel6_19E0,  /* 19E0..19FF */
+
+#define FriBidiPropertyBlockLevel5_1A00 0x78
+
+  FriBidiPropertyBlockLevel6_1A00,  /* 1A00..1A1F */
+  FriBidiPropertyBlockLevel6_0100,  /* 1A20..1A3F */
+
+#define FriBidiPropertyBlockLevel5_1DC0 0x7A
+
+  FriBidiPropertyBlockLevel6_1DC0,  /* 1DC0..1DDF */
+  FriBidiPropertyBlockLevel6_0100,  /* 1DE0..1DFF */
+
+#define FriBidiPropertyBlockLevel5_1F80 0x7C
 
   FriBidiPropertyBlockLevel6_0100,  /* 1F80..1F9F */
   FriBidiPropertyBlockLevel6_1FA0,  /* 1FA0..1FBF */
 
-#define FriBidiPropertyBlockLevel5_1FC0 0x70
+#define FriBidiPropertyBlockLevel5_1FC0 0x7E
 
   FriBidiPropertyBlockLevel6_1FC0,  /* 1FC0..1FDF */
   FriBidiPropertyBlockLevel6_1FE0,  /* 1FE0..1FFF */
 
-#define FriBidiPropertyBlockLevel5_2000 0x72
+#define FriBidiPropertyBlockLevel5_2000 0x80
 
   FriBidiPropertyBlockLevel6_2000,  /* 2000..201F */
   FriBidiPropertyBlockLevel6_2020,  /* 2020..203F */
 
-#define FriBidiPropertyBlockLevel5_2040 0x74
+#define FriBidiPropertyBlockLevel5_2040 0x82
 
   FriBidiPropertyBlockLevel6_2040,  /* 2040..205F */
   FriBidiPropertyBlockLevel6_2060,  /* 2060..207F */
 
-#define FriBidiPropertyBlockLevel5_2080 0x76
+#define FriBidiPropertyBlockLevel5_2080 0x84
 
   FriBidiPropertyBlockLevel6_2080,  /* 2080..209F */
   FriBidiPropertyBlockLevel6_20A0,  /* 20A0..20BF */
 
-#define FriBidiPropertyBlockLevel5_20C0 0x78
+#define FriBidiPropertyBlockLevel5_20C0 0x86
 
   FriBidiPropertyBlockLevel6_20C0,  /* 20C0..20DF */
   FriBidiPropertyBlockLevel6_20E0,  /* 20E0..20FF */
 
-#define FriBidiPropertyBlockLevel5_2100 0x7A
+#define FriBidiPropertyBlockLevel5_2100 0x88
 
   FriBidiPropertyBlockLevel6_2100,  /* 2100..211F */
   FriBidiPropertyBlockLevel6_2120,  /* 2120..213F */
 
-#define FriBidiPropertyBlockLevel5_2140 0x7C
+#define FriBidiPropertyBlockLevel5_2140 0x8A
 
   FriBidiPropertyBlockLevel6_2140,  /* 2140..215F */
   FriBidiPropertyBlockLevel6_0100,  /* 2160..217F */
 
-#define FriBidiPropertyBlockLevel5_2180 0x7E
+#define FriBidiPropertyBlockLevel5_2180 0x8C
 
   FriBidiPropertyBlockLevel6_2180,  /* 2180..219F */
-  FriBidiPropertyBlockLevel6_21A0,  /* 21A0..21BF */
+  FriBidiPropertyBlockLevel6_19E0,  /* 21A0..21BF */
 
-#define FriBidiPropertyBlockLevel5_21C0 0x80
+#define FriBidiPropertyBlockLevel5_21C0 0x8E
 
-  FriBidiPropertyBlockLevel6_21A0,  /* 21C0..21DF */
-  FriBidiPropertyBlockLevel6_21A0,  /* 21E0..21FF */
+  FriBidiPropertyBlockLevel6_19E0,  /* 21C0..21DF */
+  FriBidiPropertyBlockLevel6_19E0,  /* 21E0..21FF */
 
-#define FriBidiPropertyBlockLevel5_2200 0x82
+#define FriBidiPropertyBlockLevel5_2200 0x90
 
   FriBidiPropertyBlockLevel6_2200,  /* 2200..221F */
-  FriBidiPropertyBlockLevel6_21A0,  /* 2220..223F */
+  FriBidiPropertyBlockLevel6_19E0,  /* 2220..223F */
 
-#define FriBidiPropertyBlockLevel5_2300 0x84
+#define FriBidiPropertyBlockLevel5_2300 0x92
 
-  FriBidiPropertyBlockLevel6_21A0,  /* 2300..231F */
+  FriBidiPropertyBlockLevel6_19E0,  /* 2300..231F */
   FriBidiPropertyBlockLevel6_2320,  /* 2320..233F */
 
-#define FriBidiPropertyBlockLevel5_2340 0x86
+#define FriBidiPropertyBlockLevel5_2340 0x94
 
   FriBidiPropertyBlockLevel6_0100,  /* 2340..235F */
   FriBidiPropertyBlockLevel6_2360,  /* 2360..237F */
 
-#define FriBidiPropertyBlockLevel5_2380 0x88
+#define FriBidiPropertyBlockLevel5_2380 0x96
 
   FriBidiPropertyBlockLevel6_2380,  /* 2380..239F */
-  FriBidiPropertyBlockLevel6_21A0,  /* 23A0..23BF */
+  FriBidiPropertyBlockLevel6_19E0,  /* 23A0..23BF */
 
-#define FriBidiPropertyBlockLevel5_23C0 0x8A
+#define FriBidiPropertyBlockLevel5_23C0 0x98
 
   FriBidiPropertyBlockLevel6_23C0,  /* 23C0..23DF */
   FriBidiPropertyBlockLevel6_0100,  /* 23E0..23FF */
 
-#define FriBidiPropertyBlockLevel5_2400 0x8C
+#define FriBidiPropertyBlockLevel5_2400 0x9A
 
-  FriBidiPropertyBlockLevel6_21A0,  /* 2400..241F */
+  FriBidiPropertyBlockLevel6_19E0,  /* 2400..241F */
   FriBidiPropertyBlockLevel6_2420,  /* 2420..243F */
 
-#define FriBidiPropertyBlockLevel5_2440 0x8E
+#define FriBidiPropertyBlockLevel5_2440 0x9C
 
   FriBidiPropertyBlockLevel6_2440,  /* 2440..245F */
-  FriBidiPropertyBlockLevel6_2460,  /* 2460..247F */
+  FriBidiPropertyBlockLevel6_19E0,  /* 2460..247F */
 
-#define FriBidiPropertyBlockLevel5_2480 0x90
+#define FriBidiPropertyBlockLevel5_2480 0x9E
 
   FriBidiPropertyBlockLevel6_2480,  /* 2480..249F */
   FriBidiPropertyBlockLevel6_0100,  /* 24A0..24BF */
 
-#define FriBidiPropertyBlockLevel5_24C0 0x92
+#define FriBidiPropertyBlockLevel5_24C0 0xA0
 
   FriBidiPropertyBlockLevel6_0100,  /* 24C0..24DF */
   FriBidiPropertyBlockLevel6_24E0,  /* 24E0..24FF */
 
-#define FriBidiPropertyBlockLevel5_2600 0x94
-
-  FriBidiPropertyBlockLevel6_2600,  /* 2600..261F */
-  FriBidiPropertyBlockLevel6_21A0,  /* 2620..263F */
-
-#define FriBidiPropertyBlockLevel5_2640 0x96
-
-  FriBidiPropertyBlockLevel6_21A0,  /* 2640..265F */
-  FriBidiPropertyBlockLevel6_2660,  /* 2660..267F */
-
-#define FriBidiPropertyBlockLevel5_2680 0x98
+#define FriBidiPropertyBlockLevel5_2680 0xA2
 
   FriBidiPropertyBlockLevel6_2680,  /* 2680..269F */
-  FriBidiPropertyBlockLevel6_0100,  /* 26A0..26BF */
+  FriBidiPropertyBlockLevel6_26A0,  /* 26A0..26BF */
 
-#define FriBidiPropertyBlockLevel5_2700 0x9A
+#define FriBidiPropertyBlockLevel5_2700 0xA4
 
   FriBidiPropertyBlockLevel6_2700,  /* 2700..271F */
   FriBidiPropertyBlockLevel6_2720,  /* 2720..273F */
 
-#define FriBidiPropertyBlockLevel5_2740 0x9C
+#define FriBidiPropertyBlockLevel5_2740 0xA6
 
   FriBidiPropertyBlockLevel6_2740,  /* 2740..275F */
   FriBidiPropertyBlockLevel6_2760,  /* 2760..277F */
 
-#define FriBidiPropertyBlockLevel5_2780 0x9E
+#define FriBidiPropertyBlockLevel5_2780 0xA8
 
   FriBidiPropertyBlockLevel6_2780,  /* 2780..279F */
   FriBidiPropertyBlockLevel6_27A0,  /* 27A0..27BF */
 
-#define FriBidiPropertyBlockLevel5_27C0 0xA0
+#define FriBidiPropertyBlockLevel5_27C0 0xAA
 
-  FriBidiPropertyBlockLevel6_2180,  /* 27C0..27DF */
+  FriBidiPropertyBlockLevel6_27C0,  /* 27C0..27DF */
   FriBidiPropertyBlockLevel6_27E0,  /* 27E0..27FF */
 
-#define FriBidiPropertyBlockLevel5_2E80 0xA2
+#define FriBidiPropertyBlockLevel5_2B00 0xAC
+
+  FriBidiPropertyBlockLevel6_2B00,  /* 2B00..2B1F */
+  FriBidiPropertyBlockLevel6_0100,  /* 2B20..2B3F */
+
+#define FriBidiPropertyBlockLevel5_2CC0 0xAE
+
+  FriBidiPropertyBlockLevel6_0100,  /* 2CC0..2CDF */
+  FriBidiPropertyBlockLevel6_2CE0,  /* 2CE0..2CFF */
+
+#define FriBidiPropertyBlockLevel5_2E00 0xB0
+
+  FriBidiPropertyBlockLevel6_2E00,  /* 2E00..2E1F */
+  FriBidiPropertyBlockLevel6_0100,  /* 2E20..2E3F */
+
+#define FriBidiPropertyBlockLevel5_2E80 0xB2
 
   FriBidiPropertyBlockLevel6_2E80,  /* 2E80..2E9F */
-  FriBidiPropertyBlockLevel6_21A0,  /* 2EA0..2EBF */
+  FriBidiPropertyBlockLevel6_19E0,  /* 2EA0..2EBF */
 
-#define FriBidiPropertyBlockLevel5_2EC0 0xA4
+#define FriBidiPropertyBlockLevel5_2EC0 0xB4
 
-  FriBidiPropertyBlockLevel6_21A0,  /* 2EC0..2EDF */
-  FriBidiPropertyBlockLevel6_2EE0,  /* 2EE0..2EFF */
+  FriBidiPropertyBlockLevel6_19E0,  /* 2EC0..2EDF */
+  FriBidiPropertyBlockLevel6_2B00,  /* 2EE0..2EFF */
 
-#define FriBidiPropertyBlockLevel5_2FC0 0xA6
+#define FriBidiPropertyBlockLevel5_2FC0 0xB6
 
   FriBidiPropertyBlockLevel6_2320,  /* 2FC0..2FDF */
   FriBidiPropertyBlockLevel6_2FE0,  /* 2FE0..2FFF */
 
-#define FriBidiPropertyBlockLevel5_3000 0xA8
+#define FriBidiPropertyBlockLevel5_3000 0xB8
 
   FriBidiPropertyBlockLevel6_3000,  /* 3000..301F */
   FriBidiPropertyBlockLevel6_3020,  /* 3020..303F */
 
-#define FriBidiPropertyBlockLevel5_3080 0xAA
+#define FriBidiPropertyBlockLevel5_3080 0xBA
 
   FriBidiPropertyBlockLevel6_3080,  /* 3080..309F */
   FriBidiPropertyBlockLevel6_30A0,  /* 30A0..30BF */
 
-#define FriBidiPropertyBlockLevel5_30C0 0xAC
+#define FriBidiPropertyBlockLevel5_30C0 0xBC
 
   FriBidiPropertyBlockLevel6_0100,  /* 30C0..30DF */
   FriBidiPropertyBlockLevel6_30E0,  /* 30E0..30FF */
 
-#define FriBidiPropertyBlockLevel5_3240 0xAE
+#define FriBidiPropertyBlockLevel5_31C0 0xBE
 
-  FriBidiPropertyBlockLevel6_3240,  /* 3240..325F */
-  FriBidiPropertyBlockLevel6_0100,  /* 3260..327F */
+  FriBidiPropertyBlockLevel6_31C0,  /* 31C0..31DF */
+  FriBidiPropertyBlockLevel6_0100,  /* 31E0..31FF */
 
-#define FriBidiPropertyBlockLevel5_3280 0xB0
+#define FriBidiPropertyBlockLevel5_3200 0xC0
+
+  FriBidiPropertyBlockLevel6_3200,  /* 3200..321F */
+  FriBidiPropertyBlockLevel6_0100,  /* 3220..323F */
+
+#define FriBidiPropertyBlockLevel5_3240 0xC2
+
+  FriBidiPropertyBlockLevel6_2180,  /* 3240..325F */
+  FriBidiPropertyBlockLevel6_3260,  /* 3260..327F */
+
+#define FriBidiPropertyBlockLevel5_3280 0xC4
 
   FriBidiPropertyBlockLevel6_0100,  /* 3280..329F */
-  FriBidiPropertyBlockLevel6_3240,  /* 32A0..32BF */
+  FriBidiPropertyBlockLevel6_32A0,  /* 32A0..32BF */
 
-#define FriBidiPropertyBlockLevel5_A4C0 0xB2
+#define FriBidiPropertyBlockLevel5_32C0 0xC6
+
+  FriBidiPropertyBlockLevel6_32C0,  /* 32C0..32DF */
+  FriBidiPropertyBlockLevel6_0100,  /* 32E0..32FF */
+
+#define FriBidiPropertyBlockLevel5_3340 0xC8
+
+  FriBidiPropertyBlockLevel6_0100,  /* 3340..335F */
+  FriBidiPropertyBlockLevel6_3360,  /* 3360..337F */
+
+#define FriBidiPropertyBlockLevel5_33C0 0xCA
+
+  FriBidiPropertyBlockLevel6_19C0,  /* 33C0..33DF */
+  FriBidiPropertyBlockLevel6_33E0,  /* 33E0..33FF */
+
+#define FriBidiPropertyBlockLevel5_A4C0 0xCC
 
   FriBidiPropertyBlockLevel6_2420,  /* A4C0..A4DF */
   FriBidiPropertyBlockLevel6_0100,  /* A4E0..A4FF */
 
-#define FriBidiPropertyBlockLevel5_FB00 0xB4
+#define FriBidiPropertyBlockLevel5_A700 0xCE
+
+  FriBidiPropertyBlockLevel6_A700,  /* A700..A71F */
+  FriBidiPropertyBlockLevel6_0100,  /* A720..A73F */
+
+#define FriBidiPropertyBlockLevel5_A800 0xD0
+
+  FriBidiPropertyBlockLevel6_A800,  /* A800..A81F */
+  FriBidiPropertyBlockLevel6_A820,  /* A820..A83F */
+
+#define FriBidiPropertyBlockLevel5_FB00 0xD2
 
   FriBidiPropertyBlockLevel6_FB00,  /* FB00..FB1F */
   FriBidiPropertyBlockLevel6_FB20,  /* FB20..FB3F */
 
-#define FriBidiPropertyBlockLevel5_FB40 0xB6
+#define FriBidiPropertyBlockLevel5_FB40 0xD4
 
   FriBidiPropertyBlockLevel6_FB40,  /* FB40..FB5F */
   FriBidiPropertyBlockLevel6_0620,  /* FB60..FB7F */
 
-#define FriBidiPropertyBlockLevel5_FD00 0xB8
+#define FriBidiPropertyBlockLevel5_FD00 0xD6
 
   FriBidiPropertyBlockLevel6_0620,  /* FD00..FD1F */
   FriBidiPropertyBlockLevel6_FD20,  /* FD20..FD3F */
 
-#define FriBidiPropertyBlockLevel5_FE00 0xBA
+#define FriBidiPropertyBlockLevel5_FDC0 0xD8
 
-  FriBidiPropertyBlockLevel6_0340,  /* FE00..FE1F */
+  FriBidiPropertyBlockLevel6_FDC0,  /* FDC0..FDDF */
+  FriBidiPropertyBlockLevel6_FDE0,  /* FDE0..FDFF */
+
+#define FriBidiPropertyBlockLevel5_FE00 0xDA
+
+  FriBidiPropertyBlockLevel6_FE00,  /* FE00..FE1F */
   FriBidiPropertyBlockLevel6_FE20,  /* FE20..FE3F */
 
-#define FriBidiPropertyBlockLevel5_FE40 0xBC
+#define FriBidiPropertyBlockLevel5_FE40 0xDC
 
   FriBidiPropertyBlockLevel6_FE40,  /* FE40..FE5F */
   FriBidiPropertyBlockLevel6_FE60,  /* FE60..FE7F */
 
-#define FriBidiPropertyBlockLevel5_FEC0 0xBE
+#define FriBidiPropertyBlockLevel5_FEC0 0xDE
 
   FriBidiPropertyBlockLevel6_0620,  /* FEC0..FEDF */
   FriBidiPropertyBlockLevel6_FEE0,  /* FEE0..FEFF */
 
-#define FriBidiPropertyBlockLevel5_FF00 0xC0
+#define FriBidiPropertyBlockLevel5_FF00 0xE0
 
   FriBidiPropertyBlockLevel6_FF00,  /* FF00..FF1F */
   FriBidiPropertyBlockLevel6_0040,  /* FF20..FF3F */
 
-#define FriBidiPropertyBlockLevel5_FF40 0xC2
+#define FriBidiPropertyBlockLevel5_FF40 0xE2
 
   FriBidiPropertyBlockLevel6_0040,  /* FF40..FF5F */
   FriBidiPropertyBlockLevel6_FF60,  /* FF60..FF7F */
 
-#define FriBidiPropertyBlockLevel5_FFC0 0xC4
+#define FriBidiPropertyBlockLevel5_FFC0 0xE4
 
   FriBidiPropertyBlockLevel6_0100,  /* FFC0..FFDF */
   FriBidiPropertyBlockLevel6_FFE0,  /* FFE0..FFFF */
 
-#define FriBidiPropertyBlockLevel5_1D140 0xC6
+#define FriBidiPropertyBlockLevel5_10100 0xE6
+
+  FriBidiPropertyBlockLevel6_10100,  /* 10100..1011F */
+  FriBidiPropertyBlockLevel6_0100,  /* 10120..1013F */
+
+#define FriBidiPropertyBlockLevel5_10180 0xE8
+
+  FriBidiPropertyBlockLevel6_2440,  /* 10180..1019F */
+  FriBidiPropertyBlockLevel6_0100,  /* 101A0..101BF */
+
+#define FriBidiPropertyBlockLevel5_103C0 0xEA
+
+  FriBidiPropertyBlockLevel6_103C0,  /* 103C0..103DF */
+  FriBidiPropertyBlockLevel6_0100,  /* 103E0..103FF */
+
+#define FriBidiPropertyBlockLevel5_10A00 0xEC
+
+  FriBidiPropertyBlockLevel6_10A00,  /* 10A00..10A1F */
+  FriBidiPropertyBlockLevel6_10A20,  /* 10A20..10A3F */
+
+#define FriBidiPropertyBlockLevel5_1D140 0xEE
 
   FriBidiPropertyBlockLevel6_0100,  /* 1D140..1D15F */
   FriBidiPropertyBlockLevel6_1D160,  /* 1D160..1D17F */
 
-#define FriBidiPropertyBlockLevel5_1D180 0xC8
+#define FriBidiPropertyBlockLevel5_1D180 0xF0
 
   FriBidiPropertyBlockLevel6_1D180,  /* 1D180..1D19F */
   FriBidiPropertyBlockLevel6_1D1A0,  /* 1D1A0..1D1BF */
 
-#define FriBidiPropertyBlockLevel5_1D7C0 0xCA
+#define FriBidiPropertyBlockLevel5_1D240 0xF2
+
+  FriBidiPropertyBlockLevel6_1D240,  /* 1D240..1D25F */
+  FriBidiPropertyBlockLevel6_0100,  /* 1D260..1D27F */
+
+#define FriBidiPropertyBlockLevel5_1D7C0 0xF4
 
   FriBidiPropertyBlockLevel6_1D7C0,  /* 1D7C0..1D7DF */
-  FriBidiPropertyBlockLevel6_2460,  /* 1D7E0..1D7FF */
+  FriBidiPropertyBlockLevel6_1D7E0,  /* 1D7E0..1D7FF */
 
-#define FriBidiPropertyBlockLevel5_E0000 0xCC
+#define FriBidiPropertyBlockLevel5_1FFC0 0xF6
+
+  FriBidiPropertyBlockLevel6_0100,  /* 1FFC0..1FFDF */
+  FriBidiPropertyBlockLevel6_1FFE0,  /* 1FFE0..1FFFF */
+
+#define FriBidiPropertyBlockLevel5_E0000 0xF8
 
   FriBidiPropertyBlockLevel6_E0000,  /* E0000..E001F */
-  FriBidiPropertyBlockLevel6_E0020,  /* E0020..E003F */
+  FriBidiPropertyBlockLevel6_E0000,  /* E0020..E003F */
 
-#define FriBidiPropertyBlockLevel5_E0040 0xCE
+#define FriBidiPropertyBlockLevel5_E01C0 0xFA
 
-  FriBidiPropertyBlockLevel6_E0020,  /* E0040..E005F */
-  FriBidiPropertyBlockLevel6_E0020,  /* E0060..E007F */
+  FriBidiPropertyBlockLevel6_0300,  /* E01C0..E01DF */
+  FriBidiPropertyBlockLevel6_E01E0,  /* E01E0..E01FF */
 };
 
-static const PACKTAB_UINT8 FriBidiPropertyBlockLevel4[4*41] = {
+static const PACKTAB_UINT8 FriBidiPropertyBlockLevel4[4*60] = {
 
 #define FriBidiPropertyBlockLevel4_0000 0x0
 
@@ -2795,241 +3259,374 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel4[4*41] = {
   FriBidiPropertyBlockLevel5_0700,  /* 0700..073F */
   FriBidiPropertyBlockLevel5_0740,  /* 0740..077F */
   FriBidiPropertyBlockLevel5_0780,  /* 0780..07BF */
-  FriBidiPropertyBlockLevel5_0100,  /* 07C0..07FF */
+  FriBidiPropertyBlockLevel5_07C0,  /* 07C0..07FF */
 
-#define FriBidiPropertyBlockLevel4_0900 0x20
+#define FriBidiPropertyBlockLevel4_0800 0x20
+
+  FriBidiPropertyBlockLevel5_07C0,  /* 0800..083F */
+  FriBidiPropertyBlockLevel5_07C0,  /* 0840..087F */
+  FriBidiPropertyBlockLevel5_07C0,  /* 0880..08BF */
+  FriBidiPropertyBlockLevel5_07C0,  /* 08C0..08FF */
+
+#define FriBidiPropertyBlockLevel4_0900 0x24
 
   FriBidiPropertyBlockLevel5_0900,  /* 0900..093F */
   FriBidiPropertyBlockLevel5_0940,  /* 0940..097F */
   FriBidiPropertyBlockLevel5_0980,  /* 0980..09BF */
   FriBidiPropertyBlockLevel5_09C0,  /* 09C0..09FF */
 
-#define FriBidiPropertyBlockLevel4_0A00 0x24
+#define FriBidiPropertyBlockLevel4_0A00 0x28
 
-  FriBidiPropertyBlockLevel5_0A00,  /* 0A00..0A3F */
+  FriBidiPropertyBlockLevel5_0900,  /* 0A00..0A3F */
   FriBidiPropertyBlockLevel5_0A40,  /* 0A40..0A7F */
   FriBidiPropertyBlockLevel5_0900,  /* 0A80..0ABF */
   FriBidiPropertyBlockLevel5_0AC0,  /* 0AC0..0AFF */
 
-#define FriBidiPropertyBlockLevel4_0B00 0x28
+#define FriBidiPropertyBlockLevel4_0B00 0x2C
 
   FriBidiPropertyBlockLevel5_0B00,  /* 0B00..0B3F */
   FriBidiPropertyBlockLevel5_0B40,  /* 0B40..0B7F */
   FriBidiPropertyBlockLevel5_0B80,  /* 0B80..0BBF */
   FriBidiPropertyBlockLevel5_0BC0,  /* 0BC0..0BFF */
 
-#define FriBidiPropertyBlockLevel4_0C00 0x2C
+#define FriBidiPropertyBlockLevel4_0C00 0x30
 
   FriBidiPropertyBlockLevel5_0C00,  /* 0C00..0C3F */
   FriBidiPropertyBlockLevel5_0C40,  /* 0C40..0C7F */
   FriBidiPropertyBlockLevel5_0C80,  /* 0C80..0CBF */
   FriBidiPropertyBlockLevel5_0CC0,  /* 0CC0..0CFF */
 
-#define FriBidiPropertyBlockLevel4_0D00 0x30
+#define FriBidiPropertyBlockLevel4_0D00 0x34
 
   FriBidiPropertyBlockLevel5_0100,  /* 0D00..0D3F */
   FriBidiPropertyBlockLevel5_0D40,  /* 0D40..0D7F */
   FriBidiPropertyBlockLevel5_0100,  /* 0D80..0DBF */
   FriBidiPropertyBlockLevel5_0DC0,  /* 0DC0..0DFF */
 
-#define FriBidiPropertyBlockLevel4_0E00 0x34
+#define FriBidiPropertyBlockLevel4_0E00 0x38
 
   FriBidiPropertyBlockLevel5_0E00,  /* 0E00..0E3F */
   FriBidiPropertyBlockLevel5_0E40,  /* 0E40..0E7F */
   FriBidiPropertyBlockLevel5_0E80,  /* 0E80..0EBF */
   FriBidiPropertyBlockLevel5_0EC0,  /* 0EC0..0EFF */
 
-#define FriBidiPropertyBlockLevel4_0F00 0x38
+#define FriBidiPropertyBlockLevel4_0F00 0x3C
 
   FriBidiPropertyBlockLevel5_0F00,  /* 0F00..0F3F */
   FriBidiPropertyBlockLevel5_0F40,  /* 0F40..0F7F */
   FriBidiPropertyBlockLevel5_0F80,  /* 0F80..0FBF */
   FriBidiPropertyBlockLevel5_0FC0,  /* 0FC0..0FFF */
 
-#define FriBidiPropertyBlockLevel4_1000 0x3C
+#define FriBidiPropertyBlockLevel4_1000 0x40
 
   FriBidiPropertyBlockLevel5_1000,  /* 1000..103F */
   FriBidiPropertyBlockLevel5_1040,  /* 1040..107F */
   FriBidiPropertyBlockLevel5_0100,  /* 1080..10BF */
   FriBidiPropertyBlockLevel5_0100,  /* 10C0..10FF */
 
-#define FriBidiPropertyBlockLevel4_1600 0x40
+#define FriBidiPropertyBlockLevel4_1300 0x44
+
+  FriBidiPropertyBlockLevel5_0100,  /* 1300..133F */
+  FriBidiPropertyBlockLevel5_1340,  /* 1340..137F */
+  FriBidiPropertyBlockLevel5_1380,  /* 1380..13BF */
+  FriBidiPropertyBlockLevel5_0100,  /* 13C0..13FF */
+
+#define FriBidiPropertyBlockLevel4_1600 0x48
 
   FriBidiPropertyBlockLevel5_0100,  /* 1600..163F */
   FriBidiPropertyBlockLevel5_0100,  /* 1640..167F */
   FriBidiPropertyBlockLevel5_1680,  /* 1680..16BF */
   FriBidiPropertyBlockLevel5_0100,  /* 16C0..16FF */
 
-#define FriBidiPropertyBlockLevel4_1700 0x44
+#define FriBidiPropertyBlockLevel4_1700 0x4C
 
   FriBidiPropertyBlockLevel5_1700,  /* 1700..173F */
   FriBidiPropertyBlockLevel5_1740,  /* 1740..177F */
   FriBidiPropertyBlockLevel5_1780,  /* 1780..17BF */
   FriBidiPropertyBlockLevel5_17C0,  /* 17C0..17FF */
 
-#define FriBidiPropertyBlockLevel4_1800 0x48
+#define FriBidiPropertyBlockLevel4_1800 0x50
 
   FriBidiPropertyBlockLevel5_1800,  /* 1800..183F */
   FriBidiPropertyBlockLevel5_0100,  /* 1840..187F */
   FriBidiPropertyBlockLevel5_1880,  /* 1880..18BF */
   FriBidiPropertyBlockLevel5_0100,  /* 18C0..18FF */
 
-#define FriBidiPropertyBlockLevel4_1F00 0x4C
+#define FriBidiPropertyBlockLevel4_1900 0x54
+
+  FriBidiPropertyBlockLevel5_1900,  /* 1900..193F */
+  FriBidiPropertyBlockLevel5_1940,  /* 1940..197F */
+  FriBidiPropertyBlockLevel5_0100,  /* 1980..19BF */
+  FriBidiPropertyBlockLevel5_19C0,  /* 19C0..19FF */
+
+#define FriBidiPropertyBlockLevel4_1A00 0x58
+
+  FriBidiPropertyBlockLevel5_1A00,  /* 1A00..1A3F */
+  FriBidiPropertyBlockLevel5_0100,  /* 1A40..1A7F */
+  FriBidiPropertyBlockLevel5_0100,  /* 1A80..1ABF */
+  FriBidiPropertyBlockLevel5_0100,  /* 1AC0..1AFF */
+
+#define FriBidiPropertyBlockLevel4_1D00 0x5C
+
+  FriBidiPropertyBlockLevel5_0100,  /* 1D00..1D3F */
+  FriBidiPropertyBlockLevel5_0100,  /* 1D40..1D7F */
+  FriBidiPropertyBlockLevel5_0100,  /* 1D80..1DBF */
+  FriBidiPropertyBlockLevel5_1DC0,  /* 1DC0..1DFF */
+
+#define FriBidiPropertyBlockLevel4_1F00 0x60
 
   FriBidiPropertyBlockLevel5_0100,  /* 1F00..1F3F */
   FriBidiPropertyBlockLevel5_0100,  /* 1F40..1F7F */
   FriBidiPropertyBlockLevel5_1F80,  /* 1F80..1FBF */
   FriBidiPropertyBlockLevel5_1FC0,  /* 1FC0..1FFF */
 
-#define FriBidiPropertyBlockLevel4_2000 0x50
+#define FriBidiPropertyBlockLevel4_2000 0x64
 
   FriBidiPropertyBlockLevel5_2000,  /* 2000..203F */
   FriBidiPropertyBlockLevel5_2040,  /* 2040..207F */
   FriBidiPropertyBlockLevel5_2080,  /* 2080..20BF */
   FriBidiPropertyBlockLevel5_20C0,  /* 20C0..20FF */
 
-#define FriBidiPropertyBlockLevel4_2100 0x54
+#define FriBidiPropertyBlockLevel4_2100 0x68
 
   FriBidiPropertyBlockLevel5_2100,  /* 2100..213F */
   FriBidiPropertyBlockLevel5_2140,  /* 2140..217F */
   FriBidiPropertyBlockLevel5_2180,  /* 2180..21BF */
   FriBidiPropertyBlockLevel5_21C0,  /* 21C0..21FF */
 
-#define FriBidiPropertyBlockLevel4_2200 0x58
+#define FriBidiPropertyBlockLevel4_2200 0x6C
 
   FriBidiPropertyBlockLevel5_2200,  /* 2200..223F */
   FriBidiPropertyBlockLevel5_21C0,  /* 2240..227F */
   FriBidiPropertyBlockLevel5_21C0,  /* 2280..22BF */
   FriBidiPropertyBlockLevel5_21C0,  /* 22C0..22FF */
 
-#define FriBidiPropertyBlockLevel4_2300 0x5C
+#define FriBidiPropertyBlockLevel4_2300 0x70
 
   FriBidiPropertyBlockLevel5_2300,  /* 2300..233F */
   FriBidiPropertyBlockLevel5_2340,  /* 2340..237F */
   FriBidiPropertyBlockLevel5_2380,  /* 2380..23BF */
   FriBidiPropertyBlockLevel5_23C0,  /* 23C0..23FF */
 
-#define FriBidiPropertyBlockLevel4_2400 0x60
+#define FriBidiPropertyBlockLevel4_2400 0x74
 
   FriBidiPropertyBlockLevel5_2400,  /* 2400..243F */
   FriBidiPropertyBlockLevel5_2440,  /* 2440..247F */
   FriBidiPropertyBlockLevel5_2480,  /* 2480..24BF */
   FriBidiPropertyBlockLevel5_24C0,  /* 24C0..24FF */
 
-#define FriBidiPropertyBlockLevel4_2500 0x64
+#define FriBidiPropertyBlockLevel4_2500 0x78
 
   FriBidiPropertyBlockLevel5_21C0,  /* 2500..253F */
   FriBidiPropertyBlockLevel5_21C0,  /* 2540..257F */
   FriBidiPropertyBlockLevel5_21C0,  /* 2580..25BF */
   FriBidiPropertyBlockLevel5_21C0,  /* 25C0..25FF */
 
-#define FriBidiPropertyBlockLevel4_2600 0x68
+#define FriBidiPropertyBlockLevel4_2600 0x7C
 
-  FriBidiPropertyBlockLevel5_2600,  /* 2600..263F */
-  FriBidiPropertyBlockLevel5_2640,  /* 2640..267F */
+  FriBidiPropertyBlockLevel5_21C0,  /* 2600..263F */
+  FriBidiPropertyBlockLevel5_21C0,  /* 2640..267F */
   FriBidiPropertyBlockLevel5_2680,  /* 2680..26BF */
   FriBidiPropertyBlockLevel5_0100,  /* 26C0..26FF */
 
-#define FriBidiPropertyBlockLevel4_2700 0x6C
+#define FriBidiPropertyBlockLevel4_2700 0x80
 
   FriBidiPropertyBlockLevel5_2700,  /* 2700..273F */
   FriBidiPropertyBlockLevel5_2740,  /* 2740..277F */
   FriBidiPropertyBlockLevel5_2780,  /* 2780..27BF */
   FriBidiPropertyBlockLevel5_27C0,  /* 27C0..27FF */
 
-#define FriBidiPropertyBlockLevel4_2E00 0x70
+#define FriBidiPropertyBlockLevel4_2B00 0x84
 
-  FriBidiPropertyBlockLevel5_0100,  /* 2E00..2E3F */
+  FriBidiPropertyBlockLevel5_2B00,  /* 2B00..2B3F */
+  FriBidiPropertyBlockLevel5_0100,  /* 2B40..2B7F */
+  FriBidiPropertyBlockLevel5_0100,  /* 2B80..2BBF */
+  FriBidiPropertyBlockLevel5_0100,  /* 2BC0..2BFF */
+
+#define FriBidiPropertyBlockLevel4_2C00 0x88
+
+  FriBidiPropertyBlockLevel5_0100,  /* 2C00..2C3F */
+  FriBidiPropertyBlockLevel5_0100,  /* 2C40..2C7F */
+  FriBidiPropertyBlockLevel5_0100,  /* 2C80..2CBF */
+  FriBidiPropertyBlockLevel5_2CC0,  /* 2CC0..2CFF */
+
+#define FriBidiPropertyBlockLevel4_2E00 0x8C
+
+  FriBidiPropertyBlockLevel5_2E00,  /* 2E00..2E3F */
   FriBidiPropertyBlockLevel5_0100,  /* 2E40..2E7F */
   FriBidiPropertyBlockLevel5_2E80,  /* 2E80..2EBF */
   FriBidiPropertyBlockLevel5_2EC0,  /* 2EC0..2EFF */
 
-#define FriBidiPropertyBlockLevel4_2F00 0x74
+#define FriBidiPropertyBlockLevel4_2F00 0x90
 
   FriBidiPropertyBlockLevel5_21C0,  /* 2F00..2F3F */
   FriBidiPropertyBlockLevel5_21C0,  /* 2F40..2F7F */
   FriBidiPropertyBlockLevel5_21C0,  /* 2F80..2FBF */
   FriBidiPropertyBlockLevel5_2FC0,  /* 2FC0..2FFF */
 
-#define FriBidiPropertyBlockLevel4_3000 0x78
+#define FriBidiPropertyBlockLevel4_3000 0x94
 
   FriBidiPropertyBlockLevel5_3000,  /* 3000..303F */
   FriBidiPropertyBlockLevel5_0100,  /* 3040..307F */
   FriBidiPropertyBlockLevel5_3080,  /* 3080..30BF */
   FriBidiPropertyBlockLevel5_30C0,  /* 30C0..30FF */
 
-#define FriBidiPropertyBlockLevel4_3200 0x7C
+#define FriBidiPropertyBlockLevel4_3100 0x98
 
-  FriBidiPropertyBlockLevel5_0100,  /* 3200..323F */
+  FriBidiPropertyBlockLevel5_0100,  /* 3100..313F */
+  FriBidiPropertyBlockLevel5_0100,  /* 3140..317F */
+  FriBidiPropertyBlockLevel5_0100,  /* 3180..31BF */
+  FriBidiPropertyBlockLevel5_31C0,  /* 31C0..31FF */
+
+#define FriBidiPropertyBlockLevel4_3200 0x9C
+
+  FriBidiPropertyBlockLevel5_3200,  /* 3200..323F */
   FriBidiPropertyBlockLevel5_3240,  /* 3240..327F */
   FriBidiPropertyBlockLevel5_3280,  /* 3280..32BF */
-  FriBidiPropertyBlockLevel5_0100,  /* 32C0..32FF */
+  FriBidiPropertyBlockLevel5_32C0,  /* 32C0..32FF */
 
-#define FriBidiPropertyBlockLevel4_A400 0x80
+#define FriBidiPropertyBlockLevel4_3300 0xA0
+
+  FriBidiPropertyBlockLevel5_0100,  /* 3300..333F */
+  FriBidiPropertyBlockLevel5_3340,  /* 3340..337F */
+  FriBidiPropertyBlockLevel5_0100,  /* 3380..33BF */
+  FriBidiPropertyBlockLevel5_33C0,  /* 33C0..33FF */
+
+#define FriBidiPropertyBlockLevel4_4D00 0xA4
+
+  FriBidiPropertyBlockLevel5_0100,  /* 4D00..4D3F */
+  FriBidiPropertyBlockLevel5_0100,  /* 4D40..4D7F */
+  FriBidiPropertyBlockLevel5_0100,  /* 4D80..4DBF */
+  FriBidiPropertyBlockLevel5_21C0,  /* 4DC0..4DFF */
+
+#define FriBidiPropertyBlockLevel4_A400 0xA8
 
   FriBidiPropertyBlockLevel5_0100,  /* A400..A43F */
   FriBidiPropertyBlockLevel5_0100,  /* A440..A47F */
   FriBidiPropertyBlockLevel5_2180,  /* A480..A4BF */
   FriBidiPropertyBlockLevel5_A4C0,  /* A4C0..A4FF */
 
-#define FriBidiPropertyBlockLevel4_FB00 0x84
+#define FriBidiPropertyBlockLevel4_A700 0xAC
+
+  FriBidiPropertyBlockLevel5_A700,  /* A700..A73F */
+  FriBidiPropertyBlockLevel5_0100,  /* A740..A77F */
+  FriBidiPropertyBlockLevel5_0100,  /* A780..A7BF */
+  FriBidiPropertyBlockLevel5_0100,  /* A7C0..A7FF */
+
+#define FriBidiPropertyBlockLevel4_A800 0xB0
+
+  FriBidiPropertyBlockLevel5_A800,  /* A800..A83F */
+  FriBidiPropertyBlockLevel5_0100,  /* A840..A87F */
+  FriBidiPropertyBlockLevel5_0100,  /* A880..A8BF */
+  FriBidiPropertyBlockLevel5_0100,  /* A8C0..A8FF */
+
+#define FriBidiPropertyBlockLevel4_FB00 0xB4
 
   FriBidiPropertyBlockLevel5_FB00,  /* FB00..FB3F */
   FriBidiPropertyBlockLevel5_FB40,  /* FB40..FB7F */
   FriBidiPropertyBlockLevel5_0680,  /* FB80..FBBF */
   FriBidiPropertyBlockLevel5_0680,  /* FBC0..FBFF */
 
-#define FriBidiPropertyBlockLevel4_FC00 0x88
+#define FriBidiPropertyBlockLevel4_FC00 0xB8
 
   FriBidiPropertyBlockLevel5_0680,  /* FC00..FC3F */
   FriBidiPropertyBlockLevel5_0680,  /* FC40..FC7F */
   FriBidiPropertyBlockLevel5_0680,  /* FC80..FCBF */
   FriBidiPropertyBlockLevel5_0680,  /* FCC0..FCFF */
 
-#define FriBidiPropertyBlockLevel4_FD00 0x8C
+#define FriBidiPropertyBlockLevel4_FD00 0xBC
 
   FriBidiPropertyBlockLevel5_FD00,  /* FD00..FD3F */
   FriBidiPropertyBlockLevel5_0680,  /* FD40..FD7F */
   FriBidiPropertyBlockLevel5_0680,  /* FD80..FDBF */
-  FriBidiPropertyBlockLevel5_0680,  /* FDC0..FDFF */
+  FriBidiPropertyBlockLevel5_FDC0,  /* FDC0..FDFF */
 
-#define FriBidiPropertyBlockLevel4_FE00 0x90
+#define FriBidiPropertyBlockLevel4_FE00 0xC0
 
   FriBidiPropertyBlockLevel5_FE00,  /* FE00..FE3F */
   FriBidiPropertyBlockLevel5_FE40,  /* FE40..FE7F */
   FriBidiPropertyBlockLevel5_0680,  /* FE80..FEBF */
   FriBidiPropertyBlockLevel5_FEC0,  /* FEC0..FEFF */
 
-#define FriBidiPropertyBlockLevel4_FF00 0x94
+#define FriBidiPropertyBlockLevel4_FF00 0xC4
 
   FriBidiPropertyBlockLevel5_FF00,  /* FF00..FF3F */
   FriBidiPropertyBlockLevel5_FF40,  /* FF40..FF7F */
   FriBidiPropertyBlockLevel5_0100,  /* FF80..FFBF */
   FriBidiPropertyBlockLevel5_FFC0,  /* FFC0..FFFF */
 
-#define FriBidiPropertyBlockLevel4_1D100 0x98
+#define FriBidiPropertyBlockLevel4_10100 0xC8
+
+  FriBidiPropertyBlockLevel5_10100,  /* 10100..1013F */
+  FriBidiPropertyBlockLevel5_21C0,  /* 10140..1017F */
+  FriBidiPropertyBlockLevel5_10180,  /* 10180..101BF */
+  FriBidiPropertyBlockLevel5_0100,  /* 101C0..101FF */
+
+#define FriBidiPropertyBlockLevel4_10300 0xCC
+
+  FriBidiPropertyBlockLevel5_0100,  /* 10300..1033F */
+  FriBidiPropertyBlockLevel5_0100,  /* 10340..1037F */
+  FriBidiPropertyBlockLevel5_0100,  /* 10380..103BF */
+  FriBidiPropertyBlockLevel5_103C0,  /* 103C0..103FF */
+
+#define FriBidiPropertyBlockLevel4_10A00 0xD0
+
+  FriBidiPropertyBlockLevel5_10A00,  /* 10A00..10A3F */
+  FriBidiPropertyBlockLevel5_07C0,  /* 10A40..10A7F */
+  FriBidiPropertyBlockLevel5_07C0,  /* 10A80..10ABF */
+  FriBidiPropertyBlockLevel5_07C0,  /* 10AC0..10AFF */
+
+#define FriBidiPropertyBlockLevel4_1D100 0xD4
 
   FriBidiPropertyBlockLevel5_0100,  /* 1D100..1D13F */
   FriBidiPropertyBlockLevel5_1D140,  /* 1D140..1D17F */
   FriBidiPropertyBlockLevel5_1D180,  /* 1D180..1D1BF */
   FriBidiPropertyBlockLevel5_0100,  /* 1D1C0..1D1FF */
 
-#define FriBidiPropertyBlockLevel4_1D700 0x9C
+#define FriBidiPropertyBlockLevel4_1D200 0xD8
+
+  FriBidiPropertyBlockLevel5_21C0,  /* 1D200..1D23F */
+  FriBidiPropertyBlockLevel5_1D240,  /* 1D240..1D27F */
+  FriBidiPropertyBlockLevel5_0100,  /* 1D280..1D2BF */
+  FriBidiPropertyBlockLevel5_0100,  /* 1D2C0..1D2FF */
+
+#define FriBidiPropertyBlockLevel4_1D300 0xDC
+
+  FriBidiPropertyBlockLevel5_21C0,  /* 1D300..1D33F */
+  FriBidiPropertyBlockLevel5_A700,  /* 1D340..1D37F */
+  FriBidiPropertyBlockLevel5_0100,  /* 1D380..1D3BF */
+  FriBidiPropertyBlockLevel5_0100,  /* 1D3C0..1D3FF */
+
+#define FriBidiPropertyBlockLevel4_1D700 0xE0
 
   FriBidiPropertyBlockLevel5_0100,  /* 1D700..1D73F */
   FriBidiPropertyBlockLevel5_0100,  /* 1D740..1D77F */
   FriBidiPropertyBlockLevel5_0100,  /* 1D780..1D7BF */
   FriBidiPropertyBlockLevel5_1D7C0,  /* 1D7C0..1D7FF */
 
-#define FriBidiPropertyBlockLevel4_E0000 0xA0
+#define FriBidiPropertyBlockLevel4_1FF00 0xE4
+
+  FriBidiPropertyBlockLevel5_0100,  /* 1FF00..1FF3F */
+  FriBidiPropertyBlockLevel5_0100,  /* 1FF40..1FF7F */
+  FriBidiPropertyBlockLevel5_0100,  /* 1FF80..1FFBF */
+  FriBidiPropertyBlockLevel5_1FFC0,  /* 1FFC0..1FFFF */
+
+#define FriBidiPropertyBlockLevel4_E0000 0xE8
 
   FriBidiPropertyBlockLevel5_E0000,  /* E0000..E003F */
-  FriBidiPropertyBlockLevel5_E0040,  /* E0040..E007F */
-  FriBidiPropertyBlockLevel5_0100,  /* E0080..E00BF */
-  FriBidiPropertyBlockLevel5_0100,  /* E00C0..E00FF */
+  FriBidiPropertyBlockLevel5_E0000,  /* E0040..E007F */
+  FriBidiPropertyBlockLevel5_E0000,  /* E0080..E00BF */
+  FriBidiPropertyBlockLevel5_E0000,  /* E00C0..E00FF */
+
+#define FriBidiPropertyBlockLevel4_E0100 0xEC
+
+  FriBidiPropertyBlockLevel5_0300,  /* E0100..E013F */
+  FriBidiPropertyBlockLevel5_0300,  /* E0140..E017F */
+  FriBidiPropertyBlockLevel5_0300,  /* E0180..E01BF */
+  FriBidiPropertyBlockLevel5_E01C0,  /* E01C0..E01FF */
 };
 
-static const PACKTAB_UINT8 FriBidiPropertyBlockLevel3[8*12] = {
+static const PACKTAB_UINT8 FriBidiPropertyBlockLevel3[8*18] = {
 
 #define FriBidiPropertyBlockLevel3_0000 0x0
 
@@ -3044,7 +3641,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel3[8*12] = {
 
 #define FriBidiPropertyBlockLevel3_0800 0x8
 
-  FriBidiPropertyBlockLevel4_0100,  /* 0800..08FF */
+  FriBidiPropertyBlockLevel4_0800,  /* 0800..08FF */
   FriBidiPropertyBlockLevel4_0900,  /* 0900..09FF */
   FriBidiPropertyBlockLevel4_0A00,  /* 0A00..0AFF */
   FriBidiPropertyBlockLevel4_0B00,  /* 0B00..0BFF */
@@ -3058,7 +3655,7 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel3[8*12] = {
   FriBidiPropertyBlockLevel4_1000,  /* 1000..10FF */
   FriBidiPropertyBlockLevel4_0100,  /* 1100..11FF */
   FriBidiPropertyBlockLevel4_0100,  /* 1200..12FF */
-  FriBidiPropertyBlockLevel4_0100,  /* 1300..13FF */
+  FriBidiPropertyBlockLevel4_1300,  /* 1300..13FF */
   FriBidiPropertyBlockLevel4_0100,  /* 1400..14FF */
   FriBidiPropertyBlockLevel4_0100,  /* 1500..15FF */
   FriBidiPropertyBlockLevel4_1600,  /* 1600..16FF */
@@ -3067,11 +3664,11 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel3[8*12] = {
 #define FriBidiPropertyBlockLevel3_1800 0x18
 
   FriBidiPropertyBlockLevel4_1800,  /* 1800..18FF */
-  FriBidiPropertyBlockLevel4_0100,  /* 1900..19FF */
-  FriBidiPropertyBlockLevel4_0100,  /* 1A00..1AFF */
+  FriBidiPropertyBlockLevel4_1900,  /* 1900..19FF */
+  FriBidiPropertyBlockLevel4_1A00,  /* 1A00..1AFF */
   FriBidiPropertyBlockLevel4_0100,  /* 1B00..1BFF */
   FriBidiPropertyBlockLevel4_0100,  /* 1C00..1CFF */
-  FriBidiPropertyBlockLevel4_0100,  /* 1D00..1DFF */
+  FriBidiPropertyBlockLevel4_1D00,  /* 1D00..1DFF */
   FriBidiPropertyBlockLevel4_0100,  /* 1E00..1EFF */
   FriBidiPropertyBlockLevel4_1F00,  /* 1F00..1FFF */
 
@@ -3088,11 +3685,11 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel3[8*12] = {
 
 #define FriBidiPropertyBlockLevel3_2800 0x28
 
-  FriBidiPropertyBlockLevel4_2500,  /* 2800..28FF */
+  FriBidiPropertyBlockLevel4_0100,  /* 2800..28FF */
   FriBidiPropertyBlockLevel4_2500,  /* 2900..29FF */
   FriBidiPropertyBlockLevel4_2500,  /* 2A00..2AFF */
-  FriBidiPropertyBlockLevel4_0100,  /* 2B00..2BFF */
-  FriBidiPropertyBlockLevel4_0100,  /* 2C00..2CFF */
+  FriBidiPropertyBlockLevel4_2B00,  /* 2B00..2BFF */
+  FriBidiPropertyBlockLevel4_2C00,  /* 2C00..2CFF */
   FriBidiPropertyBlockLevel4_0100,  /* 2D00..2DFF */
   FriBidiPropertyBlockLevel4_2E00,  /* 2E00..2EFF */
   FriBidiPropertyBlockLevel4_2F00,  /* 2F00..2FFF */
@@ -3100,9 +3697,9 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel3[8*12] = {
 #define FriBidiPropertyBlockLevel3_3000 0x30
 
   FriBidiPropertyBlockLevel4_3000,  /* 3000..30FF */
-  FriBidiPropertyBlockLevel4_0100,  /* 3100..31FF */
+  FriBidiPropertyBlockLevel4_3100,  /* 3100..31FF */
   FriBidiPropertyBlockLevel4_3200,  /* 3200..32FF */
-  FriBidiPropertyBlockLevel4_0100,  /* 3300..33FF */
+  FriBidiPropertyBlockLevel4_3300,  /* 3300..33FF */
   FriBidiPropertyBlockLevel4_0100,  /* 3400..34FF */
   FriBidiPropertyBlockLevel4_0100,  /* 3500..35FF */
   FriBidiPropertyBlockLevel4_0100,  /* 3600..36FF */
@@ -3119,7 +3716,18 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel3[8*12] = {
   FriBidiPropertyBlockLevel4_0100,  /* 3E00..3EFF */
   FriBidiPropertyBlockLevel4_0100,  /* 3F00..3FFF */
 
-#define FriBidiPropertyBlockLevel3_A000 0x40
+#define FriBidiPropertyBlockLevel3_4800 0x40
+
+  FriBidiPropertyBlockLevel4_0100,  /* 4800..48FF */
+  FriBidiPropertyBlockLevel4_0100,  /* 4900..49FF */
+  FriBidiPropertyBlockLevel4_0100,  /* 4A00..4AFF */
+  FriBidiPropertyBlockLevel4_0100,  /* 4B00..4BFF */
+  FriBidiPropertyBlockLevel4_0100,  /* 4C00..4CFF */
+  FriBidiPropertyBlockLevel4_4D00,  /* 4D00..4DFF */
+  FriBidiPropertyBlockLevel4_0100,  /* 4E00..4EFF */
+  FriBidiPropertyBlockLevel4_0100,  /* 4F00..4FFF */
+
+#define FriBidiPropertyBlockLevel3_A000 0x48
 
   FriBidiPropertyBlockLevel4_0100,  /* A000..A0FF */
   FriBidiPropertyBlockLevel4_0100,  /* A100..A1FF */
@@ -3128,9 +3736,20 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel3[8*12] = {
   FriBidiPropertyBlockLevel4_A400,  /* A400..A4FF */
   FriBidiPropertyBlockLevel4_0100,  /* A500..A5FF */
   FriBidiPropertyBlockLevel4_0100,  /* A600..A6FF */
-  FriBidiPropertyBlockLevel4_0100,  /* A700..A7FF */
+  FriBidiPropertyBlockLevel4_A700,  /* A700..A7FF */
 
-#define FriBidiPropertyBlockLevel3_F800 0x48
+#define FriBidiPropertyBlockLevel3_A800 0x50
+
+  FriBidiPropertyBlockLevel4_A800,  /* A800..A8FF */
+  FriBidiPropertyBlockLevel4_0100,  /* A900..A9FF */
+  FriBidiPropertyBlockLevel4_0100,  /* AA00..AAFF */
+  FriBidiPropertyBlockLevel4_0100,  /* AB00..ABFF */
+  FriBidiPropertyBlockLevel4_0100,  /* AC00..ACFF */
+  FriBidiPropertyBlockLevel4_0100,  /* AD00..ADFF */
+  FriBidiPropertyBlockLevel4_0100,  /* AE00..AEFF */
+  FriBidiPropertyBlockLevel4_0100,  /* AF00..AFFF */
+
+#define FriBidiPropertyBlockLevel3_F800 0x58
 
   FriBidiPropertyBlockLevel4_0100,  /* F800..F8FF */
   FriBidiPropertyBlockLevel4_0100,  /* F900..F9FF */
@@ -3141,30 +3760,74 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel3[8*12] = {
   FriBidiPropertyBlockLevel4_FE00,  /* FE00..FEFF */
   FriBidiPropertyBlockLevel4_FF00,  /* FF00..FFFF */
 
-#define FriBidiPropertyBlockLevel3_1D000 0x50
+#define FriBidiPropertyBlockLevel3_10000 0x60
+
+  FriBidiPropertyBlockLevel4_0100,  /* 10000..100FF */
+  FriBidiPropertyBlockLevel4_10100,  /* 10100..101FF */
+  FriBidiPropertyBlockLevel4_0100,  /* 10200..102FF */
+  FriBidiPropertyBlockLevel4_10300,  /* 10300..103FF */
+  FriBidiPropertyBlockLevel4_0100,  /* 10400..104FF */
+  FriBidiPropertyBlockLevel4_0100,  /* 10500..105FF */
+  FriBidiPropertyBlockLevel4_0100,  /* 10600..106FF */
+  FriBidiPropertyBlockLevel4_0100,  /* 10700..107FF */
+
+#define FriBidiPropertyBlockLevel3_10800 0x68
+
+  FriBidiPropertyBlockLevel4_0800,  /* 10800..108FF */
+  FriBidiPropertyBlockLevel4_0800,  /* 10900..109FF */
+  FriBidiPropertyBlockLevel4_10A00,  /* 10A00..10AFF */
+  FriBidiPropertyBlockLevel4_0800,  /* 10B00..10BFF */
+  FriBidiPropertyBlockLevel4_0800,  /* 10C00..10CFF */
+  FriBidiPropertyBlockLevel4_0800,  /* 10D00..10DFF */
+  FriBidiPropertyBlockLevel4_0800,  /* 10E00..10EFF */
+  FriBidiPropertyBlockLevel4_0800,  /* 10F00..10FFF */
+
+#define FriBidiPropertyBlockLevel3_1D000 0x70
 
   FriBidiPropertyBlockLevel4_0100,  /* 1D000..1D0FF */
   FriBidiPropertyBlockLevel4_1D100,  /* 1D100..1D1FF */
-  FriBidiPropertyBlockLevel4_0100,  /* 1D200..1D2FF */
-  FriBidiPropertyBlockLevel4_0100,  /* 1D300..1D3FF */
+  FriBidiPropertyBlockLevel4_1D200,  /* 1D200..1D2FF */
+  FriBidiPropertyBlockLevel4_1D300,  /* 1D300..1D3FF */
   FriBidiPropertyBlockLevel4_0100,  /* 1D400..1D4FF */
   FriBidiPropertyBlockLevel4_0100,  /* 1D500..1D5FF */
   FriBidiPropertyBlockLevel4_0100,  /* 1D600..1D6FF */
   FriBidiPropertyBlockLevel4_1D700,  /* 1D700..1D7FF */
 
-#define FriBidiPropertyBlockLevel3_E0000 0x58
+#define FriBidiPropertyBlockLevel3_1F800 0x78
+
+  FriBidiPropertyBlockLevel4_0100,  /* 1F800..1F8FF */
+  FriBidiPropertyBlockLevel4_0100,  /* 1F900..1F9FF */
+  FriBidiPropertyBlockLevel4_0100,  /* 1FA00..1FAFF */
+  FriBidiPropertyBlockLevel4_0100,  /* 1FB00..1FBFF */
+  FriBidiPropertyBlockLevel4_0100,  /* 1FC00..1FCFF */
+  FriBidiPropertyBlockLevel4_0100,  /* 1FD00..1FDFF */
+  FriBidiPropertyBlockLevel4_0100,  /* 1FE00..1FEFF */
+  FriBidiPropertyBlockLevel4_1FF00,  /* 1FF00..1FFFF */
+
+#define FriBidiPropertyBlockLevel3_E0000 0x80
 
   FriBidiPropertyBlockLevel4_E0000,  /* E0000..E00FF */
-  FriBidiPropertyBlockLevel4_0100,  /* E0100..E01FF */
-  FriBidiPropertyBlockLevel4_0100,  /* E0200..E02FF */
-  FriBidiPropertyBlockLevel4_0100,  /* E0300..E03FF */
-  FriBidiPropertyBlockLevel4_0100,  /* E0400..E04FF */
-  FriBidiPropertyBlockLevel4_0100,  /* E0500..E05FF */
-  FriBidiPropertyBlockLevel4_0100,  /* E0600..E06FF */
-  FriBidiPropertyBlockLevel4_0100,  /* E0700..E07FF */
+  FriBidiPropertyBlockLevel4_E0100,  /* E0100..E01FF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0200..E02FF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0300..E03FF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0400..E04FF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0500..E05FF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0600..E06FF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0700..E07FF */
+
+#define FriBidiPropertyBlockLevel3_E0800 0x88
+
+  FriBidiPropertyBlockLevel4_E0000,  /* E0800..E08FF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0900..E09FF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0A00..E0AFF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0B00..E0BFF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0C00..E0CFF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0D00..E0DFF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0E00..E0EFF */
+  FriBidiPropertyBlockLevel4_E0000,  /* E0F00..E0FFF */
 };
 
-static const PACKTAB_UINT8 FriBidiPropertyBlockLevel2[4*7] = {
+static const PACKTAB_UINT8 FriBidiPropertyBlockLevel2[4*10] = {
 
 #define FriBidiPropertyBlockLevel2_0000 0x0
 
@@ -3183,35 +3846,56 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel2[4*7] = {
 #define FriBidiPropertyBlockLevel2_4000 0x8
 
   FriBidiPropertyBlockLevel3_3800,  /* 4000..47FF */
-  FriBidiPropertyBlockLevel3_3800,  /* 4800..4FFF */
+  FriBidiPropertyBlockLevel3_4800,  /* 4800..4FFF */
   FriBidiPropertyBlockLevel3_3800,  /* 5000..57FF */
   FriBidiPropertyBlockLevel3_3800,  /* 5800..5FFF */
 
-#define FriBidiPropertyBlockLevel2_A000 0xC
+#define FriBidiPropertyBlockLevel2_6000 0xC
+
+  FriBidiPropertyBlockLevel3_3800,  /* 6000..67FF */
+  FriBidiPropertyBlockLevel3_3800,  /* 6800..6FFF */
+  FriBidiPropertyBlockLevel3_3800,  /* 7000..77FF */
+  FriBidiPropertyBlockLevel3_3800,  /* 7800..7FFF */
+
+#define FriBidiPropertyBlockLevel2_A000 0x10
 
   FriBidiPropertyBlockLevel3_A000,  /* A000..A7FF */
-  FriBidiPropertyBlockLevel3_3800,  /* A800..AFFF */
+  FriBidiPropertyBlockLevel3_A800,  /* A800..AFFF */
   FriBidiPropertyBlockLevel3_3800,  /* B000..B7FF */
   FriBidiPropertyBlockLevel3_3800,  /* B800..BFFF */
 
-#define FriBidiPropertyBlockLevel2_E000 0x10
+#define FriBidiPropertyBlockLevel2_E000 0x14
 
   FriBidiPropertyBlockLevel3_3800,  /* E000..E7FF */
   FriBidiPropertyBlockLevel3_3800,  /* E800..EFFF */
   FriBidiPropertyBlockLevel3_3800,  /* F000..F7FF */
   FriBidiPropertyBlockLevel3_F800,  /* F800..FFFF */
 
-#define FriBidiPropertyBlockLevel2_1C000 0x14
+#define FriBidiPropertyBlockLevel2_10000 0x18
+
+  FriBidiPropertyBlockLevel3_10000,  /* 10000..107FF */
+  FriBidiPropertyBlockLevel3_10800,  /* 10800..10FFF */
+  FriBidiPropertyBlockLevel3_3800,  /* 11000..117FF */
+  FriBidiPropertyBlockLevel3_3800,  /* 11800..11FFF */
+
+#define FriBidiPropertyBlockLevel2_1C000 0x1C
 
   FriBidiPropertyBlockLevel3_3800,  /* 1C000..1C7FF */
   FriBidiPropertyBlockLevel3_3800,  /* 1C800..1CFFF */
   FriBidiPropertyBlockLevel3_1D000,  /* 1D000..1D7FF */
   FriBidiPropertyBlockLevel3_3800,  /* 1D800..1DFFF */
 
-#define FriBidiPropertyBlockLevel2_E0000 0x18
+#define FriBidiPropertyBlockLevel2_1E000 0x20
+
+  FriBidiPropertyBlockLevel3_3800,  /* 1E000..1E7FF */
+  FriBidiPropertyBlockLevel3_3800,  /* 1E800..1EFFF */
+  FriBidiPropertyBlockLevel3_3800,  /* 1F000..1F7FF */
+  FriBidiPropertyBlockLevel3_1F800,  /* 1F800..1FFFF */
+
+#define FriBidiPropertyBlockLevel2_E0000 0x24
 
   FriBidiPropertyBlockLevel3_E0000,  /* E0000..E07FF */
-  FriBidiPropertyBlockLevel3_3800,  /* E0800..E0FFF */
+  FriBidiPropertyBlockLevel3_E0800,  /* E0800..E0FFF */
   FriBidiPropertyBlockLevel3_3800,  /* E1000..E17FF */
   FriBidiPropertyBlockLevel3_3800,  /* E1800..E1FFF */
 };
@@ -3223,44 +3907,44 @@ static const PACKTAB_UINT8 FriBidiPropertyBlockLevel1[8*4] = {
   FriBidiPropertyBlockLevel2_0000,  /* 0000..1FFF */
   FriBidiPropertyBlockLevel2_2000,  /* 2000..3FFF */
   FriBidiPropertyBlockLevel2_4000,  /* 4000..5FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 6000..7FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 8000..9FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 6000..7FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 8000..9FFF */
   FriBidiPropertyBlockLevel2_A000,  /* A000..BFFF */
-  FriBidiPropertyBlockLevel2_4000,  /* C000..DFFF */
+  FriBidiPropertyBlockLevel2_6000,  /* C000..DFFF */
   FriBidiPropertyBlockLevel2_E000,  /* E000..FFFF */
 
 #define FriBidiPropertyBlockLevel1_10000 0x8
 
-  FriBidiPropertyBlockLevel2_4000,  /* 10000..11FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 12000..13FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 14000..15FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 16000..17FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 18000..19FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 1A000..1BFFF */
+  FriBidiPropertyBlockLevel2_10000,  /* 10000..11FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 12000..13FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 14000..15FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 16000..17FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 18000..19FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 1A000..1BFFF */
   FriBidiPropertyBlockLevel2_1C000,  /* 1C000..1DFFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 1E000..1FFFF */
+  FriBidiPropertyBlockLevel2_1E000,  /* 1E000..1FFFF */
 
 #define FriBidiPropertyBlockLevel1_20000 0x10
 
-  FriBidiPropertyBlockLevel2_4000,  /* 20000..21FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 22000..23FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 24000..25FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 26000..27FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 28000..29FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 2A000..2BFFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 2C000..2DFFF */
-  FriBidiPropertyBlockLevel2_4000,  /* 2E000..2FFFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 20000..21FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 22000..23FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 24000..25FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 26000..27FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 28000..29FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 2A000..2BFFF */
+  FriBidiPropertyBlockLevel2_6000,  /* 2C000..2DFFF */
+  FriBidiPropertyBlockLevel2_1E000,  /* 2E000..2FFFF */
 
 #define FriBidiPropertyBlockLevel1_E0000 0x18
 
   FriBidiPropertyBlockLevel2_E0000,  /* E0000..E1FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* E2000..E3FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* E4000..E5FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* E6000..E7FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* E8000..E9FFF */
-  FriBidiPropertyBlockLevel2_4000,  /* EA000..EBFFF */
-  FriBidiPropertyBlockLevel2_4000,  /* EC000..EDFFF */
-  FriBidiPropertyBlockLevel2_4000,  /* EE000..EFFFF */
+  FriBidiPropertyBlockLevel2_6000,  /* E2000..E3FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* E4000..E5FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* E6000..E7FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* E8000..E9FFF */
+  FriBidiPropertyBlockLevel2_6000,  /* EA000..EBFFF */
+  FriBidiPropertyBlockLevel2_6000,  /* EC000..EDFFF */
+  FriBidiPropertyBlockLevel2_1E000,  /* EE000..EFFFF */
 };
 
 static const PACKTAB_UINT8 FriBidiPropertyBlockLevel0[17*1] = {

@@ -40,15 +40,13 @@ extern "C"
 #define fribidi_char_set_enter_utf8 NULL
 #define fribidi_char_set_leave_utf8 NULL
 
-  int fribidi_unicode_to_utf8 (FriBidiChar *us,
-			       int length,
+  int fribidi_unicode_to_utf8 (FriBidiChar *us, int length,
 			       /* Output */
 			       char *s);
 
 /* warning: the length of output string may exceed the length of the input */
 /* the length of the string is returned */
-  int fribidi_utf8_to_unicode (char *s,
-			       int length,
+  int fribidi_utf8_to_unicode (char *s, int length,
 			       /* Output */
 			       FriBidiChar *us);
 

@@ -40,8 +40,7 @@ err (char *msg)
 }
 
 static void
-err2 (char *fmt,
-      char *p)
+err2 (char *fmt, char *p)
 {
   fprintf (stderr, "fribidi_create_char_types: ");
   fprintf (stderr, fmt, p);
@@ -113,9 +112,9 @@ static void
 init_table ()
 {
   int i;
+  register FriBidiChar c;
   int deftype = get_type (default_type),
-    RTL = get_type ("RTL"),
-    AL = get_type ("AL");
+    RTL = get_type ("RTL"), AL = get_type ("AL"), BN = get_type ("BN");
 
   for (i = 0; i < type_names_count; i++)
     names[i] = 0;
@@ -123,18 +122,42 @@ init_table ()
     names[type_names[i].key] = type_names[i].name;
 
   /* initialize table */
-  for (i = 0; i < FRIBIDI_UNICODE_CHARS; i++)
-    table[i] = deftype;
-  for (i = 0x590; i < 0x600; i++)
-    table[i] = RTL;
-  for (i = 0xFB1D; i < 0xFB50; i++)
-    table[i] = RTL;
-  for (i = 0x600; i < 0x7C0; i++)
-    table[i] = AL;
-  for (i = 0xFB50; i < 0xFE00; i++)
-    table[i] = AL;
-  for (i = 0xFE70; i < 0xFF00; i++)
-    table[i] = AL;
+  for (c = 0; c < FRIBIDI_UNICODE_CHARS; c++)
+    table[c] = deftype;
+
+  for (c = 0x0590; c < 0x0600; c++)
+    table[c] = RTL;
+  for (c = 0x07C0; c < 0x0900; c++)
+    table[c] = RTL;
+  for (c = 0xFB1D; c < 0xFB50; c++)
+    table[c] = RTL;
+
+  for (c = 0x0600; c < 0x07C0; c++)
+    table[c] = AL;
+  for (c = 0xFB50; c < 0xFDD0; c++)
+    table[c] = AL;
+  for (c = 0xFDF0; c < 0xFE00; c++)
+    table[c] = AL;
+  for (c = 0xFE70; c < 0xFF00; c++)
+    table[c] = AL;
+
+  for (c = 0x2060; c < 0x2070; c++)
+    table[c] = BN;
+  for (c = 0xFDD0; c < 0xFDF0; c++)
+    table[c] = BN;
+  for (c = 0xFFF0; c < 0xFFF9; c++)
+    table[c] = BN;
+  for (c = 0xFFFF; c < FRIBIDI_UNICODE_CHARS; c += 0x10000)
+    table[c - 1] = table[c] = BN;
+
+  if (FRIBIDI_UNICODE_CHARS > 0x10000)
+    {
+      for (c = 0x10800; c < 0x11000; c++)
+	table[c] = RTL;
+
+      for (c = 0xE0000; c < 0xE1000; c++)
+	table[c] = BN;
+    }
 }
 
 static void
@@ -172,8 +195,7 @@ headermacro (char *file)
 }
 
 static void
-write_char_type (char *file,
-		 int max_depth)
+write_char_type (char *file, int max_depth)
 {
   int i;
   FILE *f;
@@ -230,8 +252,7 @@ write_char_type (char *file,
 }
 
 int
-main (int argc,
-      char **argv)
+main (int argc, char **argv)
 {
   int max_depth;
   char file[50], *p;

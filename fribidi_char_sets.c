@@ -30,14 +30,12 @@ typedef struct
 {
   /* Convert the character string "s" to unicode string "us" and
      return it's length. */
-  int (*charset_to_unicode) (char *s,
-			     int length,
+  int (*charset_to_unicode) (char *s, int length,
 			     /* output */
 			     FriBidiChar *us);
   /* Convert the unicode string "us" with length "length" to character
      string "s" and return it's length. */
-  int (*unicode_to_charset) (FriBidiChar *us,
-			     int length,
+  int (*unicode_to_charset) (FriBidiChar *us, int length,
 			     /* output */
 			     char *s);
   /* Charset's name. */
@@ -84,8 +82,7 @@ toupper (char c)
 }
 
 static int
-fribidi_strcasecmp (const char *s1,
-		    const char *s2)
+fribidi_strcasecmp (const char *s1, const char *s2)
 {
   while (*s1 && toupper (*s1) == toupper (*s2))
     {
@@ -112,9 +109,7 @@ fribidi_parse_charset (char *s)
 /* Convert the character string "s" in charset "char_set" to unicode
    string "us" and return it's length. */
 FRIBIDI_API int
-fribidi_charset_to_unicode (FriBidiCharSet char_set,
-			    char *s,
-			    int length,
+fribidi_charset_to_unicode (FriBidiCharSet char_set, char *s, int length,
 			    /* output */
 			    FriBidiChar *us)
 {
@@ -127,8 +122,7 @@ fribidi_charset_to_unicode (FriBidiCharSet char_set,
    string "s" in charset "char_set" and return it's length. */
 FRIBIDI_API int
 fribidi_unicode_to_charset (FriBidiCharSet char_set,
-			    FriBidiChar *us,
-			    int length,
+			    FriBidiChar *us, int length,
 			    /* output */
 			    char *s)
 {
@@ -196,8 +190,7 @@ fribidi_char_set_leave (FriBidiCharSet char_set)
 #include <string.h>
 
 FRIBIDI_API int
-fribidi_charset_to_unicode_1 (FriBidiCharSet char_set,
-			      char *s,
+fribidi_charset_to_unicode_1 (FriBidiCharSet char_set, char *s,
 			      /* output */
 			      FriBidiChar *us)
 {

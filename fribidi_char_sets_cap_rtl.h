@@ -40,12 +40,10 @@ extern "C"
   fribidi_boolean fribidi_char_set_enter_cap_rtl (void);
   fribidi_boolean fribidi_char_set_leave_cap_rtl (void);
 
-  int fribidi_cap_rtl_to_unicode (char *s,
-				  int length,
+  int fribidi_cap_rtl_to_unicode (char *s, int length,
 				  /* Output */
 				  FriBidiChar *us);
-  int fribidi_unicode_to_cap_rtl (FriBidiChar *us,
-				  int length,
+  int fribidi_unicode_to_cap_rtl (FriBidiChar *us, int length,
 				  /* Output */
 				  char *s);
 

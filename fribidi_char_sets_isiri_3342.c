@@ -57,9 +57,7 @@ fribidi_isiri_3342_to_unicode_c (char sch)
 }
 
 int
-fribidi_isiri_3342_to_unicode (char *s,
-			       int len,
-			       FriBidiChar *us)
+fribidi_isiri_3342_to_unicode (char *s, int len, FriBidiChar *us)
 {
   int i;
 
@@ -220,9 +218,7 @@ fribidi_unicode_to_isiri_3342_c (FriBidiChar uch)
 }
 
 int
-fribidi_unicode_to_isiri_3342 (FriBidiChar *us,
-			       int length,
-			       char *s)
+fribidi_unicode_to_isiri_3342 (FriBidiChar *us, int length, char *s)
 {
   int i;
 

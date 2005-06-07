@@ -24,27 +24,23 @@
 #define FRIBIDI_TYPES_H
 
 #include "fribidi_config.h"
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-#define FRIBIDI_INT8	char
-#define FRIBIDI_INT16	short
-#define FRIBIDI_INT32	long
-#define FRIBIDI_INT	int
-
   typedef int fribidi_boolean;
 
-  typedef signed FRIBIDI_INT8 fribidi_int8;
-  typedef unsigned FRIBIDI_INT8 fribidi_uint8;
-  typedef signed FRIBIDI_INT16 fribidi_int16;
-  typedef unsigned FRIBIDI_INT16 fribidi_uint16;
-  typedef signed FRIBIDI_INT32 fribidi_int32;
-  typedef unsigned FRIBIDI_INT32 fribidi_uint32;
-  typedef signed FRIBIDI_INT fribidi_int;
-  typedef unsigned FRIBIDI_INT fribidi_uint;
+  typedef int8_t fribidi_int8;
+  typedef uint8_t fribidi_uint8;
+  typedef int16_t fribidi_int16;
+  typedef uint16_t fribidi_uint16;
+  typedef int32_t fribidi_int32;
+  typedef uint32_t fribidi_uint32;
+  typedef int fribidi_int;
+  typedef unsigned int fribidi_uint;
 
 
   typedef fribidi_int8 FriBidiLevel;

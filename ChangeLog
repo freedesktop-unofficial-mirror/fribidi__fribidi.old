@@ -1,3 +1,8 @@
+2005-06-07  Behdad Esfahbid <fribidi@behdad.org>
+	* *: Updated to Unicode 4.1.0.  Misc build fixes.
+	* wcwidth.c,i: Renamed from fribidi_wcwidth.c,i.
+	* fribidi_types.h: Include stdint.h and use the int types from there.
+
 2002-12-22  Behdad Esfahbod <fribidi@behdad.org>
 	* Makefile.am: Added fribidi_types.i to
 	libfribidiinc_HEADERS, to fix bug reported by Omer Zak.

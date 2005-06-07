@@ -41,13 +41,11 @@ extern "C"
 #define fribidi_char_set_leave_iso8859_6 NULL
 
   FriBidiChar fribidi_iso8859_6_to_unicode_c (char ch);
-  int fribidi_iso8859_6_to_unicode (char *s,
-				    int length,
+  int fribidi_iso8859_6_to_unicode (char *s, int length,
 				    /* Output */
 				    FriBidiChar *us);
   char fribidi_unicode_to_iso8859_6_c (FriBidiChar uch);
-  int fribidi_unicode_to_iso8859_6 (FriBidiChar *us,
-				    int length,
+  int fribidi_unicode_to_iso8859_6 (FriBidiChar *us, int length,
 				    /* Output */
 				    char *s);
 

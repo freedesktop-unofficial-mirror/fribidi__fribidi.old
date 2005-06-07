@@ -65,9 +65,7 @@ fribidi_cp1256_to_unicode_c (char sch)
 }
 
 int
-fribidi_cp1256_to_unicode (char *s,
-			   int len,
-			   FriBidiChar *us)
+fribidi_cp1256_to_unicode (char *s, int len, FriBidiChar *us)
 {
   int i;
 
@@ -218,9 +216,7 @@ fribidi_unicode_to_cp1256_c (FriBidiChar uch)
 }
 
 int
-fribidi_unicode_to_cp1256 (FriBidiChar *us,
-			   int length,
-			   char *s)
+fribidi_unicode_to_cp1256 (FriBidiChar *us, int length, char *s)
 {
   int i;
 

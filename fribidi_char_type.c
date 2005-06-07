@@ -37,8 +37,7 @@ fribidi_get_type (FriBidiChar uch)
 
 FRIBIDI_API void
 fribidi_get_types (		/* input */
-		    FriBidiChar *str,
-		    FriBidiStrIndex len,
+		    FriBidiChar *str, FriBidiStrIndex len,
 		    /* output */
 		    FriBidiCharType *type)
 {

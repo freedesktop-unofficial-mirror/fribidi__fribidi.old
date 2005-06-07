@@ -1,5 +1,5 @@
 /* FriBidi - Library of BiDi algorithm
- * Copyright (C) 2001,2002 Behdad Esfahbod.
+ * Copyright (C) 2001,2002,2005 Behdad Esfahbod.
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public  
@@ -32,7 +32,7 @@ extern "C"
 
 /* Unicode version */
 #define FRIBIDI_UNICODE_CHARS	(sizeof(FriBidiChar) >= 4 ? 0x110000 : 0x10000)
-#define FRIBIDI_UNICODE_VERSION	"3.2.0"
+#define FRIBIDI_UNICODE_VERSION	"4.1.0"
 
 /* UAX#9 Unicode BiDirectional Algorithm */
 #define UNI_MAX_BIDI_LEVEL 61

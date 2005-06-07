@@ -72,9 +72,7 @@ fribidi_iso8859_8_to_unicode_c (char sch)
 }
 
 int
-fribidi_iso8859_8_to_unicode (char *s,
-			      int len,
-			      FriBidiChar *us)
+fribidi_iso8859_8_to_unicode (char *s, int len, FriBidiChar *us)
 {
   int i;
 
@@ -112,9 +110,7 @@ fribidi_unicode_to_iso8859_8_c (FriBidiChar uch)
 }
 
 int
-fribidi_unicode_to_iso8859_8 (FriBidiChar *us,
-			      int length,
-			      char *s)
+fribidi_unicode_to_iso8859_8 (FriBidiChar *us, int length, char *s)
 {
   int i;
 
