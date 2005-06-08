@@ -101,7 +101,6 @@ EXTRA_HEADERS =	\
 EXTRA_DIST =	\
 	bootstrap \
 	run.tests	\
-	ANNOUNCE	\
 	acinclude.m4	\
 	fribidi_config.h.in	\
 	fribidi.pc.in	\

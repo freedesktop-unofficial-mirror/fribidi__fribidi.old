@@ -1,4 +1,9 @@
-2005-06-07  Behdad Esfahbid <fribidi@behdad.org>
+2005-06-08  Behdad Esfahbod <fribidi@behdad.org>
+	* NEWS, README, AUTHORS, THANKS: Updated.
+	* ANNOUNCE: Removed.
+	* 0.10.5: released.
+
+2005-06-07  Behdad Esfahbod <fribidi@behdad.org>
 	* *: Updated to Unicode 4.1.0.  Misc build fixes.
 	* wcwidth.c,i: Renamed from fribidi_wcwidth.c,i.
 	* fribidi_types.h: Include stdint.h and use the int types from there.

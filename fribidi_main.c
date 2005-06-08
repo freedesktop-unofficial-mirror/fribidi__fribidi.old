@@ -148,7 +148,7 @@ help (void)
 #endif
 
   printf
-    ("\nReport bugs online at <http://fribidi.sourceforge.net/bugs.php>.\n");
+    ("\nReport bugs online at <http://fribidi.org/bug>.\n");
   exit (0);
 }
 
