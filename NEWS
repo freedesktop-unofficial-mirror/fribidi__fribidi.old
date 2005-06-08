@@ -1,3 +1,13 @@
+New in 0.10.5:
+
+* Unicode 4.1.0 character database used.
+
+* Fixed type sizes on 64-bit architectures.
+
+* We've become GNU FriBidi.  Note capitalization please.
+
+* We have moved to http://fribidi.org/, hosted on freedesktop.org.
+
 New in 0.10.4:
 
 * Unicode 3.2 data files used.

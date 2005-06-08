@@ -1,43 +1,34 @@
-Dov Grobgeld <dov@imagic.weizmann.ac.il>
-	* Initial author.
-   
-Behdad Esfahbod <behdad@bamdad.org>
-	* Current maintainer, Added explicit bidi support, fixed all
-	conformance bugs, changed the library to use bitmasks, rewrote
-	many things, removed glib dependency.
+behdad: Behdad Esfahbod <behdad@gnu.org>
+#
+# Behdad Esfahbod is the only author that actually codes these days.  He
+# maintains the package too.
+#
 
-Owen Tayler <otaylor@redhat.com>
-	* Contributed very important memory leak and speed patches.
+dov-g: Dov Grobgeld <dov@imagic.weizmann.ac.il>
+#
+# Dov Grobgeld originally wrote FriBidi.  The 0.1.* releases were all done
+# by him.  After that, Dov rarely touched the code, but contributed ideas. 
+# All files that he has originally authored have him listed as an author in
+# the header of the file.
+#
 
-Raphael Finkel <raphael@cs.uky.edu>       
-	* Contributed UTF-8 converters.
+roozbeh: Roozbeh Pournader <roozbeh@gnu.org>
+#
+# Roozbeh Pournader hasn't contributed much code to FriBidi personally; but
+# has maintained, promoted, and supported the project for a while.  He has
+# helped with making GNU FriBidi standards compliant, and has sometimes
+# lobbied with the Unicode Consortium when needed.  Roozbeh was supposed to
+# be a co-maintainer of GNU FriBidi, but he's not doing that yet.
+#
 
-Pablo Saratxaga <pablo@mandrakesoft.com>  
-	* Contributed several arabic charset converters.
 
-Manish Singh <yosh@gimp.org> 
-	* Contributed patch to make fribidi use libtool.
-
-Omer Zak <omerz@actcom.co.il>
-	* Contributed several bug fixes, improved interface UTF-8 converters,
-	and several considerations for embedded systems.
-
-Roozbeh Pournader <roozbeh@sharif.edu>
-	* Fixed small things here and there.
-
-Dan Kenigsberg <danken@cs.technion.ac.il>
-	* Contributed a patch to make Fribidi work without Glib.
-
-Markus Kuhn <Markus.Kuhn@cl.cam.ac.uk>
-	* Free wcwidth() implementation.
-
-Abel Cheung <maddog@linux.org.hk>
-	* Implemented pkgconfig support.
-
-Dominique Unruh <dominique@unruh.de>
-	* Contributed a patch for reordering NSMs (rule L3).
-
-Tomas Frydrych <tomas@frydrych.uklinux.net>
-	* Contirbuted patches for compiling fribidi under Microsoft
-	Visual C++.
-		
+#
+# Note: wcwidth.c implementation is by Markus Kuhn.  It is distributed with
+# and used in GNU FriBidi, but is not part of GNU FriBidi.
+#
+# Note: GNU getopt is distributed with and used in GNU FriBidi, but is not
+# part of GNU FriBidi.
+#
+# Note: Parts of the Unicode Character Database are distributed with and used
+# in GNU FriBidi under unidata/, but are not part of GNU FriBidi.
+#

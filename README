@@ -1,4 +1,5 @@
-This is is FriBidi, a Free Implementation of the Unicode BiDi algorithm.
+This is GNU FriBidi,
+a Free Implementation of the Unicode BiDirectional algorithm.
 
 Background
 ==========
@@ -12,7 +13,7 @@ Audience
 ========
 It is our hope that this library will stimulate the implementation of Hebrew
 and Arabic in lots of free software. Here is a small list of projects that
-would benifit from the use of the FriBidi library, but of course there are
+would benifit from the use of the GNU FriBidi library, but of course there are
 many more: Wine, Mozilla, Qt, KDE, lynx, OpenOffice.
 
 It may be interesting for you to know that Fribidi is already being used in
@@ -20,9 +21,9 @@ projects like Gnome, GTK+, Pango, AbiWord, and Xterm.
 
 Downloading
 ===========
-The latest version of FriBidi may be found at:
+The latest version of GNU FriBidi may be found at:
 
-   http://fribidi.sourceforge.net/
+   http://fribidi.org/
 
 Building
 ========
@@ -32,7 +33,7 @@ Copyright
 =========
 Fribidi is:
 Copyright (C) 1999,2000 Dov Grobgeld, and
-Copyright (C) 2001,2002 Behdad Esfahbod.
+Copyright (C) 2001,2002,2005 Behdad Esfahbod.
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
@@ -56,35 +57,10 @@ Implementation
 ==============
 The library implements the algorithm described in the "Unicode Standard
 Annex #9, The Bidirectional Algorithm", available at
-http://www.unicode.org/unicode/reports/tr9/. Fribidi has been tested
+http://www.unicode.org/unicode/reports/tr9/. GNU FriBidi has been tested
 exhaustively against the Unicode Reference Code, and due to our knowledge,
 it completely conforms to the specification, always producing the same
 result as the Reference Code.
-
-In the API we were inspired by the document "Bi-Di languages support
-- BiDi API propasal", http://www.langbox.com/AraMosaic/mozilla/BiDi_API.html,
-by Franck Portaneri <franck@langbox.com> which he wrote as a proposal for
-adding BiDi support to Mozilla.
-
-Internally, the library uses Unicode entirely. The character property
-function was automatically created from the Unicode property list document
-PropList.txt available from the Unicode FTP site. This means that every
-Unicode character is treated in strict accordance with the Unicode
-specification. The same is true for the mirroring of characters, which also
-works for all the characters listed as mirrorable in the the Unicode
-specification.
-
-Other character sets must be converted into Unicode before the library
-may be used. In order to use, e.g. iso8859-8, the function
-
-     void
-     fribidi_iso8859_8_to_unicode(guchar *s,
-             	                  /* output */
-	    	                  FriBidiChar *us)
-
-must be called which translates the guchar string *s to a unicode 
-string. There is also a corresponding fribidi_unicode_to_iso8859_8
-that may be called to convert the string back to iso8859_8 for output.
 
 The reordering of characters is done through the function:
       
@@ -119,8 +95,10 @@ where
                             list is in interactive applications when the
                             embedding e.g. level determines cursor display.
 
-In any of the output pointers == NULL, then that information is not 
-calculated.
+If any of the output pointers == NULL, then that information is not 
+calculated.  Note that this function does not allow line breaking, and
+so GNU FriBidi is not feature complete yet.  This will be fixed in the
+future.
 
 How it looks like
 =================
@@ -132,7 +110,8 @@ full description.
 
 Executable
 ==========
-There is also a command line utilitity called fribidi that loops over
+
+There is also a command line utilitity called `fribidi' that loops over
 the text of a file and performs the BiDi algorithm on each line, also
 used for testing the algorithm. Run fribidi with the --help option to
 learn about usage.
@@ -140,10 +119,15 @@ learn about usage.
 Bugs and comments
 =================
 
-Report FriBidi bugs at:
+Report GNU FriBidi bugs at:
 
-	http://fribidi.sourceforge.net/bugs.php
+	http://fribidi.org/bug
 
 And send your comments to:
 
-	fribidi-discuss@lists.sourceforge.net
+	fribidi@freedesktop.org
+
+
+
+Behdad Esfahbod
+June 8, 2005
