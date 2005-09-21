@@ -308,7 +308,7 @@ extern "C"
   };
 
 /* Map fribidi_prop_types to fribidi_types */
-  extern FriBidiCharType *fribidi_prop_to_type;
+  extern const FriBidiCharType fribidi_prop_to_type[];
 
 #ifdef	__cplusplus
 }
