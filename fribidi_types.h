@@ -24,7 +24,22 @@
 #define FRIBIDI_TYPES_H
 
 #include "fribidi_config.h"
-#include <stdint.h>
+#define FRIBIDI_INT8	char
+#if FRIBIDI_SIZEOF_INT+0 == 2
+# define FRIBIDI_INT16	int
+#elif FRIBIDI_SIZEOF_SHORT+0 == 2
+# define FRIBIDI_INT16	short
+#else
+# error cannot determine a 16-bit integer type.  check fribidi_config.h
+#endif
+#if FRIBIDI_SIZEOF_INT+0 == 4
+# define FRIBIDI_INT32	int
+#elif FRIBIDI_SIZEOF_LONG+0 == 4
+# define FRIBIDI_INT32	long
+#else
+# error cannot determine a 32-bit integer type.  check fribidi_config.h
+#endif
+
 
 #ifdef __cplusplus
 extern "C"
@@ -33,13 +48,14 @@ extern "C"
 
   typedef int fribidi_boolean;
 
-  typedef int8_t fribidi_int8;
-  typedef uint8_t fribidi_uint8;
-  typedef int16_t fribidi_int16;
-  typedef uint16_t fribidi_uint16;
-  typedef int32_t fribidi_int32;
-  typedef uint32_t fribidi_uint32;
-  typedef int fribidi_int;
+  typedef signed FRIBIDI_INT8 fribidi_int8;
+  typedef unsigned FRIBIDI_INT8 fribidi_uint8;
+  typedef signed FRIBIDI_INT16 fribidi_int16;
+  typedef unsigned FRIBIDI_INT16 fribidi_uint16;
+  typedef signed FRIBIDI_INT32 fribidi_int32;
+  typedef unsigned FRIBIDI_INT32 fribidi_uint32;
+
+  typedef signed int fribidi_int;
   typedef unsigned int fribidi_uint;
 
 

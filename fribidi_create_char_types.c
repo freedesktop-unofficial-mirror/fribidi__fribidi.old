@@ -28,10 +28,6 @@
 #endif
 #include "fribidi_unicode.h"
 
-#ifndef SIZEOF_CHAR
-#define SIZEOF_CHAR sizeof (char)
-#endif
-
 static void
 err (const char *msg)
 {
@@ -221,7 +217,7 @@ write_char_type (const char *file, int max_depth)
   fprintf (f, "#define PACKTAB_UINT32 fribidi_uint32\n");
 
   if (!pack_table
-      (table, FRIBIDI_UNICODE_CHARS, SIZEOF_CHAR, max_depth, 3, names,
+      (table, FRIBIDI_UNICODE_CHARS, sizeof (char), max_depth, 3, names,
        key_type_name, table_name, macro_name, f))
     err ("error: insufficient memory, decrease max_depth");
 

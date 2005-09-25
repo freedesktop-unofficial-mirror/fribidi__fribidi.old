@@ -32,7 +32,7 @@ m4_define(fribidi_version,
 	    fribidi_major_version.fribidi_minor_version.fribidi_micro_version))dnl
 
 AC_INIT([GNU FriBidi],fribidi_version(),[http://bugs.freedesktop.org/enter_bug.cgi?product=FriBidi])
-AC_REVISION([$Id: configure.in,v 1.22.2.11 2005-09-25 18:38:36 behdad Exp $])
+AC_REVISION([$Id: configure.in,v 1.22.2.12 2005-09-25 22:27:39 behdad Exp $])
 AC_CONFIG_SRCDIR(fribidi.c)
 AC_CONFIG_HEADERS(config.h)
 AM_INIT_AUTOMAKE([gnu])
@@ -81,7 +81,18 @@ AM_PROG_LIBTOOL
 
 
 dnl Checks for typedefs
-AC_CHECK_SIZEOF(char, 1)
+
+AC_CHECK_SIZEOF(short, 2)
+SIZEOF_SHORT=$ac_cv_sizeof_short
+AC_SUBST(SIZEOF_SHORT)
+
+AC_CHECK_SIZEOF(int, 4)
+SIZEOF_INT=$ac_cv_sizeof_int
+AC_SUBST(SIZEOF_INT)
+
+AC_CHECK_SIZEOF(long, 4)
+SIZEOF_LONG=$ac_cv_sizeof_long
+AC_SUBST(SIZEOF_LONG)
 
 
 dnl Checks for compiler characteristics

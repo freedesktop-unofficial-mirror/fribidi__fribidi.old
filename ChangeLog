@@ -7,6 +7,7 @@
 	bastards!
 	* *: const added in places.
 	* fribidi_type.c: Define prop array as const.
+	* fribidi_types.h: Back to not using stdint.h. (#4319)
 
 2005-06-08  Behdad Esfahbod <fribidi@behdad.org>
 	* NEWS, README, AUTHORS, THANKS: Updated.
