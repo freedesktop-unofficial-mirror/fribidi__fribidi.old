@@ -291,7 +291,7 @@ extern "C"
 
 /*
  * Define character types that char_type_tables use.
- * define them to be 0, 1, 2, ... and then in fribidi_get_type.c map them
+ * define them to be 0, 1, 2, ... and then in fribidi_char_type.c map them
  * to FriBidiCharTypes.
  */
   typedef char FriBidiPropCharType;
