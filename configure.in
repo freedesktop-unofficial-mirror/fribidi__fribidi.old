@@ -1,32 +1,50 @@
-# Init autoconf (and check for presence of fribidi.c)
-AC_INIT(fribidi.c)
+AC_PREREQ(2.56)
 
-# Define different version variables.
-#
-# Making releases:
-#   FRIBIDI_MICRO_VERSION++;
-#   FRIBIDI_INTERFACE_AGE++;
-#   FRIBIDI_BINARY_AGE++;
-#   FRIBIDI_RPM_RELEASE = 0;
-#
-# If any major functions have been added:
-#   FRIBIDI_INTERFACE_AGE = 0;
-#   FRIBIDI_INTERFACE_VERSION++;
-#
-# If backwards compatibility has been broken:
-#   FRIBIDI_BINARY_AGE = FRIBIDI_INTERFACE_AGE = 0;
-#
-# Building RPMs:
-#   FRIBIDI_RPM_RELEASE++;
-#
-FRIBIDI_MAJOR_VERSION=0
-FRIBIDI_MINOR_VERSION=10
-FRIBIDI_MICRO_VERSION=5
-FRIBIDI_INTERFACE_VERSION=2
-FRIBIDI_INTERFACE_AGE=5
-FRIBIDI_BINARY_AGE=5
-FRIBIDI_RPM_RELEASE=1
-FRIBIDI_VERSION=$FRIBIDI_MAJOR_VERSION.$FRIBIDI_MINOR_VERSION.$FRIBIDI_MICRO_VERSION
+dnl Define different version variables.
+dnl
+dnl Making releases:
+dnl   FRIBIDI_MICRO_VERSION++;
+dnl   FRIBIDI_INTERFACE_AGE++;
+dnl   FRIBIDI_RPM_RELEASE = 1;
+dnl
+dnl If any functions have been added:
+dnl   FRIBIDI_INTERFACE_AGE = 0;
+dnl   FRIBIDI_INTERFACE_VERSION++;
+dnl   FRIBIDI_BINARY_AGE++;
+dnl
+dnl If binary backwards compatibility has been broken:
+dnl   FRIBIDI_BINARY_AGE = FRIBIDI_INTERFACE_AGE = 0;
+dnl
+dnl Building RPMs:
+dnl   FRIBIDI_RPM_RELEASE++;
+dnl
+m4_define(fribidi_major_version, 0)dnl
+m4_define(fribidi_minor_version, 10)dnl
+m4_define(fribidi_micro_version, 6)dnl
+m4_define(fribidi_interface_version, 2)dnl
+m4_define(fribidi_interface_age, 6)dnl
+m4_define(fribidi_binary_age, 6)dnl
+m4_define(fribidi_rpm_release, 1)dnl
+dnl
+m4_define(fribidi_version,
+	  m4_if(m4_eval(fribidi_micro_version()),0,
+	    fribidi_major_version.fribidi_minor_version,
+	    fribidi_major_version.fribidi_minor_version.fribidi_micro_version))dnl
+
+AC_INIT([GNU FriBidi],fribidi_version(),[http://bugs.freedesktop.org/enter_bug.cgi?product=FriBidi])
+AC_REVISION([$Id: configure.in,v 1.22.2.10 2005-09-25 17:37:44 behdad Exp $])
+AC_CONFIG_SRCDIR(fribidi.c)
+AC_CONFIG_HEADERS(config.h)
+AM_INIT_AUTOMAKE([gnits])
+
+FRIBIDI_MAJOR_VERSION=fribidi_major_version()
+FRIBIDI_MINOR_VERSION=fribidi_minor_version()
+FRIBIDI_MICRO_VERSION=fribidi_micro_version()
+FRIBIDI_VERSION=fribidi_version()
+FRIBIDI_INTERFACE_VERSION=fribidi_interface_version()
+FRIBIDI_INTERFACE_AGE=fribidi_interface_age()
+FRIBIDI_BINARY_AGE=fribidi_binary_age()
+FRIBIDI_RPM_RELEASE=fribidi_rpm_release
 
 AC_SUBST(FRIBIDI_MAJOR_VERSION)
 AC_SUBST(FRIBIDI_MINOR_VERSION)
@@ -37,11 +55,15 @@ AC_SUBST(FRIBIDI_INTERFACE_AGE)
 AC_SUBST(FRIBIDI_BINARY_AGE)
 AC_SUBST(FRIBIDI_RPM_RELEASE)
 
-PACKAGE=fribidi
-VERSION=$FRIBIDI_VERSION
+dnl libtool versioning.
+m4_define(lt_current, fribidi_interface_version())dnl
+m4_define(lt_revision, fribidi_interface_age())dnl
+m4_define(lt_age, fribidi_binary_age())dnl
+LT_VERSION_INFO=lt_current():lt_revision():lt_age()
+LT_CURRENT_MINUS_AGE=m4_eval(lt_current - lt_age)
 
-AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE($PACKAGE, $VERSION)
+AC_SUBST(LT_VERSION_INFO)
+AC_SUBST(LT_CURRENT_MINUS_AGE)
 
 dnl Checks for programs.
 AC_PROG_AWK

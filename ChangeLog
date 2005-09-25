@@ -1,3 +1,7 @@
+2005-09-25  Behdad Esfahbod <behdad@gnu.org>
+	* configure.in: Updated to new autoconf/automake syntax. Copied
+	from fribidi2 tree.
+
 2005-06-08  Behdad Esfahbod <fribidi@behdad.org>
 	* NEWS, README, AUTHORS, THANKS: Updated.
 	* ANNOUNCE: Removed.
