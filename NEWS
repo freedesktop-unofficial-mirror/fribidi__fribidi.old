@@ -1,3 +1,7 @@
+New in 0.10.6:
+
+* Fixed type sizes when stdint.h is not available.
+
 New in 0.10.5:
 
 * Unicode 4.1.0 character database used.

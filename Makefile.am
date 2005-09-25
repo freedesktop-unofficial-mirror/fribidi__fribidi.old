@@ -93,6 +93,8 @@ UNIDATA_FILES =	\
 OTHER_FILES =	\
 	wcwidth.i
 
+TESTS = run.tests
+
 EXTRA_HEADERS =	\
 	packtab.h	\
 	$(libfribidi_extra_h)	\
@@ -100,12 +102,8 @@ EXTRA_HEADERS =	\
 
 EXTRA_DIST =	\
 	bootstrap \
-	run.tests	\
-	acinclude.m4	\
-	fribidi_config.h.in	\
-	fribidi.pc.in	\
-	fribidi.spec.in	\
 	fribidi.spec	\
+	$(TESTS)	\
 	$(TEST_FILES)	\
 	$(TABLE_FILES)	\
 	$(UNIDATA_FILES)	\
@@ -196,8 +194,6 @@ test: fribidi
 .PHONY:		test test.reference	\
 		fribidi_tab_char_type_small fribidi_tab_char_type_large	\
 		fribidi_tab_mirroring fribidi_tab tab
-
-TESTS = run.tests
 
 bin_SCRIPTS = fribidi-config
 

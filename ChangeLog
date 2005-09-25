@@ -1,4 +1,7 @@
 2005-09-25  Behdad Esfahbod <behdad@gnu.org>
+	GNU FriBidi 0.10.6 released.
+
+2005-09-25  Behdad Esfahbod <behdad@gnu.org>
 	* configure.in: Updated to new autoconf/automake syntax. Copied
 	from fribidi2 tree.
 	* Makefile.am, bootstrap, configure.in: More update from the
