@@ -42,8 +42,8 @@
 #endif
 
 #ifdef DEBUG
-#define DBG(s) do { if (fribidi_debug_status(fribidienv)) { fprintf(stderr, s); } } while (0)
-#define DBG2(s, t) do { if (fribidi_debug_status(fribidienv)) { fprintf(stderr, s, t); } } while (0)
+#define DBG(s) do { if (fribidi_debug) { fprintf(stderr, s); } } while (0)
+#define DBG2(s, t) do { if (fribidi_debug) { fprintf(stderr, s, t); } } while (0)
 #else
 #define DBG(s)
 #define DBG2(s, t)

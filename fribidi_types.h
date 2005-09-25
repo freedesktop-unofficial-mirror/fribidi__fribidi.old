@@ -24,6 +24,7 @@
 #define FRIBIDI_TYPES_H
 
 #include "fribidi_config.h"
+
 #define FRIBIDI_INT8	char
 #if FRIBIDI_SIZEOF_INT+0 == 2
 # define FRIBIDI_INT16	int
