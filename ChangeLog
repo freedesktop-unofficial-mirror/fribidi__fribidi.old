@@ -5,6 +5,7 @@
 	fribidi2 tree, and voodoo to make it all work.
 	* acconfig.h, acinclude.m4, stamp-h.in: Removed, you generated
 	bastards!
+	* *: const added in places.
 
 2005-06-08  Behdad Esfahbod <fribidi@behdad.org>
 	* NEWS, README, AUTHORS, THANKS: Updated.

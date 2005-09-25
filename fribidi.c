@@ -89,10 +89,11 @@ fribidi_boolean
 fribidi_set_debug (fribidi_boolean debug)
 {
 #ifdef DEBUG
-  return fribidi_debug = debug;
+  fribidi_debug = debug;
 #else
-  return 0;
+  debug = 0;
 #endif
+  return debug;
 }
 
 static void

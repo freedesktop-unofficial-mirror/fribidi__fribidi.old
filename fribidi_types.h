@@ -69,9 +69,10 @@ extern "C"
   };
 
 #ifndef FRIBIDI_MAX_STRING_LENGTH
-#define FRIBIDI_MAX_STRING_LENGTH (sizeof (FriBidiStrIndex) == 2 ?	\
+#define FRIBIDI_MAX_STRING_LENGTH (FriBidiStrIndex) \
+				  (sizeof (FriBidiStrIndex) == 2 ?	\
     				   0x7FFE : (sizeof (FriBidiStrIndex) == 1 ? \
-					     0x7E : 0x8FFFFFFEL))
+					     0x7E : 0x7FFFFFFEL))
 #endif
 
 
