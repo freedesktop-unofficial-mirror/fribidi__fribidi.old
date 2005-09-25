@@ -1,6 +1,10 @@
 2005-09-25  Behdad Esfahbod <behdad@gnu.org>
 	* configure.in: Updated to new autoconf/automake syntax. Copied
 	from fribidi2 tree.
+	* Makefile.am, bootstrap, configure.in: More update from the
+	fribidi2 tree, and voodoo to make it all work.
+	* acconfig.h, acinclude.m4, stamp-h.in: Removed, you generated
+	bastards!
 
 2005-06-08  Behdad Esfahbod <fribidi@behdad.org>
 	* NEWS, README, AUTHORS, THANKS: Updated.

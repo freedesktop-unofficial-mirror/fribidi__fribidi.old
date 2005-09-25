@@ -32,10 +32,10 @@ m4_define(fribidi_version,
 	    fribidi_major_version.fribidi_minor_version.fribidi_micro_version))dnl
 
 AC_INIT([GNU FriBidi],fribidi_version(),[http://bugs.freedesktop.org/enter_bug.cgi?product=FriBidi])
-AC_REVISION([$Id: configure.in,v 1.22.2.10 2005-09-25 17:37:44 behdad Exp $])
+AC_REVISION([$Id: configure.in,v 1.22.2.11 2005-09-25 18:38:36 behdad Exp $])
 AC_CONFIG_SRCDIR(fribidi.c)
 AC_CONFIG_HEADERS(config.h)
-AM_INIT_AUTOMAKE([gnits])
+AM_INIT_AUTOMAKE([gnu])
 
 FRIBIDI_MAJOR_VERSION=fribidi_major_version()
 FRIBIDI_MINOR_VERSION=fribidi_minor_version()
@@ -72,8 +72,6 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-AC_PROG_RANLIB
-AC_PATH_PROG(SED, sed, $PATH)
 
 
 dnl Checks for libraries
@@ -114,6 +112,14 @@ fi
 
 dnl check for fribidi_tab_char_type_*.i files
 
+AH_TEMPLATE(HAS_FRIBIDI_TAB_CHAR_TYPE_2_I)
+AH_TEMPLATE(HAS_FRIBIDI_TAB_CHAR_TYPE_3_I)
+AH_TEMPLATE(HAS_FRIBIDI_TAB_CHAR_TYPE_4_I)
+AH_TEMPLATE(HAS_FRIBIDI_TAB_CHAR_TYPE_5_I)
+AH_TEMPLATE(HAS_FRIBIDI_TAB_CHAR_TYPE_6_I)
+AH_TEMPLATE(HAS_FRIBIDI_TAB_CHAR_TYPE_7_I)
+AH_TEMPLATE(HAS_FRIBIDI_TAB_CHAR_TYPE_8_I)
+AH_TEMPLATE(HAS_FRIBIDI_TAB_CHAR_TYPE_9_I)
 for n in 2 3 4 5 6 7 8 9; do
   if test -f "${srcdir}/fribidi_tab_char_type_$n.i" ||
      test -f         "./fribidi_tab_char_type_$n.i"; then
@@ -131,7 +137,8 @@ dnl --enable-debug
 AC_ARG_ENABLE(debug, dnl
 [  --enable-debug          turn debugging information on [default=no]],
 [case "${enableval}" in
-  yes) AC_DEFINE(DEBUG) ;;  
+  yes) AC_DEFINE(DEBUG,1,
+                 [Define to 1 if you want to include debug code in the library]) ;;
   no) ;;
   *) AC_MSG_ERROR(bad value ${enableval} for --enable-debug) ;;
 esac])
@@ -140,7 +147,8 @@ dnl --enable-malloc
 AC_ARG_ENABLE(malloc, dnl
 [  --enable-malloc         do not allocate chunks of memory  [default=no]],
 [case "${enableval}" in
-  yes) AC_DEFINE(USE_SIMPLE_MALLOC) ;;
+  yes) AC_DEFINE(USE_SIMPLE_MALLOC,1,
+                 [Define to 1 if you prefer simple malloc instead of chunk memory]) ;;
   no) ;;
   *) AC_MSG_ERROR(bad value ${enableval} for --enable-malloc) ;;
 esac])
@@ -149,7 +157,8 @@ dnl --enable-memopt
 AC_ARG_ENABLE(memopt, dnl
 [  --enable-memopt         optimize for memory usage [default=no]],
 [case "${enableval}" in
-  yes) AC_DEFINE(MEM_OPTIMIZED)
+  yes) AC_DEFINE(MEM_OPTIMIZED,1,
+                 [Define to 1 if you want to optimize for memory instead of speed])
        memopt=true ;;
   no)  memopt=false ;;
   *) AC_MSG_ERROR(bad value ${enableval} for --enable-memopt) ;;
@@ -160,7 +169,8 @@ AC_ARG_WITH(charsets, dnl
 [  --without-charsets      exclude character set converters from library
                           causes command-line tool to use iconv],
 [case "${withval}" in
-  yes) AC_DEFINE(FRIBIDI_NO_CHARSETS)
+  yes) AC_DEFINE(FRIBIDI_NO_CHARSETS,1,
+                 [Define to 1 if you do not want character set conversion routines])
        charsets=true ;;
   no)  charsets=false ;;
   *) AC_MSG_ERROR(bad value ${withval} for --without-charsets) ;;
@@ -172,7 +182,8 @@ else
 fi
 AC_SUBST(FRIBIDI_NO_CHARSETS)
 
-AC_DEFINE(FRIBIDI_EXPORT)
+AC_DEFINE(FRIBIDI_EXPORTS,1,
+          [Define to 1])
 
 AC_OUTPUT([
 Makefile
