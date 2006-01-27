@@ -1,4 +1,12 @@
 #! /bin/sh
+echo WARNING: this code in fribidi HEAD branch is obsolete and should
+echo not be used.  If you are looking for the stable branch, check out
+echo the STABLE branch.  If you are looking for the development branch
+echo check out the fribidi2 module.
+echo For more information, check out http://fribidi.org/ or ask on the
+echo mailing list.
+echo
+sleep 5
 libtoolize --copy --force --automake &&
 aclocal --force &&
 autoheader --force &&

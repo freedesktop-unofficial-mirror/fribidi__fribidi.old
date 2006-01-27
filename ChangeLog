@@ -1,3 +1,6 @@
+2006-01-27  Behdad Esfahbod <fribidi@behdad.org>
+	* bootstrap: Added warning that this branch is dead.
+
 2002-12-22  Behdad Esfahbod <fribidi@behdad.org>
 	* Makefile.am: Added fribidi_types.i to
 	libfribidiinc_HEADERS, to fix bug reported by Omer Zak.
