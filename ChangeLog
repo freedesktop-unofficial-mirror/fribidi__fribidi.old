@@ -1,3 +1,6 @@
+2006-07-21  Behdad Esfahbod <behdad@gnu.org>
+	* *.i: Update to Unicode Character Database 5.0.0.
+
 2006-04-27  Behdad Esfahbod <behdad@gnu.org>
 	* Makefile.am: Pass -no-undefined to linker.
 	(fixes fd.o bug #5509)
