@@ -1,3 +1,7 @@
+2007-05-25  Behdad Esfahbod  <behdad@gnome.org>
+	GNU FriBidi 0.10.8 released.
+	Update Unicode version to 5.0.0.
+
 2007-05-25  Behdad Esfahbod  <behdad@gnu.org>
 	* wcwidth.c (mk_wcwidth): Update to latest version, reflecting
 	Unicode Character Database 5.0.0.
