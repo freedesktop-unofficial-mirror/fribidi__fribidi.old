@@ -1,3 +1,7 @@
+2007-05-25  Behdad Esfahbod  <behdad@gnu.org>
+	* wcwidth.c (mk_wcwidth): Update to latest version, reflecting
+	Unicode Character Database 5.0.0.
+
 2006-07-21  Behdad Esfahbod <behdad@gnu.org>
 	* *.i: Update to Unicode Character Database 5.0.0.
 
