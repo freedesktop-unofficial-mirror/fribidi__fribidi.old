@@ -1,3 +1,12 @@
+2008-04-22  Behdad Esfahbod  <behdad@gnome.org>
+
+	Bugzilla – Bug 15328
+	LRM/MLR marks not converted between cp1255 and UNICODE
+	Patch from Artyom
+
+	* fribidi_char_sets_cp1255.c (fribidi_cp1255_to_unicode_c),
+	(fribidi_unicode_to_cp1255_c): Handle LRM/RLM in CP1255.
+
 2008-04-08  Behdad Esfahbod  <behdad@gnome.org>
 	Update tables to Unicode Character Database 5.1.0.
 	
